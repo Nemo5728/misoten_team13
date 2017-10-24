@@ -797,6 +797,11 @@ namespace TrueSync
             return result;
         }
 
+        public static explicit operator TSVector(Vector3 v)
+        {
+            throw new NotImplementedException();
+        }
+
         public static FP Angle(TSVector a, TSVector b) {
             return FP.Acos(a.normalized * b.normalized) * FP.Rad2Deg;
         }

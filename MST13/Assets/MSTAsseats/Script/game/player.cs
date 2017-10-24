@@ -10,7 +10,12 @@ public class player : TrueSyncBehaviour {
     private const byte INPUT_KEY_RIGHT = 2;
     private const byte INPUT_KEY_LEFT = 3;
 
+    private TSRigidBody rb = null;
+
     public float speed;
+
+    public GameObject[] markerList;
+    public GameObject minion;
 
 	// Use this for initialization
 	void Start () {
@@ -19,47 +24,28 @@ public class player : TrueSyncBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        /*
-        TSRigidBody rb = GetComponent<TSRigidBody>();
-        TSVector vec = TSVector.zero, rot = TSVector.zero;
-
-        if (Input.GetKey(KeyCode.W)){
-            vec += TSVector.forward;
-        }
-        if (Input.GetKey(KeyCode.S)){
-            vec += TSVector.back;
-        }
-        if (Input.GetKey(KeyCode.A)){
-            vec += TSVector.left;
-        }
-        if (Input.GetKey(KeyCode.D)){
-            vec += TSVector.right;
-        }
-
-        TSVector.Normalize(vec);
-        rot.y = TSMath.Atan(vec.z / vec.x) * TSMath.Rad2Deg;
-        Debug.Log("rot:" + rot.y);
-        rb.AddForce(speed * vec, ForceMode.Acceleration);
-        */
+        
 	}
 
-    public override void OnSyncedInput(){
-        /*
-        float hor = Input.GetAxis("Horizontal");
-        float ver = Input.GetAxis("Vertical");
-        bool space = Input.GetKey(KeyCode.Space);
-        */
+    public override void OnSyncedStart(){
+        for (int i = 0; i < markerList.Length; i ++){
+            TSVector vec;
+            vec.x = markerList[i].transform.position.x;
+            vec.y = markerList[i].transform.position.y;
+            vec.z = markerList[i].transform.position.z;
+            GameObject CreateMinion =  TrueSyncManager.SyncedInstantiate(minion, vec, TSQuaternion.identity);
+            minion mi = CreateMinion.GetComponent<minion>();
+            mi.Create(gameObject, i);
+        }
 
+        rb = GetComponent<TSRigidBody>();
+    }
+
+    public override void OnSyncedInput(){
         bool forward = Input.GetKey(KeyCode.W);
         bool back = Input.GetKey(KeyCode.S);
         bool right = Input.GetKey(KeyCode.D);
         bool left = Input.GetKey(KeyCode.A);
-
-        /*
-        TrueSyncInput.SetInt(INPUT_KEY_HORIZONTAL, (int)(hor * 100));
-        TrueSyncInput.SetInt(INPUT_KEY_VERTICAL, (int)(ver * 100));
-        TrueSyncInput.SetBool(INPUT_KEY_CREATE, space);
-        */
 
         TrueSyncInput.SetBool(INPUT_KEY_FORWARD, forward);
         TrueSyncInput.SetBool(INPUT_KEY_BACK, back);
@@ -68,53 +54,41 @@ public class player : TrueSyncBehaviour {
     }
 
     public override void OnSyncedUpdate(){
-        /*
-        FP hor = (FP)TrueSyncInput.GetInt(INPUT_KEY_HORIZONTAL) / 100;
-        FP ver = (FP)TrueSyncInput.GetInt(INPUT_KEY_VERTICAL) / 100;
-        bool currentCreateState = TrueSyncInput.GetBool(INPUT_KEY_CREATE);
-
-        TSVector forceToApply = TSVector.zero;
-
-        if (FP.Abs(hor) > FP.Zero)
-        {
-            forceToApply.x = hor / 3;
-        }
-
-        if (FP.Abs(ver) > FP.Zero)
-        {
-            forceToApply.z = ver / 3;
-        }
-
-        tsRigidBody.AddForce(forceToApply, ForceMode.Impulse);
-        */
-
         bool forward = TrueSyncInput.GetBool(INPUT_KEY_FORWARD);
         bool back = TrueSyncInput.GetBool(INPUT_KEY_BACK);
         bool right = TrueSyncInput.GetBool(INPUT_KEY_RIGHT);
         bool left = TrueSyncInput.GetBool(INPUT_KEY_LEFT);
 
-        TSRigidBody rb = GetComponent<TSRigidBody>();
-        TSVector vec = TSVector.zero;
-
+        TSVector vector = TSVector.zero;
         if (forward)
         {
-            vec += TSVector.forward;
-            Debug.Log("hoge");
+            vector += TSVector.forward;
         }
         if (back)
         {
-            vec += TSVector.back;
+            vector += TSVector.back;
         }
         if (left)
         {
-            vec += TSVector.left;
+            vector += TSVector.left;
         }
         if (right)
         {
-            vec += TSVector.right;
+            vector += TSVector.right;
         }
 
-        TSVector.Normalize(vec);
-        rb.AddForce(speed * vec, ForceMode.Impulse);
+        TSVector.Normalize(vector);
+        rb.AddForce(speed * vector, ForceMode.Force);
+
+        FP direction = TSMath.Atan2(vector.z, vector.x) * TSMath.Rad2Deg;
+        //transform.rotation = Quaternion.Euler(0.0f, (float)direction, 0.0f);
+    }
+
+    public TSVector GetMarkerPosition(int marker){
+        TSVector vec;
+        vec.x = markerList[marker].transform.position.x;
+        vec.y = markerList[marker].transform.position.y;
+        vec.z = markerList[marker].transform.position.z;
+        return vec;
     }
 }
