@@ -11,6 +11,7 @@ public class player : TrueSyncBehaviour {
     private const byte INPUT_KEY_LEFT = 3;
 
     private TSRigidBody rb = null;
+    private TSVector directionVector = TSVector.zero;
 
     public float speed;
 
@@ -62,26 +63,26 @@ public class player : TrueSyncBehaviour {
         TSVector vector = TSVector.zero;
         if (forward)
         {
-            vector += TSVector.forward;
+            directionVector = vector += TSVector.forward;
         }
         if (back)
         {
-            vector += TSVector.back;
+            directionVector = vector += TSVector.back;
         }
         if (left)
         {
-            vector += TSVector.left;
+            directionVector = vector += TSVector.left;
         }
         if (right)
         {
-            vector += TSVector.right;
+            directionVector = vector += TSVector.right;
         }
 
         TSVector.Normalize(vector);
         rb.AddForce(speed * vector, ForceMode.Force);
 
-        FP direction = TSMath.Atan2(vector.z, vector.x) * TSMath.Rad2Deg;
-        //transform.rotation = Quaternion.Euler(0.0f, (float)direction, 0.0f);
+        FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0.0f, (float)direction, 0.0f);
     }
 
     public TSVector GetMarkerPosition(int marker){
