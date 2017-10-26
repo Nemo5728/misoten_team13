@@ -25,9 +25,9 @@ GameObject:
   - component: {fileID: 114223655087657938}
   - component: {fileID: 114411106221406248}
   - component: {fileID: 114403666197854092}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Minion
-  m_TagString: Untagged
+  m_TagString: minion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
