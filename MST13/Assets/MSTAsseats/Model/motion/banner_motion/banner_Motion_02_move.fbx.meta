@@ -1,0 +1,359 @@
+fileFormatVersion: 2
+guid: f82f3d4ec6a8b4998937800b0705498d
+timeCreated: 1508995929
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: banner
+    100002: //RootNode
+    100004: capeF1
+    100006: capeF2
+    100008: capeF3
+    100010: head
+    100012: iks
+    100014: jt
+    100016: L_ankle
+    100018: L_capeA1
+    100020: L_capeA2
+    100022: L_capeA3
+    100024: L_capeB1
+    100026: L_capeB2
+    100028: L_capeB3
+    100030: L_foot
+    100032: L_hand
+    100034: L_hip
+    100036: L_ikHandle1
+    100038: L_ikHandle2
+    100040: L_ikHandle3
+    100042: L_index1
+    100044: L_index2
+    100046: L_index3
+    100048: L_knee
+    100050: L_middle1
+    100052: L_middle2
+    100054: L_middle3
+    100056: L_pinky1
+    100058: L_pinky2
+    100060: L_pinky3
+    100062: L_thumb1
+    100064: L_thumb2
+    100066: L_thumb3
+    100068: L_toe
+    100070: R_ankle
+    100072: R_capeA1
+    100074: R_capeA2
+    100076: R_capeA3
+    100078: R_capeB1
+    100080: R_capeB2
+    100082: R_capeB3
+    100084: R_foot
+    100086: R_hand
+    100088: R_hip
+    100090: R_ikHandle1
+    100092: R_ikHandle2
+    100094: R_ikHandle3
+    100096: R_index1
+    100098: R_index2
+    100100: R_index3
+    100102: R_knee
+    100104: R_middle1
+    100106: R_middle2
+    100108: R_middle3
+    100110: R_pinky1
+    100112: R_pinky2
+    100114: R_pinky3
+    100116: R_thumb1
+    100118: R_thumb2
+    100120: R_thumb3
+    100122: R_toe
+    100124: root
+    400000: banner
+    400002: //RootNode
+    400004: capeF1
+    400006: capeF2
+    400008: capeF3
+    400010: head
+    400012: iks
+    400014: jt
+    400016: L_ankle
+    400018: L_capeA1
+    400020: L_capeA2
+    400022: L_capeA3
+    400024: L_capeB1
+    400026: L_capeB2
+    400028: L_capeB3
+    400030: L_foot
+    400032: L_hand
+    400034: L_hip
+    400036: L_ikHandle1
+    400038: L_ikHandle2
+    400040: L_ikHandle3
+    400042: L_index1
+    400044: L_index2
+    400046: L_index3
+    400048: L_knee
+    400050: L_middle1
+    400052: L_middle2
+    400054: L_middle3
+    400056: L_pinky1
+    400058: L_pinky2
+    400060: L_pinky3
+    400062: L_thumb1
+    400064: L_thumb2
+    400066: L_thumb3
+    400068: L_toe
+    400070: R_ankle
+    400072: R_capeA1
+    400074: R_capeA2
+    400076: R_capeA3
+    400078: R_capeB1
+    400080: R_capeB2
+    400082: R_capeB3
+    400084: R_foot
+    400086: R_hand
+    400088: R_hip
+    400090: R_ikHandle1
+    400092: R_ikHandle2
+    400094: R_ikHandle3
+    400096: R_index1
+    400098: R_index2
+    400100: R_index3
+    400102: R_knee
+    400104: R_middle1
+    400106: R_middle2
+    400108: R_middle3
+    400110: R_pinky1
+    400112: R_pinky2
+    400114: R_pinky3
+    400116: R_thumb1
+    400118: R_thumb2
+    400120: R_thumb3
+    400122: R_toe
+    400124: root
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: jt
+        weight: 1
+      - path: jt/banner
+        weight: 1
+      - path: jt/iks
+        weight: 1
+      - path: jt/iks/L_ikHandle1
+        weight: 1
+      - path: jt/iks/L_ikHandle2
+        weight: 1
+      - path: jt/iks/L_ikHandle3
+        weight: 1
+      - path: jt/iks/R_ikHandle1
+        weight: 1
+      - path: jt/iks/R_ikHandle2
+        weight: 1
+      - path: jt/iks/R_ikHandle3
+        weight: 1
+      - path: jt/L_hip
+        weight: 1
+      - path: jt/L_hip/L_knee
+        weight: 1
+      - path: jt/L_hip/L_knee/L_ankle
+        weight: 1
+      - path: jt/L_hip/L_knee/L_ankle/L_foot
+        weight: 1
+      - path: jt/L_hip/L_knee/L_ankle/L_foot/L_toe
+        weight: 1
+      - path: jt/R_hip
+        weight: 1
+      - path: jt/R_hip/R_knee
+        weight: 1
+      - path: jt/R_hip/R_knee/R_ankle
+        weight: 1
+      - path: jt/R_hip/R_knee/R_ankle/R_foot
+        weight: 1
+      - path: jt/R_hip/R_knee/R_ankle/R_foot/R_toe
+        weight: 1
+      - path: jt/root
+        weight: 1
+      - path: jt/root/capeF1
+        weight: 1
+      - path: jt/root/capeF1/capeF2
+        weight: 1
+      - path: jt/root/capeF1/capeF2/capeF3
+        weight: 1
+      - path: jt/root/head
+        weight: 1
+      - path: jt/root/L_capeA1
+        weight: 1
+      - path: jt/root/L_capeA1/L_capeA2
+        weight: 1
+      - path: jt/root/L_capeA1/L_capeA2/L_capeA3
+        weight: 1
+      - path: jt/root/L_capeB1
+        weight: 1
+      - path: jt/root/L_capeB1/L_capeB2
+        weight: 1
+      - path: jt/root/L_capeB1/L_capeB2/L_capeB3
+        weight: 1
+      - path: jt/root/L_hand
+        weight: 1
+      - path: jt/root/L_hand/L_index1
+        weight: 1
+      - path: jt/root/L_hand/L_index1/L_index2
+        weight: 1
+      - path: jt/root/L_hand/L_index1/L_index2/L_index3
+        weight: 1
+      - path: jt/root/L_hand/L_middle1
+        weight: 1
+      - path: jt/root/L_hand/L_middle1/L_middle2
+        weight: 1
+      - path: jt/root/L_hand/L_middle1/L_middle2/L_middle3
+        weight: 1
+      - path: jt/root/L_hand/L_pinky1
+        weight: 1
+      - path: jt/root/L_hand/L_pinky1/L_pinky2
+        weight: 1
+      - path: jt/root/L_hand/L_pinky1/L_pinky2/L_pinky3
+        weight: 1
+      - path: jt/root/L_hand/L_thumb1
+        weight: 1
+      - path: jt/root/L_hand/L_thumb1/L_thumb2
+        weight: 1
+      - path: jt/root/L_hand/L_thumb1/L_thumb2/L_thumb3
+        weight: 1
+      - path: jt/root/R_capeA1
+        weight: 1
+      - path: jt/root/R_capeA1/R_capeA2
+        weight: 1
+      - path: jt/root/R_capeA1/R_capeA2/R_capeA3
+        weight: 1
+      - path: jt/root/R_capeB1
+        weight: 1
+      - path: jt/root/R_capeB1/R_capeB2
+        weight: 1
+      - path: jt/root/R_capeB1/R_capeB2/R_capeB3
+        weight: 1
+      - path: jt/root/R_hand
+        weight: 1
+      - path: jt/root/R_hand/R_index1
+        weight: 1
+      - path: jt/root/R_hand/R_index1/R_index2
+        weight: 1
+      - path: jt/root/R_hand/R_index1/R_index2/R_index3
+        weight: 1
+      - path: jt/root/R_hand/R_middle1
+        weight: 1
+      - path: jt/root/R_hand/R_middle1/R_middle2
+        weight: 1
+      - path: jt/root/R_hand/R_middle1/R_middle2/R_middle3
+        weight: 1
+      - path: jt/root/R_hand/R_pinky1
+        weight: 1
+      - path: jt/root/R_hand/R_pinky1/R_pinky2
+        weight: 1
+      - path: jt/root/R_hand/R_pinky1/R_pinky2/R_pinky3
+        weight: 1
+      - path: jt/root/R_hand/R_thumb1
+        weight: 1
+      - path: jt/root/R_hand/R_thumb1/R_thumb2
+        weight: 1
+      - path: jt/root/R_hand/R_thumb1/R_thumb2/R_thumb3
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
