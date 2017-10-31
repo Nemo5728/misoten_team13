@@ -17,13 +17,16 @@ public class loginArea : MonoBehaviour
 
     bool[] bPlayerArea;
     int onArea;//何人床に乗っているか？
+    bool bGetReadyOK;//準備が完了したか？
+
+    public GameObject refNet;
 
     // Use this for initialization
     void Start()
     {
         
         onArea = 0;
-
+        bGetReadyOK = false;
         bPlayerArea = new bool[PlayerNam_Max];
 
         //初期座標設定
@@ -76,7 +79,18 @@ public class loginArea : MonoBehaviour
         CircleColorValue.r = onArea * 0.25f;// (1 / PlayerNam_Max);//床に乗っている人数 x 0.25
         CircleColorValue.g = (PlayerNam_Max - onArea) * 0.25f;//(1 / PlayerNam_Max);//最大人数 - 床に乗っている人数 x 0.25
         AreaCreator.GetComponent<MeshRenderer>().material.color = CircleColorValue;//色を変更
+        
+
+        //4人とも床の上に乗ったら
+        if (onArea == 4)
+        {
+            bGetReadyOK = true;
+        }
         onArea = 0;
+
+        //準備OKかどうかの情報を渡す
+        loginNetwork GetReady = refNet.GetComponent<loginNetwork>();
+        GetReady.GetReadyOK(bGetReadyOK);
 
         //デバックログ
         if (Input.GetKey("p"))
