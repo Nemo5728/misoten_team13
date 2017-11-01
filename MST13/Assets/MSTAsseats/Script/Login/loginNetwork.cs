@@ -18,25 +18,28 @@ public class loginNetwork : Photon.PunBehaviour
     public override void OnJoinedLobby()
     {
         PhotonNetwork.JoinOrCreateRoom("room1", null, null);
+        //
+        
+
     }
 
-    void OnGUI()
-    {
-        //GUI.Label(new Rect(10, 10, 100, 30), "players: " + PhotonNetwork.playerList.Length);
+    //void OnGUI()
+    //{
+    //    //GUI.Label(new Rect(10, 10, 100, 30), "players: " + PhotonNetwork.playerList.Length);
 
-        //if (PhotonNetwork.isMasterClient && GUI.Button(new Rect(10, 40, 100, 30), "start"))
-        //{
-        //    PhotonNetwork.LoadLevel("シーン遷移先");
-        //}
+    //    //if (PhotonNetwork.isMasterClient && GUI.Button(new Rect(10, 40, 100, 30), "start"))
+    //    //{
+    //    //    PhotonNetwork.LoadLevel("シーン遷移先");
+    //    //}
 
-        //プレイヤーが全員サークルに入ったら
-        if(bNextScene == true)
-        {
-            //シーン遷移先
-            //PhotonNetwork.LoadLevel("Game");
-            Debug.Log("準備OK！！！！！！！");
-        }
-    }
+    //    //プレイヤーが全員サークルに入ったら
+    //    if(bNextScene == true)
+    //    {
+    //        //シーン遷移先
+    //        //PhotonNetwork.LoadLevel("Game");
+    //        Debug.Log("準備OK！！！！！！！");
+    //    }
+    //}
 
     //プレイヤーの位置がサークルに入ったかどうかを取得
     public void GetReadyOK(bool b)
