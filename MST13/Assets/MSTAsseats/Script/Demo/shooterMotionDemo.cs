@@ -44,12 +44,12 @@ public class shooterMotionDemo : MonoBehaviour {
 		if (Input.GetKeyDown ("a"))
 		{
 			// 弱攻撃モーションへ
-			anime.SetTrigger("shooterAttack_A");
+            anime.SetTrigger("shooterWeakAttack");
 		}
 		else if (Input.GetKeyDown ("s"))
 		{
 			// 強攻撃モーションへ
-			anime.SetTrigger("shooterAttack_B");
+            anime.SetTrigger("shooterStrAttack");
 		}
 
 		if (Input.GetKeyDown ("b")) 

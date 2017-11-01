@@ -45,18 +45,31 @@ public class dogMotionDemo : MonoBehaviour {
 		if (Input.GetKeyDown ("a"))
 		{
 			// 弱攻撃モーションへ
-			anime.SetTrigger("dogAttack_A");
+			anime.SetTrigger("dogWeakAttack");
 		}
 		else if (Input.GetKeyDown ("s"))
 		{
 			// 強攻撃モーションへ
-			anime.SetTrigger("dogAttack_B");
+			anime.SetTrigger("dogStrAttack");
 		}
+
 
 		if (Input.GetKeyDown ("b")) 
 		{
 			// ダメージモーションへ
 			anime.SetTrigger("dogDamage");
 		}
+
+        if (Input.GetKeyDown("g"))
+        {
+            // 弱攻撃モーションへ
+            anime.SetTrigger("dogMoveWeakAttack");
+        }
+        else if (Input.GetKeyDown("h"))
+        {
+            // 強攻撃モーションへ
+            anime.SetTrigger("dogMoveStrAttack");
+        }
+
 	}
 }
