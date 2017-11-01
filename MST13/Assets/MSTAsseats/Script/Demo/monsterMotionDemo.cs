@@ -41,12 +41,12 @@ public class monsterMotionDemo : MonoBehaviour {
 			anime.SetTrigger("monsterTransform");
 		}
 
-		if (Input.GetKeyDown ("a"))
+		if (Input.GetKeyDown ("g"))
 		{
 			// 弱攻撃モーションへ
 			anime.SetTrigger("monsterAttack_A");
 		}
-		else if (Input.GetKeyDown ("s"))
+		else if (Input.GetKeyDown ("h"))
 		{
 			// 強攻撃モーションへ
 			anime.SetTrigger("monsterAttack_B");
