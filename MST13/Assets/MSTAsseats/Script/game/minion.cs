@@ -8,8 +8,15 @@ public class minion : TrueSyncBehaviour {
     private GameObject parentPlayer = null;
     private int parentMarker;
     private TSRigidBody rb = null;
+    private int ownerNum;
+    private float coolTime;
 
-    public float speed;
+    [SerializeField, TooltipAttribute("攻撃速度(sec)")] private float attackSpeed;
+    [SerializeField, TooltipAttribute("ヒットポイント")] private int health;
+    [SerializeField, TooltipAttribute("移動速度")] private float speed;
+    [SerializeField, TooltipAttribute("攻撃範囲")] private float range;
+    [SerializeField, TooltipAttribute("攻撃力")] private int attack;
+    [SerializeField, TooltipAttribute("リスポーン時間(sec)")] private float respornTime;
 
 	// Use this for initialization
 	void Start () {
@@ -21,20 +28,17 @@ public class minion : TrueSyncBehaviour {
 		
 	}
 
-    public void Create(GameObject player, int marker){
+    public void Create(GameObject player, int marker, int owner){
         parentPlayer = player;
         parentMarker = marker;
-
-        if (parentPlayer == null) Debug.Log("Createでnull");
-    }
+        ownerNum = owner;
+   }
 
     public override void OnSyncedStart(){
-        if (parentPlayer == null) Debug.Log("OnsyncedStartでnull");
         rb = GetComponent<TSRigidBody>();
     }
 
     public override void OnSyncedUpdate(){
-        if (parentPlayer == null) Debug.Log("OnsyncedUpdateでnull");
         player p = parentPlayer.GetComponent<player>();
         TSVector markerPos = p.GetMarkerPosition(parentMarker);
 
@@ -47,5 +51,42 @@ public class minion : TrueSyncBehaviour {
         TSVector.Normalize(vector);
 
         rb.AddForce(vector * speed, ForceMode.Force);
+
+        if (coolTime <= 0)
+        {
+            foreach (minion mi in FindObjectsOfType<minion>())
+            {
+                Vector3 targetPos = mi.GetPositon();
+                int targetOwner = mi.GetOwner();
+
+                float distance = Vector3.Distance(targetPos, transform.position);
+                if(distance < range && ownerNum != mi.GetOwner()){
+                    mi.AddDamage(attack);
+                    coolTime = attackSpeed;
+                    break;
+                }
+            }
+        }else{
+            coolTime -= Time.deltaTime;
+        }
+    }
+
+    public void AddDamage(int damage){
+        health -= damage;
+
+        if(health <= 0){
+            TrueSyncManager.SyncedDestroy(gameObject);
+
+            player p = parentPlayer.GetComponent<player>();
+            p.SetResporn(respornTime, parentMarker);
+        }
+    }
+
+    public int GetOwner(){
+        return ownerNum;
+    }
+
+    public Vector3 GetPositon(){
+        return transform.position;
     }
 }

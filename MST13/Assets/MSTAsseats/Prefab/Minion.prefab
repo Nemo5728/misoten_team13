@@ -21,10 +21,10 @@ GameObject:
   - component: {fileID: 4236984105451958}
   - component: {fileID: 33468576472220822}
   - component: {fileID: 23672906414863312}
-  - component: {fileID: 114126389371359632}
   - component: {fileID: 114223655087657938}
   - component: {fileID: 114411106221406248}
   - component: {fileID: 114403666197854092}
+  - component: {fileID: 114126389371359632}
   m_Layer: 9
   m_Name: Minion
   m_TagString: minion
@@ -103,7 +103,12 @@ MonoBehaviour:
   localOwner:
     id: 0
     name: 
+  attackSpeed: 1
+  health: 10
   speed: 50
+  range: 10
+  attack: 1
+  respornTime: 10
 --- !u!114 &114223655087657938
 MonoBehaviour:
   m_ObjectHideFlags: 1
