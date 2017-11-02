@@ -44,12 +44,12 @@ public class monsterMotionDemo : MonoBehaviour {
 		if (Input.GetKeyDown ("g"))
 		{
 			// 弱攻撃モーションへ
-			anime.SetTrigger("monsterAttack_A");
+            anime.SetTrigger("monsterWeakAttack");
 		}
 		else if (Input.GetKeyDown ("h"))
 		{
 			// 強攻撃モーションへ
-			anime.SetTrigger("monsterAttack_B");
+            anime.SetTrigger("monsterStrAttack");
 		}
 
 		if (Input.GetKeyDown ("b")) 
