@@ -16,7 +16,7 @@ public class minion : TrueSyncBehaviour {
     [SerializeField, TooltipAttribute("移動速度")] private float speed;
     [SerializeField, TooltipAttribute("攻撃範囲")] private float range;
     [SerializeField, TooltipAttribute("攻撃力")] private int attack;
-    [SerializeField, TooltipAttribute("リスポーン時間(sec)")] private float respornTime;
+    [SerializeField, TooltipAttribute("リスポーン時間(sec)")] private float respawnTime;
 
 	// Use this for initialization
 	void Start () {
@@ -75,10 +75,10 @@ public class minion : TrueSyncBehaviour {
         health -= damage;
 
         if(health <= 0){
-            TrueSyncManager.SyncedDestroy(gameObject);
-
             player p = parentPlayer.GetComponent<player>();
-            p.SetResporn(respornTime, parentMarker);
+            p.SetResporn(respawnTime, parentMarker);
+
+            TrueSyncManager.SyncedDestroy(gameObject);
         }
     }
 
@@ -88,5 +88,9 @@ public class minion : TrueSyncBehaviour {
 
     public Vector3 GetPositon(){
         return transform.position;
+    }
+
+    public void Destroy(){
+        TrueSyncManager.SyncedDestroy(gameObject);
     }
 }

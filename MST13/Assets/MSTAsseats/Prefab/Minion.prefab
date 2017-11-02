@@ -108,7 +108,7 @@ MonoBehaviour:
   speed: 50
   range: 10
   attack: 1
-  respornTime: 10
+  respawnTime: 0
 --- !u!114 &114223655087657938
 MonoBehaviour:
   m_ObjectHideFlags: 1
