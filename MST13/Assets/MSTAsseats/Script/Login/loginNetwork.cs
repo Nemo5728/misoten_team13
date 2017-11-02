@@ -23,14 +23,23 @@ public class loginNetwork : Photon.PunBehaviour
 
     }
 
+    void OnGUI()
+    {
+        GUI.Label(new Rect(10, 10, 100, 30), "players: " + PhotonNetwork.playerList.Length);
+
+        if (PhotonNetwork.isMasterClient && GUI.Button(new Rect(10, 40, 100, 30), "start"))
+        {
+            PhotonNetwork.LoadLevel("Tutorial/Game");
+        }
+    }
     //void OnGUI()
     //{
-    //    //GUI.Label(new Rect(10, 10, 100, 30), "players: " + PhotonNetwork.playerList.Length);
+    //GUI.Label(new Rect(10, 10, 100, 30), "players: " + PhotonNetwork.playerList.Length);
 
-    //    //if (PhotonNetwork.isMasterClient && GUI.Button(new Rect(10, 40, 100, 30), "start"))
-    //    //{
-    //    //    PhotonNetwork.LoadLevel("シーン遷移先");
-    //    //}
+    //if (PhotonNetwork.isMasterClient && GUI.Button(new Rect(10, 40, 100, 30), "start"))
+    //{
+    //    PhotonNetwork.LoadLevel("シーン遷移先");
+    //}
 
     //    //プレイヤーが全員サークルに入ったら
     //    if(bNextScene == true)
