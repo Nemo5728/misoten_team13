@@ -12,11 +12,13 @@ public class player : TrueSyncBehaviour {
 
     private TSRigidBody rb = null;
     private TSVector directionVector = TSVector.zero;
+    private ControllerInfo info;
+    private float[] respornCount = new float[15];
 
-    public float speed;
-
-    public GameObject[] markerList;
-    public GameObject minion;
+    [SerializeField, TooltipAttribute("攻撃速度(sec)")] private int attackSpeed = 0;
+    [SerializeField, TooltipAttribute("移動速度")] private float speed;
+    [SerializeField, TooltipAttribute("触るな危険")] private GameObject[] markerList;
+    [SerializeField, TooltipAttribute("触るな危険")] private GameObject minion;
 
 	// Use this for initialization
 	void Start () {
@@ -36,13 +38,14 @@ public class player : TrueSyncBehaviour {
             vec.z = markerList[i].transform.position.z;
             GameObject CreateMinion =  TrueSyncManager.SyncedInstantiate(minion, vec, TSQuaternion.identity);
             minion mi = CreateMinion.GetComponent<minion>();
-            mi.Create(gameObject, i);
+            mi.Create(gameObject, i, ownerIndex);
         }
 
         rb = GetComponent<TSRigidBody>();
     }
 
     public override void OnSyncedInput(){
+        //キーボード デバッグ用
         bool forward = Input.GetKey(KeyCode.W);
         bool back = Input.GetKey(KeyCode.S);
         bool right = Input.GetKey(KeyCode.D);
@@ -52,6 +55,9 @@ public class player : TrueSyncBehaviour {
         TrueSyncInput.SetBool(INPUT_KEY_BACK, back);
         TrueSyncInput.SetBool(INPUT_KEY_RIGHT, right);
         TrueSyncInput.SetBool(INPUT_KEY_LEFT, left);
+
+        //BLEなんちゃら
+        info = BLEControlManager.GetControllerInfo();
     }
 
     public override void OnSyncedUpdate(){
@@ -83,6 +89,22 @@ public class player : TrueSyncBehaviour {
 
         FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
         transform.rotation = Quaternion.Euler(0.0f, (float)direction, 0.0f);
+
+        for (int i = 0; i < 15; i ++){
+            if(respornCount[i] > 0){
+                respornCount[i] -= Time.deltaTime;
+
+                if(respornCount[i] <= 0){
+                    TSVector vec;
+                    vec.x = markerList[i].transform.position.x;
+                    vec.y = markerList[i].transform.position.y;
+                    vec.z = markerList[i].transform.position.z;
+                    GameObject CreateMinion = TrueSyncManager.SyncedInstantiate(minion, vec, TSQuaternion.identity);
+                    minion mi = CreateMinion.GetComponent<minion>();
+                    mi.Create(gameObject, i, ownerIndex);
+                }
+            }
+        }
     }
 
     public TSVector GetMarkerPosition(int marker){
@@ -91,5 +113,9 @@ public class player : TrueSyncBehaviour {
         vec.y = markerList[marker].transform.position.y;
         vec.z = markerList[marker].transform.position.z;
         return vec;
+    }
+
+    public void SetResporn(float time, int num){
+        respornCount[num] = time;
     }
 }
