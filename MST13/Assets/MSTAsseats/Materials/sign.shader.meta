@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 5e30d764baf22344e9e4e1945896e823
+timeCreated: 1509253270
+licenseType: Free
+ShaderImporter:
+  defaultTextures:
+  - _gradBar: {fileID: 2800000, guid: b1102e3015ce1974ebddf6e58b4396e0, type: 3}
+  - _tex: {fileID: 2800000, guid: 68009ca0f4440c44099556b272858bea, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
