@@ -6,8 +6,5 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/MSTAsseats/Scene/Connecting.unity
-    guid: 9099f4cd2876a4eea8ea8ac698062dd2
-  - enabled: 1
-    path: Assets/MSTAsseats/Scene/Game.unity
-    guid: 2cb34f0f2e3344aba8fe97c368b93c82
+    path: Assets/MSTAsseats/Scene/Debug.unity
+    guid: 95cd1d53be75543f5a25c96ad2241fbc
