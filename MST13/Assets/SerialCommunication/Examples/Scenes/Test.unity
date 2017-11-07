@@ -1036,6 +1036,20 @@ Prefab:
       propertyPath: portName
       value: /dev/cu.wchusbserial1440
       objectReference: {fileID: 0}
+    - target: {fileID: 1383033510002710, guid: 639b642d67cda4ba5bec99e839717da2, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114436154893453722, guid: 639b642d67cda4ba5bec99e839717da2,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114368831701632972, guid: 639b642d67cda4ba5bec99e839717da2,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 639b642d67cda4ba5bec99e839717da2, type: 2}
   m_IsPrefabParent: 0
