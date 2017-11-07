@@ -5,31 +5,41 @@ using TrueSync;
 
 public class loginPlayer : TrueSyncBehaviour 
 {
+    //キーボード関連
     private const byte INPUT_KEY_FORWARD = 0;
     private const byte INPUT_KEY_BACK = 1;
     private const byte INPUT_KEY_RIGHT = 2;
     private const byte INPUT_KEY_LEFT = 3;
 
     private TSRigidBody rb = null;//
-    private TSVector directionVector = TSVector.zero;//
+    private TSVector directionVector = TSVector.zero;//プレイヤーのpos的なもの
 
     public float speed;
 
+    private TSVector areaPos;//エリアの位置を入れる
+    const int AreaSize = 5;//床の大きさ
+    bool bPlayerArea;
+    
+    public GameObject GetLoginArea;
     TSVector pos;
     // Use this for initialization
     void Start()
     {
+        
+
+        bPlayerArea = false;
     }
 
     public override void OnSyncedStart()
     {
-        
-        pos = new TSVector(0.0f, 0.0f, 0.0f);
+        //初期化
+        pos = new TSVector(8.0f, 0.0f, 8.0f);
 
-       
-
-
+        //
         rb = GetComponent<TSRigidBody>();
+
+        //生成
+        areaPos = new TSVector(0.0f, 0.0f, 0.0f);//位置初期化
 
 
     }
@@ -55,32 +65,66 @@ public class loginPlayer : TrueSyncBehaviour
         bool right = TrueSyncInput.GetBool(INPUT_KEY_RIGHT);
         bool left = TrueSyncInput.GetBool(INPUT_KEY_LEFT);
 
-        TSVector vector = TSVector.zero;
-        if (forward)
-        {
-            directionVector = vector += TSVector.forward;
-        }
-        if (back)
-        {
-            directionVector = vector += TSVector.back;
-        }
-        if (left)
-        {
-            directionVector = vector += TSVector.left;
-        }
-        if (right)
-        {
-            directionVector = vector += TSVector.right;
-        }
-
-        TSVector.Normalize(vector);
-        rb.AddForce(speed * vector, ForceMode.Force);
+        Debug.Log(bPlayerArea);
+       // if (bPlayerArea == false)//プレイヤーがエリアの上にいるなら
+        //{ 
+            //プレイヤー移動
+            TSVector vector = TSVector.zero;//プレイヤー位置数値を初期化
+            if (forward)
+            {
+                directionVector = vector += TSVector.forward;
+            }
+            if (back)
+            {
+                directionVector = vector += TSVector.back;
+            }
+            if (left)
+            {
+                directionVector = vector += TSVector.left;
+            }
+            if (right)
+            {
+                directionVector = vector += TSVector.right;
+            }
+            TSVector.Normalize(vector);//正規化
+            rb.AddForce(speed * vector, ForceMode.Force);
+            
+       // }
+        
 
         FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0.0f, (float)direction, 0.0f);
+        transform.rotation = Quaternion.Euler(0.0f, (float)direction, 0.0f);//Rotを設定
+
+
+        pos = rb.position;
+       
+
+        //当り判定：床の上に乗っているなら
+        if (areaPos.x + AreaSize > pos.x &&
+        areaPos.x - AreaSize < pos.x &&
+        areaPos.z + AreaSize > pos.z &&
+        areaPos.z - AreaSize < pos.z)
+        {
+            bPlayerArea = true;
+        }
+        else
+        {
+            bPlayerArea = false;
+        }
+        Debug.Log(areaPos.x);
+        Debug.Log(areaPos.z);
+        Debug.Log(pos);
     }
 
+   
 
+    public void SetAreaPos(Vector3 pos)
+    {
+        areaPos.x = pos.x;
+        areaPos.y = pos.y;
+        areaPos.z = pos.z;
+
+    }
 
     // Update is called once per frame
     void Update()
