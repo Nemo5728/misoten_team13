@@ -592,6 +592,8 @@ MonoBehaviour:
   health: 100
   transformTime: 100
   attack: 1
+  powerUpEndTime: 1
+  powerUpStart: 10
 --- !u!114 &114717637357915240
 MonoBehaviour:
   m_ObjectHideFlags: 1
