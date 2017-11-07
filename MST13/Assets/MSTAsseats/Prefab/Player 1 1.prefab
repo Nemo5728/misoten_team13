@@ -2024,7 +2024,9 @@ MonoBehaviour:
   localOwner:
     id: 0
     name: 
-  speed: 5
+  speed: 3
+  GetLoginArea: {fileID: 1189890504459828, guid: 1da46ecdeb6cc57498d2b42fcb365665,
+    type: 2}
 --- !u!137 &137504351919434916
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

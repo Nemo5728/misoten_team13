@@ -5,6 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/MSTAsseats/Scene/Debug.unity
     guid: 95cd1d53be75543f5a25c96ad2241fbc
+  - enabled: 1
+    path: Assets/MSTAsseats/Scene/Connecting.unity
+    guid: ea5192c0b25414dbd97a33d9ef88385e
+  - enabled: 1
+    path: Assets/MSTAsseats/Scene/Login.unity
+    guid: 00000000000000000000000000000000

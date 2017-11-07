@@ -50,7 +50,7 @@ public class MatchMaking_Test : Photon.PunBehaviour {
 	if ( GUI.Button (new Rect (10, 40, 100, 30), "start")) {
         //PhotonNetwork.LoadLevel ("Login");
 		
-		SceneManager.LoadScene("Game");
+		SceneManager.LoadScene("Login");
     }
 }
 }
