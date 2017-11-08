@@ -137,6 +137,7 @@ PlayerSettings:
   protectGraphicsMemory: 0
   useHDRDisplay: 0
   applicationIdentifier:
+    Standalone: com.mst13
     iOS: com.MST13.com
   buildNumber: {}
   AndroidBundleVersionCode: 1
