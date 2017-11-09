@@ -69,6 +69,8 @@ public class minion : TrueSyncBehaviour {
         }else{
             coolTime -= Time.deltaTime;
         }
+
+        OnPhotonSerializeView();
     }
 
     public void AddDamage(int damage){
@@ -78,6 +80,7 @@ public class minion : TrueSyncBehaviour {
             player p = parentPlayer.GetComponent<player>();
             p.SetResporn(respawnTime, parentMarker);
 
+            Debug.Log("じゃあな");
             TrueSyncManager.SyncedDestroy(gameObject);
         }
     }
@@ -92,5 +95,17 @@ public class minion : TrueSyncBehaviour {
 
     public void Destroy(){
         TrueSyncManager.SyncedDestroy(gameObject);
+    }
+
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            stream.SendNext(transform.position);
+        }
+        else
+        {
+            transform.position = (Vector3)stream.ReceiveNext();
+        }
     }
 }
