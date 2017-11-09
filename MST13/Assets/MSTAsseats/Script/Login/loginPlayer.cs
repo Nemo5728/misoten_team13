@@ -16,8 +16,8 @@ public class loginPlayer : TrueSyncBehaviour
 
     public float speed;
 
-    private TSVector areaPos;//エリアの位置を入れる
-    const int AreaSize = 5;//床の大きさ
+    private Vector3 areaPos;//エリアの位置を入れる
+    const float AreaSize = 2.5f;//床の大きさ
     bool bPlayerArea;
     
     public GameObject GetLoginArea;
@@ -39,7 +39,7 @@ public class loginPlayer : TrueSyncBehaviour
         rb = GetComponent<TSRigidBody>();
 
         //生成
-        areaPos = new TSVector(0.0f, 0.0f, 0.0f);//位置初期化
+        areaPos = new Vector3(0.0f, 0.0f, 0.0f);//位置初期化
 
 
     }
@@ -96,8 +96,12 @@ public class loginPlayer : TrueSyncBehaviour
         transform.rotation = Quaternion.Euler(0.0f, (float)direction, 0.0f);//Rotを設定
 
 
-        pos = rb.position;
-       
+        pos = rb.position;//位置を変数posに代入
+
+        //areaPos情報を取得
+        loginArea GetReady = GetLoginArea.GetComponent<loginArea>();
+        GetReady.SetAreaPos(areaPos);
+
 
         //当り判定：床の上に乗っているなら
         if (areaPos.x + AreaSize > pos.x &&
@@ -111,20 +115,17 @@ public class loginPlayer : TrueSyncBehaviour
         {
             bPlayerArea = false;
         }
-        Debug.Log(areaPos.x);
-        Debug.Log(areaPos.z);
-        Debug.Log(pos);
+        Debug.Log("areaPos" + areaPos);
+        Debug.Log("rb.position" + rb.position);
+        Debug.Log("pos" + pos);
     }
 
    
 
-    public void SetAreaPos(Vector3 pos)
-    {
-        areaPos.x = pos.x;
-        areaPos.y = pos.y;
-        areaPos.z = pos.z;
-
-    }
+    //public void SetAreaPos(Vector3 pos)
+    //{
+    //    areaPos = pos;
+    //}
 
     // Update is called once per frame
     void Update()
