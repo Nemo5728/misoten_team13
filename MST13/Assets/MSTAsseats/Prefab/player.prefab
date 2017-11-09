@@ -569,7 +569,7 @@ MonoBehaviour:
     name: 
   attackSpeed: 0
   respawnTime: 0
-  speed: 50
+  speed: 15
   markerList:
   - {fileID: 1475493563332570}
   - {fileID: 1833279172512238}

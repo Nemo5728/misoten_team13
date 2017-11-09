@@ -44,6 +44,10 @@ public class player : TrueSyncBehaviour {
     [SerializeField, TooltipAttribute("連打判定終了時間")] private float powerUpEndTime = 0.5f;
     [SerializeField, TooltipAttribute("パワーアップ開始回数")] private int powerUpStart = 10;
 
+    // test 
+    private float settimer = 5f;
+    private float timer;
+
     // Use this for initialization
     void Start () {
         
@@ -106,65 +110,133 @@ public class player : TrueSyncBehaviour {
         }
     }
 
-    public override void OnSyncedUpdate(){
-        if (!knockout){
-            bool forward = TrueSyncInput.GetBool(INPUT_KEY_FORWARD);
-            bool back = TrueSyncInput.GetBool(INPUT_KEY_BACK);
-            bool right = TrueSyncInput.GetBool(INPUT_KEY_RIGHT);
-            bool left = TrueSyncInput.GetBool(INPUT_KEY_LEFT);
-            bool space = TrueSyncInput.GetBool(INPUT_KEY_SPACE);
+    public override void OnSyncedUpdate()
+    {
+        timer += Time.deltaTime;
 
-            TSVector vector = TSVector.zero;
-            if (forward) directionVector = vector += TSVector.forward;
-            if (back) directionVector = vector += TSVector.back;
-            if (left) directionVector = vector += TSVector.left;
-            if (right) directionVector = vector += TSVector.right;
+        if( timer >=  settimer)
+        {
+            if (!knockout)
+            {
+                bool forward = TrueSyncInput.GetBool(INPUT_KEY_FORWARD);
+                bool back = TrueSyncInput.GetBool(INPUT_KEY_BACK);
+                bool right = TrueSyncInput.GetBool(INPUT_KEY_RIGHT);
+                bool left = TrueSyncInput.GetBool(INPUT_KEY_LEFT);
+                bool space = TrueSyncInput.GetBool(INPUT_KEY_SPACE);
 
-            if(controllerConnect){
-                int stickX = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
-                int stickY = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
-                bool button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
-                bool stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
+                TSVector vector = TSVector.zero;
+                if (forward) directionVector = vector += TSVector.forward;
+                if (back) directionVector = vector += TSVector.back;
+                if (left) directionVector = vector += TSVector.left;
+                if (right) directionVector = vector += TSVector.right;
 
-                FP slopeX = stickX / 473;
-                FP slopeY = stickY / 473;
-                directionVector.x = vector.x = speed * slopeX;
-                directionVector.y = vector.y = speed * slopeY;
-            }
+                if (controllerConnect)
+                {
+                    int stickX = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
+                    int stickY = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
+                    bool button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
+                    bool stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
 
-            if(space){
-                powerUpButton++;
-                powerUpCount = 0.0f;
-            }else{
-                powerUpCount += Time.deltaTime;
+                    FP slopeX = stickX / 473;
+                    FP slopeY = stickY / 473;
+                    directionVector.x = vector.x = speed * slopeX;
+                    directionVector.y = vector.y = speed * slopeY;
+                }
 
-                if(powerUpCount >= powerUpEndTime){
+                if (space)
+                {
+                    powerUpButton++;
                     powerUpCount = 0.0f;
-                    powerUpButton = 0;
+                }
+                else
+                {
+                    powerUpCount += Time.deltaTime;
+
+                    if (powerUpCount >= powerUpEndTime)
+                    {
+                        powerUpCount = 0.0f;
+                        powerUpButton = 0;
+                    }
+                }
+
+                if (powerUpButton > powerUpStart)
+                {
+                    powerUpFlag = true;
+                }
+                else
+                {
+                    powerUpFlag = false;
+                }
+
+                TSVector.Normalize(vector);
+                TSVector.Normalize(directionVector);
+
+                rb.AddForce(speed * vector, ForceMode.Force);
+
+                FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0.0f, (float)direction, 0.0f);
+
+                for (int i = 0; i < 15; i++)
+                {
+                    if (minionRespawnCount[i] > 0)
+                    {
+                        minionRespawnCount[i] -= Time.deltaTime;
+
+                        if (minionRespawnCount[i] <= 0)
+                        {
+                            TSVector vec;
+                            vec.x = markerList[i].transform.position.x;
+                            vec.y = markerList[i].transform.position.y;
+                            vec.z = markerList[i].transform.position.z;
+                            GameObject CreateMinion = TrueSyncManager.SyncedInstantiate(minion, vec, TSQuaternion.identity);
+                            minion mi = CreateMinion.GetComponent<minion>();
+                            mi.Create(gameObject, i, ownerIndex);
+                        }
+                    }
+                }
+
+                timeLeft -= Time.deltaTime;
+                if (timeLeft <= 0)
+                {
+                    loveGauge += loveGaugeLate;
+                    timeLeft = 1.0f;
+                }
+
+                if (loveGauge >= loveGaugeMax)
+                {
+                    //変身
+                    transformFlag = true;
+                    transformCount = transformTime;
+
+                    foreach (minion mi in FindObjectsOfType<minion>())
+                    {
+                        if (ownerIndex == mi.GetOwner())
+                        {
+                            mi.Destroy();
+                        }
+                    }
+                }
+
+                //変身中処理(仮)
+                if (transformFlag)
+                {
+                    transformCount -= Time.deltaTime;
+
+                    if (transformTime <= 0)
+                    {
+                        transformFlag = false;
+                    }
                 }
             }
-
-            if (powerUpButton > powerUpStart){
-                powerUpFlag = true;
-            }else{
-                powerUpFlag = false;
-            }
-
-            TSVector.Normalize(vector);
-            TSVector.Normalize(directionVector);
-
-            rb.AddForce(speed * vector, ForceMode.Force);
-
-            FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0.0f, (float)direction, 0.0f);
-
-            for (int i = 0; i < 15; i++)
+            else
             {
-                if (minionRespawnCount[i] > 0)
-                {
-                    minionRespawnCount[i] -= Time.deltaTime;
+                playerRespawnCount -= Time.deltaTime;
 
-                    if (minionRespawnCount[i] <= 0)
+                if (playerRespawnCount <= 0)
+                {
+                    knockout = false;
+
+                    for (int i = 0; i < 15; i++)
                     {
                         TSVector vec;
                         vec.x = markerList[i].transform.position.x;
@@ -173,56 +245,14 @@ public class player : TrueSyncBehaviour {
                         GameObject CreateMinion = TrueSyncManager.SyncedInstantiate(minion, vec, TSQuaternion.identity);
                         minion mi = CreateMinion.GetComponent<minion>();
                         mi.Create(gameObject, i, ownerIndex);
+                        minionCount++;
+
+                        minionRespawnCount[i] = 0.0f;
                     }
-                }
-            }
-
-            timeLeft -= Time.deltaTime;
-            if(timeLeft <= 0){
-                loveGauge += loveGaugeLate;
-                timeLeft = 1.0f;
-            }
-
-            if(loveGauge >= loveGaugeMax){
-                //変身
-                transformFlag = true;
-                transformCount = transformTime;
-
-                foreach (minion mi in FindObjectsOfType<minion>()){
-                    if(ownerIndex == mi.GetOwner()){
-                        mi.Destroy();
-                    }
-                }
-            }
-
-            //変身中処理(仮)
-            if(transformFlag){
-                transformCount -= Time.deltaTime;
-
-                if (transformTime <= 0){
-                    transformFlag = false;
-                }
-            }
-        }else{
-            playerRespawnCount -= Time.deltaTime;
-
-            if(playerRespawnCount <= 0){
-                knockout = false;
-
-                for (int i = 0; i < 15; i ++){
-                    TSVector vec;
-                    vec.x = markerList[i].transform.position.x;
-                    vec.y = markerList[i].transform.position.y;
-                    vec.z = markerList[i].transform.position.z;
-                    GameObject CreateMinion = TrueSyncManager.SyncedInstantiate(minion, vec, TSQuaternion.identity);
-                    minion mi = CreateMinion.GetComponent<minion>();
-                    mi.Create(gameObject, i, ownerIndex);
-                    minionCount++;
-
-                    minionRespawnCount[i] = 0.0f;
                 }
             }
         }
+
     }
 
     public TSVector GetMarkerPosition(int marker){
