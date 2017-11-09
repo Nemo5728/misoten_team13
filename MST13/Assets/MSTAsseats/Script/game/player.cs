@@ -43,9 +43,10 @@ public class player : TrueSyncBehaviour {
     [SerializeField, TooltipAttribute("変身時攻撃力")] private int attack = 1;
     [SerializeField, TooltipAttribute("連打判定終了時間")] private float powerUpEndTime = 0.5f;
     [SerializeField, TooltipAttribute("パワーアップ開始回数")] private int powerUpStart = 10;
+    [SerializeField, TooltipAttribute("スタミナ")] private int stamina = 10;
 
     // test 
-    private float settimer = 5f;
+    private float settimer = 0f;
     private float timer;
 
     // Use this for initialization
@@ -172,7 +173,8 @@ public class player : TrueSyncBehaviour {
                 rb.AddForce(speed * vector, ForceMode.Force);
 
                 FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
-                transform.rotation = Quaternion.Euler(0.0f, (float)direction, 0.0f);
+                //transform.rotation = Quaternion.Euler(0.0f, (float)direction, 0.0f);
+                tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
 
                 for (int i = 0; i < 15; i++)
                 {
