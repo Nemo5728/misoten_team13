@@ -47,7 +47,9 @@ public class minion : TrueSyncBehaviour {
         pos.y = transform.position.y;
         pos.z = transform.position.z;
 
-        TSVector vector = markerPos - pos;
+        //TSVector vector = markerPos - pos;
+
+        TSVector vector = markerPos - tsTransform.position;
         TSVector.Normalize(vector);
 
         rb.AddForce(vector * speed, ForceMode.Force);
@@ -69,8 +71,6 @@ public class minion : TrueSyncBehaviour {
         }else{
             coolTime -= Time.deltaTime;
         }
-
-        OnPhotonSerializeView();
     }
 
     public void AddDamage(int damage){
