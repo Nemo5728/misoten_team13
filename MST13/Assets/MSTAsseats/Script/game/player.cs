@@ -114,7 +114,7 @@ public class player : TrueSyncBehaviour {
     {
         timer += Time.deltaTime;
 
-        if( timer >=  settimer)
+        if(timer >=  settimer)
         {
             if (!knockout)
             {
@@ -137,10 +137,8 @@ public class player : TrueSyncBehaviour {
                     bool button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
                     bool stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
 
-                    FP slopeX = stickX / 473;
-                    FP slopeY = stickY / 473;
-                    directionVector.x = vector.x = speed * slopeX;
-                    directionVector.y = vector.y = speed * slopeY;
+                    directionVector.x = vector.x = speed * (stickX / 473);
+                    directionVector.z = vector.z = speed * (stickY / 473);
                 }
 
                 if (space)
