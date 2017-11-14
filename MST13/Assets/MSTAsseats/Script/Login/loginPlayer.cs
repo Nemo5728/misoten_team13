@@ -5,16 +5,20 @@ using TrueSync;
 
 public class loginPlayer : TrueSyncBehaviour 
 {
-    //キーボード関連
-    private const byte INPUT_KEY_FORWARD = 0;
-    private const byte INPUT_KEY_BACK = 1;
-    private const byte INPUT_KEY_RIGHT = 2;
-    private const byte INPUT_KEY_LEFT = 3;
+    // コントローラ設定
+    private const byte INPUT_CONTROLLER_STICKX = 5;
+    private const byte INPUT_CONTROLLER_STICKY = 6;
+    private const byte INPUT_CONTROLLER_BUTTON = 7;
+    private const byte INPUT_CONTROLLER_STICKBUTTON = 8;
 
-    private TSRigidBody rb = null;//
-    private TSVector directionVector = TSVector.zero;//プレイヤーのpos的なもの
+    private TSRigidBody rb = null;                         // rigidbody
+    private TSVector directionVector = TSVector.zero;      
+    private ControllerInfo info = null;                    // コントローラー
+    private bool knockout = false;
+    private bool controllerConnect;
 
-    public float speed;
+    [SerializeField, TooltipAttribute("移動速度")] private float speed;
+
 
     private Vector3 areaPos;//エリアの位置を入れる
     const float AreaSize = 2.5f;//床の大きさ
@@ -25,13 +29,15 @@ public class loginPlayer : TrueSyncBehaviour
     // Use this for initialization
     void Start()
     {
-        
-
         bPlayerArea = false;
     }
 
     public override void OnSyncedStart()
     {
+        knockout = false;
+        controllerConnect = false;
+        rb = GetComponent<TSRigidBody>();
+
         //初期化
         pos = new TSVector(8.0f, 0.0f, 8.0f);
 
@@ -47,80 +53,78 @@ public class loginPlayer : TrueSyncBehaviour
     //インプット
     public override void OnSyncedInput()
     {
-        bool forward = Input.GetKey(KeyCode.W);
-        bool back = Input.GetKey(KeyCode.S);
-        bool right = Input.GetKey(KeyCode.D);
-        bool left = Input.GetKey(KeyCode.A);
+        //BLEなんちゃら
+        info = BLEControlManager.GetControllerInfo();
+        //info = SerialControllManager.GetControllerInfo();
 
-        TrueSyncInput.SetBool(INPUT_KEY_FORWARD, forward);
-        TrueSyncInput.SetBool(INPUT_KEY_BACK, back);
-        TrueSyncInput.SetBool(INPUT_KEY_RIGHT, right);
-        TrueSyncInput.SetBool(INPUT_KEY_LEFT, left);
+        if (info != null) controllerConnect = true;
+
+        if (controllerConnect)
+        {
+            int stickX = info.stickX;
+            int stickY = info.stickY;
+            bool button = info.isButtonDown;
+            bool stickBtn = info.isStickDown;
+
+            TrueSyncInput.SetInt(INPUT_CONTROLLER_STICKX, stickX);
+            TrueSyncInput.SetInt(INPUT_CONTROLLER_STICKY, stickY);
+            TrueSyncInput.SetBool(INPUT_CONTROLLER_BUTTON, button);
+            TrueSyncInput.SetBool(INPUT_CONTROLLER_STICKBUTTON, stickBtn);
+        }
+
     }
 
     public override void OnSyncedUpdate()
     {
-        bool forward = TrueSyncInput.GetBool(INPUT_KEY_FORWARD);
-        bool back = TrueSyncInput.GetBool(INPUT_KEY_BACK);
-        bool right = TrueSyncInput.GetBool(INPUT_KEY_RIGHT);
-        bool left = TrueSyncInput.GetBool(INPUT_KEY_LEFT);
+        if (!knockout)
+        {
+            TSVector vector = TSVector.zero;
+ 
+            if (controllerConnect)
+            {
+                int stickX = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
+                int stickY = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
+                bool button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
+                bool stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
 
-        Debug.Log(bPlayerArea);
-       // if (bPlayerArea == false)//プレイヤーがエリアの上にいるなら
-        //{ 
-            //プレイヤー移動
-            TSVector vector = TSVector.zero;//プレイヤー位置数値を初期化
-            if (forward)
-            {
-                directionVector = vector += TSVector.forward;
+                directionVector.x = vector.x = speed * (stickX / 473);
+                directionVector.z = vector.z = speed * (stickY / 473);
             }
-            if (back)
-            {
-                directionVector = vector += TSVector.back;
-            }
-            if (left)
-            {
-                directionVector = vector += TSVector.left;
-            }
-            if (right)
-            {
-                directionVector = vector += TSVector.right;
-            }
-            TSVector.Normalize(vector);//正規化
+
+            TSVector.Normalize(vector);
+            TSVector.Normalize(directionVector);
+
             rb.AddForce(speed * vector, ForceMode.Force);
-            
-       // }
-        
 
-        FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0.0f, (float)direction, 0.0f);//Rotを設定
+            FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
+            //transform.rotation = Quaternion.Euler(0.0f, (float)direction, 0.0f);
+            tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
 
+            pos = rb.position;//位置を変数posに代入
 
-        pos = rb.position;//位置を変数posに代入
-
-        //areaPos情報を取得
-        loginArea GetReady = GetLoginArea.GetComponent<loginArea>();
-        GetReady.SetAreaPos(areaPos);
+            //areaPos情報を取得
+            loginArea GetReady = GetLoginArea.GetComponent<loginArea>();
+            GetReady.SetAreaPos(areaPos);
 
 
-        //当り判定：床の上に乗っているなら
-        if (areaPos.x + AreaSize > pos.x &&
-        areaPos.x - AreaSize < pos.x &&
-        areaPos.z + AreaSize > pos.z &&
-        areaPos.z - AreaSize < pos.z)
-        {
-            bPlayerArea = true;
+            //当り判定：床の上に乗っているなら
+            if (areaPos.x + AreaSize > pos.x &&
+            areaPos.x - AreaSize < pos.x &&
+            areaPos.z + AreaSize > pos.z &&
+            areaPos.z - AreaSize < pos.z)
+            {
+                bPlayerArea = true;
+            }
+            else
+            {
+                bPlayerArea = false;
+            }
+            Debug.Log("areaPos" + areaPos);
+            Debug.Log("rb.position" + rb.position);
+            Debug.Log("pos" + pos);
         }
-        else
-        {
-            bPlayerArea = false;
-        }
-        Debug.Log("areaPos" + areaPos);
-        Debug.Log("rb.position" + rb.position);
-        Debug.Log("pos" + pos);
+
     }
-
-   
 
     //public void SetAreaPos(Vector3 pos)
     //{
