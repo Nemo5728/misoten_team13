@@ -46,7 +46,7 @@ public class player : TrueSyncBehaviour {
     [SerializeField, TooltipAttribute("スタミナ")] private int stamina = 10;
 
     // test 
-    private float settimer = 0f;
+    private float settimer = 3f;
     private float timer;
 
     // Use this for initialization
@@ -95,7 +95,7 @@ public class player : TrueSyncBehaviour {
 
         //BLEなんちゃら
         info = BLEControlManager.GetControllerInfo();
-
+        //info = SerialControllManager.GetControllerInfo();
         if (info != null) controllerConnect = true;
 
         if(controllerConnect){
@@ -113,6 +113,7 @@ public class player : TrueSyncBehaviour {
 
     public override void OnSyncedUpdate()
     {
+        
         timer += Time.deltaTime;
 
         if(timer >=  settimer)

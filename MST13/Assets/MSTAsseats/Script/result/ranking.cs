@@ -7,12 +7,18 @@ using TrueSync;
 public class ranking : MonoBehaviour
 {
 
-    public int[] score;
+    public int[] TestScore = { 10, 20, 15, 40 };
     public GameObject players;
     public GameObject texts;
     public GameObject pillers;
     public float HeightRate = 10.0f;
     public float DifPltoBar = 0.5f;
+
+    public static int[] score = new int[4];
+    public static Color[] color = { new Color (1.0f, 0.0f, 0.0f, 1.0f),
+                                    new Color (0.0f, 0.0f, 1.0f, 1.0f),
+                                    new Color (0.0f, 1.0f, 0.0f, 1.0f),
+                                    new Color (1.0f, 1.0f, 0.0f, 1.0f) };
 
     private int[] pr_score = new int[4];
     private int[] pr_rank = new int[4];
@@ -29,10 +35,12 @@ public class ranking : MonoBehaviour
         TrueSyncManager.EndSimulation();
 
         Transform text;
-        float y = 0.0f;
         float addy = 0.0f;
-        int minscore = 999999999;
+        int minscore = 9999999;
         int maxscore = 0;
+
+        //通信なしでの動作確認用
+        TestScore.CopyTo(score, 0);
 
         score.CopyTo(pr_score, 0);
 
@@ -52,11 +60,6 @@ public class ranking : MonoBehaviour
             }
         }
 
-        if (maxscore / addy < 0.35f)
-        {
-            HeightRate *= 1.5f;
-        }
-
         //ランキングソート
         for (int i = 0; i < 4; i++)
         {
@@ -74,17 +77,24 @@ public class ranking : MonoBehaviour
         for (int i = 0; i < players.transform.childCount; i++)
         {
             //プレイヤー達の高さの設定
-            //y = ( 4 - pr_rank[i] ) * 0.75f;
-            targetY[i] = (score[i] / addy) * HeightRate + 0.45f;
-            y = (score[i] / addy) * HeightRate + 0.45f;
+            if (minscore / (float)maxscore > 0.80f)
+            {
+                float set = (score[i] / addy) * (score[i] / addy) * 5.0f;
+                targetY[i] = set * HeightRate + 0.45f;
+            }
+            else
+            {
+                targetY[i] = (score[i] / addy) * HeightRate + 0.45f;
+            }
             // players.transform.GetChild(i).transform.Translate ( 0.0f, y, 0.0f );
 
             //ランキングのテキスト表記
             text = texts.transform.GetChild(i);
-            text.transform.Translate(0.0f, (y + 2.5f), 0.0f);
+            text.transform.Translate(0.0f, (targetY[i] + 2.5f), 0.0f);
             text.GetComponent<TextMesh>().text = "PC" + (i + 1) + ":" + pr_rank[i].ToString() + "位";
             text.transform.localScale = new Vector3(-1, 1, 1);
             text.GetComponent<MeshRenderer>().enabled = false;
+            text.GetComponent<TextMesh>().color = color[i];
 
             //柱の設定
             pr_BarCol[i] = pillers.transform.GetChild(i).transform.Find("rankingBar/rankingBar").gameObject;
@@ -135,6 +145,16 @@ public class ranking : MonoBehaviour
                     //到達時の発光処理
                     pr_BarCol[i].GetComponent<Renderer>().material.SetFloat("_glow", 0.45f);
                     pr_BarCol[i].GetComponent<Renderer>().material.SetFloat("_lighten", 0.60f);
+
+                    var anim = players.transform.GetChild(i).GetComponent<Animator>();
+                    if (a == i)
+                    {
+                        anim.SetTrigger("win");
+                    }
+                    else
+                    {
+                        anim.SetTrigger("lose");
+                    }
                 }
             }
             else
@@ -152,8 +172,18 @@ public class ranking : MonoBehaviour
         }
     }
 
-    static public void SetScore(int PlayerScore, int PlayerNomber0to3)
+    public static void SetScore(int PlayerScore, int PlayerNomber0to3)
     {
+        score[PlayerNomber0to3] = PlayerScore;
+    }
 
+    public static void SetColor(Color PlayerColor, int PlayerNomber0to3)
+    {
+        color[PlayerNomber0to3] = PlayerColor;
+    }
+
+    public int GetRank()
+    {
+        return a;
     }
 }

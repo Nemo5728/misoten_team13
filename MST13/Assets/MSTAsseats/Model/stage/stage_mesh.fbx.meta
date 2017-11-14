@@ -1,22 +1,28 @@
 fileFormatVersion: 2
-guid: 4fca7b3b217274353b0857944c039f6f
-timeCreated: 1508995822
+guid: 562a12ae2b6374ee08aed9b4717891e5
+timeCreated: 1510469314
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: base
-    100002: //RootNode
-    100004: water
-    400000: base
-    400002: //RootNode
-    400004: water
-    2300000: base
-    2300002: water
-    3300000: base
-    3300002: water
-    4300000: base
-    4300002: water
+    100000: floor
+    100002: stage
+    100004: //RootNode
+    100006: water
+    400000: floor
+    400002: stage
+    400004: //RootNode
+    400006: water
+    2300000: floor
+    2300002: stage
+    2300004: water
+    3300000: floor
+    3300002: stage
+    3300004: water
+    4300000: floor
+    4300002: stage
+    4300004: water
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -81,7 +87,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

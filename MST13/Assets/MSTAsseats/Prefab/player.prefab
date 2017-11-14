@@ -459,7 +459,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1181295717844348}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 17.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4342110683513278}
@@ -518,7 +518,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1181295717844348}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: c6ed3225e680b0b40a35aee80f79a1ca, type: 3}
 --- !u!114 &114333922197170128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -569,7 +569,7 @@ MonoBehaviour:
     name: 
   attackSpeed: 0
   respawnTime: 0
-  speed: 15
+  speed: 10
   markerList:
   - {fileID: 1475493563332570}
   - {fileID: 1833279172512238}
@@ -581,11 +581,6 @@ MonoBehaviour:
   - {fileID: 1603684787144900}
   - {fileID: 1532050519064858}
   - {fileID: 1640058961633536}
-  - {fileID: 1579729379363128}
-  - {fileID: 1058595626035840}
-  - {fileID: 1468731853605432}
-  - {fileID: 1040846805535368}
-  - {fileID: 1221803887125502}
   minion: {fileID: 1103229404769566, guid: ccd01d43c215c45f081e30887a3c6f4d, type: 2}
   loveGaugeMax: 100
   loveGaugeLate: 1
@@ -594,6 +589,7 @@ MonoBehaviour:
   attack: 1
   powerUpEndTime: 1
   powerUpStart: 10
+  stamina: 10
 --- !u!114 &114717637357915240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -611,7 +607,7 @@ MonoBehaviour:
     y:
       _serializedValue: 2147483648
     z:
-      _serializedValue: 0
+      _serializedValue: 73143296000
   _rotation:
     x:
       _serializedValue: 0
