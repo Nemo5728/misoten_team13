@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TrueSync;
+using UnityEngine.SceneManagement;
 
 public class ranking : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class ranking : MonoBehaviour
     public float DifPltoBar = 0.5f;
 
     public static int[] score = new int[4];
+    public static int playerNumber = 0;
     public static Color[] color = { new Color (1.0f, 0.0f, 0.0f, 1.0f),
                                     new Color (0.0f, 0.0f, 1.0f, 1.0f),
                                     new Color (0.0f, 1.0f, 0.0f, 1.0f),
@@ -79,7 +81,7 @@ public class ranking : MonoBehaviour
             //プレイヤー達の高さの設定
             if (minscore / (float)maxscore > 0.80f)
             {
-                float set = (score[i] / addy) * (score[i] / addy) * 5.0f;
+                float set = (score[i] / addy) * (score[i] / addy) * 2.5f;
                 targetY[i] = set * HeightRate + 0.45f;
             }
             else
@@ -146,7 +148,8 @@ public class ranking : MonoBehaviour
                     pr_BarCol[i].GetComponent<Renderer>().material.SetFloat("_glow", 0.45f);
                     pr_BarCol[i].GetComponent<Renderer>().material.SetFloat("_lighten", 0.60f);
 
-                    var anim = players.transform.GetChild(i).GetComponent<Animator>();
+                    //一位か否かでモーション分岐
+                    Animator anim = players.transform.GetChild(i).GetComponent<Animator>();
                     if (a == i)
                     {
                         anim.SetTrigger("win");
@@ -159,6 +162,7 @@ public class ranking : MonoBehaviour
             }
             else
             {
+                //光の消灯化処理
                 float f = 0.0f;
                 f = pr_BarCol[i].GetComponent<Renderer>().material.GetFloat("_glow") * 0.90f;
                 pr_BarCol[i].GetComponent<Renderer>().material.SetFloat("_glow", f);
@@ -170,18 +174,42 @@ public class ranking : MonoBehaviour
                 }
             }
         }
+
+        //1位発表後操作でタイトルに移る。
+        if (texts.transform.GetChild(a).GetComponent<MeshRenderer>().enabled == true)
+        {
+            if (Input.GetKey("a"))
+            {
+                SceneManager.LoadScene("Title");
+            }
+        }
     }
 
+    //各プレイヤーのスコアを受け取る。
     public static void SetScore(int PlayerScore, int PlayerNomber0to3)
     {
         score[PlayerNomber0to3] = PlayerScore;
     }
 
+    //各プレイヤーのカラーを受け取る。
     public static void SetColor(Color PlayerColor, int PlayerNomber0to3)
     {
         color[PlayerNomber0to3] = PlayerColor;
     }
 
+    //この端末のプレイヤーナンバーを受け取る。
+    public static void SetPlayerNumber(int PlayerNomber0to3)
+    {
+        playerNumber = PlayerNomber0to3;
+    }
+
+    //この端末のプレイヤーナンバーを送信する。
+    public int GetPlayerNumber()
+    {
+        return playerNumber;
+    }
+
+    //一位のプレイヤーのナンバーを送信する。
     public int GetRank()
     {
         return a;
