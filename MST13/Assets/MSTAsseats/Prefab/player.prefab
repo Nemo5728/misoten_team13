@@ -459,7 +459,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1181295717844348}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 17.03}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4342110683513278}
@@ -582,6 +582,7 @@ MonoBehaviour:
   - {fileID: 1532050519064858}
   - {fileID: 1640058961633536}
   minion: {fileID: 1103229404769566, guid: ccd01d43c215c45f081e30887a3c6f4d, type: 2}
+  monsterObject: {fileID: 0}
   loveGaugeMax: 100
   loveGaugeLate: 1
   health: 100

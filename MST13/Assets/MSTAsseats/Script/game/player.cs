@@ -36,6 +36,7 @@ public class player : TrueSyncBehaviour {
     [SerializeField, TooltipAttribute("移動速度")] private float speed;
     [SerializeField, TooltipAttribute("触るな危険")] private GameObject[] markerList;
     [SerializeField, TooltipAttribute("触るな危険")] private GameObject minion;
+    [SerializeField, TooltipAttribute("触るな危険")] private GameObject monsterObject;
     [SerializeField, TooltipAttribute("ラブゲージMAX")] private int loveGaugeMax = 100;
     [SerializeField, TooltipAttribute("ラブゲージ上昇率")] private int loveGaugeLate = 1;
     [SerializeField, TooltipAttribute("変身時HP")] private int health = 100;
@@ -95,7 +96,6 @@ public class player : TrueSyncBehaviour {
 
         //BLEなんちゃら
         info = BLEControlManager.GetControllerInfo();
-        //info = SerialControllManager.GetControllerInfo();
         if (info != null) controllerConnect = true;
 
         if(controllerConnect){
@@ -174,7 +174,6 @@ public class player : TrueSyncBehaviour {
                 rb.AddForce(speed * vector, ForceMode.Force);
 
                 FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
-                //transform.rotation = Quaternion.Euler(0.0f, (float)direction, 0.0f);
                 tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
 
                 for (int i = 0; i < 15; i++)
@@ -208,6 +207,10 @@ public class player : TrueSyncBehaviour {
                     //変身
                     transformFlag = true;
                     transformCount = transformTime;
+
+                    monsterObject.SetActive(true);
+                    GetComponent<monster>().TransformInit(tsTransform.position, tsTransform.rotation);
+                    gameObject.SetActive(false);
 
                     foreach (minion mi in FindObjectsOfType<minion>())
                     {
@@ -274,5 +277,26 @@ public class player : TrueSyncBehaviour {
         }
     }
 
+    public void TransformInit(TSVector pos, TSQuaternion rot){
+        tsTransform.position = pos;
+        tsTransform.rotation = rot;
 
+        for (int i = 0; i < markerList.Length; i++)
+        {
+            TSVector vec;
+            vec.x = markerList[i].transform.position.x;
+            vec.y = markerList[i].transform.position.y;
+            vec.z = markerList[i].transform.position.z;
+            GameObject CreateMinion = TrueSyncManager.SyncedInstantiate(minion, vec, TSQuaternion.identity);
+            minion mi = CreateMinion.GetComponent<minion>();
+            mi.Create(gameObject, i, ownerIndex);
+            minionCount++;
+        }
+
+        knockout = false;
+        transformFlag = false;
+        powerUpCount = 0.0f;
+        powerUpButton = 0;
+        powerUpFlag = false;
+    }
 }

@@ -1160,7 +1160,7 @@ Prefab:
     - target: {fileID: 11424684, guid: 0017db9755b5cb442a00a702420c1076, type: 2}
       propertyPath: playerPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 1181295717844348, guid: f49f723870a524eb9a416750a42be830,
+      objectReference: {fileID: 1181615605814426, guid: 86efe2fab192e42f0b22170f50ad00c7,
         type: 2}
     - target: {fileID: 11424684, guid: 0017db9755b5cb442a00a702420c1076, type: 2}
       propertyPath: customConfig
@@ -1170,7 +1170,7 @@ Prefab:
     - target: {fileID: 11424684, guid: 0017db9755b5cb442a00a702420c1076, type: 2}
       propertyPath: playerPrefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 1181295717844348, guid: f49f723870a524eb9a416750a42be830,
+      objectReference: {fileID: 1540991540942870, guid: e5fb832ed7b6e4ad7a9c0595610964d9,
         type: 2}
     - target: {fileID: 11424684, guid: 0017db9755b5cb442a00a702420c1076, type: 2}
       propertyPath: playerPrefabs.Array.data[2]

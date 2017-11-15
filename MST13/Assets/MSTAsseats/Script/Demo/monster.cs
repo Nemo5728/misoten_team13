@@ -36,6 +36,7 @@ public class monster : TrueSyncBehaviour {
     [SerializeField, TooltipAttribute("変身時攻撃力")] private int attack = 1;
     [SerializeField, TooltipAttribute("連打判定終了時間")] private float powerUpEndTime = 0.5f;
     [SerializeField, TooltipAttribute("変身時HP")] private int health = 100;
+    [SerializeField, TooltipAttribute("触るな危険")] private GameObject playerObject;
 	// Use this for initialization
 	void Start () {}
 	
@@ -191,6 +192,9 @@ public class monster : TrueSyncBehaviour {
                 // 時間切れ
                 anime.SetTrigger("monsterSplit");
                 // playerにチェンジ
+                playerObject.SetActive(true);
+                GetComponent<player>().TransformInit(tsTransform.position, tsTransform.rotation);
+                gameObject.SetActive(false);
             }
 
             // 体力処理
@@ -199,6 +203,9 @@ public class monster : TrueSyncBehaviour {
                 // 撃破モーション
                 anime.SetTrigger("monsterDown");
                 // playerにチェンジ
+                playerObject.SetActive(true);
+                GetComponent<player>().TransformInit(tsTransform.position, tsTransform.rotation);
+                gameObject.SetActive(false);
             }
             if(isAttakc)
             {
@@ -217,4 +224,17 @@ public class monster : TrueSyncBehaviour {
        
 	
 	}
+
+    public void TransformInit(TSVector pos, TSQuaternion rot){
+        tsTransform.position = pos;
+        tsTransform.rotation = rot;
+
+        knockout = false;
+        transformFlag = false;
+        powerUpCount = 0.0f;
+        powerUpButton = 0;
+        powerUpFlag = false;
+        controllerConnect = false;
+        loveGauge = loveGaugeMax;
+    }
 }
