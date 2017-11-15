@@ -2142,6 +2142,7 @@ MonoBehaviour:
   attack: 1
   powerUpEndTime: 0.5
   health: 100
+  playerObject: {fileID: 0}
 --- !u!114 &114705081093900266
 MonoBehaviour:
   m_ObjectHideFlags: 1
