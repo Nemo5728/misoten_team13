@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: monsterfire3
+  m_Shader: {fileID: 4800000, guid: 7f98592402ac28549a4645c569fafda9, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _BaseTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _EmiTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _loadingLight
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _loadingMask
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _noiseMask
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: _Lighten
+      second: 0
+    - first:
+        name: _alpha
+      second: 1
+    - first:
+        name: _alphaPow
+      second: 5.8
+    - first:
+        name: _glow
+      second: 0
+    - first:
+        name: _loadUVpan
+      second: 1
+    - first:
+        name: _range
+      second: 0.96
+    - first:
+        name: _toon1
+      second: 0.77
+    - first:
+        name: _toon2
+      second: 0.64
+    - first:
+        name: _toon3
+      second: 0.44
+    m_Colors:
+    - first:
+        name: _C1
+      second: {r: 0.427451, g: 0.93725497, b: 0.38431376, a: 1}
+    - first:
+        name: _C2
+      second: {r: 0.33333334, g: 0.8980393, b: 0.24705884, a: 1}
+    - first:
+        name: _C3
+      second: {r: 0.627451, g: 1, b: 0.6039216, a: 1}
+    - first:
+        name: _C4
+      second: {r: 1, g: 1, b: 1, a: 1}
