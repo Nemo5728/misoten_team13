@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c188bd955b954a3c974402d80c9bb56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 63000000650000006e00000064000000
+  TestScore: 0a000000140000000f00000028000000
   players: {fileID: 1354205858}
   texts: {fileID: 781662025}
   pillers: {fileID: 2098074742}
