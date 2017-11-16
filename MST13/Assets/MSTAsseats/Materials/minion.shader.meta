@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 979b0706cd64bfe4e9ddb58fb974366d
+timeCreated: 1510650920
+licenseType: Free
+ShaderImporter:
+  defaultTextures:
+  - _DiffuseTex: {instanceID: 0}
+  - _EmiTex: {instanceID: 0}
+  - _SpeGloTex: {instanceID: 0}
+  - _loadingMask: {fileID: 2800000, guid: bc9c54c4c2da44244b9566eda893f6af, type: 3}
+  - _loadingLight: {fileID: 2800000, guid: 7d723cf25f3a82048beca933a19f3ff1, type: 3}
+  - _noiseMask: {fileID: 2800000, guid: 3b3a917edc3c9124098e35835f97013c, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
