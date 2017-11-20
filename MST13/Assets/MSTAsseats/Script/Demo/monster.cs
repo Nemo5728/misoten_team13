@@ -28,6 +28,7 @@ public class monster : TrueSyncBehaviour {
     private bool powerUpFlag;
     private bool controllerConnect;
     private Animator anime;             //アニメーター
+    private TSVector move;
 
     [SerializeField, TooltipAttribute("攻撃速度(sec)")] private int attackSpeed = 0;
     [SerializeField, TooltipAttribute("移動速度")] private float speed;
@@ -37,6 +38,8 @@ public class monster : TrueSyncBehaviour {
     [SerializeField, TooltipAttribute("連打判定終了時間")] private float powerUpEndTime = 0.5f;
     [SerializeField, TooltipAttribute("変身時HP")] private int health = 100;
     [SerializeField, TooltipAttribute("触るな危険")] private GameObject playerObject;
+    [SerializeField, TooltipAttribute("移動減衰係数"), Range(0.0f, 1.0f)] private float drag;
+
 	// Use this for initialization
 	void Start () {}
 	
@@ -56,6 +59,7 @@ public class monster : TrueSyncBehaviour {
         powerUpFlag = false;
         controllerConnect = false;
         loveGauge = loveGaugeMax;
+        move = TSVector.zero;
         // 出現モーション
         anime.SetTrigger("monsterTransform");
 	}
@@ -214,12 +218,16 @@ public class monster : TrueSyncBehaviour {
                 TSVector.Normalize(vector);
                 TSVector.Normalize(directionVector);
 
-                rb.AddForce(speed * vector, ForceMode.Force);
+                //rb.AddForce(speed * vector, ForceMode.Force);
 
                 FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
                 //transform.rotation = Quaternion.Euler(0.0f, (float)direction, 0.0f);
                 tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
 
+                move += vector * speed;
+                tsTransform.Translate(move, Space.World);
+                move.x += (0.0f - move.x) / drag;
+                move.z += (0.0f - move.z) / drag;
         }
        
 	
@@ -235,6 +243,7 @@ public class monster : TrueSyncBehaviour {
         powerUpButton = 0;
         powerUpFlag = false;
         controllerConnect = false;
+        move = TSVector.zero;
         loveGauge = loveGaugeMax;
     }
 }

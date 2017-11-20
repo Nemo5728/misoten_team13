@@ -30,6 +30,7 @@ public class player : TrueSyncBehaviour {
     private float powerUpCount = 0.0f;
     private bool powerUpFlag;
     private bool controllerConnect;
+    private TSVector move;
 
     [SerializeField, TooltipAttribute("攻撃速度(sec)")] private int attackSpeed = 0;
     [SerializeField, TooltipAttribute("復帰時間(sec)")] private float respawnTime = 0;
@@ -45,9 +46,10 @@ public class player : TrueSyncBehaviour {
     [SerializeField, TooltipAttribute("連打判定終了時間")] private float powerUpEndTime = 0.5f;
     [SerializeField, TooltipAttribute("パワーアップ開始回数")] private int powerUpStart = 10;
     [SerializeField, TooltipAttribute("スタミナ")] private int stamina = 10;
+    [SerializeField, TooltipAttribute("移動減衰係数"), Range(0.0f, 1.0f)] private float drag;
 
     // test 
-    private float settimer = 3f;
+    private float settimer = 0;
     private float timer;
 
     // Use this for initialization
@@ -78,6 +80,7 @@ public class player : TrueSyncBehaviour {
         powerUpButton = 0;
         powerUpFlag = false;
         controllerConnect = false;
+        move = TSVector.zero;
         rb = GetComponent<TSRigidBody>();
     }
 
@@ -168,15 +171,18 @@ public class player : TrueSyncBehaviour {
                     powerUpFlag = false;
                 }
 
-                TSVector.Normalize(vector);
-                TSVector.Normalize(directionVector);
-
-                rb.AddForce(speed * vector, ForceMode.Force);
-
+                vector = TSVector.Normalize(vector);Debug.Log("vec:" + vector);
+                directionVector = TSVector.Normalize(directionVector);
                 FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
                 tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
+                //tsTransform.Translate(vector.x * speed, 0.0f, vector.z * speed, Space.World);
 
-                for (int i = 0; i < 15; i++)
+                move += vector * speed;
+                tsTransform.Translate(move, Space.World);
+                move.x += (0.0f - move.x) / drag;
+                move.z += (0.0f - move.z) / drag;
+
+                for (int i = 0; i < markerList.Length; i++)
                 {
                     if (minionRespawnCount[i] > 0)
                     {
@@ -240,7 +246,7 @@ public class player : TrueSyncBehaviour {
                 {
                     knockout = false;
 
-                    for (int i = 0; i < 15; i++)
+                    for (int i = 0; i < markerList.Length; i++)
                     {
                         TSVector vec;
                         vec.x = markerList[i].transform.position.x;
@@ -298,5 +304,6 @@ public class player : TrueSyncBehaviour {
         powerUpCount = 0.0f;
         powerUpButton = 0;
         powerUpFlag = false;
+        move = TSVector.zero;
     }
 }

@@ -1737,7 +1737,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1181615605814426}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.9781098, y: 0.5, z: -1.1431752}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4396306016807806}
@@ -1863,7 +1863,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1564462359086708}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.9781098, y: 0, z: 1.1431752}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4932738943135894}
@@ -2103,7 +2103,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1146175436229552}
   m_LocalRotation: {x: 0, y: 0.92387956, z: 0, w: 0.38268343}
-  m_LocalPosition: {x: -10.87, y: 0.5, z: -4.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4974529524495780}
@@ -2664,7 +2664,7 @@ MonoBehaviour:
     name: 
   attackSpeed: 0
   respawnTime: 0
-  speed: 10
+  speed: 0.1
   markerList:
   - {fileID: 1201963085156132}
   - {fileID: 1811707958475386}
@@ -2677,7 +2677,7 @@ MonoBehaviour:
   - {fileID: 1515167981544332}
   - {fileID: 1764512979603280}
   minion: {fileID: 1103229404769566, guid: ccd01d43c215c45f081e30887a3c6f4d, type: 2}
-  monsterObject: {fileID: 0}
+  monsterObject: {fileID: 1146175436229552}
   loveGaugeMax: 100
   loveGaugeLate: 1
   health: 100
@@ -2686,6 +2686,7 @@ MonoBehaviour:
   powerUpEndTime: 1
   powerUpStart: 10
   stamina: 10
+  drag: 0.5
 --- !u!114 &114066311742914696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2898,6 +2899,7 @@ MonoBehaviour:
   powerUpEndTime: 0.5
   health: 100
   playerObject: {fileID: 0}
+  drag: 0
 --- !u!137 &137040757381978648
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
