@@ -849,7 +849,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 562a12ae2b6374ee08aed9b4717891e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 562a12ae2b6374ee08aed9b4717891e5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1160,7 +1160,7 @@ Prefab:
     - target: {fileID: 11424684, guid: 0017db9755b5cb442a00a702420c1076, type: 2}
       propertyPath: playerPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 1181615605814426, guid: 86efe2fab192e42f0b22170f50ad00c7,
+      objectReference: {fileID: 1841181755673674, guid: 78d37ea1559584244a418cab76d03b18,
         type: 2}
     - target: {fileID: 11424684, guid: 0017db9755b5cb442a00a702420c1076, type: 2}
       propertyPath: customConfig
