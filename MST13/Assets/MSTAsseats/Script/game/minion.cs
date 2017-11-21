@@ -46,7 +46,8 @@ public class minion : TrueSyncBehaviour {
         FP dist = TSVector.Distance(markerPos, tsTransform.position) / speed;
         vector = TSVector.Normalize(vector);
 
-        tsTransform.Translate(vector * dist, Space.World);
+        if (!(TSVector.Distance(TSVector.zero, tsTransform.position + vector) >= p.GetStageLength()))
+            tsTransform.Translate(vector * dist, Space.World);
 
         if (coolTime <= 0)
         {

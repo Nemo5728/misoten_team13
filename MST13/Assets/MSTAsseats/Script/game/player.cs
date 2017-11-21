@@ -14,6 +14,7 @@ public class player : TrueSyncBehaviour {
     private const byte INPUT_CONTROLLER_STICKY = 6;
     private const byte INPUT_CONTROLLER_BUTTON = 7;
     private const byte INPUT_CONTROLLER_STICKBUTTON = 8;
+    private const float STAGE_LENGTH = 56.0f;
 
     private TSRigidBody rb = null;
     private TSVector directionVector = TSVector.zero;
@@ -174,7 +175,9 @@ public class player : TrueSyncBehaviour {
                 directionVector = TSVector.Normalize(directionVector);
                 FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
                 tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
-                tsTransform.Translate(vector * speed, Space.World);
+
+                if(!(TSVector.Distance(TSVector.zero, tsTransform.position + vector) >= STAGE_LENGTH))
+                    tsTransform.Translate(vector * speed, Space.World);
 
                 for (int i = 0; i < markerList.Length; i++)
                 {
@@ -299,5 +302,9 @@ public class player : TrueSyncBehaviour {
         powerUpButton = 0;
         powerUpFlag = false;
         move = TSVector.zero;
+    }
+
+    public float GetStageLength(){
+        return STAGE_LENGTH;
     }
 }
