@@ -14,6 +14,7 @@ public class MatchMaking_Test : Photon.PunBehaviour
 
     void Start()
     {
+        // haro-
         startText = GameObject.Find("Canvas/Start").GetComponent<Text>();
         failedText = GameObject.Find("Canvas/Failed").GetComponent<Text>();
 
@@ -53,11 +54,19 @@ public class MatchMaking_Test : Photon.PunBehaviour
 
         if (PhotonNetwork.playerList.Length > 0)
         {
-            if (PhotonNetwork.isMasterClient && GUI.Button(new Rect(10, 40, 100, 30), "start"))
+            if (PhotonNetwork.isMasterClient && GUI.Button(new Rect(10, 40, 100, 30), "login"))
             {
                 PhotonNetwork.LoadLevel("Login");
 
                 //SceneManager.LoadScene("Login");
+
+                Debug.Log("Check A.");
+            }
+            if (PhotonNetwork.isMasterClient && GUI.Button(new Rect(10, 100, 100, 30), "game"))
+            {
+                PhotonNetwork.LoadLevel("Login");
+
+                //SceneManager.LoadScene("Game");
 
                 Debug.Log("Check A.");
             }

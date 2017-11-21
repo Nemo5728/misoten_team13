@@ -19,6 +19,8 @@ public class loginArea : MonoBehaviour
 
     public GameObject refNet;
 
+    Renderer ren;
+
     // Use this for initialization
     void Start()
     {
@@ -28,7 +30,7 @@ public class loginArea : MonoBehaviour
         //bPlayerArea = false;
 
         //初期座標設定
-        posAreaTex = new Vector3(10.0f, 0.0f, 10.0f);
+        posAreaTex = new Vector3(0.0f, 0.0f, 0.0f);
 
         //色を設定
         CircleColorValue = new Color(0.0f, 1.0f, 0.0f, 1.0f);
@@ -36,6 +38,11 @@ public class loginArea : MonoBehaviour
         AreaCreator = Instantiate(AreaTex); //オブジェクト割り振り
         AreaCreator.transform.position = posAreaTex;  //初期座標設定
         AreaCreator.GetComponent<MeshRenderer>().material.color = CircleColorValue;//色を変更
+
+       ren =  AreaCreator.GetComponent<Renderer>();
+        Color color = ren.material.color;
+        color.a = 0.0f;
+        ren.material.color = color;
 
         ////pos情報を渡す
         //loginPlayer GetReady = refNet.GetComponent<loginPlayer>();

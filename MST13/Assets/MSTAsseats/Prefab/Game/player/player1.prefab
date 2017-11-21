@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 114969963835262534}
   - component: {fileID: 114343981036204442}
   - component: {fileID: 114254728732588556}
+  - component: {fileID: 95758183769804208}
   m_Layer: 8
   m_Name: player1
   m_TagString: Player
@@ -2368,6 +2369,23 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!95 &95758183769804208
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1153890307338718}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 49732232886ab464d8eb0663a5f44593, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114254728732588556
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2389,7 +2407,7 @@ MonoBehaviour:
     name: 
   attackSpeed: 0
   respawnTime: 0
-  speed: 10
+  speed: 3
   markerList:
   - {fileID: 1593063415465934}
   - {fileID: 1813005010888574}
@@ -2411,6 +2429,7 @@ MonoBehaviour:
   powerUpEndTime: 1
   powerUpStart: 10
   stamina: 10
+  drag: 0
 --- !u!114 &114343981036204442
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -2230,6 +2230,7 @@ MonoBehaviour:
   powerUpEndTime: 0.5
   health: 100
   playerObject: {fileID: 0}
+  drag: 0
 --- !u!137 &137053973982152068
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

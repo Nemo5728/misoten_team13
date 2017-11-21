@@ -6,6 +6,11 @@ using TrueSync;
 public class loginPlayer : TrueSyncBehaviour 
 {
     // コントローラ設定
+    private const byte INPUT_KEY_FORWARD = 0;
+    private const byte INPUT_KEY_BACK = 1;
+    private const byte INPUT_KEY_RIGHT = 2;
+    private const byte INPUT_KEY_LEFT = 3;
+    private const byte INPUT_KEY_SPACE = 4;
     private const byte INPUT_CONTROLLER_STICKX = 5;
     private const byte INPUT_CONTROLLER_STICKY = 6;
     private const byte INPUT_CONTROLLER_BUTTON = 7;
@@ -16,9 +21,11 @@ public class loginPlayer : TrueSyncBehaviour
     private ControllerInfo info = null;                    // コントローラー
     private bool knockout = false;
     private bool controllerConnect;
+    private TSVector move;
+
 
     [SerializeField, TooltipAttribute("移動速度")] private float speed;
-
+    [SerializeField, TooltipAttribute("移動減衰係数"), Range(0.0f, 1.0f)] private float drag;
 
     private Vector3 areaPos;//エリアの位置を入れる
     const float AreaSize = 2.5f;//床の大きさ
@@ -37,6 +44,7 @@ public class loginPlayer : TrueSyncBehaviour
         knockout = false;
         controllerConnect = false;
         rb = GetComponent<TSRigidBody>();
+        move = TSVector.zero;
 
         //初期化
         pos = new TSVector(8.0f, 0.0f, 8.0f);
@@ -53,9 +61,22 @@ public class loginPlayer : TrueSyncBehaviour
     //インプット
     public override void OnSyncedInput()
     {
+        bool forward = Input.GetKey(KeyCode.W);
+        bool back = Input.GetKey(KeyCode.S);
+        bool right = Input.GetKey(KeyCode.D);
+        bool left = Input.GetKey(KeyCode.A);
+        bool space = Input.GetKeyDown(KeyCode.Space);
+
+        TrueSyncInput.SetBool(INPUT_KEY_FORWARD, forward);
+        TrueSyncInput.SetBool(INPUT_KEY_BACK, back);
+        TrueSyncInput.SetBool(INPUT_KEY_RIGHT, right);
+        TrueSyncInput.SetBool(INPUT_KEY_LEFT, left);
+        TrueSyncInput.SetBool(INPUT_KEY_SPACE, space);
+
+
         //BLEなんちゃら
-        info = BLEControlManager.GetControllerInfo();
-        //info = SerialControllManager.GetControllerInfo();
+        //  info = BLEControlManager.GetControllerInfo();
+        info = SerialControllManager.GetControllerInfo();
 
         if (info != null) controllerConnect = true;
 
@@ -78,7 +99,18 @@ public class loginPlayer : TrueSyncBehaviour
     {
         if (!knockout)
         {
+            bool forward = TrueSyncInput.GetBool(INPUT_KEY_FORWARD);
+            bool back = TrueSyncInput.GetBool(INPUT_KEY_BACK);
+            bool right = TrueSyncInput.GetBool(INPUT_KEY_RIGHT);
+            bool left = TrueSyncInput.GetBool(INPUT_KEY_LEFT);
+            bool space = TrueSyncInput.GetBool(INPUT_KEY_SPACE);
+
             TSVector vector = TSVector.zero;
+            if (forward) directionVector = vector += TSVector.forward;
+            if (back) directionVector = vector += TSVector.back;
+            if (left) directionVector = vector += TSVector.left;
+            if (right) directionVector = vector += TSVector.right;
+
  
             if (controllerConnect)
             {
@@ -91,14 +123,23 @@ public class loginPlayer : TrueSyncBehaviour
                 directionVector.z = vector.z = speed * (stickY / 473);
             }
 
-            TSVector.Normalize(vector);
-            TSVector.Normalize(directionVector);
+            vector = TSVector.Normalize(vector); Debug.Log("vec:" + vector);
 
-            rb.AddForce(speed * vector, ForceMode.Force);
-
+            directionVector = TSVector.Normalize(directionVector);
             FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
-            //transform.rotation = Quaternion.Euler(0.0f, (float)direction, 0.0f);
             tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
+            // tsTransform.Translate(vector.x * speed, 0.0f, vector.z * speed, Space.World);
+
+            Debug.Log(vector);
+            Debug.Log(move);
+
+            move += vector * speed;
+
+           // rb.tsTransform.Translate(move, Space.World);
+           tsTransform.Translate(move, Space.World);
+            move.x += (0.0f - move.x) / drag;
+            move.z += (0.0f - move.z) / drag;
+
 
             pos = rb.position;//位置を変数posに代入
 
@@ -114,6 +155,7 @@ public class loginPlayer : TrueSyncBehaviour
             areaPos.z - AreaSize < pos.z)
             {
                 bPlayerArea = true;
+                Debug.Log("乗ってるよ！");
             }
             else
             {
