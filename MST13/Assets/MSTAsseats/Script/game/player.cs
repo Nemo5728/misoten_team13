@@ -46,7 +46,6 @@ public class player : TrueSyncBehaviour {
     [SerializeField, TooltipAttribute("連打判定終了時間")] private float powerUpEndTime = 0.5f;
     [SerializeField, TooltipAttribute("パワーアップ開始回数")] private int powerUpStart = 10;
     [SerializeField, TooltipAttribute("スタミナ")] private int stamina = 10;
-    [SerializeField, TooltipAttribute("移動減衰係数"), Range(0.0f, 1.0f)] private float drag;
 
     // test 
     private float settimer = 0;
@@ -130,10 +129,10 @@ public class player : TrueSyncBehaviour {
                 bool space = TrueSyncInput.GetBool(INPUT_KEY_SPACE);
 
                 TSVector vector = TSVector.zero;
-                if (forward) directionVector = vector += TSVector.forward;
-                if (back) directionVector = vector += TSVector.back;
-                if (left) directionVector = vector += TSVector.left;
-                if (right) directionVector = vector += TSVector.right;
+                if (forward) directionVector += vector += TSVector.forward;
+                if (back) directionVector += vector += TSVector.back;
+                if (left) directionVector += vector += TSVector.left;
+                if (right) directionVector += vector += TSVector.right;
 
                 if (controllerConnect)
                 {
@@ -171,16 +170,11 @@ public class player : TrueSyncBehaviour {
                     powerUpFlag = false;
                 }
 
-                vector = TSVector.Normalize(vector);Debug.Log("vec:" + vector);
+                vector = TSVector.Normalize(vector);
                 directionVector = TSVector.Normalize(directionVector);
                 FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
                 tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
-                //tsTransform.Translate(vector.x * speed, 0.0f, vector.z * speed, Space.World);
-
-                move += vector * speed;
-                tsTransform.Translate(move, Space.World);
-                move.x += (0.0f - move.x) / drag;
-                move.z += (0.0f - move.z) / drag;
+                tsTransform.Translate(vector * speed, Space.World);
 
                 for (int i = 0; i < markerList.Length; i++)
                 {
