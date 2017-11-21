@@ -2664,7 +2664,7 @@ MonoBehaviour:
     name: 
   attackSpeed: 0
   respawnTime: 0
-  speed: 0.1
+  speed: 0.5
   markerList:
   - {fileID: 1201963085156132}
   - {fileID: 1811707958475386}
@@ -2686,7 +2686,6 @@ MonoBehaviour:
   powerUpEndTime: 1
   powerUpStart: 10
   stamina: 10
-  drag: 0.5
 --- !u!114 &114066311742914696
 MonoBehaviour:
   m_ObjectHideFlags: 1

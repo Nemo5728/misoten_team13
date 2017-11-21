@@ -123,11 +123,10 @@ MonoBehaviour:
     name: 
   attackSpeed: 1
   health: 10
-  speed: 0.1
   range: 10
   attack: 1
+  speed: 10
   respawnTime: 0
-  drag: 0.5
 --- !u!114 &114223655087657938
 MonoBehaviour:
   m_ObjectHideFlags: 1
