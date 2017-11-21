@@ -1046,7 +1046,7 @@ Animator:
   m_GameObject: {fileID: 1327664504012864}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ef0a66204b96f40d9ae27cba97988c71, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1a68e4941cb8b4b41a410f440e80a4df, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1257,6 +1257,7 @@ MonoBehaviour:
   range: 10
   attack: 1
   respawnTime: 0
+  drag: 0
 --- !u!137 &137160846486621826
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

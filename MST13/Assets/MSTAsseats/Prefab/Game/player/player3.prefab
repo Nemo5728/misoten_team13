@@ -549,6 +549,7 @@ GameObject:
   - component: {fileID: 114641955063534984}
   - component: {fileID: 114778586626932572}
   - component: {fileID: 114515551211044734}
+  - component: {fileID: 95374982843133336}
   m_Layer: 8
   m_Name: player3
   m_TagString: Player
@@ -2368,6 +2369,23 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!95 &95374982843133336
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1425579319365326}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 49732232886ab464d8eb0663a5f44593, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114515551211044734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2411,6 +2429,7 @@ MonoBehaviour:
   powerUpEndTime: 1
   powerUpStart: 10
   stamina: 10
+  drag: 0
 --- !u!114 &114549519840815292
 MonoBehaviour:
   m_ObjectHideFlags: 1

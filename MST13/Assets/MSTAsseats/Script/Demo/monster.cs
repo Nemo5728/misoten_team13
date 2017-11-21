@@ -27,9 +27,12 @@ public class monster : TrueSyncBehaviour {
     private float powerUpCount = 0.0f;
     private bool powerUpFlag;
     private bool controllerConnect;
+    private bool bAttack;               // 攻撃
+
     private Animator anime;             //アニメーター
     private TSVector move;
-
+    private GameObject ready;           // readyオブジェクト
+   
     [SerializeField, TooltipAttribute("攻撃速度(sec)")] private int attackSpeed = 0;
     [SerializeField, TooltipAttribute("移動速度")] private float speed;
     [SerializeField, TooltipAttribute("ラブゲージMAX")] private int loveGaugeMax = 100;
@@ -49,7 +52,7 @@ public class monster : TrueSyncBehaviour {
 	// 初期化
 	public override void OnSyncedStart()
 	{
-        
+        ready = GameObject.Find("ready");
 		anime = GetComponent<Animator> ();	//アニメーションの取得
 		rb = GetComponent<TSRigidBody>();	// RigidBodyの取得
         knockout = false;
@@ -58,8 +61,10 @@ public class monster : TrueSyncBehaviour {
         powerUpButton = 0;
         powerUpFlag = false;
         controllerConnect = false;
+        bAttack = false;
         loveGauge = loveGaugeMax;
         move = TSVector.zero;
+
         // 出現モーション
         anime.SetTrigger("monsterTransform");
 	}
@@ -81,8 +86,8 @@ public class monster : TrueSyncBehaviour {
        
 
         //BLEなんちゃら
-        info = BLEControlManager.GetControllerInfo();
-        //info = SerialControllManager.GetControllerInfo();
+        //info = BLEControlManager.GetControllerInfo();
+        info = SerialControllManager.GetControllerInfo();
         if (info != null) controllerConnect = true;
 
         if (controllerConnect)
@@ -102,11 +107,14 @@ public class monster : TrueSyncBehaviour {
 	// 更新
 	public override void OnSyncedUpdate()
 	{
+        if (ready != null) return;
 
         if (!knockout)
         {
             // 攻撃アニメーション情報を取得
-            bool isAttakc = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monsterWeakAttack");
+            bool isAttakc    = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monsterWeakAttack");
+            bool isStrAttack = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monsterStrAttack");
+
 
             bool forward = TrueSyncInput.GetBool(INPUT_KEY_FORWARD);
             bool back = TrueSyncInput.GetBool(INPUT_KEY_BACK);
@@ -134,7 +142,6 @@ public class monster : TrueSyncBehaviour {
                 directionVector.x = vector.x = speed * (stickX / 473);
                 directionVector.z = vector.z = speed * (stickY / 473);
 
-
                 // スティック傾けているかチェック*部品ごとの誤差対策
                 if(stickX >=  -20 && stickX <= 20)
                 {
@@ -146,40 +153,52 @@ public class monster : TrueSyncBehaviour {
                     anime.SetBool("monsterMove", true); 
                 }
           
-                // 攻撃モーション中は移動不可にしたい
+                ///// 攻撃モーション中は移動不可にしたい /////
                 if (isAttakc)
                 {
-                    speed = 0f;
+                    speed = 0f; // 移動速度を0に
+
+                    // スティックを押したら
                     if (stickBtn)
                     {
+                        if (isStrAttack) return;
                         // 弱攻撃モーション
                         anime.SetTrigger("monsterStrAttack");
-
                     }
-
                 }
+                ///// その他のモーション /////
                 else
                 {
+                    // スティックを押したら
                     if (stickBtn)
                     {
+                        if (bAttack) return;    // 
                         Debug.Log("スティックボタン押されたよ！");
+
+                        bAttack = true;
+
                         // 弱攻撃モーション
                         anime.SetTrigger("monsterWeakAttack");
 
                     }
                     speed = 3f;
+
                 }
 
+                // 攻撃モーションを使用していなかったら
+                if (isAttakc == false && isStrAttack == false)
+                {
+                    bAttack = false;
+                }
                 // ボタンが押されたら
                 if(button == true)
                 {
+                    speed = 0f;
                     Debug.Log("ボタン押されたよ！");
                     // 弱攻撃モーション
                     anime.SetTrigger("monsterWeakAttack");
                   
                 }
-
-
             }
 
             // ラブゲージ処理
