@@ -14,6 +14,7 @@ public class monster : TrueSyncBehaviour {
     private const byte INPUT_CONTROLLER_STICKY = 6;
     private const byte INPUT_CONTROLLER_BUTTON = 7;
     private const byte INPUT_CONTROLLER_STICKBUTTON = 8;
+    private const float STAGE_LENGTH = 56.0f;
 
     private TSRigidBody rb = null;                          // RigidBodyの取得
     private TSVector directionVector = TSVector.zero;       
@@ -240,13 +241,10 @@ public class monster : TrueSyncBehaviour {
                 //rb.AddForce(speed * vector, ForceMode.Force);
 
                 FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
-                //transform.rotation = Quaternion.Euler(0.0f, (float)direction, 0.0f);
                 tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
 
-                move += vector * speed;
-                tsTransform.Translate(move, Space.World);
-                move.x += (0.0f - move.x) / drag;
-                move.z += (0.0f - move.z) / drag;
+                if (!(TSVector.Distance(TSVector.zero, tsTransform.position + vector) >= STAGE_LENGTH))
+                    tsTransform.Translate(vector, Space.World);
         }
        
 	
