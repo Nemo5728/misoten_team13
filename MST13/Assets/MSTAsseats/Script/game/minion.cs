@@ -10,15 +10,13 @@ public class minion : TrueSyncBehaviour {
     private TSRigidBody rb = null;
     private int ownerNum;
     private float coolTime;
-    private TSVector move;
 
     [SerializeField, TooltipAttribute("攻撃速度(sec)")] private float attackSpeed;
     [SerializeField, TooltipAttribute("ヒットポイント")] private int health;
-    [SerializeField, TooltipAttribute("移動速度")] private float speed;
     [SerializeField, TooltipAttribute("攻撃範囲")] private float range;
     [SerializeField, TooltipAttribute("攻撃力")] private int attack;
+    [SerializeField, TooltipAttribute("スピード")] private float speed = 10;
     [SerializeField, TooltipAttribute("リスポーン時間(sec)")] private float respawnTime;
-    [SerializeField, TooltipAttribute("移動減衰係数"), Range(0.0f, 1.0f)] private float drag;
 
 	// Use this for initialization
 	void Start () {
@@ -45,14 +43,10 @@ public class minion : TrueSyncBehaviour {
         TSVector markerPos = p.GetMarkerPosition(parentMarker);
 
         TSVector vector = markerPos - tsTransform.position;
+        FP dist = TSVector.Distance(markerPos, tsTransform.position) / speed;
         vector = TSVector.Normalize(vector);
 
-        tsTransform.Translate(vector * speed, Space.World);
-
-        //move += vector * speed;
-        //tsTransform.Translate(move, Space.World);
-        //move.x += (0.0f - move.x) / drag;
-        //move.z += (0.0f - move.z) / drag;
+        tsTransform.Translate(vector * dist, Space.World);
 
         if (coolTime <= 0)
         {
