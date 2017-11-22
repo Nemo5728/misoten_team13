@@ -1140,11 +1140,10 @@ MonoBehaviour:
     name: 
   attackSpeed: 1
   health: 10
-  speed: 50
   range: 10
   attack: 1
+  speed: 50
   respawnTime: 0
-  drag: 0
 --- !u!114 &114421094745309602
 MonoBehaviour:
   m_ObjectHideFlags: 1

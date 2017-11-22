@@ -4,27 +4,30 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreText : MonoBehaviour {
-    public int[] rank;
-    public int[] score;
-    private string[] text = new string[4];
+
+    public ranking rank;
+    public int player0to3 = 0;
+    private Text date;
+    private int a;
 
     // Use this for initialization
     void Start () {
-        this.GetComponent<Text>().text = "";
+        date = GetComponent<Text>();
+        date.text = "";
+        date.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
     }
 
     // Update is called once per frame
     void Update() {
-        this.GetComponent<Text>().text = "";
-
-        for (int i = 0; i < 4; i++)
+        date.text = "";
+        a = rank.GetRank();
+        player0to3 = rank.GetPlayerNumber();
+        date.color += new Color(0.0f, 0.0f, 0.0f, 0.01f);
+        
+        date.text = "Thank You For Playing!!\n";
+        if (a == player0to3)
         {
-            text[i] = "PC" + (i + 1) + ":" + rank[i].ToString() + "位 ";
-        }
-
-        for (int i = 0; i < 4; i++)
-        {
-            this.GetComponent<Text>().text += text[i];
+            date.text += "You are Number 1!";
         }
     }
 }

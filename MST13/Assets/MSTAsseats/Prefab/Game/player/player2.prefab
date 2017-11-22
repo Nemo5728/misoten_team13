@@ -2466,7 +2466,6 @@ MonoBehaviour:
   powerUpEndTime: 1
   powerUpStart: 10
   stamina: 10
-  drag: 0
 --- !u!114 &114905151675185174
 MonoBehaviour:
   m_ObjectHideFlags: 1
