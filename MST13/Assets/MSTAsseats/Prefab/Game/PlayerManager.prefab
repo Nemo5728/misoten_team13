@@ -1517,7 +1517,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1679833998796796
 GameObject:
   m_ObjectHideFlags: 1
@@ -4681,7 +4681,7 @@ MonoBehaviour:
     name: 
   attackSpeed: 0
   respawnTime: 0
-  speed: 0.3
+  speed: 1
   markerList:
   - {fileID: 1462238414088520}
   - {fileID: 1360014091466068}
@@ -4708,7 +4708,6 @@ MonoBehaviour:
   powerUpEndTime: 1
   powerUpStart: 10
   stamina: 10
-  drag: 0.5
 --- !u!114 &114917662350816742
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -98,7 +98,8 @@ public class player : TrueSyncBehaviour {
         TrueSyncInput.SetBool(INPUT_KEY_SPACE, space);
 
         //BLEなんちゃら
-        info = BLEControlManager.GetControllerInfo();
+        //info = BLEControlManager.GetControllerInfo();
+        info = SerialControllManager.GetControllerInfo();
         if (info != null) controllerConnect = true;
 
         if(controllerConnect){

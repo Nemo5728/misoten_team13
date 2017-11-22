@@ -17,10 +17,13 @@ public class ranking : MonoBehaviour
 
     public static int[] score = new int[4];
     public static int playerNumber = 0;
-    public static Color[] color = { new Color (1.0f, 0.0f, 0.0f, 1.0f),
+    private  Color[] color = { new Color (1.0f, 0.0f, 0.0f, 1.0f),
                                     new Color (0.0f, 0.0f, 1.0f, 1.0f),
                                     new Color (0.0f, 1.0f, 0.0f, 1.0f),
                                     new Color (1.0f, 1.0f, 0.0f, 1.0f) };
+
+    public GameObject[] monster;
+    public RuntimeAnimatorController monsAnim;
 
     private int[] pr_score = new int[4];
     private int[] pr_rank = new int[4];
@@ -30,6 +33,7 @@ public class ranking : MonoBehaviour
 
     private GameObject[] pr_BarCol = new GameObject[4];
     private GameObject[] pr_BarTop = new GameObject[4];
+    private GameObject pr_Monster;
 
     // Use this for initialization
     void Start()
@@ -88,15 +92,14 @@ public class ranking : MonoBehaviour
             {
                 targetY[i] = (score[i] / addy) * HeightRate + 0.45f;
             }
-            // players.transform.GetChild(i).transform.Translate ( 0.0f, y, 0.0f );
+
 
             //ランキングのテキスト表記
             text = texts.transform.GetChild(i);
             text.transform.Translate(0.0f, (targetY[i] + 2.5f), 0.0f);
-            text.GetComponent<TextMesh>().text = "PC" + (i + 1) + ":" + pr_rank[i].ToString() + "位";
             text.transform.localScale = new Vector3(-1, 1, 1);
             text.GetComponent<MeshRenderer>().enabled = false;
-            text.GetComponent<TextMesh>().color = color[i];
+            text.GetComponent<Renderer>().material.SetFloat("_barValue", (float)( 5 - pr_rank[i] ) * 0.25f);
 
             //柱の設定
             pr_BarCol[i] = pillers.transform.GetChild(i).transform.Find("rankingBar/rankingBar").gameObject;
@@ -107,13 +110,7 @@ public class ranking : MonoBehaviour
             {
                 //一位固有演出をするプレイヤーの設定
                 a = i;
-
-                text.GetComponent<TextMesh>().fontSize += 40;
-            }
-            else
-            {
-                text.GetComponent<TextMesh>().fontSize += 10;
-                text.GetComponent<TextMesh>().color *= new Color(0.85f, 0.85f, 0.85f, 0.8f);
+                text.GetComponent<Renderer>().material.SetFloat("_Crown", 1.0f);
             }
         }
 
@@ -125,6 +122,7 @@ public class ranking : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             texts.transform.GetChild(i).transform.LookAt(Camera.main.transform);
+            texts.transform.GetChild(i).transform.Rotate( 0.0f, 180.0f, 0.0f );
 
             if (texts.transform.GetChild(i).GetComponent<MeshRenderer>().enabled == false)
             {
@@ -153,6 +151,10 @@ public class ranking : MonoBehaviour
                     if (a == i)
                     {
                         anim.SetTrigger("win");
+
+                        //モンスターの召喚
+                        pr_Monster = Instantiate(monster[a], new Vector3(0.0f, 0.0f, 0.0f), new Quaternion (0.0f, 180.0f, 0.0f, 0.0f) );
+                        pr_Monster.GetComponent<Animator>().runtimeAnimatorController = monsAnim;
                     }
                     else
                     {
@@ -189,12 +191,6 @@ public class ranking : MonoBehaviour
     public static void SetScore(int PlayerScore, int PlayerNomber0to3)
     {
         score[PlayerNomber0to3] = PlayerScore;
-    }
-
-    //各プレイヤーのカラーを受け取る。
-    public static void SetColor(Color PlayerColor, int PlayerNomber0to3)
-    {
-        color[PlayerNomber0to3] = PlayerColor;
     }
 
     //この端末のプレイヤーナンバーを受け取る。
