@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: stageTimerRing
+  m_Shader: {fileID: 4800000, guid: ac58b55cd97717041bfb2d7badf3f590, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _BaseTex
+      second:
+        m_Texture: {fileID: 2800000, guid: 441028605dacc7b44b6d35d5f2b7cb4e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _BaseTexB
+      second:
+        m_Texture: {fileID: 2800000, guid: cd0fb308146ef484f852a2889588da63, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _LightTex
+      second:
+        m_Texture: {fileID: 2800000, guid: abb059d56f6d2584db21a2cc7c679793, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _LightTexB
+      second:
+        m_Texture: {fileID: 2800000, guid: 6092e09a4f498284f98ac513058be6d9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _loadingLight
+      second:
+        m_Texture: {fileID: 2800000, guid: 7d723cf25f3a82048beca933a19f3ff1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _loadingMask
+      second:
+        m_Texture: {fileID: 2800000, guid: bc9c54c4c2da44244b9566eda893f6af, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _noiseMask
+      second:
+        m_Texture: {fileID: 2800000, guid: 3b3a917edc3c9124098e35835f97013c, type: 3}
+        m_Scale: {x: 0.05, y: 3.2}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: _ChangeColor
+      second: 0
+    - first:
+        name: _Lighten
+      second: 0
+    - first:
+        name: _RingLight
+      second: 0
+    - first:
+        name: _RingRound
+      second: 1
+    - first:
+        name: _alpha
+      second: 1
+    - first:
+        name: _glow
+      second: 0
+    - first:
+        name: _loadUVpan
+      second: 1
+    m_Colors: []
