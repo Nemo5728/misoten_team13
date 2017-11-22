@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: stageWater
+  m_Shader: {fileID: 4800000, guid: 71b0f2bc2c32e624daff33259bbe3ac0, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 4000
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseTex:
+        m_Texture: {fileID: 2800000, guid: 31c686fb017c5c448aca717a9943591f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CircuitTex:
+        m_Texture: {fileID: 2800000, guid: 350850045ba1a7040a23725622e7c8e6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FlowMask:
+        m_Texture: {fileID: 2800000, guid: 27561606fe0cc2f4baa3a6c12759a0c4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WaveMask:
+        m_Texture: {fileID: 2800000, guid: c87a7df717db10c4aa69393d7bd3d25e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _loadingLight:
+        m_Texture: {fileID: 2800000, guid: 7d723cf25f3a82048beca933a19f3ff1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _loadingMask:
+        m_Texture: {fileID: 2800000, guid: bc9c54c4c2da44244b9566eda893f6af, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _noiseMask:
+        m_Texture: {fileID: 2800000, guid: 3b3a917edc3c9124098e35835f97013c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _CircuitPos: 0
+    - _Lighten: 0
+    - _WaterFlowPos: 0
+    - _WaterWavePos: 0
+    - _alpha: 1
+    - _glow: 0
+    - _loadUVpan: 1
+    m_Colors: []

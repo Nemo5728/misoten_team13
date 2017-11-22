@@ -1,28 +1,57 @@
 fileFormatVersion: 2
-guid: 562a12ae2b6374ee08aed9b4717891e5
-timeCreated: 1510469314
+guid: bdab1e78174bd0b4ba0e8cd497439295
+timeCreated: 1509602840
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: floor
-    100002: stage
-    100004: //RootNode
-    100006: water
-    400000: floor
-    400002: stage
-    400004: //RootNode
-    400006: water
-    2300000: floor
-    2300002: stage
-    2300004: water
-    3300000: floor
-    3300002: stage
-    3300004: water
-    4300000: floor
-    4300002: stage
-    4300004: water
-    9500000: //RootNode
+    100000: base
+    100002: //RootNode
+    100004: water
+    100006: pillar
+    100008: roof
+    100010: floor
+    100012: stage
+    100014: timer
+    100016: timeRing
+    100018: timerClock
+    400000: base
+    400002: //RootNode
+    400004: water
+    400006: pillar
+    400008: roof
+    400010: floor
+    400012: stage
+    400014: timer
+    400016: timeRing
+    400018: timerClock
+    2300000: base
+    2300002: water
+    2300004: pillar
+    2300006: roof
+    2300008: floor
+    2300010: stage
+    2300012: timer
+    2300014: timeRing
+    2300016: timerClock
+    3300000: base
+    3300002: water
+    3300004: pillar
+    3300006: roof
+    3300008: floor
+    3300010: stage
+    3300012: timer
+    3300014: timeRing
+    3300016: timerClock
+    4300000: base
+    4300002: water
+    4300004: roof
+    4300006: pillar
+    4300008: floor
+    4300010: stage
+    4300012: timeRing
+    4300014: timer
+    4300016: timerClock
   materials:
     importMaterials: 1
     materialName: 0
@@ -33,8 +62,6 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -71,7 +98,6 @@ ModelImporter:
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
     human: []
     skeleton: []
     armTwist: 0.5
@@ -82,12 +108,9 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
-    hasExtraRoot: 0
-    skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

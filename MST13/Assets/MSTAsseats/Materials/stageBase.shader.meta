@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 429f43473e93315479bf2ff693f696ea
+timeCreated: 1511163474
+licenseType: Free
+ShaderImporter:
+  defaultTextures:
+  - _BaseTex: {fileID: 2800000, guid: 475274865f6d72c46a61821aa8e8e5e9, type: 3}
+  - _EmiTex: {fileID: 2800000, guid: b752cf93f7f531c41a8e29f8a0a65bd0, type: 3}
+  - _NormalTex: {fileID: 2800000, guid: 9690ed2612d19cc4b8a7c3510792408c, type: 3}
+  - _SpeGloTex: {fileID: 2800000, guid: 9b38e3331084fe94191a3aecb400b48e, type: 3}
+  - _loadingMask: {fileID: 2800000, guid: bc9c54c4c2da44244b9566eda893f6af, type: 3}
+  - _loadingLight: {fileID: 2800000, guid: 7d723cf25f3a82048beca933a19f3ff1, type: 3}
+  - _noiseMask: {fileID: 2800000, guid: 3b3a917edc3c9124098e35835f97013c, type: 3}
+  - _CircuitEmi: {fileID: 2800000, guid: 1a88475460aaf06448f13d494dfb8034, type: 3}
+  - _CircuitM: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
