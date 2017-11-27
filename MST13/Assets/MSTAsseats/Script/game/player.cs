@@ -261,6 +261,8 @@ public class player : TrueSyncBehaviour {
             }
         }
 
+        //
+        gameObject.transform.Find("sign1").GetComponent<MeshRenderer>().material.SetFloat("_barValue", (float)loveGauge / 100);
     }
 
     public TSVector GetMarkerPosition(int marker){
