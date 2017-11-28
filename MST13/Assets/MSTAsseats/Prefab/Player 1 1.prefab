@@ -2025,6 +2025,7 @@ MonoBehaviour:
     id: 0
     name: 
   speed: 3
+  drag: 0
   GetLoginArea: {fileID: 1958430887092394, guid: 20605738b0a99204f91330f6cd163cfc,
     type: 2}
 --- !u!137 &137504351919434916
