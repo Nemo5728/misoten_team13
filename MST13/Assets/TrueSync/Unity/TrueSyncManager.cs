@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using System;
 
 namespace TrueSync {
     /**
@@ -17,6 +18,11 @@ namespace TrueSync {
         private enum StartState { BEHAVIOR_INITIALIZED, FIRST_UPDATE, STARTED };
 
         private StartState startState;
+
+        internal static GameObject SyncedInstantiate(GameObject gameObject, Vector3 zero, Quaternion identity)
+        {
+            throw new NotImplementedException();
+        }
 
         /** 
          * @brief Player prefabs to be instantiated in each machine.
