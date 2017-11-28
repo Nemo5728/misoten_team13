@@ -32,6 +32,7 @@ public class player : TrueSyncBehaviour {
     private bool powerUpFlag;
     private bool controllerConnect;
     private TSVector move;
+    private GameObject signObject;
 
     [SerializeField, TooltipAttribute("攻撃速度(sec)")] private int attackSpeed = 0;
     [SerializeField, TooltipAttribute("復帰時間(sec)")] private float respawnTime = 0;
@@ -39,6 +40,7 @@ public class player : TrueSyncBehaviour {
     [SerializeField, TooltipAttribute("触るな危険")] private GameObject[] markerList;
     [SerializeField, TooltipAttribute("触るな危険")] private GameObject minion;
     [SerializeField, TooltipAttribute("触るな危険")] private GameObject monsterObject;
+    [SerializeField, TooltipAttribute("触るな危険")] private GameObject sign;
     [SerializeField, TooltipAttribute("ラブゲージMAX")] private int loveGaugeMax = 100;
     [SerializeField, TooltipAttribute("ラブゲージ上昇率")] private int loveGaugeLate = 1;
     [SerializeField, TooltipAttribute("変身時HP")] private int health = 100;
@@ -66,11 +68,11 @@ public class player : TrueSyncBehaviour {
         for (int i = 0; i < markerList.Length; i ++){
             TSVector vec;
             vec.x = markerList[i].transform.position.x;
-            vec.y = markerList[i].transform.position.y;
+            vec.y = markerList[i].transform.position.y + 0.5f;
             vec.z = markerList[i].transform.position.z;
             GameObject CreateMinion =  TrueSyncManager.SyncedInstantiate(minion, vec, TSQuaternion.identity);
             minion mi = CreateMinion.GetComponent<minion>();
-            mi.Create(gameObject, i, ownerIndex);
+            mi.Create(gameObject, i, owner.Id);
             minionCount++;
         }
 
@@ -82,6 +84,11 @@ public class player : TrueSyncBehaviour {
         controllerConnect = false;
         move = TSVector.zero;
         rb = GetComponent<TSRigidBody>();
+
+        signObject = TrueSyncManager.SyncedInstantiate(sign, new TSVector(0.0f, 5.0f, 0.0f), TSQuaternion.identity);
+        signObject.transform.parent = transform;
+        if(owner.Id != 0) signObject.GetComponent<MeshRenderer>().material.SetFloat("_Player", (float)owner.Id);
+        else signObject.GetComponent<MeshRenderer>().material.SetFloat("_Player", 1);    //オフラインモード例外処理
     }
 
     public override void OnSyncedInput(){
@@ -194,7 +201,7 @@ public class player : TrueSyncBehaviour {
                             vec.z = markerList[i].transform.position.z;
                             GameObject CreateMinion = TrueSyncManager.SyncedInstantiate(minion, vec, TSQuaternion.identity);
                             minion mi = CreateMinion.GetComponent<minion>();
-                            mi.Create(gameObject, i, ownerIndex);
+                            mi.Create(gameObject, i, owner.Id);
                         }
                     }
                 }
@@ -218,7 +225,7 @@ public class player : TrueSyncBehaviour {
 
                     foreach (minion mi in FindObjectsOfType<minion>())
                     {
-                        if (ownerIndex == mi.GetOwner())
+                        if (owner.Id == mi.GetOwner())
                         {
                             mi.Destroy();
                         }
@@ -252,7 +259,7 @@ public class player : TrueSyncBehaviour {
                         vec.z = markerList[i].transform.position.z;
                         GameObject CreateMinion = TrueSyncManager.SyncedInstantiate(minion, vec, TSQuaternion.identity);
                         minion mi = CreateMinion.GetComponent<minion>();
-                        mi.Create(gameObject, i, ownerIndex);
+                        mi.Create(gameObject, i, owner.Id);
                         minionCount++;
 
                         minionRespawnCount[i] = 0.0f;
@@ -261,8 +268,7 @@ public class player : TrueSyncBehaviour {
             }
         }
 
-        //
-        gameObject.transform.Find("sign1").GetComponent<MeshRenderer>().material.SetFloat("_barValue", (float)loveGauge / 100);
+        signObject.GetComponent<MeshRenderer>().material.SetFloat("_barValue", (float)loveGauge / 100);
     }
 
     public TSVector GetMarkerPosition(int marker){
@@ -295,7 +301,7 @@ public class player : TrueSyncBehaviour {
             vec.z = markerList[i].transform.position.z;
             GameObject CreateMinion = TrueSyncManager.SyncedInstantiate(minion, vec, TSQuaternion.identity);
             minion mi = CreateMinion.GetComponent<minion>();
-            mi.Create(gameObject, i, ownerIndex);
+            mi.Create(gameObject, i, owner.Id);
             minionCount++;
         }
 
