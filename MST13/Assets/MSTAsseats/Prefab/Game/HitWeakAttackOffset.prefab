@@ -151,4 +151,3 @@ MonoBehaviour:
     name: Local_Player
   time: 0
   damage: 10
-  pc: {fileID: 0}

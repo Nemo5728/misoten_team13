@@ -2168,7 +2168,11 @@ MonoBehaviour:
   attack: 1
   powerUpEndTime: 0.5
   health: 100
-  playerObject: {fileID: 0}
+  playerObject: {fileID: 1425579319365326, guid: 06ead080dcb3240a49dd6955b0e6062c,
+    type: 2}
+  drag: 0
+  hitWeakObject: {fileID: 0}
+  hitWeakOffset: {fileID: 0}
 --- !u!114 &114493777107303960
 MonoBehaviour:
   m_ObjectHideFlags: 1

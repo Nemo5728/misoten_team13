@@ -2419,7 +2419,7 @@ MonoBehaviour:
   - {fileID: 1487418481539500}
   - {fileID: 1524435824833108}
   - {fileID: 1490274015365932}
-  minion: {fileID: 1103229404769566, guid: ccd01d43c215c45f081e30887a3c6f4d, type: 2}
+  minion: {fileID: 1048655944603804, guid: dbde5a86070f84a0398a432e7bda6a58, type: 2}
   monsterObject: {fileID: 1973043387217022, guid: ebc225670cfe240f7ae79a89df727050,
     type: 2}
   sign: {fileID: 1000012717119552, guid: 741baa47259bb7b4ab42b14add93120f, type: 2}
