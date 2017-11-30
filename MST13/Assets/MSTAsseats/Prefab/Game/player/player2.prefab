@@ -2456,7 +2456,7 @@ MonoBehaviour:
   - {fileID: 1286072436571624}
   - {fileID: 1892213215899528}
   - {fileID: 1415356478920488}
-  minion: {fileID: 1103229404769566, guid: ccd01d43c215c45f081e30887a3c6f4d, type: 2}
+  minion: {fileID: 1892812841504998, guid: 04286658ea49043ce93578e7d502832e, type: 2}
   monsterObject: {fileID: 1423908912880506, guid: e4a0cfb773dcd4a3d812486a34108efd,
     type: 2}
   sign: {fileID: 1000012717119552, guid: 741baa47259bb7b4ab42b14add93120f, type: 2}

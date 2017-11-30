@@ -2229,8 +2229,11 @@ MonoBehaviour:
   attack: 1
   powerUpEndTime: 0.5
   health: 100
-  playerObject: {fileID: 0}
+  playerObject: {fileID: 1285368679997446, guid: d94e59dc1eb6b4e04b54c2576aca70c9,
+    type: 2}
   drag: 0
+  hitWeakObject: {fileID: 0}
+  hitWeakOffset: {fileID: 0}
 --- !u!137 &137053973982152068
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

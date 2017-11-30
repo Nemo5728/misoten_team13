@@ -25,20 +25,27 @@ public class minion : TrueSyncBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        Debug.Log("生まれる");
 	}
 
     public void Create(GameObject player, int marker, int owner){
+        Debug.Log("minionCreate");
+        Debug.Log("marketID" + marker);
+        Debug.Log("ownerID" + owner);
         parentPlayer = player;
         parentMarker = marker;
         ownerNum = owner;
    }
 
-    public override void OnSyncedStart(){
+    public override void OnSyncedStart()
+    {
+        Debug.Log("TrueSyncStart!");
         rb = GetComponent<TSRigidBody>();
     }
 
-    public override void OnSyncedUpdate(){
+    public override void OnSyncedUpdate()
+    {
+        Debug.Log("入ってますミニオン");
         player p = parentPlayer.GetComponent<player>();
         TSVector markerPos = p.GetMarkerPosition(parentMarker);
 
