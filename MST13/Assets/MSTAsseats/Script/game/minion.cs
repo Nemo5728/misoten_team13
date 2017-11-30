@@ -10,11 +10,20 @@ public class minion : TrueSyncBehaviour {
     private TSRigidBody rb = null;
     private int ownerNum;
     private float coolTime;
+    private bool attack;
+
+    private enum STATE
+    {
+        STATE_NONE,
+        STATE_NORMAL,
+        STATE_TRANSFORM
+    };
+    private STATE state;
 
     [SerializeField, TooltipAttribute("攻撃速度(sec)")] private float attackSpeed;
     [SerializeField, TooltipAttribute("ヒットポイント")] private int health;
     [SerializeField, TooltipAttribute("攻撃範囲")] private float range;
-    [SerializeField, TooltipAttribute("攻撃力")] private int attack;
+    [SerializeField, TooltipAttribute("攻撃力")] private int attackValue;
     [SerializeField, TooltipAttribute("スピード")] private float speed = 10;
     [SerializeField, TooltipAttribute("リスポーン時間(sec)")] private float respawnTime;
 
@@ -25,54 +34,72 @@ public class minion : TrueSyncBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log("生まれる");
+        
 	}
 
     public void Create(GameObject player, int marker, int owner){
-        Debug.Log("minionCreate");
-        Debug.Log("marketID" + marker);
-        Debug.Log("ownerID" + owner);
         parentPlayer = player;
         parentMarker = marker;
         ownerNum = owner;
-   }
-
-    public override void OnSyncedStart()
-    {
-        Debug.Log("TrueSyncStart!");
-        rb = GetComponent<TSRigidBody>();
     }
 
-    public override void OnSyncedUpdate()
-    {
-        Debug.Log("入ってますミニオン");
+    public override void OnSyncedStart(){
+        rb = GetComponent<TSRigidBody>();
+        state = STATE.STATE_NORMAL;
+    }
+
+    public override void OnSyncedUpdate(){
+        Debug.Log("called minion update");
         player p = parentPlayer.GetComponent<player>();
         TSVector markerPos = p.GetMarkerPosition(parentMarker);
 
-        TSVector vector = markerPos - tsTransform.position;
-        FP dist = TSVector.Distance(markerPos, tsTransform.position) / speed;
-        vector = TSVector.Normalize(vector);
+        switch(state){
+            case STATE.STATE_NORMAL:
+                {
+                    TSVector vector = markerPos - tsTransform.position;
+                    FP dist = TSVector.Distance(markerPos, tsTransform.position) / speed;
+                    vector = TSVector.Normalize(vector);
 
-        if (!(TSVector.Distance(TSVector.zero, tsTransform.position + vector) >= p.GetStageLength()))
-            tsTransform.Translate(vector * dist, Space.World);
+                    attack = false;
 
-        if (coolTime <= 0)
-        {
-            foreach (minion mi in FindObjectsOfType<minion>())
-            {
-                Vector3 targetPos = mi.GetPositon();
-                int targetOwner = mi.GetOwner();
+                    if (!(TSVector.Distance(TSVector.zero, (tsTransform.position + vector * dist)) >= p.GetStageLength()))
+                        tsTransform.Translate(vector * dist, Space.World);
 
-                float distance = Vector3.Distance(targetPos, transform.position);
-                if(distance < range && ownerNum != mi.GetOwner()){
-                    mi.AddDamage(attack);
-                    coolTime = attackSpeed;
+                    if (coolTime <= 0)
+                    {
+                        foreach (minion mi in FindObjectsOfType<minion>())
+                        {
+                            Vector3 targetPos = mi.GetPositon();
+                            int targetOwner = mi.GetOwner();
+
+                            float distance = Vector3.Distance(targetPos, transform.position);
+                            if (distance < range && ownerNum != mi.GetOwner())
+                            {
+                                mi.AddDamage(attackValue);
+                                coolTime = attackSpeed;
+                                attack = true;
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        coolTime -= Time.deltaTime;
+                    }
+
                     break;
                 }
-            }
-        }else{
-            coolTime -= Time.deltaTime;
-        }
+            case STATE.STATE_TRANSFORM:
+                {
+                    FP dist = TSVector.Distance(p.GetPosition(), tsTransform.position) / speed;
+                    tsTransform.Translate(p.GetPosition() * dist, Space.World);
+                    break;
+                }
+            default:
+                {
+                    break;
+                }
+        };
     }
 
     public void AddDamage(int damage){
@@ -99,15 +126,11 @@ public class minion : TrueSyncBehaviour {
         TrueSyncManager.SyncedDestroy(gameObject);
     }
 
-    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.isWriting)
-        {
-            stream.SendNext(transform.position);
-        }
-        else
-        {
-            transform.position = (Vector3)stream.ReceiveNext();
-        }
+    public bool GetAttack(){
+        return attack;
+    }
+
+    public void SetTransform(){
+        state = STATE.STATE_TRANSFORM;
     }
 }

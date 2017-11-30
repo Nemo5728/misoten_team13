@@ -20,19 +20,19 @@ public class PlayerManager : TrueSyncBehaviour {
 	}
 
     public override void OnSyncedStart(){
-        GameObject player;
-        GameObject monster;
+        GameObject createPlayer;
+        GameObject createMonster;
 
         if(owner.Id != 0){
-            player = TrueSyncManager.SyncedInstantiate(playerArray[owner.Id - 1], TSVector.zero, TSQuaternion.identity);
-            monster = TrueSyncManager.SyncedInstantiate(monsterArray[owner.Id - 1], TSVector.zero, TSQuaternion.identity);
+            createPlayer = TrueSyncManager.SyncedInstantiate(playerArray[owner.Id - 1], TSVector.zero, TSQuaternion.identity);
+            createMonster = TrueSyncManager.SyncedInstantiate(monsterArray[owner.Id - 1], TSVector.zero, TSQuaternion.identity);
         }else{  //オフラインモードの例外処理
-            player = TrueSyncManager.SyncedInstantiate(playerArray[owner.Id], TSVector.zero, TSQuaternion.identity);
-            monster = TrueSyncManager.SyncedInstantiate(monsterArray[owner.Id], TSVector.zero, TSQuaternion.identity);
+            createPlayer = TrueSyncManager.SyncedInstantiate(playerArray[owner.Id], TSVector.zero, TSQuaternion.identity);
+            createMonster = TrueSyncManager.SyncedInstantiate(monsterArray[owner.Id], TSVector.zero, TSQuaternion.identity);
         }
 
-        player.transform.parent = transform;
-        monster.transform.parent = transform;
-        monster.SetActive(false);
+        createPlayer.transform.parent = transform;
+        createMonster.transform.parent = transform;
+        createMonster.SetActive(false);
     }
 }
