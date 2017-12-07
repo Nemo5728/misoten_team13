@@ -32,7 +32,7 @@ public class title : MonoBehaviour
         if (Input.GetKey("p"))
         {
             Vector3  pos = new Vector3(10.0f, 0.0f, 10.0f);
-            ParticleManager.PlayParticle("PStest", pos);
+         //   ParticleManager.PlayParticle("PStest", pos);
         }
     }
    

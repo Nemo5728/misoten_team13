@@ -51,7 +51,27 @@ public class ParticlePooler : MonoBehaviour
         particle.Play();
     }
 
-   
+    // 指定の座標で再生
+    /// <param name="position">Position.</param>
+    public void Play(Vector3 position, int waitTime)
+    {
+        ParticleSystem particle = GetPlayableParticle();
+        if (particle == null)
+        {
+            particle = InstantiateParticle();
+        }
+
+        StartCoroutine(WaitFunction(waitTime));
+
+        particle.transform.position = position;
+        particle.Play();
+    }
+
+    IEnumerator WaitFunction(float waitTime) {
+        yield return new WaitForSeconds(waitTime);
+    }
+
+
     // 再生可能なパーティクルを取得
     /// <returns>再生可能なパーティクル.</returns>
     private ParticleSystem GetPlayableParticle()
