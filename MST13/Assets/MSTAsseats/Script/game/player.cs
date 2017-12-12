@@ -37,7 +37,7 @@ public class player : TrueSyncBehaviour {
 
     // 2017/12/1 追加
     private Animator anim;  // アニメーター
-
+    float time;
     private enum STATE
     {
         STATE_NONE,
@@ -120,8 +120,8 @@ public class player : TrueSyncBehaviour {
         TrueSyncInput.SetInt(INPUT_TAP,touch);
 
         //BLEなんちゃら
-        //info = BLEControlManager.GetControllerInfo();
-        info = SerialControllManager.GetControllerInfo();
+       info = BLEControlManager.GetControllerInfo();
+       // info = SerialControllManager.GetControllerInfo();
 
         if (info != null) controllerConnect = true;
 
@@ -142,6 +142,10 @@ public class player : TrueSyncBehaviour {
 
     public override void OnSyncedUpdate()
     {
+        
+        time += Time.deltaTime;
+
+        if (time <= 3) return;
         switch(state)
         {
                 case STATE.STATE_AWAKE:
