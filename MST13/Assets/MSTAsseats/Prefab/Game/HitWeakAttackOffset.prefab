@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mass:
-    _serializedValue: 4294967296
+    _serializedValue: 0
   _useGravity: 1
   _isKinematic: 0
   _linearDrag:
@@ -149,5 +149,4 @@ MonoBehaviour:
   localOwner:
     id: 0
     name: Local_Player
-  time: 0
-  damage: 10
+  monster: {fileID: 0}

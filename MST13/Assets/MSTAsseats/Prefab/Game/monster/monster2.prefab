@@ -618,7 +618,7 @@ GameObject:
   - component: {fileID: 4120059057885460}
   m_Layer: 8
   m_Name: mesh
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2153,29 +2153,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1423908912880506}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4577979da5c254f369f30f0bc827b038, type: 3}
+  m_Script: {fileID: 11500000, guid: cb665d63c79434ae8a4aacc6ec0d2bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfPlayers: 0
-  ownerIndex: 0
+  ownerIndex: -1
   owner:
     id: 0
     name: 
   localOwner:
     id: 0
     name: 
-  attackSpeed: 5
-  speed: 3
+  attackSpeed: 0
+  speed: 0
   loveGaugeMax: 100
   loveGaugeLate: 1
-  attack: 1
+  WeakAttack: 1
+  StrAttack: 3
   powerUpEndTime: 0.5
   health: 100
-  playerObject: {fileID: 1305330840903836, guid: 986e6a463472f40e5b436254f62a181f,
-    type: 2}
+  playerObject: {fileID: 0}
   drag: 0
-  hitWeakObject: {fileID: 0}
-  hitWeakOffset: {fileID: 0}
+  isAttakc: 0
+  isStrAttack: 0
 --- !u!114 &114808615438706066
 MonoBehaviour:
   m_ObjectHideFlags: 1

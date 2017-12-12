@@ -72,6 +72,7 @@ public class SerialHandler : SingletonMonoBehaviour<SerialHandler>
                 if (serialPort_.BytesToRead > 0)
                 {
                     message_ = serialPort_.ReadLine();
+                    message_ = message_.Replace("¥r", "");
                     isNewMessageReceived_ = true;
                 }
             }

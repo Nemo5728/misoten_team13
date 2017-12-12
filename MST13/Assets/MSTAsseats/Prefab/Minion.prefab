@@ -124,7 +124,7 @@ MonoBehaviour:
   attackSpeed: 1
   health: 10
   range: 10
-  attack: 1
+  attackValue: 0
   speed: 10
   respawnTime: 0
 --- !u!114 &114223655087657938

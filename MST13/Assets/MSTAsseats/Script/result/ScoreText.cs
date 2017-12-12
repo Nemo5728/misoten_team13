@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ScoreText : MonoBehaviour {
 
     public ranking rank;
-    public int player0to3 = 0;
+    public int player0to3;
     private Text date;
     private int a;
 

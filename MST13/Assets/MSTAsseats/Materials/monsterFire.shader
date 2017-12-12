@@ -16,12 +16,16 @@ _C4("_C4", Color) = (1,1,1,1)
 	{
 		Tags
 		{
-"Queue"="Geometry"
+"Queue"="Overlay"
 "IgnoreProjector"="False"
 "RenderType"="Opaque"
 
 		}
 
+ Pass {
+            ZWrite On
+            ColorMask 0
+        }
 		
 Cull Back
 ZWrite On
