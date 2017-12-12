@@ -10,59 +10,94 @@ Material:
   m_Shader: {fileID: 4800000, guid: 429f43473e93315479bf2ff693f696ea, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses: []
   m_SavedProperties:
-    serializedVersion: 3
+    serializedVersion: 2
     m_TexEnvs:
-    - _BaseTex:
+    - first:
+        name: _BaseTex
+      second:
         m_Texture: {fileID: 2800000, guid: 475274865f6d72c46a61821aa8e8e5e9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _CircuitEmi:
+    - first:
+        name: _CircuitEmi
+      second:
         m_Texture: {fileID: 2800000, guid: 1a88475460aaf06448f13d494dfb8034, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _EmiTex:
+    - first:
+        name: _EmiTex
+      second:
         m_Texture: {fileID: 2800000, guid: b752cf93f7f531c41a8e29f8a0a65bd0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _EmiTexB:
+    - first:
+        name: _EmiTexB
+      second:
         m_Texture: {fileID: 2800000, guid: 31cb35e69f59f7746ba2ab5933c6656f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _NormalTex:
+    - first:
+        name: _NormalTex
+      second:
         m_Texture: {fileID: 2800000, guid: 9690ed2612d19cc4b8a7c3510792408c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SpeGloTex:
+    - first:
+        name: _SpeGloTex
+      second:
         m_Texture: {fileID: 2800000, guid: 9b38e3331084fe94191a3aecb400b48e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _loadingLight:
+    - first:
+        name: _loadingLight
+      second:
         m_Texture: {fileID: 2800000, guid: 7d723cf25f3a82048beca933a19f3ff1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _loadingMask:
+    - first:
+        name: _loadingMask
+      second:
         m_Texture: {fileID: 2800000, guid: bc9c54c4c2da44244b9566eda893f6af, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _noiseMask:
+    - first:
+        name: _noiseMask
+      second:
         m_Texture: {fileID: 2800000, guid: 3b3a917edc3c9124098e35835f97013c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _ChangeColor: 0
-    - _CirBlur: 0.05
-    - _CirRange: 0.08
-    - _CircuitPos: 0
-    - _Lighten: 0
-    - _alpha: 1
-    - _glow: 0
-    - _loadUVpan: 1
+    - first:
+        name: _ChangeColor
+      second: 1
+    - first:
+        name: _CirBlur
+      second: 0.05
+    - first:
+        name: _CirRange
+      second: 0.08
+    - first:
+        name: _CircuitPos
+      second: 0
+    - first:
+        name: _Lighten
+      second: 0
+    - first:
+        name: _alpha
+      second: 1
+    - first:
+        name: _glow
+      second: 0
+    - first:
+        name: _loadUVpan
+      second: 1
     m_Colors:
-    - _c1: {r: 0, g: 1, b: 0.9215687, a: 1}
-    - _c2: {r: 1, g: 0, b: 0.4196079, a: 1}
+    - first:
+        name: _c1
+      second: {r: 0, g: 1, b: 0.9215687, a: 1}
+    - first:
+        name: _c2
+      second: {r: 1, g: 0, b: 0.4196079, a: 1}
