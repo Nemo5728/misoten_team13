@@ -12,8 +12,16 @@ public class MatchMaking_Test : Photon.PunBehaviour
     private float startAlpha;
     private float failedAlpha;
 
+    private ControllerInfo info = null;
+    private bool controllerConnect;
+
     void Start()
     {
+        info = BLEControlManager.GetControllerInfo();
+        //info = SerialControllManager.GetControllerInfo();
+
+        if (info != null) controllerConnect = true;
+
         // haro-
         startText = GameObject.Find("Canvas/Start").GetComponent<Text>();
         failedText = GameObject.Find("Canvas/Failed").GetComponent<Text>();
@@ -22,9 +30,14 @@ public class MatchMaking_Test : Photon.PunBehaviour
         PhotonNetwork.automaticallySyncScene = true;
     }
 
-    //  public void OnConnectionFail() {
-    //      Debug.Log( "接続エラー：　接続失敗." );
-    //  }
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene("Game");
+        }
+    }
+
 
     public void OnFailedToConnectToPhoton()
     {
@@ -62,7 +75,8 @@ public class MatchMaking_Test : Photon.PunBehaviour
 
                 Debug.Log("Check A.");
             }
-            if (PhotonNetwork.isMasterClient && GUI.Button(new Rect(10, 100, 100, 30), "game"))
+            if (PhotonNetwork.isMasterClient && GUI.Button(new Rect(10, 100, 100, 30), "game") ||
+                info.isButtonDown)
             {
                 PhotonNetwork.LoadLevel("Game");
 

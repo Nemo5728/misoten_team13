@@ -130,22 +130,164 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar to
+      improve retargeting quality.\n\t'spine2' is inbetween humanoid transforms and
+      has rotation animation that will be discarded.\n\t'spine3' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 125
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: jt
+        weight: 1
+      - path: jt/base
+        weight: 1
+      - path: jt/base/root
+        weight: 1
+      - path: jt/base/root/L_hip
+        weight: 1
+      - path: jt/base/root/L_hip/L_leg
+        weight: 1
+      - path: jt/base/root/L_hip/L_leg/L_foot
+        weight: 1
+      - path: jt/base/root/R_hip
+        weight: 1
+      - path: jt/base/root/R_hip/R_leg
+        weight: 1
+      - path: jt/base/root/R_hip/R_leg/R_foot
+        weight: 1
+      - path: jt/base/root/spine1
+        weight: 1
+      - path: jt/base/root/spine1/spine2
+        weight: 1
+      - path: jt/base/root/spine1/spine2/L_collar
+        weight: 1
+      - path: jt/base/root/spine1/spine2/L_collar/L_shoulder
+        weight: 1
+      - path: jt/base/root/spine1/spine2/L_collar/L_shoulder/L_elbow
+        weight: 1
+      - path: jt/base/root/spine1/spine2/L_collar/L_shoulder/L_elbow/L_hand
+        weight: 1
+      - path: jt/base/root/spine1/spine2/L_collar/L_shoulder/L_elbow/L_hand/L_index1
+        weight: 1
+      - path: jt/base/root/spine1/spine2/L_collar/L_shoulder/L_elbow/L_hand/L_index1/L_index2
+        weight: 1
+      - path: jt/base/root/spine1/spine2/L_collar/L_shoulder/L_elbow/L_hand/L_index1/L_index2/L_index3
+        weight: 1
+      - path: jt/base/root/spine1/spine2/L_collar/L_shoulder/L_elbow/L_hand/L_index1/L_index2/L_index3/L_index4
+        weight: 0
+      - path: jt/base/root/spine1/spine2/L_collar/L_shoulder/L_elbow/L_hand/L_middle1
+        weight: 1
+      - path: jt/base/root/spine1/spine2/L_collar/L_shoulder/L_elbow/L_hand/L_middle1/L_middle2
+        weight: 1
+      - path: jt/base/root/spine1/spine2/L_collar/L_shoulder/L_elbow/L_hand/L_middle1/L_middle2/L_middle3
+        weight: 1
+      - path: jt/base/root/spine1/spine2/L_collar/L_shoulder/L_elbow/L_hand/L_middle1/L_middle2/L_middle3/L_middle4
+        weight: 0
+      - path: jt/base/root/spine1/spine2/L_collar/L_shoulder/L_elbow/L_hand/L_pinky1
+        weight: 1
+      - path: jt/base/root/spine1/spine2/L_collar/L_shoulder/L_elbow/L_hand/L_pinky1/L_pinky2
+        weight: 1
+      - path: jt/base/root/spine1/spine2/L_collar/L_shoulder/L_elbow/L_hand/L_pinky1/L_pinky2/L_pinky3
+        weight: 1
+      - path: jt/base/root/spine1/spine2/L_collar/L_shoulder/L_elbow/L_hand/L_pinky1/L_pinky2/L_pinky3/L_pinky4
+        weight: 0
+      - path: jt/base/root/spine1/spine2/L_collar/L_shoulder/L_elbow/L_hand/L_thumb1
+        weight: 1
+      - path: jt/base/root/spine1/spine2/L_collar/L_shoulder/L_elbow/L_hand/L_thumb1/L_thumb2
+        weight: 1
+      - path: jt/base/root/spine1/spine2/L_collar/L_shoulder/L_elbow/L_hand/L_thumb1/L_thumb2/L_thumb3
+        weight: 1
+      - path: jt/base/root/spine1/spine2/L_collar/L_shoulder/L_elbow/L_hand_roll
+        weight: 0
+      - path: jt/base/root/spine1/spine2/R_collar
+        weight: 1
+      - path: jt/base/root/spine1/spine2/R_collar/R_shoulder
+        weight: 1
+      - path: jt/base/root/spine1/spine2/R_collar/R_shoulder/R_elbow
+        weight: 1
+      - path: jt/base/root/spine1/spine2/R_collar/R_shoulder/R_elbow/R_hand
+        weight: 1
+      - path: jt/base/root/spine1/spine2/R_collar/R_shoulder/R_elbow/R_hand/R_index1
+        weight: 1
+      - path: jt/base/root/spine1/spine2/R_collar/R_shoulder/R_elbow/R_hand/R_index1/R_index2
+        weight: 1
+      - path: jt/base/root/spine1/spine2/R_collar/R_shoulder/R_elbow/R_hand/R_index1/R_index2/R_index3
+        weight: 1
+      - path: jt/base/root/spine1/spine2/R_collar/R_shoulder/R_elbow/R_hand/R_index1/R_index2/R_index3/R_index4
+        weight: 0
+      - path: jt/base/root/spine1/spine2/R_collar/R_shoulder/R_elbow/R_hand/R_middle1
+        weight: 1
+      - path: jt/base/root/spine1/spine2/R_collar/R_shoulder/R_elbow/R_hand/R_middle1/R_middle2
+        weight: 1
+      - path: jt/base/root/spine1/spine2/R_collar/R_shoulder/R_elbow/R_hand/R_middle1/R_middle2/R_middle3
+        weight: 1
+      - path: jt/base/root/spine1/spine2/R_collar/R_shoulder/R_elbow/R_hand/R_middle1/R_middle2/R_middle3/R_middle4
+        weight: 0
+      - path: jt/base/root/spine1/spine2/R_collar/R_shoulder/R_elbow/R_hand/R_pinky1
+        weight: 1
+      - path: jt/base/root/spine1/spine2/R_collar/R_shoulder/R_elbow/R_hand/R_pinky1/R_pinky2
+        weight: 1
+      - path: jt/base/root/spine1/spine2/R_collar/R_shoulder/R_elbow/R_hand/R_pinky1/R_pinky2/R_pinky3
+        weight: 1
+      - path: jt/base/root/spine1/spine2/R_collar/R_shoulder/R_elbow/R_hand/R_pinky1/R_pinky2/R_pinky3/R_pinky4
+        weight: 0
+      - path: jt/base/root/spine1/spine2/R_collar/R_shoulder/R_elbow/R_hand/R_thumb1
+        weight: 1
+      - path: jt/base/root/spine1/spine2/R_collar/R_shoulder/R_elbow/R_hand/R_thumb1/R_thumb2
+        weight: 1
+      - path: jt/base/root/spine1/spine2/R_collar/R_shoulder/R_elbow/R_hand/R_thumb1/R_thumb2/R_thumb3
+        weight: 1
+      - path: jt/base/root/spine1/spine2/R_collar/R_shoulder/R_elbow/R_hand_roll
+        weight: 0
+      - path: jt/base/root/spine1/spine2/spine3
+        weight: 1
+      - path: jt/base/root/spine1/spine2/spine3/neck
+        weight: 1
+      - path: jt/base/root/spine1/spine2/spine3/neck/head
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0

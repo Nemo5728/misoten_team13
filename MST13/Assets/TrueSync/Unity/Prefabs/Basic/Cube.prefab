@@ -10,10 +10,8 @@ GameObject:
   - component: {fileID: 462212}
   - component: {fileID: 3308944}
   - component: {fileID: 2366616}
-  - component: {fileID: 11415552}
   - component: {fileID: 11473656}
   - component: {fileID: 11463428}
-  - component: {fileID: 114639426661202728}
   m_Layer: 8
   m_Name: Cube
   m_TagString: Player
@@ -28,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -73,54 +71,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112066}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &11415552
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 112066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8561a4124465f743903b76d8cf232a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mass:
-    _serializedValue: 429496729600
-  _useGravity: 1
-  _isKinematic: 0
-  _linearDrag:
-    _serializedValue: 21474836480
-  _angularDrag:
-    _serializedValue: 214748368
-  interpolation: 0
-  _constraints: 80
 --- !u!114 &11463428
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112066}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df3e4ecc2c78eaa409dad488c230d65d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _position:
     x:
-      _serializedValue: 0
+      _serializedValue: 15743416320
     y:
-      _serializedValue: 2147483648
+      _serializedValue: 13832199168
     z:
-      _serializedValue: 0
+      _serializedValue: -18413346816
   _rotation:
     x:
-      _serializedValue: 0
+      _serializedValue: -3971408384
     y:
-      _serializedValue: 0
+      _serializedValue: 1635440384
     z:
-      _serializedValue: 0
+      _serializedValue: -192
     w:
-      _serializedValue: 4294967296
+      _serializedValue: 64
   _scale:
     x:
       _serializedValue: 4294967296
@@ -129,7 +106,7 @@ MonoBehaviour:
     z:
       _serializedValue: 4294967296
   _serialized: 1
-  tsCollider: {fileID: 0}
+  tsCollider: {fileID: 11473656}
   tsParent: {fileID: 0}
 --- !u!114 &11473656
 MonoBehaviour:
@@ -153,11 +130,11 @@ MonoBehaviour:
       _serializedValue: 0
   lossyScale:
     x:
-      _serializedValue: 4294967296
+      _serializedValue: 4294967808
     y:
-      _serializedValue: 4294967296
+      _serializedValue: 4294969344
     z:
-      _serializedValue: 4294967296
+      _serializedValue: 4294969344
   tsTransform: {fileID: 11463428}
   _size: {x: 1, y: 1, z: 1}
 --- !u!1001 &100100000
@@ -171,23 +148,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 112066}
   m_IsPrefabParent: 1
---- !u!114 &114639426661202728
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 112066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb918096787214084b7fdc5cf6dbe61f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numberOfPlayers: 0
-  ownerIndex: -1
-  owner:
-    id: 0
-    name: 
-  localOwner:
-    id: 0
-    name: 
-  speed: 10

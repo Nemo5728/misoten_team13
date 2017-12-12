@@ -583,6 +583,7 @@ MonoBehaviour:
   - {fileID: 1640058961633536}
   minion: {fileID: 1103229404769566, guid: ccd01d43c215c45f081e30887a3c6f4d, type: 2}
   monsterObject: {fileID: 0}
+  sign: {fileID: 0}
   loveGaugeMax: 100
   loveGaugeLate: 1
   health: 100
@@ -591,6 +592,9 @@ MonoBehaviour:
   powerUpEndTime: 1
   powerUpStart: 10
   stamina: 10
+  knockBackMax: 100
+  knockBackValue: 2
+  gameManager: {fileID: 0}
 --- !u!114 &114717637357915240
 MonoBehaviour:
   m_ObjectHideFlags: 1

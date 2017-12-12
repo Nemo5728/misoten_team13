@@ -5,12 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
+    path: Assets/MSTAsseats/Scene/Title.unity
+    guid: 7dc7331620e5c471da4182bbd35957b6
+  - enabled: 0
     path: Assets/MSTAsseats/Scene/Connecting.unity
     guid: ea5192c0b25414dbd97a33d9ef88385e
-  - enabled: 1
+  - enabled: 0
     path: Assets/MSTAsseats/Scene/Login.unity
     guid: 1f53c58a77722d34bb8d7dcfa593de44
   - enabled: 1
     path: Assets/MSTAsseats/Scene/Game.unity
     guid: 2cb34f0f2e3344aba8fe97c368b93c82
+  - enabled: 0
+    path: Assets/MSTAsseats/Scene/Result.unity
+    guid: 06242fc1315034ccba5651192fcb0b13

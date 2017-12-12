@@ -5,10 +5,8 @@ using TrueSync;
 
 public class HitMonster : TrueSyncBehaviour {
 
-    public float time;
-    public int damage;  // 与えるダメージ
-    //public GameObject damageEffect;
 
+    public monster monster;     // monsterクラス
 
 	// Use this for initialization
 	void Start () {}
@@ -25,13 +23,28 @@ public class HitMonster : TrueSyncBehaviour {
 
     public void OnSyncedCollisionEnter(TSCollision c)
     {
-        if (c.gameObject.name == "minion")
+       
+        if (c.transform.tag == "minion")
         {
+            // 弱攻撃
+            if (monster.isAttakc == true)
+            {
+                // ミニオンにダメージ
+                c.gameObject.GetComponent<minion>().AddDamage(monster.WeakAttack);
+            }
+            // 
+            else if (monster.isStrAttack == true)
+            {
+                // ミニオンにダメージ
+                c.gameObject.GetComponent<minion>().AddDamage(monster.StrAttack);
+            }
             // minionにダメージ
-            //  c.gameObject.GetComponent<minion>().AddDamage(damage);
+
             TrueSyncManager.SyncedDestroy(c.gameObject);
           //  Instantiate(damageEffect, transform.position, Quaternion.identity);
         }
+
+
 
     }
 

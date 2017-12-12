@@ -17,10 +17,6 @@ public class ranking : MonoBehaviour
 
     public static int[] score = new int[4];
     public static int playerNumber = 0;
-    private  Color[] color = { new Color (1.0f, 0.0f, 0.0f, 1.0f),
-                                    new Color (0.0f, 0.0f, 1.0f, 1.0f),
-                                    new Color (0.0f, 1.0f, 0.0f, 1.0f),
-                                    new Color (1.0f, 1.0f, 0.0f, 1.0f) };
 
     public GameObject[] monster;
     public RuntimeAnimatorController monsAnim;
@@ -34,6 +30,9 @@ public class ranking : MonoBehaviour
     private GameObject[] pr_BarCol = new GameObject[4];
     private GameObject[] pr_BarTop = new GameObject[4];
     private GameObject pr_Monster;
+
+    private ControllerInfo info = null;
+    private bool controllerConnect;
 
     // Use this for initialization
     void Start()
@@ -114,6 +113,8 @@ public class ranking : MonoBehaviour
             }
         }
 
+        BgmManager.Instance.Play("result");
+   
     }
 
     // Update is called once per frame
@@ -185,6 +186,8 @@ public class ranking : MonoBehaviour
                 SceneManager.LoadScene("Title");
             }
         }
+
+        FadeScene();
     }
 
     //各プレイヤーのスコアを受け取る。
@@ -209,5 +212,24 @@ public class ranking : MonoBehaviour
     public int GetRank()
     {
         return a;
+    }
+
+    void FadeScene()
+    {
+        if(controllerConnect)
+        {
+            if (info.isButtonDown)
+            {
+                SceneManager.LoadScene("Title");
+            }
+           
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SceneManager.LoadScene("Title");
+            }  
+        }
     }
 }

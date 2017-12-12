@@ -1069,7 +1069,7 @@ MonoBehaviour:
     x:
       _serializedValue: 0
     y:
-      _serializedValue: 0
+      _serializedValue: -429496736
     z:
       _serializedValue: 0
   lossyScale:
@@ -1080,7 +1080,7 @@ MonoBehaviour:
     z:
       _serializedValue: 8589934592
   tsTransform: {fileID: 114234019655173448}
-  _size: {x: 1, y: 1, z: 1}
+  _size: {x: 0.2, y: 0.2, z: 0.35}
 --- !u!114 &114234019655173448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1140,7 +1140,7 @@ MonoBehaviour:
   attackSpeed: 1
   health: 10
   range: 10
-  attack: 1
+  attackValue: 0
   speed: 50
   respawnTime: 0
 --- !u!114 &114968128377246952

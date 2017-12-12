@@ -30,6 +30,7 @@ _c2("_c2", Color) = (1,0,0.4196079,1)
 "RenderType"="Opaque"
 
 		}
+
  Pass {
             ZWrite On
             ColorMask 0
@@ -175,7 +176,8 @@ float4 Multiply1=Add16 * Add10;
 float4 Add3=Add1 + Multiply1;
 float4 Add15=Multiply8 + Add3;
 float4 Sampled2D4=tex2D(_SpeGloTex,IN.uv_SpeGloTex.xy);
-float4 Split0=Sampled2D4;
+float4 Multiply14=Sampled2D4 * float4( 0.4,0.4,0.4,0.4 );
+float4 Split0=Multiply14;
 float4 Multiply2=float4( 1.0, 1.0, 1.0, 1.0 ) * _alpha.xxxx;
 float4 Add7=UV_Pan0 + float4( -0.1,-0.1,-0.1,-0.1 );
 float4 Tex2D3=tex2D(_loadingMask,Add7.xy);

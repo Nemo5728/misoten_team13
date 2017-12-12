@@ -94,12 +94,12 @@ MonoBehaviour:
       _serializedValue: 0
   lossyScale:
     x:
-      _serializedValue: 4294967296
+      _serializedValue: 4294968320
     y:
-      _serializedValue: 4294967296
+      _serializedValue: 4294972928
     z:
-      _serializedValue: 4294967296
-  tsTransform: {fileID: 0}
+      _serializedValue: 4294974464
+  tsTransform: {fileID: 11488224}
   _radius: 0.5
 --- !u!114 &11464950
 MonoBehaviour:
@@ -135,28 +135,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _position:
     x:
-      _serializedValue: 0
+      _serializedValue: 8025822208
     y:
-      _serializedValue: 0
+      _serializedValue: 14400611328
     z:
-      _serializedValue: 0
+      _serializedValue: -933145600
   _rotation:
     x:
-      _serializedValue: 0
+      _serializedValue: -4027053312
     y:
-      _serializedValue: 0
+      _serializedValue: 1470670464
     z:
-      _serializedValue: 0
+      _serializedValue: 243439968
     w:
-      _serializedValue: 0
+      _serializedValue: -86378592
   _scale:
     x:
-      _serializedValue: 0
+      _serializedValue: 4294967296
     y:
-      _serializedValue: 0
+      _serializedValue: 4294967296
     z:
-      _serializedValue: 0
-  _serialized: 0
+      _serializedValue: 4294967296
+  _serialized: 1
   tsCollider: {fileID: 0}
   tsParent: {fileID: 0}
 --- !u!1001 &100100000

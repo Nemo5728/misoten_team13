@@ -17,12 +17,16 @@ _UVOffset("_UVOffset", Range(0,1) ) = 1
 	{
 		Tags
 		{
-"Queue"="Transparent"
+"Queue"="Overlay"
 "IgnoreProjector"="False"
-"RenderType"="Transparent"
+"RenderType"="Opaque"
 
 		}
 
+ Pass {
+            ZWrite On
+            ColorMask 0
+        }
 		
 Cull Off
 ZWrite On

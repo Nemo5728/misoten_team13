@@ -13,20 +13,43 @@ using UnityEngine.SceneManagement;
 
 public class title : MonoBehaviour 
 {
-   
+    private ControllerInfo info = null;
+    private bool controllerConnect;
 
     // Use this for initialization
     void Start () 
 	{
-       
+        info = BLEControlManager.GetControllerInfo();
+        //info = SerialControllManager.GetControllerInfo();
+
+        if (info != null) controllerConnect = true;
+
+        if (controllerConnect)
+        {
+            int stickX = info.stickX;
+            int stickY = info.stickY;
+            bool button = info.isButtonDown;
+            bool stickBtn = info.isStickDown;
+        }
     }
 	
 	// Update is called once per frame
 	void Update () 
 	{
-        if (Input.GetKey("a"))
+        if (controllerConnect)
         {
-            SceneManager.LoadScene("Connecting");
+            if (info.isButtonDown)
+            {
+                SceneManager.LoadScene("Connecting");
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SceneManager.LoadScene("Connecting");
+            }
+
         }
 
         if (Input.GetKey("p"))

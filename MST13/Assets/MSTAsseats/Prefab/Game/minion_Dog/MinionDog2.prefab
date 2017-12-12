@@ -408,7 +408,7 @@ Transform:
   m_GameObject: {fileID: 1892812841504998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 4898484861047200}
   - {fileID: 4368199208869034}
@@ -656,7 +656,7 @@ MonoBehaviour:
   attackSpeed: 1
   health: 10
   range: 10
-  attack: 1
+  attackValue: 0
   speed: 10
   respawnTime: 0
 --- !u!114 &114758324764420268
@@ -688,11 +688,11 @@ MonoBehaviour:
       _serializedValue: 4294967296
   _scale:
     x:
-      _serializedValue: 8589934592
+      _serializedValue: 21474836480
     y:
-      _serializedValue: 8589934592
+      _serializedValue: 21474836480
     z:
-      _serializedValue: 8589934592
+      _serializedValue: 21474836480
   _serialized: 1
   tsCollider: {fileID: 0}
   tsParent: {fileID: 0}
@@ -713,18 +713,18 @@ MonoBehaviour:
     x:
       _serializedValue: 0
     y:
-      _serializedValue: 0
+      _serializedValue: -429496736
     z:
-      _serializedValue: 0
+      _serializedValue: 128849016
   lossyScale:
     x:
-      _serializedValue: 8589934592
+      _serializedValue: 21474836480
     y:
-      _serializedValue: 8589934592
+      _serializedValue: 21474836480
     z:
-      _serializedValue: 8589934592
+      _serializedValue: 21474836480
   tsTransform: {fileID: 114758324764420268}
-  _size: {x: 1, y: 1, z: 1}
+  _size: {x: 0.2, y: 0.2, z: 0.35}
 --- !u!137 &137793270130295912
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
