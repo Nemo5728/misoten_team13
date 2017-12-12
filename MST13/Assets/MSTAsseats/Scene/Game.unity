@@ -24561,7 +24561,7 @@ Prefab:
     - target: {fileID: 11424684, guid: 0017db9755b5cb442a00a702420c1076, type: 2}
       propertyPath: playerPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 1166344024202724, guid: 653fd54ea0e264c21b57148104e94b57,
+      objectReference: {fileID: 1166344024202724, guid: 1e4c75f656fa24abebda2708f58b5b9d,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0017db9755b5cb442a00a702420c1076, type: 2}
