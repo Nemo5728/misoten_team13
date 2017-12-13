@@ -29,7 +29,7 @@ MonoBehaviour:
     seeThroughConfiguration: 0
     viewerName: Generic Cardboard
     viewerManufacturer: Vuforia
-    useCustomViewer: 0
+    useCustomViewer: 1
     customViewer:
       Version: 0
       Name: 

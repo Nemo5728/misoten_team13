@@ -132,8 +132,8 @@ public class monster : TrueSyncBehaviour {
         TrueSyncInput.SetBool(INPUT_ATTACK,weakAttack);
 
         //BLEなんちゃら
-        //info = BLEControlManager.GetControllerInfo();
-        info = SerialControllManager.GetControllerInfo();
+        info = BLEControlManager.GetControllerInfo();
+        //info = SerialControllManager.GetControllerInfo();
         if (info != null) controllerConnect = true;
 
         if (controllerConnect)
