@@ -9,6 +9,11 @@ public class MainManager : MonoBehaviour {
     private ControllerInfo info = null;
     private bool controllerConnect;
 
+    private float Timer;
+    private float gametimr;
+    private const float GAME_TIME = 185;
+    private const float LOGIN_TIME = 30;
+
     private enum STATE
     {
         STATE_TITLE,
@@ -39,10 +44,16 @@ public class MainManager : MonoBehaviour {
     {
         if (controllerConnect)
         {
-            // 選択オブジェクトを削除し、次のステートへ移行
-            Destroy(selectObj);
-            NextState(state);
-            SetState();
+            if(info.isButtonDown)
+            {
+                if(state != STATE.STATE_LOGIN  ||
+                   state != STATE.STATE_GAME )
+                // 選択オブジェクトを削除し、次のステートへ移行
+                Destroy(selectObj);
+                NextState(state);
+                SetState();
+            }
+           
         }
         else
         {
@@ -61,6 +72,35 @@ public class MainManager : MonoBehaviour {
                     Destroy(selectObj);
                     NextState(state);
                     SetState();
+                }
+            }
+
+            switch (state)
+            {
+                case STATE.STATE_LOGIN:
+                {
+                        Timer += Time.deltaTime;
+
+                        if (Timer >= LOGIN_TIME)
+                        {
+                            Destroy(selectObj);
+                            NextState(state);
+                            SetState();
+                        }
+                    break;
+                }
+                case STATE.STATE_GAME:
+                {
+
+                        gametimr += Time.deltaTime;
+
+                        if (gametimr >= GAME_TIME)
+                        {
+                            Destroy(selectObj);
+                            NextState(state);
+                            SetState();
+                        }
+                    break;
                 }
             }
 
@@ -93,21 +133,20 @@ public class MainManager : MonoBehaviour {
                 }
             case STATE.STATE_LOGIN:
                 {
-                    // クローンの削除
-                    GameCloneDelete();
-
+                    LoginCloneDelete();
                     state = STATE.STATE_GAME;
                     break;
                 }
             case STATE.STATE_GAME:
                 {
-                   
-
-                    state = STATE.STATE_TITLE;
+                    // クローンの削除
+                    GameCloneDelete();
+                    state = STATE.STATE_RESULT;
                     break;
                 }
             case STATE.STATE_RESULT:
                 {
+                    ResultCloneDelete();
                     state = STATE.STATE_TITLE;
                     break;
                 }
@@ -121,14 +160,46 @@ public class MainManager : MonoBehaviour {
     void GameCloneDelete()
     {
        
-        GameObject obj = GameObject.Find("TestManager(Clone)");
-        Destroy(obj);
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("PlayManager");
+
+        foreach (GameObject play in objs)
+        {
+            Destroy(play);
+        }
+
 
         GameObject[] tagobjs = GameObject.FindGameObjectsWithTag("minion");
 
         foreach (GameObject mi in tagobjs)
         {
             Destroy(mi);
+        }
+    }
+
+    void LoginCloneDelete()
+    {
+        GameObject[] logs = GameObject.FindGameObjectsWithTag("PlayManager");
+
+        foreach (GameObject play in logs)
+        {
+            Destroy(play);
+        }
+
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (GameObject play in objs)
+        {
+            Destroy(play);
+        }
+    }
+
+    void ResultCloneDelete()
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (GameObject play in objs)
+        {
+            Destroy(play);
         }
     }
 }

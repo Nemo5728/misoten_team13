@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/MSTAsseats/Scene/Login.unity
     guid: 1f53c58a77722d34bb8d7dcfa593de44
-  - enabled: 1
+  - enabled: 0
     path: Assets/MSTAsseats/Scene/Game.unity
     guid: 2cb34f0f2e3344aba8fe97c368b93c82
+  - enabled: 1
+    path: Assets/MSTAsseats/Scene/Main.unity
+    guid: 20bed981c2388428cba2c4a4d9e6f208

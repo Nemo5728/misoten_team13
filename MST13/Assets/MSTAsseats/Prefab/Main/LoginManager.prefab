@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4491948496276252}
+  - component: {fileID: 114194682718705942}
   m_Layer: 0
   m_Name: LoginManager
   m_TagString: Untagged
@@ -33,9 +34,24 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1871675396525442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -360, z: -40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114194682718705942
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1871675396525442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 623ec9198a1dd41548ffa522a06983d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoginTruySyncManager: {fileID: 1025074420982446, guid: e3e23499cd0b944eb81eb804b0140afd,
+    type: 2}
+  LoginObject: {fileID: 1732096980985290, guid: 54eeda98fcf98409a9d83886d8870f47,
+    type: 2}

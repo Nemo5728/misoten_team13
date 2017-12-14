@@ -25,8 +25,9 @@ public class readyTime : TrueSyncBehaviour {
     {
         timeCounter -= Time.deltaTime;
 
-        if (timeCounter <= -1f)
+        if (timeCounter <= 0f)
         {
+            timeCounter = 0f;
             // Canvasごと削除する
             // Destroy(gameObject);
            // TrueSyncManager.Destroy(transform.parent.gameObject);
@@ -37,7 +38,7 @@ public class readyTime : TrueSyncBehaviour {
 
 
         // マイナス値にならないようにしている
-        if (timeCounter <= 1f)
+        else if (timeCounter <= 1f)
         {
             // ゲームスタートを描画
             GetComponent<UnityEngine.UI.Text>().text = "GameStart!";

@@ -7,6 +7,9 @@ TagManager:
   - Marker
   - minion
   - loginPalyer
+  - monsterStrHit1
+  - monsterWeakHit1
+  - PlayManager
   layers:
   - Default
   - TransparentFX

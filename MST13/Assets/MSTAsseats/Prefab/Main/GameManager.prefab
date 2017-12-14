@@ -53,3 +53,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   truesyncManager: {fileID: 1495168298053186, guid: 2f8395d82286b4881ace24ec752e0bf9,
     type: 2}
+  GameObj: {fileID: 1716284535868580, guid: 0bf58a522cf4e40b0b5d78df32628c2d, type: 2}

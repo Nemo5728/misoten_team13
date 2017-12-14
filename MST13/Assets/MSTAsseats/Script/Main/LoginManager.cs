@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class LoginManager : MonoBehaviour {
 
-    public GameObject truesyncManager;
-    public GameObject GameObj;
+    public GameObject LoginTruySyncManager;
+    public GameObject LoginObject;
     GameObject obj;
 
     // Use this for initialization
     void Start()
     {
         // 生成したオブジェクトを子オブジェクトに変更
-        obj = Instantiate(truesyncManager, transform.position, Quaternion.identity);
+
+        obj = Instantiate(LoginTruySyncManager, transform.position, Quaternion.identity);
         obj.transform.parent = transform;
 
-        obj = Instantiate(GameObj, transform.position, Quaternion.identity);
+        obj = Instantiate(LoginObject, transform.position, Quaternion.identity);
         obj.transform.parent = transform;
     }
 
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour {
     {
 
     }
+
     public void AllDelete()
     {
         Destroy(obj);

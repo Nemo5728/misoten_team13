@@ -5,10 +5,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 450246}
-  - 114: {fileID: 11450246}
+  - component: {fileID: 450246}
+  - component: {fileID: 11450246}
   m_Layer: 0
   m_Name: BgmManager
   m_TagString: Untagged
@@ -28,6 +28,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &11450246
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -39,7 +40,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017b232f631fe47a6ae6122ae65ef85c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugMode: 1
+  DebugMode: 0
+  TargetVolume: 1
+  TimeToFade: 2
+  CrossFadeRatio: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -51,4 +55,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 150246}
   m_IsPrefabParent: 1
-  m_IsExploded: 1
