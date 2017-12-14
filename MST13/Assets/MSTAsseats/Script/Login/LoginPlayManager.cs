@@ -28,8 +28,10 @@ public class LoginPlayManager : TrueSyncBehaviour
             {
                 if ((owner.Id - 1) != i)
                 {
+                    Debug.Log("loginplayer" + (i + 1));
                     PlayerObject = transform.Find("loginplayer" + (i + 1)).gameObject;
                     PlayerObject.SetActive(false);
+
                 }
             }
 

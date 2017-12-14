@@ -29,6 +29,9 @@ public class MainManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
+        Timer = 0f;
+        gametimr = 0f;
+
         //BLEなんちゃら
         info = BLEControlManager.GetControllerInfo();
         // info = SerialControllManager.GetControllerInfo();
@@ -48,12 +51,13 @@ public class MainManager : MonoBehaviour {
             {
                 if(state != STATE.STATE_LOGIN  ||
                    state != STATE.STATE_GAME )
-                // 選択オブジェクトを削除し、次のステートへ移行
-                Destroy(selectObj);
-                NextState(state);
-                SetState();
-            }
-           
+                {
+                    // 選択オブジェクトを削除し、次のステートへ移行
+                    Destroy(selectObj);
+                    NextState(state);
+                    SetState();
+                }
+           }
         }
         else
         {

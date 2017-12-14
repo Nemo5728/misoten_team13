@@ -667,6 +667,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bf30d577eead1ef40bcf2b404289daf4, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf30d577eead1ef40bcf2b404289daf4, type: 2}
   m_IsPrefabParent: 0
@@ -688,7 +692,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &1795758119
 AudioListener:
   m_ObjectHideFlags: 0
@@ -935,6 +939,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2054281263}
   - component: {fileID: 2054281264}
+  - component: {fileID: 2054281265}
   m_Layer: 0
   m_Name: PStestObj
   m_TagString: Untagged
@@ -967,3 +972,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24fcadf9f1f2a4b3ab6b3125611f158c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2054281265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2054281262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87329470a7cf6574aa86ea5011316e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ParticleList:
+  - waitTime: 5
+    obj: {fileID: 1000011325941866, guid: 85d3224adb5f3194abeace87f17d8e0b, type: 2}
