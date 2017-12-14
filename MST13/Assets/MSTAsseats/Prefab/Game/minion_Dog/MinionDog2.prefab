@@ -215,10 +215,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4537703482211164}
   - component: {fileID: 114758324764420268}
-  - component: {fileID: 114975854378821132}
-  - component: {fileID: 114395198309927410}
   - component: {fileID: 114404565624644628}
   - component: {fileID: 95698152686201316}
+  - component: {fileID: 114457127931053776}
   m_Layer: 9
   m_Name: MinionDog2
   m_TagString: minion
@@ -613,27 +612,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114395198309927410
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1892812841504998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8561a4124465f743903b76d8cf232a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mass:
-    _serializedValue: 4294967296
-  _useGravity: 1
-  _isKinematic: 0
-  _linearDrag:
-    _serializedValue: 21474836480
-  _angularDrag:
-    _serializedValue: 214748368
-  interpolation: 0
-  _constraints: 116
 --- !u!114 &114404565624644628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -655,10 +633,39 @@ MonoBehaviour:
     name: 
   attackSpeed: 1
   health: 10
-  range: 10
-  attack: 1
+  range: 0.8
+  attackValue: 3
   speed: 10
   respawnTime: 0
+--- !u!114 &114457127931053776
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1892812841504998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4c7bd8f1459c9546b38fea6d5368cd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTrigger: 1
+  tsMaterial: {fileID: 0}
+  center:
+    x:
+      _serializedValue: 0
+    y:
+      _serializedValue: 0
+    z:
+      _serializedValue: 0
+  lossyScale:
+    x:
+      _serializedValue: 4294967296
+    y:
+      _serializedValue: 4294967296
+    z:
+      _serializedValue: 4294967296
+  tsTransform: {fileID: 0}
+  _radius: 0.5
 --- !u!114 &114758324764420268
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -696,35 +703,6 @@ MonoBehaviour:
   _serialized: 1
   tsCollider: {fileID: 0}
   tsParent: {fileID: 0}
---- !u!114 &114975854378821132
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1892812841504998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2761f79677a73b84cbeba46eda8c3766, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isTrigger: 0
-  tsMaterial: {fileID: 0}
-  center:
-    x:
-      _serializedValue: 0
-    y:
-      _serializedValue: 0
-    z:
-      _serializedValue: 0
-  lossyScale:
-    x:
-      _serializedValue: 8589934592
-    y:
-      _serializedValue: 8589934592
-    z:
-      _serializedValue: 8589934592
-  tsTransform: {fileID: 114758324764420268}
-  _size: {x: 1, y: 1, z: 1}
 --- !u!137 &137793270130295912
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
