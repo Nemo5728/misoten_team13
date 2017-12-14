@@ -427,10 +427,12 @@ GameObject:
   - component: {fileID: 4256900203996506}
   - component: {fileID: 23673522277600660}
   - component: {fileID: 114186154353100770}
-  - component: {fileID: 114888122416233026}
-  - component: {fileID: 114819884400048086}
   - component: {fileID: 114722177297872924}
   - component: {fileID: 95002773542914068}
+  - component: {fileID: 114235023149955306}
+  - component: {fileID: 135432150089254792}
+  - component: {fileID: 114081695352473232}
+  - component: {fileID: 54358395071317368}
   m_Layer: 9
   m_Name: MinionShooter2
   m_TagString: minion
@@ -1035,6 +1037,21 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!54 &54358395071317368
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820295646995982}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
 --- !u!95 &95002773542914068
 Animator:
   serializedVersion: 3
@@ -1052,6 +1069,27 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114081695352473232
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820295646995982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8561a4124465f743903b76d8cf232a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mass:
+    _serializedValue: 4294967296
+  _useGravity: 1
+  _isKinematic: 0
+  _linearDrag:
+    _serializedValue: 0
+  _angularDrag:
+    _serializedValue: 214748368
+  interpolation: 0
+  _constraints: 0
 --- !u!114 &114186154353100770
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1089,6 +1127,35 @@ MonoBehaviour:
   _serialized: 1
   tsCollider: {fileID: 0}
   tsParent: {fileID: 0}
+--- !u!114 &114235023149955306
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820295646995982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4c7bd8f1459c9546b38fea6d5368cd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTrigger: 1
+  tsMaterial: {fileID: 0}
+  center:
+    x:
+      _serializedValue: 0
+    y:
+      _serializedValue: 0
+    z:
+      _serializedValue: 0
+  lossyScale:
+    x:
+      _serializedValue: 4294967296
+    y:
+      _serializedValue: 4294967296
+    z:
+      _serializedValue: 4294967296
+  tsTransform: {fileID: 0}
+  _radius: 0
 --- !u!114 &114722177297872924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1110,60 +1177,22 @@ MonoBehaviour:
     name: 
   attackSpeed: 1
   health: 10
-  range: 10
-  attack: 1
+  range: 3
+  attackValue: 1
   speed: 50
   respawnTime: 0
---- !u!114 &114819884400048086
-MonoBehaviour:
+--- !u!135 &135432150089254792
+SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1820295646995982}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8561a4124465f743903b76d8cf232a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mass:
-    _serializedValue: 4294967296
-  _useGravity: 1
-  _isKinematic: 0
-  _linearDrag:
-    _serializedValue: 21474836480
-  _angularDrag:
-    _serializedValue: 214748368
-  interpolation: 0
-  _constraints: 116
---- !u!114 &114888122416233026
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1820295646995982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2761f79677a73b84cbeba46eda8c3766, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isTrigger: 0
-  tsMaterial: {fileID: 0}
-  center:
-    x:
-      _serializedValue: 0
-    y:
-      _serializedValue: 0
-    z:
-      _serializedValue: 0
-  lossyScale:
-    x:
-      _serializedValue: 8589934592
-    y:
-      _serializedValue: 8589934592
-    z:
-      _serializedValue: 8589934592
-  tsTransform: {fileID: 114186154353100770}
-  _size: {x: 1, y: 1, z: 1}
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &137709043116921282
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -17,6 +17,7 @@ public class player : TrueSyncBehaviour {
     private const float STAGE_LENGTH = 56.0f;
     private const byte INPUT_TAP = 10;
     private const byte INOPUT_MOUSE = 11;
+    private const int SHOOTER_VALUE = 4;
 
     private TSRigidBody rb = null;
     private TSVector directionVector = TSVector.zero;
@@ -53,8 +54,8 @@ public class player : TrueSyncBehaviour {
     [SerializeField, TooltipAttribute("復帰時間(sec)")] private float respawnTime = 0;
     [SerializeField, TooltipAttribute("移動速度")] private float speed;
     [SerializeField, TooltipAttribute("触るな危険")] private GameObject[] markerList;
-    [SerializeField, TooltipAttribute("触るな危険")] private GameObject minion;
-    [SerializeField, TooltipAttribute("触るな危険")] private GameObject monsterObject;
+    [SerializeField, TooltipAttribute("触るな危険")] private GameObject minionDog;
+    [SerializeField, TooltipAttribute("触るな危険")] private GameObject minionShooter;
     [SerializeField, TooltipAttribute("触るな危険")] private GameObject sign;
     [SerializeField, TooltipAttribute("ラブゲージMAX")] private int loveGaugeMax = 100;
     [SerializeField, TooltipAttribute("ラブゲージ上昇率")] private int loveGaugeLate = 50;
@@ -160,8 +161,13 @@ public class player : TrueSyncBehaviour {
                             vec.x = markerList[i].transform.position.x;
                             vec.y = markerList[i].transform.position.y + 1.0f;
                             vec.z = markerList[i].transform.position.z;
-                            GameObject CreateMinion = TrueSyncManager.SyncedInstantiate(minion, vec, TSQuaternion.identity);
-                            minion mi = CreateMinion.GetComponent<minion>();
+
+                            GameObject createMinion;
+
+                            if (i > SHOOTER_VALUE) createMinion = TrueSyncManager.SyncedInstantiate(minionDog, vec, TSQuaternion.identity);
+                            else createMinion = TrueSyncManager.SyncedInstantiate(minionShooter, vec, TSQuaternion.identity);
+
+                            minion mi = createMinion.GetComponent<minion>();
                             mi.Create(gameObject, i, owner.Id);
                             minionCount++;
                         }
@@ -175,9 +181,9 @@ public class player : TrueSyncBehaviour {
                     {
 
                    
-                           Debug.Log("TrueSyncUpdateNormalなう");
-                    // ゲーム開始準備ができてない
-                    //if (gameManager.isGamePlay == false) return;
+                        Debug.Log("TrueSyncUpdateNormalなう");
+                        // ゲーム開始準備ができてない
+                        //if (gameManager.isGamePlay == false) return;
 
                         bool forward = TrueSyncInput.GetBool(INPUT_KEY_FORWARD);
                         bool back = TrueSyncInput.GetBool(INPUT_KEY_BACK);
@@ -209,57 +215,57 @@ public class player : TrueSyncBehaviour {
                             directionVector.x = vector.x = speed * (stickX / 473);
                             directionVector.z = vector.z = speed * (stickY / 473);
                         }
-                   
-                    if(Tc > 0)
-                    {
-                        
-                        Debug.Log("TrueSyncTouchなう");
-                        Touch th = Input.GetTouch(0);
 
-                        Vector3 position = th.position;
-                        position.z = 30f;
+                        if(Tc > 0)
+                        {
+                            
+                            Debug.Log("TrueSyncTouchなう");
+                            Touch th = Input.GetTouch(0);
 
-                        Vector3 vec3 =  Camera.main.ScreenToWorldPoint(position);
-                        Debug.Log(vec3);
-                        vec3.y = 0f;
+                            Vector3 position = th.position;
+                            position.z = 30f;
 
-                        TSVector vec = new TSVector(vec3.x, vec3.y, vec3.z);
-                        Debug.Log(vec);
-                        tsTransform.position = vec;
-                      
+                            Vector3 vec3 =  Camera.main.ScreenToWorldPoint(position);
+                            Debug.Log(vec3);
+                            vec3.y = 0f;
 
-                    }
+                            TSVector vec = new TSVector(vec3.x, vec3.y, vec3.z);
+                            Debug.Log(vec);
+                            tsTransform.position = vec;
+                          
+
+                        }
 
 
                          if (space)
-                        {
-                            powerUpButton++;
-                            powerUpCount = 0.0f;
-                        }
-                        else
-                        {
-                            powerUpCount += Time.deltaTime;
+                         {
+                             powerUpButton++;
+                             powerUpCount = 0.0f;
+                         }
+                         else
+                         {
+                             powerUpCount += Time.deltaTime;
+                         
+                             if (powerUpCount >= powerUpEndTime)
+                             {
+                                 powerUpCount = 0.0f;
+                                 powerUpButton = 0;
+                             }
+                         }
 
-                            if (powerUpCount >= powerUpEndTime)
-                            {
-                                powerUpCount = 0.0f;
-                                powerUpButton = 0;
-                            }
-                        }
+                         if (powerUpButton > powerUpStart)
+                         {
+                              powerUpFlag = true;
+                         }
+                         else
+                         {
+                             powerUpFlag = false;
+                         }
 
-                        if (powerUpButton > powerUpStart)
-                        {
-                            powerUpFlag = true;
-                        }
-                        else
-                        {
-                            powerUpFlag = false;
-                        }
-                        
-                        vector = TSVector.Normalize(vector);
-                        directionVector = TSVector.Normalize(directionVector);
-                        FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
-                        tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
+                         vector = TSVector.Normalize(vector);
+                         directionVector = TSVector.Normalize(directionVector);
+                         FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
+                         tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
 
                         if (!(TSVector.Distance(TSVector.zero, tsTransform.position + vector) >= STAGE_LENGTH))
                             tsTransform.Translate(vector * speed, Space.World);
@@ -289,24 +295,27 @@ public class player : TrueSyncBehaviour {
                         }
 
                         //ミニオンリスポーン処理
-                        for (int i = 0; i < markerList.Length; i++)
+                        /*for (int i = 0; i < markerList.Length; i++)
                         {
                             if (minionRespawnCount[i] > 0)
                             {
                                 minionRespawnCount[i] -= Time.deltaTime;
 
-                                if (minionRespawnCount[i] <= 0)
+                                if (minionRespawnCount[i] < 0)
                                 {
                                     TSVector vec;
                                     vec.x = markerList[i].transform.position.x;
                                     vec.y = markerList[i].transform.position.y + 1.0f;
                                     vec.z = markerList[i].transform.position.z;
-                                    GameObject CreateMinion = TrueSyncManager.SyncedInstantiate(minion, vec, TSQuaternion.identity);
-                                    minion mi = CreateMinion.GetComponent<minion>();
+
+                                    GameObject createMinion;
+                                    if (i > SHOOTER_VALUE) createMinion = TrueSyncManager.SyncedInstantiate(minionDog, vec, TSQuaternion.identity);
+                                    else createMinion = TrueSyncManager.SyncedInstantiate(minionShooter, vec, TSQuaternion.identity);
+                                    minion mi = createMinion.GetComponent<minion>();
                                     mi.Create(gameObject, i, owner.Id);
                                 }
                             }
-                        }
+                        }*/
 
                         //ラブゲージ処理
                         timeLeft -= Time.deltaTime;
@@ -392,8 +401,13 @@ public class player : TrueSyncBehaviour {
                                 vec.x = markerList[i].transform.position.x;
                                 vec.y = markerList[i].transform.position.y + 1.0f;
                                 vec.z = markerList[i].transform.position.z;
-                                GameObject CreateMinion = TrueSyncManager.SyncedInstantiate(minion, vec, TSQuaternion.identity);
-                                minion mi = CreateMinion.GetComponent<minion>();
+
+                                GameObject createMinion;
+
+                                if (i > SHOOTER_VALUE) createMinion = TrueSyncManager.SyncedInstantiate(minionDog, vec, TSQuaternion.identity);
+                                else createMinion = TrueSyncManager.SyncedInstantiate(minionShooter, vec, TSQuaternion.identity);
+
+                                minion mi = createMinion.GetComponent<minion>();
                                 mi.Create(gameObject, i, owner.Id);
                                 minionCount++;
 

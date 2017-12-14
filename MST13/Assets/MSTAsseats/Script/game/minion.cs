@@ -11,7 +11,6 @@ public class minion : TrueSyncBehaviour {
     private int ownerNum;
     private float coolTime;
     private bool attack;
-   
 
     // 2017/12/2 追加
     private Animator anim;  // アニメーター
@@ -22,13 +21,13 @@ public class minion : TrueSyncBehaviour {
         STATE_NORMAL,
         STATE_TRANSFORM
     };
-    private STATE state;
+
+    STATE state;
 
     [SerializeField, TooltipAttribute("攻撃速度(sec)")] private float attackSpeed;
 
     [AddTracking]
     [SerializeField, TooltipAttribute("ヒットポイント")] private int health;
-
     [SerializeField, TooltipAttribute("攻撃範囲")] private float range;
     [SerializeField, TooltipAttribute("攻撃力")] private int attackValue;
     [SerializeField, TooltipAttribute("スピード")] private float speed = 10;
@@ -49,6 +48,8 @@ public class minion : TrueSyncBehaviour {
         parentPlayer = player;
         parentMarker = marker;
         ownerNum = owner;
+        GetComponent<TSSphereCollider>().radius = range;
+
         //this.tag = "minion" + (ownerNum + 1);
     }
 
@@ -63,8 +64,6 @@ public class minion : TrueSyncBehaviour {
         anim.SetTrigger("dogSpawn");        // 誕生アニメーション
         health = 100;
         state = STATE.STATE_NORMAL;
-
-
     }
 
     public override void OnSyncedUpdate()
@@ -85,42 +84,11 @@ public class minion : TrueSyncBehaviour {
 
                     if (!(TSVector.Distance(TSVector.zero, (tsTransform.position + vector * dist)) >= p.GetStageLength()))
                         tsTransform.Translate(vector * dist, Space.World);
-
-                               
-
-                    // 4フレームに１回
-                    if (coolTime <= 0 && (Time.frameCount & 0x03) == 0)
-                    {
-                        
-                        foreach (minion mi in FindObjectsOfType<minion>() )
-                        {
-                            Vector3 targetPos = mi.GetPositon();
-                            int targetOwner = mi.GetOwner();
-
-                            float distance = Vector3.Distance(targetPos, transform.position);
-                            if (distance < range && ownerNum != mi.GetOwner())
-                            {
-                                mi.AddDamage(attackValue);
-                                coolTime = attackSpeed;
-                                attack = true;
-                                break;
-                            }
-                        }
-
-                    }
-                   else
-                    {
-                        coolTime -= Time.deltaTime;
-                    }
-
+                    
                     break;
                 }
             case STATE.STATE_TRANSFORM:
                 {
-
-                  //  FP dist = TSVector.Distance(p.GetPosition(), tsTransform.position) / speed;
-                    //tsTransform.Translate(p.GetPosition() * (dist * 0.1f) , Space.World);
-
                     // 2017/12/6 変更
                     tsTransform.rotation = TSQuaternion.Slerp(tsTransform.rotation,
                                                               TSQuaternion.LookRotation(p.GetPosition() - tsTransform.position),
@@ -193,58 +161,24 @@ public class minion : TrueSyncBehaviour {
         state = STATE.STATE_TRANSFORM;
     }
 
-    /*
-     void OnSyncedCollisionEnter(TSCollision c)
-    {
-        Debug.Log("当たってる！TrueSyncEnter");
-
-        if (c.gameObject.tag != this.tag)
-        {
-            Debug.Log("ダメージ");
-            anim.SetTrigger("dogWeakAttack");
-            AddDamage(attackValue);
-        }
-    }
-
-     void OnSyncedCollisionTrigger(TSCollision c)
-    {
-        Debug.Log("当たってる！TrueSyncTrigger");
-
-        if (c.gameObject.tag != this.tag)
-        {
-            Debug.Log("ダメージ");
-            anim.SetTrigger("dogWeakAttack");
-            AddDamage(attackValue);
-        }
-    }
-*/
-
-    private void OnTriggerEnter(Collider other)
+    /*void OnTriggerStay(Collider other)
     {
         // coolTimeを追加
         Debug.Log("当たってる！Trigger");
-      
-        if (other.gameObject.tag == "Player")
+
+        if (coolTime <= 0 && (Time.frameCount & 0x03) == 0)
         {
-            Debug.Log("ダメージ");
+            minion mi = other.GetComponent<minion>();
+            if(other.tag == "minion" && mi.GetOwner() != ownerNum)
+            {
+                mi.AddDamage(attackValue);
+            }
 
-           // AddDamage(attackValue);
         }
-
-        else if (other.gameObject.tag == "monsterWeakHit1")
+        else
         {
-            Debug.Log("monster弱攻撃");
-
-           // AddDamage(10);
-            AddDamage(1);
+            coolTime -= Time.deltaTime;
         }
-        else if(other.gameObject.tag == "monsterStrHit1" )
-        {
-            Debug.Log("monster強攻撃");
-
-           // AddDamage(10);
-            AddDamage(1);
-        }
-    }
+    }*/
 
 }

@@ -20953,8 +20953,8 @@ MonoBehaviour:
   - {fileID: 1935654909236882}
   - {fileID: 1541571349966766}
   - {fileID: 1307307653836950}
-  minion: {fileID: 1127812990422254, guid: 0bba7adf5c0054eb8aa574c1473c1a4b, type: 2}
-  monsterObject: {fileID: 1139474049102988, guid: b980d428ff6dd412784a1f54f461781c,
+  minionDog: {fileID: 1127812990422254, guid: 0bba7adf5c0054eb8aa574c1473c1a4b, type: 2}
+  minionShooter: {fileID: 1721530385370128, guid: fb9d7736362fa41939d0928517ab3f9c,
     type: 2}
   sign: {fileID: 1000012717119552, guid: 741baa47259bb7b4ab42b14add93120f, type: 2}
   loveGaugeMax: 100
@@ -21113,8 +21113,8 @@ MonoBehaviour:
   - {fileID: 1086768058133434}
   - {fileID: 1857522703560612}
   - {fileID: 1342481680968280}
-  minion: {fileID: 1048655944603804, guid: dbde5a86070f84a0398a432e7bda6a58, type: 2}
-  monsterObject: {fileID: 1973043387217022, guid: ebc225670cfe240f7ae79a89df727050,
+  minionDog: {fileID: 1048655944603804, guid: dbde5a86070f84a0398a432e7bda6a58, type: 2}
+  minionShooter: {fileID: 1678048146654718, guid: a2d3178de731941cd8caae4f458b92c3,
     type: 2}
   sign: {fileID: 1000012717119552, guid: 741baa47259bb7b4ab42b14add93120f, type: 2}
   loveGaugeMax: 100
@@ -21261,8 +21261,8 @@ MonoBehaviour:
   - {fileID: 1075465019388390}
   - {fileID: 1674297268105612}
   - {fileID: 1088553747426150}
-  minion: {fileID: 1984050615264282, guid: 3bcdcafb324314166b8261a30d8a4eb3, type: 2}
-  monsterObject: {fileID: 1445317756442730, guid: 3520833827fbf49739634e7c72183312,
+  minionDog: {fileID: 1984050615264282, guid: 3bcdcafb324314166b8261a30d8a4eb3, type: 2}
+  minionShooter: {fileID: 1327664504012864, guid: a8590ea10aa2b498fbd923d5f1e5b493,
     type: 2}
   sign: {fileID: 1000012717119552, guid: 741baa47259bb7b4ab42b14add93120f, type: 2}
   loveGaugeMax: 100
@@ -21632,8 +21632,8 @@ MonoBehaviour:
   - {fileID: 1803098158117024}
   - {fileID: 1237752905189542}
   - {fileID: 1251593679116734}
-  minion: {fileID: 1892812841504998, guid: 04286658ea49043ce93578e7d502832e, type: 2}
-  monsterObject: {fileID: 1423908912880506, guid: e4a0cfb773dcd4a3d812486a34108efd,
+  minionDog: {fileID: 1892812841504998, guid: 04286658ea49043ce93578e7d502832e, type: 2}
+  minionShooter: {fileID: 1820295646995982, guid: dd12f46ceafa9465fa578d86fba85f6f,
     type: 2}
   sign: {fileID: 1000012717119552, guid: 741baa47259bb7b4ab42b14add93120f, type: 2}
   loveGaugeMax: 100
