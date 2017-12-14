@@ -2419,9 +2419,8 @@ MonoBehaviour:
   - {fileID: 1006719931780946}
   - {fileID: 1832404838933360}
   - {fileID: 1879952195566712}
-  minion: {fileID: 1127812990422254, guid: 0bba7adf5c0054eb8aa574c1473c1a4b, type: 2}
-  monsterObject: {fileID: 1476159797841772, guid: b980d428ff6dd412784a1f54f461781c,
-    type: 2}
+  minionDog: {fileID: 0}
+  minionShooter: {fileID: 0}
   sign: {fileID: 1000012717119552, guid: 741baa47259bb7b4ab42b14add93120f, type: 2}
   loveGaugeMax: 100
   loveGaugeLate: 1

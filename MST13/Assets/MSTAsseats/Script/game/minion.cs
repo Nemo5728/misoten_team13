@@ -68,7 +68,7 @@ public class minion : TrueSyncBehaviour {
 
     public override void OnSyncedUpdate()
     {
-        Debug.Log("called minion update");
+       // Debug.Log("called minion update");
         player p = parentPlayer.GetComponent<player>();
         TSVector markerPos = p.GetMarkerPosition(parentMarker);
 
@@ -108,7 +108,7 @@ public class minion : TrueSyncBehaviour {
 
     public void AddDamage(int damage)
     {
-        anim.SetTrigger("dogWeakAttack");
+      //  anim.SetTrigger("dogWeakAttack");
         health -= damage;
 
         if(health <= 0)
@@ -124,7 +124,7 @@ public class minion : TrueSyncBehaviour {
                 player p = parentPlayer.GetComponent<player>();
                 p.SetResporn(respawnTime, parentMarker);
 
-                Debug.Log("じゃあな");
+              //  Debug.Log("じゃあな");
                 TrueSyncManager.SyncedDestroy(gameObject);
             }
            
