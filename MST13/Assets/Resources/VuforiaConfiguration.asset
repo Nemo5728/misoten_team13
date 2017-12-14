@@ -25,7 +25,7 @@ MonoBehaviour:
     distortionRenderingMode: 2
     distortionRenderingLayer: 31
     eyewearType: 0
-    stereoFramework: 0
+    stereoFramework: 1
     seeThroughConfiguration: 0
     viewerName: Generic Cardboard
     viewerManufacturer: Vuforia
