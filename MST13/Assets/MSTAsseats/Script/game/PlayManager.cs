@@ -48,8 +48,26 @@ public class PlayManager : TrueSyncBehaviour {
             Debug.Log("PlayManager:オフラインモードなう");
             Debug.Log(owner.Id);
 
-            PlayerObject = transform.Find("player1").gameObject;
             monsterObject = transform.Find("monster1").gameObject;
+            monsterObject.SetActive(false);
+
+            PlayerObject = transform.Find("player2").gameObject;
+            monsterObject = transform.Find("monster2").gameObject;
+
+            PlayerObject.SetActive(false);
+            monsterObject.SetActive(false);
+
+            PlayerObject = transform.Find("player3").gameObject;
+            monsterObject = transform.Find("monster3").gameObject;
+
+            PlayerObject.SetActive(false);
+            monsterObject.SetActive(false);
+
+            PlayerObject = transform.Find("player4").gameObject;
+            monsterObject = transform.Find("monster4").gameObject;
+
+            PlayerObject.SetActive(false);
+            monsterObject.SetActive(false);
         }
     }
 
@@ -59,6 +77,7 @@ public class PlayManager : TrueSyncBehaviour {
     // 2017/12/6 追加
     public void SertActiveMonster()
     {
+        
         monsterObject = transform.Find("monster" + owner.Id).gameObject;
         monsterObject.SetActive(true);
     }

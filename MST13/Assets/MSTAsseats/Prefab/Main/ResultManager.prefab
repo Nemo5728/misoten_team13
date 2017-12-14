@@ -9,30 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1306198726334674}
+  m_RootGameObject: {fileID: 1301897232668920}
   m_IsPrefabParent: 1
---- !u!1 &1306198726334674
+--- !u!1 &1301897232668920
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4592197978531704}
-  - component: {fileID: 114210195989489718}
+  - component: {fileID: 4153110174354764}
+  - component: {fileID: 114551492623739694}
   m_Layer: 0
-  m_Name: MainManager
+  m_Name: ResultManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4592197978531704
+--- !u!4 &4153110174354764
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1306198726334674}
+  m_GameObject: {fileID: 1301897232668920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,18 +40,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114210195989489718
+--- !u!114 &114551492623739694
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1306198726334674}
+  m_GameObject: {fileID: 1301897232668920}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35df25e7da1ad48edb5f613c263b032d, type: 3}
+  m_Script: {fileID: 11500000, guid: ac1c0f1b8db144bbbb03cf6cfc8d4da6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ManagerList:
-  - {fileID: 1920032993185280, guid: 31e00e62a18ae400dad5f8b74aaca1d5, type: 2}
-  - {fileID: 1973401212857140, guid: 0ac08438b3a6e462dacec6c56fc465b4, type: 2}
-  - {fileID: 1641879522439696, guid: 3cf319c363fc44f6f874e134763293dd, type: 2}
+  ResultObject: {fileID: 1295315218847396, guid: f532e2822d7504a139c3b4f6a7095005,
+    type: 2}

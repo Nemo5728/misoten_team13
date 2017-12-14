@@ -20495,13 +20495,16 @@ MonoBehaviour:
   speed: 0
   loveGaugeMax: 100
   loveGaugeLate: 1
-  attack: 1
+  WeakAttack: 1
+  StrAttack: 3
   powerUpEndTime: 0.5
   health: 100
   playerObject: {fileID: 0}
   drag: 0
-  hitWeakObject: {fileID: 0}
-  hitWeakOffset: {fileID: 0}
+  isAttakc: 0
+  isStrAttack: 0
+  Collider: {fileID: 0}
+  DebugHealthText: {fileID: 0}
 --- !u!114 &114021980088128174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -20914,14 +20917,17 @@ MonoBehaviour:
   speed: 0.1
   loveGaugeMax: 1000000
   loveGaugeLate: 1
-  attack: 1
+  WeakAttack: 1
+  StrAttack: 3
   powerUpEndTime: 0.5
   health: 1000000
   playerObject: {fileID: 1153890307338718, guid: c676aff90198d449b8de8c9afbdae545,
     type: 2}
   drag: 0.77
-  hitWeakObject: {fileID: 0}
-  hitWeakOffset: {fileID: 0}
+  isAttakc: 0
+  isStrAttack: 0
+  Collider: {fileID: 0}
+  DebugHealthText: {fileID: 0}
 --- !u!114 &114378967827899906
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -21631,14 +21637,17 @@ MonoBehaviour:
   speed: 0.1
   loveGaugeMax: 1000000
   loveGaugeLate: 1
-  attack: 1
+  WeakAttack: 1
+  StrAttack: 3
   powerUpEndTime: 0.5
   health: 1000000
   playerObject: {fileID: 1153890307338718, guid: c676aff90198d449b8de8c9afbdae545,
     type: 2}
   drag: 0.77
-  hitWeakObject: {fileID: 0}
-  hitWeakOffset: {fileID: 0}
+  isAttakc: 0
+  isStrAttack: 0
+  Collider: {fileID: 0}
+  DebugHealthText: {fileID: 0}
 --- !u!137 &137023545990534310
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

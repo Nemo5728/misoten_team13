@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: sign_downTimer4
+  m_Shader: {fileID: 4800000, guid: 5c908b7bfd626f3499bd1b8851ae5eae, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _TimerBar
+      second:
+        m_Texture: {fileID: 2800000, guid: 3d038b60b4f6db14d814919c915a5eb8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _TimerMask
+      second:
+        m_Texture: {fileID: 2800000, guid: 978096b1a52588e4bba4f6d6bdd43a34, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _TimerTex
+      second:
+        m_Texture: {fileID: 2800000, guid: 978096b1a52588e4bba4f6d6bdd43a34, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _girdMask
+      second:
+        m_Texture: {fileID: 2800000, guid: 1f1c14ec38672054a9dca8541379704b, type: 3}
+        m_Scale: {x: 110, y: 110}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: _Range1
+      second: 0.006
+    - first:
+        name: _TimerValue
+      second: 0
+    - first:
+        name: _alpha
+      second: 1
+    m_Colors: []
