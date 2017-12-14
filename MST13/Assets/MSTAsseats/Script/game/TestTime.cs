@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TestTime : MonoBehaviour {
 
     public GameObject[] stageTex;
+    public Text finishtext;
 
     private int MAX_TIME = 180; // カウントダウンの開始値
     private int MAX_TIMEPOINT = 60; // 秒数の最大値
@@ -82,7 +83,10 @@ public class TestTime : MonoBehaviour {
             timeRing.material.SetFloat("_ChangeColor", 1.0f);//赤にカラー変更
         }
 
-
+        if (timeCounter <= 0f)
+        {
+            finishtext.text = "Finish!";
+        }
         //i = (int)timeCounter;
         //if (i != old_i)//１秒ごとに
         //{

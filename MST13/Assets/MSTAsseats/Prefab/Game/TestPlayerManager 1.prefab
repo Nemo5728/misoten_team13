@@ -1764,7 +1764,7 @@ GameObject:
   - component: {fileID: 4398181969771332}
   - component: {fileID: 114481566693095162}
   m_Layer: 0
-  m_Name: TestPlayerManager
+  m_Name: TestPlayerManager 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11931,7 +11931,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1029612213751126}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15, y: 0, z: 15}
+  m_LocalPosition: {x: -25, y: 0, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4086875672068078}
@@ -11975,7 +11975,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1714235614335094}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15, y: 0, z: -15}
+  m_LocalPosition: {x: 25, y: 0, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4339084779642854}
@@ -12306,7 +12306,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1255602015744322}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15, y: 0, z: 15}
+  m_LocalPosition: {x: 25, y: 0, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4339647557501560}
@@ -12740,7 +12740,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1850897071312678}
   m_LocalRotation: {x: -0, y: 0.92387956, z: -0, w: 0.38268343}
-  m_LocalPosition: {x: 15, y: 3, z: 15}
+  m_LocalPosition: {x: 25, y: 3, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4081915360511144}
@@ -13577,7 +13577,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1339428536807708}
   m_LocalRotation: {x: 0, y: 0.92387956, z: 0, w: 0.38268343}
-  m_LocalPosition: {x: -15, y: 3, z: 15}
+  m_LocalPosition: {x: -25, y: 3, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4040341908482718}
@@ -17841,7 +17841,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1365667497339858}
   m_LocalRotation: {x: -0, y: 0.92387956, z: -0, w: 0.38268343}
-  m_LocalPosition: {x: -15, y: 3, z: -15}
+  m_LocalPosition: {x: -25, y: 3, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4824176369467546}
@@ -18967,7 +18967,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1944285369242452}
   m_LocalRotation: {x: -0, y: 0.92387956, z: -0, w: 0.38268343}
-  m_LocalPosition: {x: 15, y: 3, z: -15}
+  m_LocalPosition: {x: 25, y: 3, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4662492580265302}
@@ -19432,7 +19432,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1952118227711842}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15, y: 0, z: -15}
+  m_LocalPosition: {x: -25, y: 0, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4777907782311548}
@@ -20515,7 +20515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _position:
     x:
-      _serializedValue: -64424509440
+      _serializedValue: -107374182400
     y:
       _serializedValue: 12884901888
     z:
@@ -20728,7 +20728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _position:
     x:
-      _serializedValue: 64424509440
+      _serializedValue: 107374182400
     y:
       _serializedValue: 0
     z:
@@ -20834,7 +20834,7 @@ MonoBehaviour:
   drag: 0.77
   isAttakc: 0
   isStrAttack: 0
-  Collider: {fileID: 0}
+  Collider: {fileID: 1367511358200432, guid: a0095f3edf5604db89b39344a1279f2d, type: 2}
   DebugHealthText: {fileID: 0}
 --- !u!114 &114476740184479338
 MonoBehaviour:
@@ -20958,7 +20958,7 @@ MonoBehaviour:
     type: 2}
   sign: {fileID: 1000012717119552, guid: 741baa47259bb7b4ab42b14add93120f, type: 2}
   loveGaugeMax: 100
-  loveGaugeLate: 1
+  loveGaugeLate: 10
   health: 100
   transformTime: 5
   attack: 1
@@ -20999,7 +20999,7 @@ MonoBehaviour:
   drag: 0.77
   isAttakc: 0
   isStrAttack: 0
-  Collider: {fileID: 0}
+  Collider: {fileID: 1367511358200432, guid: a0095f3edf5604db89b39344a1279f2d, type: 2}
   DebugHealthText: {fileID: 0}
 --- !u!114 &114534424134645678
 MonoBehaviour:
@@ -21193,7 +21193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _position:
     x:
-      _serializedValue: -64424509440
+      _serializedValue: -107374182400
     y:
       _serializedValue: 12884901888
     z:
@@ -21299,7 +21299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _position:
     x:
-      _serializedValue: -64424509440
+      _serializedValue: -107374182400
     y:
       _serializedValue: 0
     z:
@@ -21336,7 +21336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _position:
     x:
-      _serializedValue: 64424509440
+      _serializedValue: 107374182400
     y:
       _serializedValue: 12884901888
     z:
@@ -21394,7 +21394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _position:
     x:
-      _serializedValue: 64424509440
+      _serializedValue: 107374182400
     y:
       _serializedValue: 0
     z:
@@ -21555,7 +21555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _position:
     x:
-      _serializedValue: 64424509440
+      _serializedValue: 107374182400
     y:
       _serializedValue: 12884901888
     z:
@@ -21680,7 +21680,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _position:
     x:
-      _serializedValue: -64424509440
+      _serializedValue: -107374182400
     y:
       _serializedValue: 0
     z:

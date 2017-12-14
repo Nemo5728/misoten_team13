@@ -15,6 +15,7 @@ public class loginPlayer : TrueSyncBehaviour
     private const byte INPUT_CONTROLLER_STICKY = 6;
     private const byte INPUT_CONTROLLER_BUTTON = 7;
     private const byte INPUT_CONTROLLER_STICKBUTTON = 8;
+    private const float STAGE_LENGTH = 56.0f;
 
     private TSRigidBody rb = null;                         // rigidbody
     private TSVector directionVector = TSVector.zero;      
@@ -22,10 +23,9 @@ public class loginPlayer : TrueSyncBehaviour
     private bool knockout = false;
     private bool controllerConnect;
     private TSVector move;
-
+    private Animator anim;  // アニメーター
 
     [SerializeField, TooltipAttribute("移動速度")] private float speed;
-    [SerializeField, TooltipAttribute("移動減衰係数"), Range(0.0f, 1.0f)] private float drag;
 
     private Vector3 areaPos;//エリアの位置を入れる
     const float AreaSize = 2.5f;//床の大きさ
@@ -46,15 +46,9 @@ public class loginPlayer : TrueSyncBehaviour
         rb = GetComponent<TSRigidBody>();
         move = TSVector.zero;
 
-        //初期化
-        pos = new TSVector(8.0f, 0.0f, 8.0f);
-
-        //
-        rb = GetComponent<TSRigidBody>();
-
         //生成
         areaPos = new Vector3(0.0f, 0.0f, 0.0f);//位置初期化
-
+        anim = GetComponent<Animator>();    // アニメーションの取得
 
     }
 
@@ -99,6 +93,7 @@ public class loginPlayer : TrueSyncBehaviour
     {
         if (!knockout)
         {
+
             bool forward = TrueSyncInput.GetBool(INPUT_KEY_FORWARD);
             bool back = TrueSyncInput.GetBool(INPUT_KEY_BACK);
             bool right = TrueSyncInput.GetBool(INPUT_KEY_RIGHT);
@@ -106,42 +101,36 @@ public class loginPlayer : TrueSyncBehaviour
             bool space = TrueSyncInput.GetBool(INPUT_KEY_SPACE);
 
             TSVector vector = TSVector.zero;
-            if (forward) directionVector = vector += TSVector.forward;
-            if (back) directionVector = vector += TSVector.back;
-            if (left) directionVector = vector += TSVector.left;
-            if (right) directionVector = vector += TSVector.right;
+            if (forward) directionVector += vector += TSVector.forward;
+            if (back) directionVector += vector += TSVector.back;
+            if (left) directionVector += vector += TSVector.left;
+            if (right) directionVector += vector += TSVector.right;
 
- 
+
             if (controllerConnect)
             {
+                Debug.Log("TrueSyncコントローラなう");
                 int stickX = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
                 int stickY = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
                 bool button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
                 bool stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
 
+                // 2017/12/1 追記
+                // Playerの移動モーション管理
+                MoveAnimetion(stickX);
+
                 directionVector.x = vector.x = speed * (stickX / 473);
                 directionVector.z = vector.z = speed * (stickY / 473);
             }
 
-            vector = TSVector.Normalize(vector); Debug.Log("vec:" + vector);
+                  vector = TSVector.Normalize(vector);
+                        directionVector = TSVector.Normalize(directionVector);
+                        FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
+                        tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
 
-            directionVector = TSVector.Normalize(directionVector);
-            FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
-            tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
-            // tsTransform.Translate(vector.x * speed, 0.0f, vector.z * speed, Space.World);
+                        if (!(TSVector.Distance(TSVector.zero, tsTransform.position + vector) >= STAGE_LENGTH))
+                            tsTransform.Translate(vector * speed, Space.World);
 
-            Debug.Log(vector);
-            Debug.Log(move);
-
-            move += vector * speed;
-
-           // rb.tsTransform.Translate(move, Space.World);
-           tsTransform.Translate(move, Space.World);
-            move.x += (0.0f - move.x) / drag;
-            move.z += (0.0f - move.z) / drag;
-
-
-            pos = rb.position;//位置を変数posに代入
 
             //areaPos情報を取得
             loginArea GetReady = GetLoginArea.GetComponent<loginArea>();
@@ -177,6 +166,21 @@ public class loginPlayer : TrueSyncBehaviour
     void Update()
     {
           
+    }
+
+    // 2017/12/1 追加
+    private void MoveAnimetion(float stickX)
+    {
+        // スティック傾けているかチェック*部品ごとの誤差対策
+        if (stickX >= -20 && stickX <= 20)
+        {
+            // 
+            anim.SetBool("bannerMove", false);
+        }
+        else
+        {
+            anim.SetBool("bannerMove", true);
+        }
     }
 
 }
