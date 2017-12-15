@@ -295,9 +295,7 @@ GameObject:
   - component: {fileID: 114275898833859952}
   - component: {fileID: 95860620200623704}
   - component: {fileID: 114364652325357838}
-  - component: {fileID: 135156175507164834}
   - component: {fileID: 114507589908721866}
-  - component: {fileID: 54191008616155110}
   m_Layer: 9
   m_Name: MinionShooter4
   m_TagString: minion
@@ -692,7 +690,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1678048146654718}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4073612169034884}
@@ -1037,21 +1035,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!54 &54191008616155110
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1678048146654718}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 84
-  m_CollisionDetection: 0
 --- !u!95 &95860620200623704
 Animator:
   serializedVersion: 3
@@ -1129,7 +1112,7 @@ MonoBehaviour:
   health: 10
   range: 3
   attackValue: 1
-  speed: 50
+  speed: 10
   respawnTime: 0
 --- !u!114 &114364652325357838
 MonoBehaviour:
@@ -1180,19 +1163,7 @@ MonoBehaviour:
   _angularDrag:
     _serializedValue: 214748368
   interpolation: 0
-  _constraints: 0
---- !u!135 &135156175507164834
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1678048146654718}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3
-  m_Center: {x: 0, y: 0, z: 0}
+  _constraints: 84
 --- !u!137 &137515350589122862
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

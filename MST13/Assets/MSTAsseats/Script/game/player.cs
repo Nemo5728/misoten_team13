@@ -17,7 +17,7 @@ public class player : TrueSyncBehaviour {
     private const float STAGE_LENGTH = 56.0f;
     private const byte INPUT_TAP = 10;
     private const byte INOPUT_MOUSE = 11;
-    private const int SHOOTER_VALUE = 4;
+    private const int SHOOTER_VALUE = 3;
 
     private TSRigidBody rb = null;
     private TSVector directionVector = TSVector.zero;
@@ -81,7 +81,7 @@ public class player : TrueSyncBehaviour {
     public override void OnSyncedStart()
     {
 
-        Debug.Log("TrueSyncなう");
+        //Debug.Log("TrueSyncなう");
         WebAPIClient.send(2, 50);
         powerUpCount = 0.0f;
         powerUpButton = 0;
@@ -105,7 +105,7 @@ public class player : TrueSyncBehaviour {
 
     public override void OnSyncedInput()
     {
-        Debug.Log("TrueSyncInputなう");
+        //Debug.Log("TrueSyncInputなう");
         bool forward = Input.GetKey(KeyCode.W);
         bool back = Input.GetKey(KeyCode.S);
         bool right = Input.GetKey(KeyCode.D);
@@ -159,7 +159,7 @@ public class player : TrueSyncBehaviour {
                         {
                             TSVector vec;
                             vec.x = markerList[i].transform.position.x;
-                            vec.y = markerList[i].transform.position.y + 1.0f;
+                            vec.y = markerList[i].transform.position.y;
                             vec.z = markerList[i].transform.position.z;
 
                             GameObject createMinion;
@@ -181,7 +181,7 @@ public class player : TrueSyncBehaviour {
                     {
 
                    
-                        Debug.Log("TrueSyncUpdateNormalなう");
+                        //Debug.Log("TrueSyncUpdateNormalなう");
                         // ゲーム開始準備ができてない
                         //if (gameManager.isGamePlay == false) return;
 
@@ -202,7 +202,7 @@ public class player : TrueSyncBehaviour {
 
                         if (controllerConnect)
                         {
-                            Debug.Log("TrueSyncコントローラなう");
+                            //Debug.Log("TrueSyncコントローラなう");
                             int stickX = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
                             int stickY = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
                             bool button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
@@ -219,7 +219,7 @@ public class player : TrueSyncBehaviour {
                         if(Tc > 0)
                         {
                             
-                            Debug.Log("TrueSyncTouchなう");
+                            //Debug.Log("TrueSyncTouchなう");
                             Touch th = Input.GetTouch(0);
 
                             Vector3 position = th.position;
@@ -295,7 +295,7 @@ public class player : TrueSyncBehaviour {
                         }
 
                         //ミニオンリスポーン処理
-                        /*for (int i = 0; i < markerList.Length; i++)
+                        for (int i = 0; i < markerList.Length; i++)
                         {
                             if (minionRespawnCount[i] > 0)
                             {
@@ -305,7 +305,7 @@ public class player : TrueSyncBehaviour {
                                 {
                                     TSVector vec;
                                     vec.x = markerList[i].transform.position.x;
-                                    vec.y = markerList[i].transform.position.y + 1.0f;
+                                    vec.y = markerList[i].transform.position.y;
                                     vec.z = markerList[i].transform.position.z;
 
                                     GameObject createMinion;
@@ -315,7 +315,7 @@ public class player : TrueSyncBehaviour {
                                     mi.Create(gameObject, i, owner.Id);
                                 }
                             }
-                        }*/
+                        }
 
                         //ラブゲージ処理
                         timeLeft -= Time.deltaTime;
@@ -328,7 +328,7 @@ public class player : TrueSyncBehaviour {
                         if (loveGauge >= loveGaugeMax)
                         {
                         // 2017/12/6 修正
-                             Debug.Log("プレイヤー返信");
+                             //Debug.Log("プレイヤー返信");
                         //変身
                             //transformCount = transformTime;
                             transformCount = 5;
@@ -370,7 +370,7 @@ public class player : TrueSyncBehaviour {
                              monster.GetComponent<monster>().TransformInit(tsTransform.position, tsTransform.rotation);
                             
                             //GetComponent<monster>().TransformInit(tsTransform.position, tsTransform.rotation);
-                            Debug.Log("変化");
+                            //Debug.Log("変化");
                             gameObject.SetActive(false);
 
                             foreach (minion mi in FindObjectsOfType<minion>())
@@ -399,7 +399,7 @@ public class player : TrueSyncBehaviour {
                             {
                                 TSVector vec;
                                 vec.x = markerList[i].transform.position.x;
-                                vec.y = markerList[i].transform.position.y + 1.0f;
+                                vec.y = markerList[i].transform.position.y;
                                 vec.z = markerList[i].transform.position.z;
 
                                 GameObject createMinion;

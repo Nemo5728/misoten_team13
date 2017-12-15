@@ -309,6 +309,7 @@ GameObject:
   - component: {fileID: 114431735739956048}
   - component: {fileID: 95873494952266214}
   - component: {fileID: 114118773961429560}
+  - component: {fileID: 114372876141833724}
   m_Layer: 9
   m_Name: MinionDog3
   m_TagString: minion
@@ -506,7 +507,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1984050615264282}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4853361855456826}
@@ -678,6 +679,27 @@ MonoBehaviour:
       _serializedValue: 4294967296
   tsTransform: {fileID: 0}
   _radius: 0.5
+--- !u!114 &114372876141833724
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1984050615264282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8561a4124465f743903b76d8cf232a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mass:
+    _serializedValue: 4294967296
+  _useGravity: 1
+  _isKinematic: 0
+  _linearDrag:
+    _serializedValue: 0
+  _angularDrag:
+    _serializedValue: 214748368
+  interpolation: 0
+  _constraints: 84
 --- !u!114 &114431735739956048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -699,7 +721,7 @@ MonoBehaviour:
     name: 
   attackSpeed: 1
   health: 10
-  range: 0.8
+  range: 10
   attackValue: 3
   speed: 10
   respawnTime: 0

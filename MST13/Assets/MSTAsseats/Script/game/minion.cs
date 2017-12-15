@@ -161,24 +161,24 @@ public class minion : TrueSyncBehaviour {
         state = STATE.STATE_TRANSFORM;
     }
 
-    /*void OnTriggerStay(Collider other)
+    public void OnSyncedTriggerEnter(TSCollision other)
     {
         // coolTimeを追加
         Debug.Log("当たってる！Trigger");
 
-        if (coolTime <= 0 && (Time.frameCount & 0x03) == 0)
+        if (coolTime <= 0)
         {
+            /*
             minion mi = other.GetComponent<minion>();
             if(other.tag == "minion" && mi.GetOwner() != ownerNum)
             {
                 mi.AddDamage(attackValue);
             }
-
+            */
         }
         else
         {
             coolTime -= Time.deltaTime;
         }
-    }*/
-
+    }
 }
