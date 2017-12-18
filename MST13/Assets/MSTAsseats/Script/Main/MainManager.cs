@@ -38,8 +38,8 @@ public class MainManager : MonoBehaviour {
         gametimr = 0f;
 
         //BLEなんちゃら
-        info = BLEControlManager.GetControllerInfo();
-        // info = SerialControllManager.GetControllerInfo();
+        //info = BLEControlManager.GetControllerInfo();
+        info = SerialControllManager.GetControllerInfo();
 
         if (info != null) controllerConnect = true;
 

@@ -61,7 +61,7 @@ public class minion : TrueSyncBehaviour {
         // 2017/12/1 追加
         anim = GetComponent<Animator>();    // アニメーションの取得
 
-        anim.SetTrigger("dogSpawn");        // 誕生アニメーション
+        anim.SetTrigger("minionSpawn");        // 誕生アニメーション
         state = STATE.STATE_NORMAL;
     }
 
@@ -84,17 +84,21 @@ public class minion : TrueSyncBehaviour {
                     if (!(TSVector.Distance(TSVector.zero, (tsTransform.position + vector * dist)) >= p.GetStageLength()))
                         tsTransform.Translate(vector * dist, Space.World);
                     
-                    if(coolTime <= 0){
-                        foreach (minion mi in FindObjectsOfType<minion>()){
-                            if(Vector3.Distance(transform.position, mi.transform.position) < range && mi.GetOwner() != ownerNum){
-                                mi.AddDamage(attackValue);
+                    if(coolTime <= 0)
+                    {
+                        foreach (minion mi in FindObjectsOfType<minion>())
+                        {
+                            if(Vector3.Distance(transform.position, mi.transform.position) < range && mi.GetOwner() != ownerNum)
+                            {
+                                mi.AddDamage(3);
                                 coolTime = attackSpeed;
                                 attack = true;
                                 break;
                             }
                         }
                     }
-                    else{
+                    else
+                    {
                         coolTime -= Time.deltaTime;
                     }
 
@@ -121,19 +125,22 @@ public class minion : TrueSyncBehaviour {
 
     public void AddDamage(int damage)
     {
-      //  anim.SetTrigger("dogWeakAttack");
+        Debug.Log("minionDamage!");
+       anim.SetTrigger("minionWeakAttack");
+
         health -= damage;
 
         if(health <= 0)
         {
             // 2017/12/2 追記
-            anim.SetTrigger("dogDown"); // ダウン
+            anim.SetTrigger("minionDown"); // ダウン
 
-            bool isRespon = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.dog_Respon");
+            bool isRespon = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.minionRespon");
 
             // ダウンモーションが終了したら
             if(isRespon)
             {
+                Debug.Log("responする！!");
                 player p = parentPlayer.GetComponent<player>();
                 p.SetResporn(respawnTime, parentMarker);
 
@@ -144,7 +151,7 @@ public class minion : TrueSyncBehaviour {
         }else
         {
             // 2017/12/2 追記
-            anim.SetTrigger("dogDamage"); // ダメージアニメーション
+            anim.SetTrigger("minionDamage"); // ダメージアニメーション
         }
 
 

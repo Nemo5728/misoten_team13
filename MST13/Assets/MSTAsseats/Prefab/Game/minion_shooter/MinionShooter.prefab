@@ -1097,7 +1097,7 @@ MonoBehaviour:
   range: 10
   attackValue: 1
   speed: 10
-  respawnTime: 0
+  respawnTime: 10
 --- !u!114 &114901443019411368
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1113,7 +1113,7 @@ MonoBehaviour:
     x:
       _serializedValue: 0
     y:
-      _serializedValue: 2147483648
+      _serializedValue: 0
     z:
       _serializedValue: 0
   _rotation:
@@ -1157,12 +1157,12 @@ MonoBehaviour:
       _serializedValue: 0
   lossyScale:
     x:
-      _serializedValue: 4294967296
+      _serializedValue: 8589934592
     y:
-      _serializedValue: 4294967296
+      _serializedValue: 8589934592
     z:
-      _serializedValue: 4294967296
-  tsTransform: {fileID: 0}
+      _serializedValue: 8589934592
+  tsTransform: {fileID: 114901443019411368}
   _radius: 0
 --- !u!137 &137684259707185350
 SkinnedMeshRenderer:

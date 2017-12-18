@@ -121,8 +121,8 @@ public class player : TrueSyncBehaviour {
         TrueSyncInput.SetInt(INPUT_TAP,touch);
 
         //BLEなんちゃら
-       info = BLEControlManager.GetControllerInfo();
-       // info = SerialControllManager.GetControllerInfo();
+       //info = BLEControlManager.GetControllerInfo();
+        info = SerialControllManager.GetControllerInfo();
 
         if (info != null) controllerConnect = true;
 
@@ -181,7 +181,7 @@ public class player : TrueSyncBehaviour {
                     {
 
                    
-                        //Debug.Log("TrueSyncUpdateNormalなう");
+                      //  Debug.Log("TrueSyncUpdateNormalなう");
                         // ゲーム開始準備ができてない
                         //if (gameManager.isGamePlay == false) return;
 
@@ -321,7 +321,7 @@ public class player : TrueSyncBehaviour {
                         timeLeft -= Time.deltaTime;
                         if (timeLeft <= 0)
                         {
-                            //loveGauge += loveGaugeLate;
+                            loveGauge += loveGaugeLate;
                             timeLeft = 1.0f;
                         }
 
@@ -330,8 +330,8 @@ public class player : TrueSyncBehaviour {
                         // 2017/12/6 修正
                              //Debug.Log("プレイヤー返信");
                         //変身
-                            //transformCount = transformTime;
-                            transformCount = 5;
+                            transformCount = transformTime;
+                           // transformCount = 5;
                             state = STATE.STATE_PREPARATION;
                         }
                        
@@ -355,7 +355,7 @@ public class player : TrueSyncBehaviour {
                     }
                 case STATE.STATE_TRANSFORM:
                     {
-                        transformCount -= Time.deltaTime;
+                    transformCount -= Time.deltaTime;
 
                     tsTransform.position += (tsTransform.up * (Time.deltaTime * 0.3f));
                     if (transformCount <= 0)
@@ -366,6 +366,7 @@ public class player : TrueSyncBehaviour {
                              GameObject Manager = transform.parent.gameObject;
                              Manager.GetComponent<PlayManager>().SertActiveMonster();
 
+                             Debug.Log("monster" + owner.Id);
                              GameObject monster = Manager.transform.Find("monster" + owner.Id).gameObject;
                              monster.GetComponent<monster>().TransformInit(tsTransform.position, tsTransform.rotation);
                             
