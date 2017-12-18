@@ -85,6 +85,25 @@ public class minion : TrueSyncBehaviour {
                     if (!(TSVector.Distance(TSVector.zero, (tsTransform.position + vector * dist)) >= p.GetStageLength()))
                         tsTransform.Translate(vector * dist, Space.World);
                     
+                    if(coolTime <= 0 && !attack){
+                        foreach (GameObject go in GameObject.FindGameObjectsWithTag("minion")){
+                            if(Vector3.Distance(transform.position, go.transform.position) < range){
+                                //Debug.Log("攻撃");
+                                minion mi = go.GetComponent<minion>();
+                                if(mi.GetOwner() != ownerNum){
+                                    mi.AddDamage(attackValue);
+                                    coolTime = attackSpeed;
+                                    attack = true;
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        coolTime -= Time.deltaTime;
+                        if(coolTime <= 0)
+                            attack = false;
+                    }
+
                     break;
                 }
             case STATE.STATE_TRANSFORM:

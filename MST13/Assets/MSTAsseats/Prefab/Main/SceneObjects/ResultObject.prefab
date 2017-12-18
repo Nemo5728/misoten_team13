@@ -325,6 +325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4688886682653142}
   - component: {fileID: 114874850258473234}
+  - component: {fileID: 114284822816233502}
   m_Layer: 0
   m_Name: ranking
   m_TagString: Untagged
@@ -9508,6 +9509,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rank: {fileID: 114874850258473234}
   player0to3: 0
+--- !u!114 &114284822816233502
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1055931797891370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87329470a7cf6574aa86ea5011316e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ParticleList:
+  - waitTime: 0
+    obj: {fileID: 1000012051743184, guid: 2ef7df9d7d18da843a75a072092a03db, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000012524030116, guid: cc933bfea46b52548bb4ea9f0849be7d, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000011080044644, guid: 5d5e3eb26a1d3cf4caa342ef6595444e, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000012550977660, guid: 0818c46838c88c54e95da64fe5748f92, type: 2}
 --- !u!114 &114389181374811532
 MonoBehaviour:
   m_ObjectHideFlags: 1

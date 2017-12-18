@@ -321,7 +321,7 @@ public class player : TrueSyncBehaviour {
                         timeLeft -= Time.deltaTime;
                         if (timeLeft <= 0)
                         {
-                            loveGauge += loveGaugeLate;
+                            //loveGauge += loveGaugeLate;
                             timeLeft = 1.0f;
                         }
 

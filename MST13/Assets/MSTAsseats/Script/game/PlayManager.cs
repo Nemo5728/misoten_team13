@@ -45,8 +45,8 @@ public class PlayManager : TrueSyncBehaviour {
         }
         else
         {  //オフラインモードの例外処理
-            Debug.Log("PlayManager:オフラインモードなう");
-            Debug.Log(owner.Id);
+          //  Debug.Log("PlayManager:オフラインモードなう");
+           // Debug.Log(owner.Id);
 
             monsterObject = transform.Find("monster1").gameObject;
             monsterObject.SetActive(false);

@@ -6,7 +6,7 @@ public class ResultManager : MonoBehaviour {
 
     public GameObject ResultObject;
     GameObject obj;
-
+    private GameObject[] particleList;
 	// Use this for initialization
 	void Start () 
     {
@@ -16,8 +16,9 @@ public class ResultManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update ()
+    {
+        
 	}
 
     public void AllDelete()

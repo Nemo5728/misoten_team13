@@ -111,14 +111,16 @@ public class ranking : MonoBehaviour
                 //一位固有演出をするプレイヤーの設定
                 a = i;
                 text.GetComponent<Renderer>().material.SetFloat("_Crown", 1.0f);
+         
             }
         }
-
+        GetComponent<ParticleManager>().Play("FX_ResultFireworkP1", transform.position);
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         for (int i = 0; i < 4; i++)
         {
             texts.transform.GetChild(i).transform.LookAt(Camera.main.transform);
