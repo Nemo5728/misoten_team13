@@ -62,7 +62,6 @@ public class minion : TrueSyncBehaviour {
         anim = GetComponent<Animator>();    // アニメーションの取得
 
         anim.SetTrigger("dogSpawn");        // 誕生アニメーション
-        health = 100;
         state = STATE.STATE_NORMAL;
     }
 
@@ -85,23 +84,18 @@ public class minion : TrueSyncBehaviour {
                     if (!(TSVector.Distance(TSVector.zero, (tsTransform.position + vector * dist)) >= p.GetStageLength()))
                         tsTransform.Translate(vector * dist, Space.World);
                     
-                    if(coolTime <= 0 && !attack){
-                        foreach (GameObject go in GameObject.FindGameObjectsWithTag("minion")){
-                            if(Vector3.Distance(transform.position, go.transform.position) < range){
-                                //Debug.Log("攻撃");
-                                minion mi = go.GetComponent<minion>();
-                                if(mi.GetOwner() != ownerNum){
-                                    mi.AddDamage(attackValue);
-                                    coolTime = attackSpeed;
-                                    attack = true;
-                                }
+                    if(coolTime <= 0){
+                        foreach (minion mi in FindObjectsOfType<minion>()){
+                            if(Vector3.Distance(transform.position, mi.transform.position) < range && mi.GetOwner() != ownerNum){
+                                mi.AddDamage(attackValue);
+                                coolTime = attackSpeed;
+                                attack = true;
+                                break;
                             }
                         }
                     }
                     else{
                         coolTime -= Time.deltaTime;
-                        if(coolTime <= 0)
-                            attack = false;
                     }
 
                     break;
@@ -178,26 +172,5 @@ public class minion : TrueSyncBehaviour {
     public void SetTransform()
     {
         state = STATE.STATE_TRANSFORM;
-    }
-
-    public void OnSyncedTriggerEnter(TSCollision other)
-    {
-        // coolTimeを追加
-        Debug.Log("当たってる！Trigger");
-
-        if (coolTime <= 0)
-        {
-            /*
-            minion mi = other.GetComponent<minion>();
-            if(other.tag == "minion" && mi.GetOwner() != ownerNum)
-            {
-                mi.AddDamage(attackValue);
-            }
-            */
-        }
-        else
-        {
-            coolTime -= Time.deltaTime;
-        }
     }
 }
