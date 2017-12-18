@@ -26,6 +26,11 @@ public class MainManager : MonoBehaviour {
     private STATE state;    // 状態遷移
     GameObject selectObj;   // 選択中のオブジェクト
 
+    void Awake()
+    {
+        Application.targetFrameRate = 60; //60FPSに設定
+    }
+
 	// Use this for initialization
 	void Start () 
     {
@@ -38,6 +43,7 @@ public class MainManager : MonoBehaviour {
 
         if (info != null) controllerConnect = true;
 
+        BgmManager.Instance.Play("select");
         state = STATE.STATE_TITLE;
         SetState();
 	}
@@ -127,17 +133,24 @@ public class MainManager : MonoBehaviour {
         {
             case STATE.STATE_TITLE:
                 {
+                    BgmManager.Instance.Stop();
+                    BgmManager.Instance.Play("select");
                     state = STATE.STATE_CONECTING;
+
                     break;
                 }
             case STATE.STATE_CONECTING:
                 {
+                    BgmManager.Instance.Stop();
+                    BgmManager.Instance.Play("select");
                     state = STATE.STATE_LOGIN;
                     break;
                 }
             case STATE.STATE_LOGIN:
                 {
                     LoginCloneDelete();
+                    BgmManager.Instance.Stop();
+                    BgmManager.Instance.Play("gameBGM1");
                     state = STATE.STATE_GAME;
                     break;
                 }
@@ -145,12 +158,16 @@ public class MainManager : MonoBehaviour {
                 {
                     // クローンの削除
                     GameCloneDelete();
+                    BgmManager.Instance.Stop();
+                    BgmManager.Instance.Play("result");
                     state = STATE.STATE_RESULT;
                     break;
                 }
             case STATE.STATE_RESULT:
                 {
                     ResultCloneDelete();
+                    BgmManager.Instance.Stop();
+                    BgmManager.Instance.Play("select");
                     state = STATE.STATE_TITLE;
                     break;
                 }

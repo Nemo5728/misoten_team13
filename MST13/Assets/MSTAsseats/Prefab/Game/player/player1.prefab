@@ -2419,8 +2419,9 @@ MonoBehaviour:
   - {fileID: 1006719931780946}
   - {fileID: 1832404838933360}
   - {fileID: 1879952195566712}
-  minionDog: {fileID: 0}
-  minionShooter: {fileID: 0}
+  minionDog: {fileID: 1127812990422254, guid: 0bba7adf5c0054eb8aa574c1473c1a4b, type: 2}
+  minionShooter: {fileID: 1721530385370128, guid: fb9d7736362fa41939d0928517ab3f9c,
+    type: 2}
   sign: {fileID: 1000012717119552, guid: 741baa47259bb7b4ab42b14add93120f, type: 2}
   loveGaugeMax: 100
   loveGaugeLate: 1
