@@ -64,5 +64,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff45d60d0f3a24507b5853127e34f1dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portName: /dev/cu.wchusbserial1450
+  portName: /dev/cu.wchusbserial1460
   baudRate: 9600

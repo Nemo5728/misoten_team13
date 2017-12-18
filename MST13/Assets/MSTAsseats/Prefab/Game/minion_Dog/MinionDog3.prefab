@@ -721,10 +721,10 @@ MonoBehaviour:
     name: 
   attackSpeed: 1
   health: 10
-  range: 10
+  range: 3
   attackValue: 3
   speed: 10
-  respawnTime: 0
+  respawnTime: 10
 --- !u!137 &137542154253769648
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

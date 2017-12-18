@@ -84,14 +84,14 @@ public class monster : TrueSyncBehaviour {
             health -= 10;
         }
 
-         
+    /*     
         if (Input.GetKeyDown(KeyCode.Y))
        {
           //  if (isStrAttack) return;
             // 弱攻撃モーション
             anime.SetTrigger("monsterWeakAttack");
         }
-                
+     */           
     }
 
 	// 初期化
@@ -132,8 +132,8 @@ public class monster : TrueSyncBehaviour {
         TrueSyncInput.SetBool(INPUT_ATTACK,weakAttack);
 
         //BLEなんちゃら
-        info = BLEControlManager.GetControllerInfo();
-        //info = SerialControllManager.GetControllerInfo();
+        //info = BLEControlManager.GetControllerInfo();
+        info = SerialControllManager.GetControllerInfo();
         if (info != null) controllerConnect = true;
 
         if (controllerConnect)
@@ -219,7 +219,7 @@ public class monster : TrueSyncBehaviour {
                 else
                 {
                     // スティックを押したら
-                    if (stickBtn)
+                    if (stickBtn || weakAttack)
                     {
                         if (bAttack) return;    // 
                         Debug.Log("スティックボタン押されたよ！");
@@ -320,7 +320,7 @@ public class monster : TrueSyncBehaviour {
                         anime.SetTrigger("monsterDown");
 
                         // リスポーンステートになったら
-                        bool isDown = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monster_setRespon");
+                        bool isDown = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monterOut");
 
                         if (isDown == true)
                         {
@@ -328,7 +328,7 @@ public class monster : TrueSyncBehaviour {
                             // playerにチェンジ
                             SetChangePlayer();
                             gameObject.SetActive(false);
-                            state = STATE.STATE_NONE;
+                            state = STATE.STATE_TRANSFORM;
                         }
 
                     break;
@@ -340,14 +340,14 @@ public class monster : TrueSyncBehaviour {
                         anime.SetTrigger("monsterSplit");
 
                         // リスポーンステートになったら
-                        bool isSplit = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monster_setRespon");
+                        bool isSplit = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monterOut");
 
                         if (isSplit == true)
                         {
                             Debug.Log("モンスター時間消滅切り替え");
                             SetChangePlayer();
                             gameObject.SetActive(false);
-                            state = STATE.STATE_NONE;
+                            state = STATE.STATE_TRANSFORM;
                         }
 
                     break;
