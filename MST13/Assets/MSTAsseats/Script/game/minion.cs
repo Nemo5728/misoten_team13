@@ -6,11 +6,13 @@ using TrueSync;
 public class minion : TrueSyncBehaviour {
 
     private GameObject parentPlayer = null;
+    private GameObject isBullet = null;
     private int parentMarker;
     private TSRigidBody rb = null;
     private int ownerNum;
     private float coolTime;
     private bool attack;
+    private player p;
 
     // 2017/12/2 追加
     private Animator anim;  // アニメーター
@@ -26,12 +28,14 @@ public class minion : TrueSyncBehaviour {
     STATE state;
 
     [SerializeField, TooltipAttribute("攻撃速度(sec)")] private float attackSpeed;
+    [SerializeField, TooltipAttribute("触るな危険")] private GameObject bullet;
 
     [AddTracking]
     [SerializeField, TooltipAttribute("ヒットポイント")] private int health;
 
     [SerializeField, TooltipAttribute("攻撃範囲")] private float range;
     [SerializeField, TooltipAttribute("攻撃力")] private int attackValue;
+    [SerializeField, TooltipAttribute("パワーアップ")] private int powerUpAttackValue;
     [SerializeField, TooltipAttribute("スピード")] private float speed = 10;
     [SerializeField, TooltipAttribute("リスポーン時間(sec)")] private float respawnTime;
 
@@ -66,12 +70,13 @@ public class minion : TrueSyncBehaviour {
 
         anim.SetTrigger("minionSpawn");        // 誕生アニメーション
         state = STATE.STATE_NORMAL;
+
+        p = parentPlayer.GetComponent<player>();
     }
 
     public override void OnSyncedUpdate()
     {
        // Debug.Log("called minion update");
-        player p = parentPlayer.GetComponent<player>();
         TSVector markerPos = p.GetMarkerPosition(parentMarker);
 
         switch(state)
@@ -94,9 +99,20 @@ public class minion : TrueSyncBehaviour {
                             if(Vector3.Distance(transform.position, mi.transform.position) < range && mi.GetOwner() != ownerNum)
                             {
                                 anim.SetTrigger("minionWeakAttack");
-                                mi.AddDamage(3);
                                 coolTime = attackSpeed;
                                 attack = true;
+
+                                if(!p.GetPowerUp()){
+                                    mi.AddDamage(attackValue);
+                                }
+                                else{
+                                    mi.AddDamage(powerUpAttackValue);
+                                }
+
+                                if(isBullet != null){
+                                    GameObject go = TrueSyncManager.SyncedInstantiate(isBullet, transform.position, Quaternion.identity);
+                                    go.GetComponent<Bullet>().Create(mi, ownerNum);
+                                }
                                 break;
                             }
                         }
@@ -138,7 +154,7 @@ public class minion : TrueSyncBehaviour {
                     // ダウンモーションが終了したら
 
                     TrueSyncManager.SyncedDestroy(gameObject);
-                    Debug.Log("responする！!");
+                    //Debug.Log("responする！!");
 
                     player pl = parentPlayer.GetComponent<player>();
                     pl.SetResporn(respawnTime, parentMarker);
@@ -169,7 +185,7 @@ public class minion : TrueSyncBehaviour {
             state = STATE.STATE_DOWN;
         }else
         {
-            Debug.Log("minionDamage!");
+            //Debug.Log("minionDamage!");
             // 2017/12/2 追記
             anim.SetTrigger("minionDamage"); // ダメージアニメーション
         }

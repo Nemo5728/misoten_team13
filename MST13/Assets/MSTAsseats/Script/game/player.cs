@@ -69,6 +69,7 @@ public class player : TrueSyncBehaviour {
     [SerializeField, TooltipAttribute("スタミナ")] private int stamina = 10;
     [SerializeField, TooltipAttribute("ノックバック値")] private int knockBackMax = 100;
     [SerializeField, TooltipAttribute("ノックバック上昇値")] private int knockBackValue = 2;
+    [SerializeField, TooltipAttribute("ノックバックパワー")] private float knockBackPower;
 
 
     // Use this for initialization
@@ -296,18 +297,13 @@ public class player : TrueSyncBehaviour {
                         {
                             if (mi.GetAttack() && mi.GetOwner() == owner.Id)
                             {
-                                
                                 knockback += knockBackValue;
                             }
                         }
 
                         if (knockBackValue >= knockBackMax)
                         {
-                            TSVector knockbackVector;
-                            knockbackVector.x = -directionVector.x;
-                            knockbackVector.y = -directionVector.y;
-                            knockbackVector.z = -directionVector.z;
-                            rb.AddForce(knockbackVector, ForceMode.Impulse);
+                        rb.AddForce(TSVector.back * knockBackPower, ForceMode.Impulse);
                         }
 
                         if (TSVector.Distance(TSVector.zero, tsTransform.position + rb.velocity) >= STAGE_LENGTH)
@@ -387,7 +383,7 @@ public class player : TrueSyncBehaviour {
                              GameObject Manager = transform.parent.gameObject;
                              Manager.GetComponent<PlayManager>().SertActiveMonster();
 
-                             Debug.Log("monster" + owner.Id);
+                             //Debug.Log("monster" + owner.Id);
                              GameObject monster = Manager.transform.Find("monster" + owner.Id).gameObject;
                              monster.GetComponent<monster>().TransformInit(tsTransform.position, tsTransform.rotation);
                             
@@ -530,4 +526,10 @@ public class player : TrueSyncBehaviour {
             anim.SetBool("bannerMove", true);
         }
     }
+
+    public bool GetPowerUp(){
+        return powerUpFlag;
+    }
+
+
 }
