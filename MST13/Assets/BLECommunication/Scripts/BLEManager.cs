@@ -15,7 +15,7 @@ public class BLEManager : SingletonMonoBehaviour<BLEManager>
         Disconnect
     }
 
-    public string   DeviceName          = "MST1303";
+    public string   DeviceName;
     string          ServiceUUID         = "11223344-5566-7788-9900-AABBCCDDEE00";
     string          ReadCharacteristic  = "12345678-9012-3456-7890-123456789011";
 
@@ -40,6 +40,9 @@ public class BLEManager : SingletonMonoBehaviour<BLEManager>
     // Use this for initialization
     void Start()
     {
+
+        DeviceName = GameObject.Find("ControllerInfoManager").GetComponent<ControllerInfoManager>().playerString;
+
         BluetoothLEHardwareInterface.Initialize(true, false, () =>
         {
 
