@@ -222,7 +222,7 @@ public class monster : TrueSyncBehaviour {
                     if (stickBtn || weakAttack)
                     {
                         if (bAttack) return;    // 
-                        Debug.Log("スティックボタン押されたよ！");
+                        //Debug.Log("スティックボタン押されたよ！");
 
                         bAttack = true;
 
@@ -244,7 +244,7 @@ public class monster : TrueSyncBehaviour {
                 if(button == true)
                 {
                     speed = 0f;
-                    Debug.Log("ボタン押されたよ！");
+                    //Debug.Log("ボタン押されたよ！");
                     // 弱攻撃モーション
                     anime.SetTrigger("monsterWeakAttack");
                   
@@ -315,7 +315,7 @@ public class monster : TrueSyncBehaviour {
                     // ダウン＆消滅
                 case STATE.STATE_KNOCKOUT:
                 {
-                        Debug.Log("モンスターダウン");
+                        //Debug.Log("モンスターダウン");
                         // 撃破モーション
                         anime.SetTrigger("monsterDown");
 
@@ -324,7 +324,7 @@ public class monster : TrueSyncBehaviour {
 
                         if (isDown == true)
                         {
-                            Debug.Log("モンスターダウン切り替え");
+                            //Debug.Log("モンスターダウン切り替え");
                             // playerにチェンジ
                             SetChangePlayer();
                             gameObject.SetActive(false);
@@ -335,7 +335,7 @@ public class monster : TrueSyncBehaviour {
                 }
                 case STATE.STATE_SPLIT:
                 {
-                        Debug.Log("モンスター時間消滅");
+                        //Debug.Log("モンスター時間消滅");
                         // 時間切れ
                         anime.SetTrigger("monsterSplit");
 
@@ -344,7 +344,7 @@ public class monster : TrueSyncBehaviour {
 
                         if (isSplit == true)
                         {
-                            Debug.Log("モンスター時間消滅切り替え");
+                            //Debug.Log("モンスター時間消滅切り替え");
                             SetChangePlayer();
                             gameObject.SetActive(false);
                             state = STATE.STATE_TRANSFORM;
@@ -360,7 +360,7 @@ public class monster : TrueSyncBehaviour {
             }
             if(isAttakc)
             {
-                Debug.Log(("攻撃モーションだよ！"));
+                //Debug.Log(("攻撃モーションだよ！"));
             }
 
 
@@ -371,7 +371,7 @@ public class monster : TrueSyncBehaviour {
 
     public void TransformInit(TSVector pos, TSQuaternion rot)
     {
-        Debug.Log("モンスターInit");
+        //Debug.Log("モンスターInit");
         tsTransform.position = new TSVector(pos.x, 3f, pos.z);;
         tsTransform.rotation = rot;
 
@@ -402,14 +402,14 @@ public class monster : TrueSyncBehaviour {
 
     public void OnSyncedCollisionEnter(TSCollision c)
     {
-        Debug.Log("monこりチェック");
+        //Debug.Log("monこりチェック");
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "minion")
         {
-            Debug.Log("minionからDamage!");
+            //Debug.Log("minionからDamage!");
            // health -= 1;
         }
 
