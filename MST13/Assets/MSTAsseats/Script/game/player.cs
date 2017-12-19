@@ -69,7 +69,7 @@ public class player : TrueSyncBehaviour {
     [SerializeField, TooltipAttribute("スタミナ")] private int stamina = 10;
     [SerializeField, TooltipAttribute("ノックバック値")] private int knockBackMax = 100;
     [SerializeField, TooltipAttribute("ノックバック上昇値")] private int knockBackValue = 2;
-    [SerializeField, TooltipAttribute("ノックバックパワー")] private float knockBackPower;
+    [SerializeField, TooltipAttribute("ノックバックパワー")] private float knockBackPower = 100;
 
 
     // Use this for initialization
@@ -206,6 +206,9 @@ public class player : TrueSyncBehaviour {
                         if (left) directionVector += vector += TSVector.left;
                         if (right) directionVector += vector += TSVector.right;
 
+                        if(kib_y){
+                            
+                        }
 
                         if (controllerConnect)
                         {
@@ -301,9 +304,9 @@ public class player : TrueSyncBehaviour {
                             }
                         }
 
-                        if (knockBackValue >= knockBackMax)
+                        if (knockback >= knockBackMax)
                         {
-                        rb.AddForce(TSVector.back * knockBackPower, ForceMode.Impulse);
+                            rb.AddForce(tsTransform.forward * -knockBackPower, ForceMode.VelocityChange);
                         }
 
                         if (TSVector.Distance(TSVector.zero, tsTransform.position + rb.velocity) >= STAGE_LENGTH)
@@ -349,7 +352,7 @@ public class player : TrueSyncBehaviour {
                         //変身
                             transformCount = transformTime;
                            // transformCount = 5;
-                            state = STATE.STATE_PREPARATION;
+                            //state = STATE.STATE_PREPARATION;
                         }
                        
                         break;
