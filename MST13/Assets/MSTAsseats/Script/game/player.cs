@@ -14,6 +14,8 @@ public class player : TrueSyncBehaviour {
     private const byte INPUT_CONTROLLER_STICKY = 6;
     private const byte INPUT_CONTROLLER_BUTTON = 7;
     private const byte INPUT_CONTROLLER_STICKBUTTON = 8;
+    private const byte INPUT_KEY_Y = 9;
+
     private const float STAGE_LENGTH = 56.0f;
     private const byte INPUT_TAP = 10;
     private const byte INOPUT_MOUSE = 11;
@@ -111,6 +113,7 @@ public class player : TrueSyncBehaviour {
         bool right = Input.GetKey(KeyCode.D);
         bool left = Input.GetKey(KeyCode.A);
         bool space = Input.GetKeyDown(KeyCode.Space);
+        bool kib_y = Input.GetKey(KeyCode.Y);
         int touch = Input.touchCount;
 
         TrueSyncInput.SetBool(INPUT_KEY_FORWARD, forward);
@@ -119,6 +122,8 @@ public class player : TrueSyncBehaviour {
         TrueSyncInput.SetBool(INPUT_KEY_LEFT, left);
         TrueSyncInput.SetBool(INPUT_KEY_SPACE, space);
         TrueSyncInput.SetInt(INPUT_TAP,touch);
+        TrueSyncInput.SetBool(INPUT_KEY_Y, kib_y);
+
 
         //BLEなんちゃら
        //info = BLEControlManager.GetControllerInfo();
@@ -191,6 +196,7 @@ public class player : TrueSyncBehaviour {
                         bool left = TrueSyncInput.GetBool(INPUT_KEY_LEFT);
                         bool space = TrueSyncInput.GetBool(INPUT_KEY_SPACE);
                         bool mouse = TrueSyncInput.GetBool(INOPUT_MOUSE);
+                        bool kib_y = TrueSyncInput.GetBool(INPUT_KEY_Y);
                         int Tc = TrueSyncInput.GetInt(INPUT_TAP);
 
                         TSVector vector = TSVector.zero;
@@ -214,6 +220,13 @@ public class player : TrueSyncBehaviour {
 
                             directionVector.x = vector.x = speed * (stickX / 473);
                             directionVector.z = vector.z = speed * (stickY / 473);
+
+                            if (info.isStickDown)
+                            {
+                                knockBackValue++;
+                                loveGauge++;
+                                    // minion強攻撃へ！
+                            }
                         }
 
                         if(Tc > 0)
@@ -235,7 +248,14 @@ public class player : TrueSyncBehaviour {
                           
 
                         }
+                            if (kib_y)
+                            {
+                                 knockBackValue++;
+                                 loveGauge++;
 
+                                // minion強攻撃へ！
+                            }
+                           
 
                          if (space)
                          {
@@ -276,6 +296,7 @@ public class player : TrueSyncBehaviour {
                         {
                             if (mi.GetAttack() && mi.GetOwner() == owner.Id)
                             {
+                                
                                 knockback += knockBackValue;
                             }
                         }
@@ -430,7 +451,8 @@ public class player : TrueSyncBehaviour {
         signObject.GetComponent<MeshRenderer>().material.SetFloat("_barValue", (float)loveGauge / 100);
     }
 
-    public TSVector GetMarkerPosition(int marker){
+    public TSVector GetMarkerPosition(int marker)
+    {
         TSVector vec;
         vec.x = markerList[marker].transform.position.x;
         vec.y = markerList[marker].transform.position.y;
@@ -483,11 +505,13 @@ public class player : TrueSyncBehaviour {
                 }
             }
     }
-    public float GetStageLength(){
+    public float GetStageLength()
+    {
         return STAGE_LENGTH;
     }
 
-    public TSVector GetPosition(){
+    public TSVector GetPosition()
+    {
         return tsTransform.position;
     }
 

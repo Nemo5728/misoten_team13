@@ -681,13 +681,13 @@ MonoBehaviour:
       _serializedValue: 0
   lossyScale:
     x:
-      _serializedValue: 4294967296
+      _serializedValue: 21474836480
     y:
-      _serializedValue: 4294967296
+      _serializedValue: 21474836480
     z:
-      _serializedValue: 4294967296
-  tsTransform: {fileID: 0}
-  _radius: 0.5
+      _serializedValue: 21474836480
+  tsTransform: {fileID: 114889615117818374}
+  _radius: 3
 --- !u!114 &114889615117818374
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -703,7 +703,7 @@ MonoBehaviour:
     x:
       _serializedValue: 0
     y:
-      _serializedValue: 2147483648
+      _serializedValue: 0
     z:
       _serializedValue: 0
   _rotation:
