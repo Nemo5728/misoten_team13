@@ -19,7 +19,8 @@ public class minion : TrueSyncBehaviour {
     {
         STATE_NONE,
         STATE_NORMAL,
-        STATE_TRANSFORM
+        STATE_TRANSFORM,
+        STATE_DOWN
     };
 
     STATE state;
@@ -28,6 +29,7 @@ public class minion : TrueSyncBehaviour {
 
     [AddTracking]
     [SerializeField, TooltipAttribute("ヒットポイント")] private int health;
+
     [SerializeField, TooltipAttribute("攻撃範囲")] private float range;
     [SerializeField, TooltipAttribute("攻撃力")] private int attackValue;
     [SerializeField, TooltipAttribute("スピード")] private float speed = 10;
@@ -48,6 +50,7 @@ public class minion : TrueSyncBehaviour {
         parentPlayer = player;
         parentMarker = marker;
         ownerNum = owner;
+        health = 10;
         GetComponent<TSSphereCollider>().radius = range;
 
         //this.tag = "minion" + (ownerNum + 1);
@@ -90,6 +93,7 @@ public class minion : TrueSyncBehaviour {
                         {
                             if(Vector3.Distance(transform.position, mi.transform.position) < range && mi.GetOwner() != ownerNum)
                             {
+                                anim.SetTrigger("minionWeakAttack");
                                 mi.AddDamage(3);
                                 coolTime = attackSpeed;
                                 attack = true;
@@ -100,6 +104,13 @@ public class minion : TrueSyncBehaviour {
                     else
                     {
                         coolTime -= Time.deltaTime;
+                    }
+
+
+                    if (health <= 0)
+                    {
+                        // downへ
+                        state = STATE.STATE_DOWN;
                     }
 
                     break;
@@ -116,6 +127,29 @@ public class minion : TrueSyncBehaviour {
 
                     break;
                 }
+
+            case STATE.STATE_DOWN:
+                {
+                    // 2017/12/2 追記
+                    anim.SetTrigger("minionDown"); // ダウン
+
+                    bool isRespon = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.minion_down");
+
+                    // ダウンモーションが終了したら
+
+                    TrueSyncManager.SyncedDestroy(gameObject);
+                    Debug.Log("responする！!");
+
+                    player pl = parentPlayer.GetComponent<player>();
+                    pl.SetResporn(respawnTime, parentMarker);
+
+                    if (isRespon == true)
+                    {
+                      
+                       
+                    }
+                    break;
+                }
             default:
                 {
                     break;
@@ -125,36 +159,20 @@ public class minion : TrueSyncBehaviour {
 
     public void AddDamage(int damage)
     {
-        Debug.Log("minionDamage!");
-       anim.SetTrigger("minionWeakAttack");
+        if (state != STATE.STATE_NORMAL) return;
 
         health -= damage;
 
         if(health <= 0)
         {
-            // 2017/12/2 追記
-            anim.SetTrigger("minionDown"); // ダウン
-
-            bool isRespon = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.minionRespon");
-
-            // ダウンモーションが終了したら
-            if(isRespon)
-            {
-                Debug.Log("responする！!");
-                player p = parentPlayer.GetComponent<player>();
-                p.SetResporn(respawnTime, parentMarker);
-
-              //  Debug.Log("じゃあな");
-                TrueSyncManager.SyncedDestroy(gameObject);
-            }
-           
+            // downへ
+            state = STATE.STATE_DOWN;
         }else
         {
+            Debug.Log("minionDamage!");
             // 2017/12/2 追記
             anim.SetTrigger("minionDamage"); // ダメージアニメーション
         }
-
-
     }
 
     public int GetOwner()
