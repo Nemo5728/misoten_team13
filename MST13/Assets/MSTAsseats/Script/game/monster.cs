@@ -213,6 +213,7 @@ public class monster : TrueSyncBehaviour {
                         if (isStrAttack) return;
                         // 弱攻撃モーション
                         anime.SetTrigger("monsterStrAttack");
+                        GetComponent<ParticleManager>().Play("FX_SwingB" , transform.position);
                     }
                 }
                 ///// その他のモーション /////
@@ -228,6 +229,7 @@ public class monster : TrueSyncBehaviour {
 
                         // 弱攻撃モーション
                         anime.SetTrigger("monsterWeakAttack");
+                        GetComponent<ParticleManager>().Play("FX_SwingA", transform.position);
                         //HitWeakAttack(hitWeakObject, hitWeakOffset);
 
                     }

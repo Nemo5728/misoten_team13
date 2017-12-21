@@ -3,9 +3,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TrueSync;
 
-public class Item : MonoBehaviour {
+public class Item :  TrueSyncBehaviour
+{
 
+    [AddTracking]
+    bool bUse;
+
+    void Start()
+    {
+        bUse = true;
+    }
+
+    void Update()
+    {
+        
+    }
+
+    public override void OnSyncedStart()
+    {
+        bUse = true;
+    }
+    public override void OnSyncedUpdate()
+    {
+        if(!bUse)
+        {
+            Debug.Log("どこどこ");
+            //Destroy(gameObject);
+            TrueSyncManager.SyncedDestroy(gameObject);
+        }
+    }
+
+    private void OnSyncedCollisionEnter(TSCollision col)
+    {
+        //playerに触れたら
+        if(col.gameObject.tag == "Player")
+        {
+            Debug.Log("当たっって");
+            bUse = false;
+           
+        }
+    }
+    /*
 
     public Vector3[] posItemTex;        //計算用座標（位置座標）
     public GameObject[] ItemTex;        //オブジェクト本体（プレハブ）
@@ -68,4 +108,5 @@ public class Item : MonoBehaviour {
 
         }
     }
+    */
 }

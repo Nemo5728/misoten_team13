@@ -17,7 +17,7 @@ public class ConnectingManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+//        GetComponent<ParticleManager>().Play("FX_ResultFireworkP1", transform.position);
 	}
     public void AllDelete()
     {

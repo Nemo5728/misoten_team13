@@ -15,7 +15,8 @@ public class ControllerInfoManager : MonoBehaviour {
         playerString = "MST1301";
         SceneManager.LoadScene("Main");
     }
-    public void DecideTwo(){
+    public void DecideTwo()
+    {
         playerString = "MST1302";
         SceneManager.LoadScene("Main");
     }
