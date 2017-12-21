@@ -10,6 +10,11 @@ TagManager:
   - monsterStrHit1
   - monsterWeakHit1
   - PlayManager
+  - Bullet
+  - ItemSpeed
+  - ItemLoveUp
+  - ItemMiniUp
+  - Item
   layers:
   - Default
   - TransparentFX

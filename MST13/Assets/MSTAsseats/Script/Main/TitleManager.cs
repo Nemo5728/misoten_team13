@@ -20,7 +20,7 @@ public class TitleManager : MonoBehaviour {
 	void Start ()
     {
         alpha = 0f;
-        obj =  Instantiate(logo,transform.position,Quaternion.identity);
+        obj =  Instantiate(logo,transform.position,new Quaternion(0f, 180f, 0f, 1f));
         obj.transform.parent = transform;
 
         state = STATE.STATE_START;
