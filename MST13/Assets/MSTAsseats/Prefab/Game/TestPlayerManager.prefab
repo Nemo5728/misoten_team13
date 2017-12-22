@@ -17682,7 +17682,8 @@ MonoBehaviour:
     name: 
   attackSpeed: 0
   respawnTime: 10
-  speed: 0.5
+  speed:
+    _serializedValue: 107374182400
   markerList:
   - {fileID: 1663460944513190}
   - {fileID: 1342187904313466}
@@ -17706,6 +17707,7 @@ MonoBehaviour:
   stamina: 10
   knockBackMax: 100
   knockBackValue: 2
+  knockBackPower: 100
 --- !u!114 &114504122799102542
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17840,7 +17842,8 @@ MonoBehaviour:
     name: 
   attackSpeed: 0
   respawnTime: 10
-  speed: 0.5
+  speed:
+    _serializedValue: 107374182400
   markerList:
   - {fileID: 1358391136970080}
   - {fileID: 1514772055458994}
@@ -17864,6 +17867,7 @@ MonoBehaviour:
   stamina: 10
   knockBackMax: 100
   knockBackValue: 2
+  knockBackPower: 100
 --- !u!114 &114575325698575996
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17965,7 +17969,8 @@ MonoBehaviour:
     name: 
   attackSpeed: 0
   respawnTime: 10
-  speed: 0.5
+  speed:
+    _serializedValue: 107374182400
   markerList:
   - {fileID: 1680323122286194}
   - {fileID: 1033913919578696}
@@ -17989,6 +17994,7 @@ MonoBehaviour:
   stamina: 10
   knockBackMax: 100
   knockBackValue: 2
+  knockBackPower: 100
 --- !u!114 &114635027421916864
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -18314,7 +18320,8 @@ MonoBehaviour:
     name: 
   attackSpeed: 0
   respawnTime: 10
-  speed: 0.5
+  speed:
+    _serializedValue: 107374182400
   markerList:
   - {fileID: 1986454656483886}
   - {fileID: 1477631521766030}
@@ -18338,6 +18345,7 @@ MonoBehaviour:
   stamina: 10
   knockBackMax: 100
   knockBackValue: 2
+  knockBackPower: 100
 --- !u!114 &114997843946623796
 MonoBehaviour:
   m_ObjectHideFlags: 1

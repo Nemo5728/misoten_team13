@@ -48,6 +48,7 @@ public class minion : TrueSyncBehaviour {
     [SerializeField, TooltipAttribute("パワーアップ")] private int powerUpAttackValue;
     [SerializeField, TooltipAttribute("スピード")] private float speed = 10;
     [SerializeField, TooltipAttribute("リスポーン時間(sec)")] private float respawnTime;
+    [SerializeField, TooltipAttribute("ミニオン間の距離")] private float boidRange;
 
 	// Use this for initialization
 	void Start () {
@@ -100,21 +101,32 @@ public class minion : TrueSyncBehaviour {
                     foreach (minion mi in FindObjectsOfType<minion>())
                     {
                         if(mi.GetOwner() != ownerNum){
+                            targetMinion = mi;
                             if (Vector3.Distance(transform.position, new Vector3((float)markerPos.x, (float)markerPos.y, (float)markerPos.z)) > outRange){
                                 moveState = MOVESTATE.MOVE_OUT;
+                                //Debug.Log("out" + parentMarker);
                                 break;
                             }
                             else if (Vector3.Distance(transform.position, mi.transform.position) < searchRange){
                                 moveState = MOVESTATE.MOVE_SEARCE;
+                                //Debug.Log("searce" + parentMarker);
                                 break;
+                            }
+                            else{
+                                moveState = MOVESTATE.MOVE_NORMAL;
+                                //Debug.Log("関谷はホモ");
                             }
 
                             if(Vector3.Distance(transform.position, mi.transform.position) < attackRange){
                                 moveState = MOVESTATE.MOVE_ATTACK;
+                                //Debug.Log("attack" + parentMarker);
                                 break;
                             }
-
-                            targetMinion = mi;
+                        }
+                        else{
+                            if(Vector3.Distance(transform.position, mi.transform.position) < boidRange){
+                                
+                            }
                         }
                     }
 
