@@ -1161,7 +1161,9 @@ MonoBehaviour:
   attackSpeed: 1
   bullet: {fileID: 1871796210600878, guid: 3c5ffe20791dd40ae92d21a3f46be32e, type: 2}
   health: 10
-  range: 10
+  attackRange: 6
+  searchRange: 9
+  outRange: 12
   attackValue: 1
   powerUpAttackValue: 0
   speed: 10

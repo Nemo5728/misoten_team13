@@ -70,7 +70,6 @@ public class player : TrueSyncBehaviour {
     [SerializeField, TooltipAttribute("攻撃速度(sec)")] private int attackSpeed = 0;
     [SerializeField, TooltipAttribute("復帰時間(sec)")] private float respawnTime = 0;
 
-    [AddTracking]
     [SerializeField, TooltipAttribute("移動速度")] private FP speed;
 
     [SerializeField, TooltipAttribute("触るな危険")] private GameObject[] markerList;
@@ -313,7 +312,7 @@ public class player : TrueSyncBehaviour {
                          tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
 
                         if (!(TSVector.Distance(TSVector.zero, tsTransform.position + vector) >= STAGE_LENGTH))
-                            tsTransform.Translate(vector * speed, Space.World);
+                        tsTransform.Translate((vector * speed)* TrueSyncManager.DeltaTime, Space.World);
 
 
                         //ノックバック処理
@@ -327,7 +326,7 @@ public class player : TrueSyncBehaviour {
 
                         if (knockback >= knockBackMax)
                         {
-                        rb.AddForce(tsTransform.forward * -knockBackPower, ForceMode.Impulse);
+                            rb.AddForce(tsTransform.forward * -knockBackPower, ForceMode.Impulse);
                         }
 
                         if (TSVector.Distance(TSVector.zero, tsTransform.position + rb.velocity) >= STAGE_LENGTH)

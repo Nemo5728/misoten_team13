@@ -656,7 +656,9 @@ MonoBehaviour:
   attackSpeed: 1
   bullet: {fileID: 0}
   health: 10
-  range: 3
+  attackRange: 3
+  searchRange: 6
+  outRange: 10
   attackValue: 3
   powerUpAttackValue: 0
   speed: 10
