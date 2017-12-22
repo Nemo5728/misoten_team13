@@ -100,7 +100,7 @@ public class minion : TrueSyncBehaviour {
                     foreach (minion mi in FindObjectsOfType<minion>())
                     {
                         if(mi.GetOwner() != ownerNum){
-                            if (Vector3.Distance(transform.position, mi.transform.position) > outRange){
+                            if (Vector3.Distance(transform.position, new Vector3((float)markerPos.x, (float)markerPos.y, (float)markerPos.z)) > outRange){
                                 moveState = MOVESTATE.MOVE_OUT;
                                 break;
                             }
