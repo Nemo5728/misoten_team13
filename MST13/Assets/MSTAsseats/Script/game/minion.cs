@@ -10,9 +10,10 @@ public class minion : TrueSyncBehaviour {
     private int parentMarker;
     private TSRigidBody rb = null;
     private int ownerNum;
-    private float coolTime;
+    [AddTracking] private FP coolTime;
     private bool attack;
     private player p;
+    private FP range = 1.0f;
 
     // 2017/12/2 追加
     private Animator anim;  // アニメーター
@@ -25,15 +26,24 @@ public class minion : TrueSyncBehaviour {
         STATE_DOWN
     };
 
+    private enum MOVESTATE
+    {
+        MOVE_NONE,
+        MOVE_NORMAL,
+        MOVE_SEARCE,
+        MOVE_ATTACK,
+        MOVE_OUT
+    };
+
     STATE state;
+    MOVESTATE moveState;
 
     [SerializeField, TooltipAttribute("攻撃速度(sec)")] private float attackSpeed;
     [SerializeField, TooltipAttribute("触るな危険")] private GameObject bullet;
-
-    [AddTracking]
     [SerializeField, TooltipAttribute("ヒットポイント")] private int health;
-
-    [SerializeField, TooltipAttribute("攻撃範囲")] private float range;
+    [SerializeField, TooltipAttribute("攻撃範囲")] private float attackRange;
+    [SerializeField, TooltipAttribute("索敵範囲")] private float searchRange;
+    [SerializeField, TooltipAttribute("この値>索敵範囲>攻撃範囲になるように")] private float outRange;
     [SerializeField, TooltipAttribute("攻撃力")] private int attackValue;
     [SerializeField, TooltipAttribute("パワーアップ")] private int powerUpAttackValue;
     [SerializeField, TooltipAttribute("スピード")] private float speed = 10;
@@ -55,7 +65,6 @@ public class minion : TrueSyncBehaviour {
         parentMarker = marker;
         ownerNum = owner;
         health = 10;
-        GetComponent<TSSphereCollider>().radius = range;
 
         //this.tag = "minion" + (ownerNum + 1);
     }
@@ -78,56 +87,123 @@ public class minion : TrueSyncBehaviour {
     {
        // Debug.Log("called minion update");
         TSVector markerPos = p.GetMarkerPosition(parentMarker);
+        moveState = MOVESTATE.MOVE_NORMAL;
 
         switch(state)
         {
             case STATE.STATE_NORMAL:
                 {
-                    TSVector vector = markerPos - tsTransform.position;
-                    FP dist = TSVector.Distance(markerPos, tsTransform.position) / speed;
-                    vector = TSVector.Normalize(vector);
+                    minion targetMinion = null;
 
                     attack = false;
-
-                    if (!(TSVector.Distance(TSVector.zero, (tsTransform.position + vector * dist)) >= p.GetStageLength()))
-                        tsTransform.Translate(vector * dist, Space.World);
                     
-                    if(coolTime <= 0)
+                    foreach (minion mi in FindObjectsOfType<minion>())
                     {
-                        foreach (minion mi in FindObjectsOfType<minion>())
-                        {
-                            if(Vector3.Distance(transform.position, mi.transform.position) < range && mi.GetOwner() != ownerNum)
-                            {
-                                anim.SetTrigger("minionWeakAttack");
-                                coolTime = attackSpeed;
-                                attack = true;
-
-                                if(!p.GetPowerUp()){
-                                    mi.AddDamage(attackValue);
-                                }
-                                else{
-                                    mi.AddDamage(powerUpAttackValue);
-                                }
-
-                                if(isBullet != null){
-                                    GameObject go = TrueSyncManager.SyncedInstantiate(isBullet, transform.position, Quaternion.identity);
-                                    go.GetComponent<Bullet>().Create(mi, ownerNum);
-                                }
+                        if(mi.GetOwner() != ownerNum){
+                            if (Vector3.Distance(transform.position, mi.transform.position) > outRange){
+                                moveState = MOVESTATE.MOVE_OUT;
                                 break;
                             }
+                            else if (Vector3.Distance(transform.position, mi.transform.position) < searchRange){
+                                moveState = MOVESTATE.MOVE_SEARCE;
+                                break;
+                            }
+
+                            if(Vector3.Distance(transform.position, mi.transform.position) < attackRange){
+                                moveState = MOVESTATE.MOVE_ATTACK;
+                                break;
+                            }
+
+                            targetMinion = mi;
                         }
                     }
-                    else
-                    {
-                        coolTime -= Time.deltaTime;
-                    }
 
+                    switch(moveState)
+                    {
+                        case MOVESTATE.MOVE_NORMAL:
+                            {
+                                TSVector vector = markerPos - tsTransform.position;
+                                FP dist = TSVector.Distance(markerPos, tsTransform.position) / speed;
+                                vector = TSVector.Normalize(vector);
+
+                                if (!(TSVector.Distance(TSVector.zero, (tsTransform.position + vector * dist)) >= p.GetStageLength())
+                                    && !(TSVector.Distance(markerPos, tsTransform.position) < range)){
+                                    tsTransform.LookAt(tsTransform.position + vector);
+                                    tsTransform.Translate(vector * dist, Space.World);
+                                }
+
+                                break;
+                            }
+                        case MOVESTATE.MOVE_SEARCE:
+                            {
+                                TSVector vector = targetMinion.tsTransform.position - tsTransform.position;
+                                FP dist = TSVector.Distance(targetMinion.tsTransform.position, tsTransform.position) / speed;
+                                vector = TSVector.Normalize(vector);
+
+                                tsTransform.LookAt(vector);
+                                tsTransform.Translate(vector * dist, Space.World);
+                                
+                                break;
+                            }
+                        case MOVESTATE.MOVE_ATTACK:
+                            {
+                                if (coolTime <= 0)
+                                {
+                                    TSVector vector = targetMinion.tsTransform.position - tsTransform.position;
+                                    vector = TSVector.Normalize(vector);
+
+                                    tsTransform.LookAt(vector);
+
+                                    anim.SetTrigger("minionWeakAttack");
+                                    coolTime = attackSpeed;
+                                    attack = true;
+
+                                    if (!p.GetPowerUp())
+                                    {
+                                        targetMinion.AddDamage(attackValue);
+                                    }
+                                    else
+                                    {
+                                        targetMinion.AddDamage(powerUpAttackValue);
+                                    }
+
+                                    if (isBullet != null)
+                                    {
+                                        GameObject go = TrueSyncManager.SyncedInstantiate(isBullet, transform.position, Quaternion.identity);
+                                        go.GetComponent<Bullet>().Create(targetMinion, ownerNum);
+                                    }
+                                }
+
+                                break;
+                            }
+                        case MOVESTATE.MOVE_OUT:
+                            {
+                                if(targetMinion != null){
+                                    TSVector vector = targetMinion.tsTransform.position - tsTransform.position;
+                                    FP dist = TSVector.Distance(markerPos, tsTransform.position) / speed;
+                                    vector = TSVector.Normalize(vector);
+
+                                    tsTransform.LookAt(tsTransform.position + vector);
+                                    tsTransform.Translate(vector * dist, Space.World);
+                                }
+                                
+                                break;
+                            }
+                        default:
+                            {
+
+
+                                break;
+                            }
+                    }
 
                     if (health <= 0)
                     {
                         // downへ
                         state = STATE.STATE_DOWN;
                     }
+
+                    coolTime -= TrueSyncManager.DeltaTime;
 
                     break;
                 }
@@ -156,8 +232,7 @@ public class minion : TrueSyncBehaviour {
                     TrueSyncManager.SyncedDestroy(gameObject);
                     //Debug.Log("responする！!");
 
-                    player pl = parentPlayer.GetComponent<player>();
-                    pl.SetResporn(respawnTime, parentMarker);
+                    p.SetResporn(respawnTime, parentMarker);
 
                     if (isRespon == true)
                     {
