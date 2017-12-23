@@ -35,6 +35,13 @@ public class minion : TrueSyncBehaviour {
         MOVE_OUT
     };
 
+    private enum TARGETTYPE
+    {
+        TYPE_NONE,
+        TYPE_RANDOM,
+        TYPE_DIST
+    };
+
     STATE state;
     MOVESTATE moveState;
 
@@ -48,7 +55,9 @@ public class minion : TrueSyncBehaviour {
     [SerializeField, TooltipAttribute("パワーアップ")] private int powerUpAttackValue;
     [SerializeField, TooltipAttribute("スピード")] private float speed = 10;
     [SerializeField, TooltipAttribute("リスポーン時間(sec)")] private float respawnTime;
-    [SerializeField, TooltipAttribute("ミニオン間の距離")] private float boidRange;
+    [SerializeField, TooltipAttribute("撤退完了距離")] private FP boidRange;
+    [SerializeField, TooltipAttribute("巡航速度範囲"), Range(0, 5)] private float cruiseSpeedRange;
+    [SerializeField, TooltipAttribute("ターゲットタイプ")] private TARGETTYPE targetType;
 
 	// Use this for initialization
 	void Start () {
@@ -81,6 +90,7 @@ public class minion : TrueSyncBehaviour {
         anim.SetTrigger("minionSpawn");        // 誕生アニメーション
         state = STATE.STATE_NORMAL;
 
+        isBullet = bullet;
         p = parentPlayer.GetComponent<player>();
     }
 
@@ -88,54 +98,38 @@ public class minion : TrueSyncBehaviour {
     {
        // Debug.Log("called minion update");
         TSVector markerPos = p.GetMarkerPosition(parentMarker);
-        moveState = MOVESTATE.MOVE_NORMAL;
 
         switch(state)
         {
             case STATE.STATE_NORMAL:
                 {
                     minion targetMinion = null;
-
                     attack = false;
                     
-                    foreach (minion mi in FindObjectsOfType<minion>())
+                    if (targetType == TARGETTYPE.TYPE_NONE)
                     {
-                        if(mi.GetOwner() != ownerNum){
-                            targetMinion = mi;
-                            if (Vector3.Distance(transform.position, new Vector3((float)markerPos.x, (float)markerPos.y, (float)markerPos.z)) > outRange){
-                                moveState = MOVESTATE.MOVE_OUT;
-                                //Debug.Log("out" + parentMarker);
-                                break;
-                            }
-                            else if (Vector3.Distance(transform.position, mi.transform.position) < searchRange){
-                                moveState = MOVESTATE.MOVE_SEARCE;
-                                //Debug.Log("searce" + parentMarker);
-                                break;
-                            }
-                            else{
-                                moveState = MOVESTATE.MOVE_NORMAL;
-                                //Debug.Log("関谷はホモ");
-                            }
-
-                            if(Vector3.Distance(transform.position, mi.transform.position) < attackRange){
-                                moveState = MOVESTATE.MOVE_ATTACK;
-                                //Debug.Log("attack" + parentMarker);
-                                break;
-                            }
-                        }
-                        else{
-                            if(Vector3.Distance(transform.position, mi.transform.position) < boidRange){
-                                
-                            }
-                        }
+                        targetMinion = TargetSelectTypeNone(markerPos);
+                    }
+                    else if (targetType == TARGETTYPE.TYPE_DIST)
+                    {
+                        targetMinion = TargetSelectTypeDistance(markerPos);
+                    }
+                    else if (targetType == TARGETTYPE.TYPE_RANDOM)
+                    {
+                        targetMinion = TargetSelectTypeRandom(markerPos);
+                    }
+                    else
+                    {
+                        targetMinion = TargetSelectTypeNone(markerPos);
                     }
 
                     switch(moveState)
                     {
                         case MOVESTATE.MOVE_NORMAL:
                             {
+                                FP cruiseSpeed = speed + Random.Range(-cruiseSpeedRange, cruiseSpeedRange); 
                                 TSVector vector = markerPos - tsTransform.position;
-                                FP dist = TSVector.Distance(markerPos, tsTransform.position) / speed;
+                                FP dist = TSVector.Distance(markerPos, tsTransform.position) / cruiseSpeed;
                                 vector = TSVector.Normalize(vector);
 
                                 if (!(TSVector.Distance(TSVector.zero, (tsTransform.position + vector * dist)) >= p.GetStageLength())
@@ -170,19 +164,31 @@ public class minion : TrueSyncBehaviour {
                                     coolTime = attackSpeed;
                                     attack = true;
 
-                                    if (!p.GetPowerUp())
+                                    if (isBullet != null)
                                     {
-                                        targetMinion.AddDamage(attackValue);
+                                        GameObject go = Instantiate(isBullet, transform.position, Quaternion.identity);
+
+                                        if (!p.GetPowerUp())
+                                        {
+                                            go.GetComponent<Bullet>().Create(targetMinion, ownerNum, attackValue);
+                                        }
+                                        else
+                                        {
+                                            go.GetComponent<Bullet>().Create(targetMinion, ownerNum, powerUpAttackValue);
+                                        }
+
+                                        go.transform.parent = targetMinion.transform;
                                     }
                                     else
                                     {
-                                        targetMinion.AddDamage(powerUpAttackValue);
-                                    }
-
-                                    if (isBullet != null)
-                                    {
-                                        GameObject go = TrueSyncManager.SyncedInstantiate(isBullet, transform.position, Quaternion.identity);
-                                        go.GetComponent<Bullet>().Create(targetMinion, ownerNum);
+                                        if (!p.GetPowerUp())
+                                        {
+                                            targetMinion.AddDamage(attackValue);
+                                        }
+                                        else
+                                        {
+                                            targetMinion.AddDamage(powerUpAttackValue);
+                                        }
                                     }
                                 }
 
@@ -190,14 +196,12 @@ public class minion : TrueSyncBehaviour {
                             }
                         case MOVESTATE.MOVE_OUT:
                             {
-                                if(targetMinion != null){
-                                    TSVector vector = targetMinion.tsTransform.position - tsTransform.position;
-                                    FP dist = TSVector.Distance(markerPos, tsTransform.position) / speed;
-                                    vector = TSVector.Normalize(vector);
+                                TSVector vector = markerPos - tsTransform.position;
+                                FP dist = TSVector.Distance(markerPos, tsTransform.position) / speed;
+                                vector = TSVector.Normalize(vector);
 
-                                    tsTransform.LookAt(tsTransform.position + vector);
-                                    tsTransform.Translate(vector * dist, Space.World);
-                                }
+                                tsTransform.LookAt(tsTransform.position + vector);
+                                tsTransform.Translate(vector * dist, Space.World);
                                 
                                 break;
                             }
@@ -300,5 +304,174 @@ public class minion : TrueSyncBehaviour {
     public void SetTransform()
     {
         state = STATE.STATE_TRANSFORM;
+    }
+
+    private minion TargetSelectTypeNone(TSVector markerPos)
+    {
+        minion targetMinion = null;
+
+        foreach (minion mi in FindObjectsOfType<minion>())
+        {
+            if (mi.GetOwner() != ownerNum && moveState != MOVESTATE.MOVE_OUT)
+            {
+                targetMinion = mi;
+                if (TSMath.Abs(TSVector.Distance(tsTransform.position, markerPos)) > outRange)
+                {
+                    moveState = MOVESTATE.MOVE_OUT;
+                }
+                else if (TSMath.Abs(TSVector.Distance(tsTransform.position, mi.tsTransform.position)) < searchRange && moveState != MOVESTATE.MOVE_OUT)
+                {
+                    moveState = MOVESTATE.MOVE_SEARCE;
+                }
+                else
+                {
+                    moveState = MOVESTATE.MOVE_NORMAL;
+                }
+
+                if (TSMath.Abs(TSVector.Distance(tsTransform.position, mi.tsTransform.position)) < attackRange && moveState != MOVESTATE.MOVE_OUT)
+                {
+                    moveState = MOVESTATE.MOVE_ATTACK;
+                }
+
+
+                if (moveState != MOVESTATE.MOVE_NORMAL)
+                {
+                    break;
+                }
+            }
+            else if (moveState == MOVESTATE.MOVE_OUT)
+            {
+                if (TSMath.Abs(TSVector.Distance(tsTransform.position, markerPos)) <= boidRange)
+                {
+                    moveState = MOVESTATE.MOVE_NORMAL;
+                }
+            }
+        }
+
+        //オフラインモード例外処理
+        if (moveState == MOVESTATE.MOVE_NONE) moveState = MOVESTATE.MOVE_NORMAL;
+
+        return targetMinion;
+    }
+
+    private minion TargetSelectTypeRandom(TSVector markerPos)
+    {
+        minion targetMinion = null;
+        List<minion> minionList = new List<minion>();
+
+        foreach (minion mi in FindObjectsOfType<minion>())
+        {
+            if (mi.GetOwner() != ownerNum && moveState != MOVESTATE.MOVE_OUT)
+            {
+                targetMinion = mi;
+                if (TSMath.Abs(TSVector.Distance(tsTransform.position, markerPos)) > outRange)
+                {
+                    moveState = MOVESTATE.MOVE_OUT;
+                }
+                else if (TSMath.Abs(TSVector.Distance(tsTransform.position, mi.tsTransform.position)) < searchRange && moveState != MOVESTATE.MOVE_OUT)
+                {
+                    moveState = MOVESTATE.MOVE_SEARCE;
+                    return targetMinion;
+                }
+                else
+                {
+                    moveState = MOVESTATE.MOVE_NORMAL;
+                }
+
+                if (TSMath.Abs(TSVector.Distance(tsTransform.position, mi.tsTransform.position)) < attackRange && moveState != MOVESTATE.MOVE_OUT)
+                {
+                    moveState = MOVESTATE.MOVE_ATTACK;
+
+                    minionList.Add(mi);
+                }
+
+
+                if (moveState != MOVESTATE.MOVE_NORMAL || moveState != MOVESTATE.MOVE_ATTACK)
+                {
+                    break;
+                }
+            }
+            else if (moveState == MOVESTATE.MOVE_OUT)
+            {
+                if (TSMath.Abs(TSVector.Distance(tsTransform.position, markerPos)) <= boidRange)
+                {
+                    moveState = MOVESTATE.MOVE_NORMAL;
+                }
+            }
+        }
+
+        //オフラインモード例外処理
+        if (moveState == MOVESTATE.MOVE_NONE) moveState = MOVESTATE.MOVE_NORMAL;
+
+        if (minionList.Count == 0)
+        {
+            return null;
+        }
+        else
+        {
+            return minionList[(int)Random.Range(0, minionList.Count)];
+        }
+    }
+
+    private minion TargetSelectTypeDistance(TSVector markerPos)
+    {
+        minion targetMinion = null;
+        FP targetDist = 0;
+
+        foreach (minion mi in FindObjectsOfType<minion>())
+        {
+            if (mi.GetOwner() != ownerNum && moveState != MOVESTATE.MOVE_OUT)
+            {
+                if (TSMath.Abs(TSVector.Distance(tsTransform.position, markerPos)) > outRange)
+                {
+                    moveState = MOVESTATE.MOVE_OUT;
+                }
+                else if (TSMath.Abs(TSVector.Distance(tsTransform.position, mi.tsTransform.position)) < searchRange && moveState != MOVESTATE.MOVE_OUT)
+                {
+                    FP distBuff = TSVector.Distance(tsTransform.position, mi.tsTransform.position);
+                    if (targetMinion == null || distBuff < targetDist)
+                    {
+                        targetDist = distBuff;
+                        targetMinion = mi;
+                    }
+
+                    moveState = MOVESTATE.MOVE_SEARCE;
+                }
+                else
+                {
+                    moveState = MOVESTATE.MOVE_NORMAL;
+                }
+
+                if (TSMath.Abs(TSVector.Distance(tsTransform.position, mi.tsTransform.position)) < attackRange && moveState != MOVESTATE.MOVE_OUT)
+                {
+                    FP distBuff = TSMath.Abs(TSVector.Distance(tsTransform.position, mi.tsTransform.position));
+                    if (targetMinion == null || distBuff < targetDist)
+                    {
+                        targetDist = distBuff;
+                        targetMinion = mi;
+                    }
+
+                    moveState = MOVESTATE.MOVE_ATTACK;
+                }
+
+
+                if (moveState != MOVESTATE.MOVE_OUT)
+                {
+                    break;
+                }
+            }
+            else if (moveState == MOVESTATE.MOVE_OUT)
+            {
+                if (TSMath.Abs(TSVector.Distance(tsTransform.position, markerPos)) <= boidRange)
+                {
+                    moveState = MOVESTATE.MOVE_NORMAL;
+                }
+            }
+        }
+
+        //オフラインモード例外処理
+        if (moveState == MOVESTATE.MOVE_NONE) moveState = MOVESTATE.MOVE_NORMAL;
+
+        return targetMinion;
     }
 }
