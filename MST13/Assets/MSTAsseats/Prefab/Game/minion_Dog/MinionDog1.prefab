@@ -642,6 +642,10 @@ MonoBehaviour:
   powerUpAttackValue: 0
   speed: 10
   respawnTime: 10
+  boidRange:
+    _serializedValue: 4294967296
+  cruiseSpeedRange: 2.5
+  targetType: 0
 --- !u!114 &114696439920775130
 MonoBehaviour:
   m_ObjectHideFlags: 1
