@@ -107,22 +107,26 @@ public class minion : TrueSyncBehaviour {
                 {
                     minion targetMinion = null;
                     attack = false;
-                    
-                    if (targetType == TARGETTYPE.TYPE_NONE)
-                    {
-                        targetMinion = TargetSelectTypeNone(markerPos);
-                    }
-                    else if (targetType == TARGETTYPE.TYPE_DIST)
-                    {
-                        targetMinion = TargetSelectTypeDistance(markerPos);
-                    }
-                    else if (targetType == TARGETTYPE.TYPE_RANDOM)
-                    {
-                        targetMinion = TargetSelectTypeRandom(markerPos);
-                    }
-                    else
-                    {
-                        targetMinion = TargetSelectTypeNone(markerPos);
+
+                    monster targetMonster = TargetSelectMonster(markerPos);
+
+                    if(targetMonster == null){
+                        if (targetType == TARGETTYPE.TYPE_NONE)
+                        {
+                            targetMinion = TargetSelectTypeNone(markerPos);
+                        }
+                        else if (targetType == TARGETTYPE.TYPE_DIST)
+                        {
+                            targetMinion = TargetSelectTypeDistance(markerPos);
+                        }
+                        else if (targetType == TARGETTYPE.TYPE_RANDOM)
+                        {
+                            targetMinion = TargetSelectTypeRandom(markerPos);
+                        }
+                        else
+                        {
+                            targetMinion = TargetSelectTypeNone(markerPos);
+                        }
                     }
 
                     switch(moveState)
@@ -144,53 +148,107 @@ public class minion : TrueSyncBehaviour {
                             }
                         case MOVESTATE.MOVE_SEARCE:
                             {
-                                TSVector vector = targetMinion.tsTransform.position - tsTransform.position;
-                                FP dist = TSVector.Distance(targetMinion.tsTransform.position, tsTransform.position) / speed;
-                                vector = TSVector.Normalize(vector);
+                                if(targetMonster != null){
+                                    TSVector vector = targetMonster.tsTransform.position - tsTransform.position;
+                                    FP dist = TSVector.Distance(targetMonster.tsTransform.position, tsTransform.position) / speed;
+                                    vector = TSVector.Normalize(vector);
 
-                                tsTransform.LookAt(vector);
-                                tsTransform.Translate(vector * dist, Space.World);
+                                    tsTransform.LookAt(vector);
+                                    tsTransform.Translate(vector * dist, Space.World);
+                                }
+                                else{
+                                    TSVector vector = targetMinion.tsTransform.position - tsTransform.position;
+                                    FP dist = TSVector.Distance(targetMinion.tsTransform.position, tsTransform.position) / speed;
+                                    vector = TSVector.Normalize(vector);
+
+                                    tsTransform.LookAt(vector);
+                                    tsTransform.Translate(vector * dist, Space.World);
+                                }
+
                                 
                                 break;
                             }
                         case MOVESTATE.MOVE_ATTACK:
                             {
-                                if (coolTime <= 0)
-                                {
-                                    TSVector vector = targetMinion.tsTransform.position - tsTransform.position;
-                                    vector = TSVector.Normalize(vector);
-
-                                    tsTransform.LookAt(vector);
-
-                                    anim.SetTrigger("minionWeakAttack");
-                                    coolTime = attackSpeed;
-                                    attack = true;
-                                    p = parentPlayer.GetComponent<player>();
-                                    p.AddScoreNum(5);   // スコア追加
-                                    if (isBullet != null)
+                                if (targetMonster == null){
+                                    if (coolTime <= 0)
                                     {
-                                        GameObject go = Instantiate(isBullet, transform.position, Quaternion.identity);
+                                        TSVector vector = targetMinion.tsTransform.position - tsTransform.position;
+                                        vector = TSVector.Normalize(vector);
 
-                                        if (!p.GetPowerUp())
+                                        tsTransform.LookAt(vector);
+
+                                        anim.SetTrigger("minionWeakAttack");
+                                        coolTime = attackSpeed;
+                                        attack = true;
+                                        p = parentPlayer.GetComponent<player>();
+                                        p.AddScoreNum(5);   // スコア追加
+                                        if (isBullet != null)
                                         {
-                                            go.GetComponent<Bullet>().Create(targetMinion, ownerNum, attackValue);
+                                            GameObject go = Instantiate(isBullet, transform.position, Quaternion.identity);
+
+                                            if (!p.GetPowerUp())
+                                            {
+                                                go.GetComponent<Bullet>().CreateBulletMinion(targetMinion, ownerNum, attackValue);
+                                            }
+                                            else
+                                            {
+                                                go.GetComponent<Bullet>().CreateBulletMinion(targetMinion, ownerNum, powerUpAttackValue);
+                                            }
+
+                                            go.transform.parent = targetMinion.transform;
                                         }
                                         else
                                         {
-                                            go.GetComponent<Bullet>().Create(targetMinion, ownerNum, powerUpAttackValue);
+                                            if (!p.GetPowerUp())
+                                            {
+                                                targetMinion.AddDamage(attackValue);
+                                            }
+                                            else
+                                            {
+                                                targetMinion.AddDamage(powerUpAttackValue);
+                                            }
                                         }
-
-                                        go.transform.parent = targetMinion.transform;
                                     }
-                                    else
+                                }
+                                else{
+                                    if (coolTime <= 0)
                                     {
-                                        if (!p.GetPowerUp())
+                                        TSVector vector = targetMonster.tsTransform.position - tsTransform.position;
+                                        vector = TSVector.Normalize(vector);
+
+                                        tsTransform.LookAt(vector);
+
+                                        anim.SetTrigger("minionWeakAttack");
+                                        coolTime = attackSpeed;
+                                        attack = true;
+                                        p = parentPlayer.GetComponent<player>();
+                                        p.AddScoreNum(5);   // スコア追加
+                                        if (isBullet != null)
                                         {
-                                            targetMinion.AddDamage(attackValue);
+                                            GameObject go = Instantiate(isBullet, transform.position, Quaternion.identity);
+
+                                            if (!p.GetPowerUp())
+                                            {
+                                                go.GetComponent<Bullet>().CreateBulletMonster(targetMonster, ownerNum, attackValue);
+                                            }
+                                            else
+                                            {
+                                                go.GetComponent<Bullet>().CreateBulletMonster(targetMonster, ownerNum, powerUpAttackValue);
+                                            }
+
+                                            go.transform.parent = targetMinion.transform;
                                         }
                                         else
                                         {
-                                            targetMinion.AddDamage(powerUpAttackValue);
+                                            if (!p.GetPowerUp())
+                                            {
+                                                targetMinion.AddDamage(attackValue);
+                                            }
+                                            else
+                                            {
+                                                targetMinion.AddDamage(powerUpAttackValue);
+                                            }
                                         }
                                     }
                                 }
@@ -307,6 +365,50 @@ public class minion : TrueSyncBehaviour {
     public void SetTransform()
     {
         state = STATE.STATE_TRANSFORM;
+    }
+
+    private monster TargetSelectMonster(TSVector markerPos)
+    {
+        monster targetMonster = null;
+
+        foreach (monster mo in FindObjectsOfType<monster>())
+        {
+
+            if (moveState == MOVESTATE.MOVE_OUT)
+            {
+                if (TSMath.Abs(TSVector.Distance(tsTransform.position, markerPos)) <= boidRange)
+                {
+                    moveState = MOVESTATE.MOVE_NORMAL;
+                }
+            }
+
+            if (TSMath.Abs(TSVector.Distance(tsTransform.position, markerPos)) > outRange)
+            {
+                moveState = MOVESTATE.MOVE_OUT;
+            }
+            else if (TSMath.Abs(TSVector.Distance(tsTransform.position, mo.tsTransform.position)) < searchRange && moveState != MOVESTATE.MOVE_OUT)
+            {
+                moveState = MOVESTATE.MOVE_SEARCE;
+                targetMonster = mo;
+            }
+            else
+            {
+                moveState = MOVESTATE.MOVE_NORMAL;
+            }
+
+            if (TSMath.Abs(TSVector.Distance(tsTransform.position, mo.tsTransform.position)) < attackRange && moveState != MOVESTATE.MOVE_OUT)
+            {
+                moveState = MOVESTATE.MOVE_ATTACK;
+                targetMonster = mo;
+            }
+
+            if (moveState != MOVESTATE.MOVE_NORMAL)
+            {
+                break;
+            }
+        }
+
+        return targetMonster;
     }
 
     private minion TargetSelectTypeNone(TSVector markerPos)
