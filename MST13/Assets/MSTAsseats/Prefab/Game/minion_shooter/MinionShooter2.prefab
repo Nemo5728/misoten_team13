@@ -1159,7 +1159,7 @@ MonoBehaviour:
     id: 0
     name: 
   attackSpeed: 1
-  bullet: {fileID: 1871796210600878, guid: 3c5ffe20791dd40ae92d21a3f46be32e, type: 2}
+  bullet: {fileID: 1744654209434920, guid: 5813919a15ae3477bade682ce76f98e0, type: 2}
   health: 10
   attackRange: 6
   searchRange: 9
