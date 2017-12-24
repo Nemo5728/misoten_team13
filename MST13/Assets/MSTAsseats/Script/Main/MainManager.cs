@@ -17,7 +17,6 @@ public class MainManager : MonoBehaviour {
     public enum STATE
     {
         STATE_TITLE,
-        STATE_CONECTING,
         STATE_LOGIN,
         STATE_GAME,
         STATE_RESULT
@@ -53,10 +52,10 @@ public class MainManager : MonoBehaviour {
     {
         if (controllerConnect)
         {
-            if(info.isButtonDown)
+            if (info.isButtonDown || info.isStickDown)
             {
-                if(state != STATE.STATE_LOGIN  ||
-                   state != STATE.STATE_GAME )
+                if(state == STATE.STATE_TITLE||
+                   state == STATE.STATE_RESULT)
                 {
                     // 選択オブジェクトを削除し、次のステートへ移行
                     Destroy(selectObj);
@@ -85,35 +84,40 @@ public class MainManager : MonoBehaviour {
                 }
             }
 
-            switch (state)
-            {
-                case STATE.STATE_LOGIN:
-                {
-                        Timer += Time.deltaTime;
+           
 
-                        if (Timer >= LOGIN_TIME)
-                        {
-                            Destroy(selectObj);
-                            NextState(state);
-                            SetState();
-                        }
+        }
+
+        switch (state)
+        {
+
+            case STATE.STATE_LOGIN:
+                {
+                    Timer += Time.deltaTime;
+
+                    if (Timer >= LOGIN_TIME)
+                    {
+                        Timer = 0f;
+                        Destroy(selectObj);
+                        NextState(state);
+                        SetState();
+                    }
                     break;
                 }
-                case STATE.STATE_GAME:
+            case STATE.STATE_GAME:
                 {
 
-                        gametimr += Time.deltaTime;
+                    gametimr += Time.deltaTime;
 
-                        if (gametimr >= GAME_TIME)
-                        {
-                            Destroy(selectObj);
-                            NextState(state);
-                            SetState();
-                        }
+                    if (gametimr >= GAME_TIME)
+                    {
+                        gametimr = 0f;
+                        Destroy(selectObj);
+                        NextState(state);
+                        SetState();
+                    }
                     break;
                 }
-            }
-
         }
 
 	}
@@ -133,17 +137,10 @@ public class MainManager : MonoBehaviour {
         {
             case STATE.STATE_TITLE:
                 {
-                    //BgmManager.Instance.Stop();
-                   // BgmManager.Instance.Play("select");
-                    state = STATE.STATE_CONECTING;
-
-                    break;
-                }
-            case STATE.STATE_CONECTING:
-                {
-                 //   BgmManager.Instance.Stop();
-                  //  BgmManager.Instance.Play("select");
+                    //   BgmManager.Instance.Stop();
+                    //  BgmManager.Instance.Play("select");
                     state = STATE.STATE_LOGIN;
+
                     break;
                 }
             case STATE.STATE_LOGIN:
@@ -192,6 +189,34 @@ public class MainManager : MonoBehaviour {
         GameObject[] tagobjs = GameObject.FindGameObjectsWithTag("minion");
 
         foreach (GameObject mi in tagobjs)
+        {
+            Destroy(mi);
+        }
+
+        GameObject[] Love = GameObject.FindGameObjectsWithTag("ItemLoveUp");
+
+        foreach (GameObject mi in Love)
+        {
+            Destroy(mi);
+        }
+
+        GameObject[] power = GameObject.FindGameObjectsWithTag("ItemPower");
+
+        foreach (GameObject mi in power)
+        {
+            Destroy(mi);
+        }
+
+        GameObject[] miniUp = GameObject.FindGameObjectsWithTag("ItemMiniUp");
+
+        foreach (GameObject mi in miniUp)
+        {
+            Destroy(mi);
+        }
+
+        GameObject[] speed = GameObject.FindGameObjectsWithTag("ItemSpeed");
+
+        foreach (GameObject mi in speed)
         {
             Destroy(mi);
         }

@@ -50,26 +50,11 @@ public class MatchMaking_Test : Photon.PunBehaviour
 
     void OnGUI()
     {
-        GUI.Label(new Rect(10, 10, 100, 30), "players: " + PhotonNetwork.playerList.Length);
+        //GUI.Label(new Rect(10, 10, 100, 30), "players: " + PhotonNetwork.playerList.Length);
 
         if (PhotonNetwork.playerList.Length > 0)
         {
-            if (PhotonNetwork.isMasterClient && GUI.Button(new Rect(10, 40, 100, 30), "login"))
-            {
-                PhotonNetwork.LoadLevel("Login");
-
-                //SceneManager.LoadScene("Login");
-
-                Debug.Log("Check A.");
-            }
-            if (PhotonNetwork.isMasterClient && GUI.Button(new Rect(10, 100, 100, 30), "game"))
-            {
-                PhotonNetwork.LoadLevel("Game");
-
-                //SceneManager.LoadScene("Game");
-
-                Debug.Log("Check A.");
-            }
+            
         }
     }
 }

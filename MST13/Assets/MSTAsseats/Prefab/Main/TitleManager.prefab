@@ -52,3 +52,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logo: {fileID: 1000013472913952, guid: b123b549513bf834dbb62bffaaff04fa, type: 2}
+  text: {fileID: 1501218008856438, guid: 6d1e9eab2f6ef4f42a761ccae6c22a09, type: 2}
