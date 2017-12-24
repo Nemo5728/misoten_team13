@@ -28,9 +28,9 @@ public class ItemManager : TrueSyncBehaviour {
         if (timer >= 1f)
         {
             
-            int num = TSRandom.Range(0, 2);
+            int num = TSRandom.Range(0, 3);
             TrueSyncManager.SyncedInstantiate(itemList[num], new TSVector(TSRandom.Range(-30f, 30f),
-                                                                  1f,
+                                                                  -0.5f,
                                                                   TSRandom.Range(-30f, 30f)),
                                                                   TSQuaternion.identity);
             timer = 0f;

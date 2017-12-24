@@ -190,4 +190,6 @@ MonoBehaviour:
   localOwner:
     id: 0
     name: 
+  speed:
+    _serializedValue: 0
   range: 0
