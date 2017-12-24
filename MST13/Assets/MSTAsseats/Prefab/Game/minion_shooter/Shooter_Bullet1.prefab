@@ -253,7 +253,7 @@ MonoBehaviour:
     id: 0
     name: 
   speed:
-    _serializedValue: 4294967296
+    _serializedValue: 42949672960
   range:
     _serializedValue: 4294967296
 --- !u!198 &198198112439771330

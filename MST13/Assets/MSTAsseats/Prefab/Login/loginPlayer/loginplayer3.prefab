@@ -249,6 +249,7 @@ GameObject:
   - component: {fileID: 114897102894539606}
   - component: {fileID: 114151669897120086}
   - component: {fileID: 95292982963334910}
+  - component: {fileID: 114663457331612408}
   m_Layer: 8
   m_Name: loginplayer3
   m_TagString: Player
@@ -1664,7 +1665,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1196757495100978}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5, y: 0, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4339777472196810}
@@ -1963,11 +1964,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _position:
     x:
-      _serializedValue: 0
+      _serializedValue: -21474836480
     y:
       _serializedValue: 0
     z:
-      _serializedValue: 0
+      _serializedValue: 21474836480
   _rotation:
     x:
       _serializedValue: 0
@@ -1987,6 +1988,28 @@ MonoBehaviour:
   _serialized: 1
   tsCollider: {fileID: 0}
   tsParent: {fileID: 0}
+--- !u!114 &114663457331612408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1196757495100978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a8ecb489da704348879fffef96ad335, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfPlayers: 0
+  ownerIndex: -1
+  owner:
+    id: 0
+    name: 
+  localOwner:
+    id: 0
+    name: 
+  speed: 1
+  GetLoginArea: {fileID: 1958430887092394, guid: 20605738b0a99204f91330f6cd163cfc,
+    type: 2}
 --- !u!114 &114887684571846468
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -109,7 +109,7 @@ public class player : TrueSyncBehaviour {
 
     public override void OnSyncedInput()
     {
-        //Debug.Log("TrueSyncInputなう");
+        Debug.Log("TrueSyncInputなう");
         bool forward = Input.GetKey(KeyCode.W);
         bool back = Input.GetKey(KeyCode.S);
         bool right = Input.GetKey(KeyCode.D);
@@ -335,6 +335,7 @@ public class player : TrueSyncBehaviour {
                                     minion mi = createMinion.GetComponent<minion>();
                                     mi.Create(gameObject, i, owner.Id);
                                     minionCount++;
+                                     SeManager.Instance.Play("minion-spawn");
                                 }
                             }
                         }
@@ -598,6 +599,7 @@ public class player : TrueSyncBehaviour {
                     mi.Create(gameObject, i, owner.Id);
                     minionCount++;
                     ResponCount++;
+                    SeManager.Instance.Play("minion-spawn");
                 }
             }
         }

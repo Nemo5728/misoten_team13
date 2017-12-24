@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 527394400f1f04db796006657162fa59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeviceName: MST1301
+  DeviceName: MST1303
 --- !u!114 &114411992516778066
 MonoBehaviour:
   m_ObjectHideFlags: 1

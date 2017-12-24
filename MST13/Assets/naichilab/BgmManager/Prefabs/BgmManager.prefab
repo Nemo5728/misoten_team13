@@ -41,7 +41,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DebugMode: 0
-  TargetVolume: 1
+  TargetVolume: 0.26
   TimeToFade: 2
   CrossFadeRatio: 1
 --- !u!1001 &100100000
