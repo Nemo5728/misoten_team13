@@ -242,7 +242,7 @@ public class monster : TrueSyncBehaviour {
                         // 弱攻撃モーション
                         anime.SetTrigger("monsterWeakAttack");
                         GetComponent<ParticleManager>().Play("FX_SwingA", transform.position);
-                        SeManager.Instance.Play("monster-attack");
+                        SeManager.Instance.Play("monster-attack.mp3");
                         //HitWeakAttack(hitWeakObject, hitWeakOffset);
                         foreach (minion mi in FindObjectsOfType<minion>())
                         {
@@ -391,7 +391,7 @@ public class monster : TrueSyncBehaviour {
                         tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
 
                         if (!(TSVector.Distance(TSVector.zero, tsTransform.position + vector) >= STAGE_LENGTH))
-                            Debug.Log("移動中");
+//                            Debug.Log("移動中");
                             tsTransform.Translate((vector * speed) * TrueSyncManager.DeltaTime, Space.World);
 
                     break;
