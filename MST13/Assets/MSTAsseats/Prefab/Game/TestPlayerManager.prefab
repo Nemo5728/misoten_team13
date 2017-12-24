@@ -17548,7 +17548,7 @@ MonoBehaviour:
     name: Local_Player
   attackSpeed: 3
   speed:
-    _serializedValue: 0
+    _serializedValue: 107374182400
   loveGaugeMax: 1000
   loveGaugeLate: 1
   WeakAttack: 1

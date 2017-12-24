@@ -6,8 +6,8 @@ using TrueSync;
 public class scoreManager : TrueSyncBehaviour {
 
     public int[] TestScore = { 0, 0, 0, 0 };
-    private int[] pr_score = new int[4];
-    private int[] score = new int[4];
+    public int[] pr_score = new int[4];
+    public int[] score = new int[4];
     int lenght;
     int hiscore;
     int playerNum;
@@ -45,16 +45,17 @@ public class scoreManager : TrueSyncBehaviour {
         }
 
         //ランキングソート
-        for (int i = 0; i < lenght; i++)
+        for (int i = 0; i < cnt; i++)
         {
-            pr_score[i] = score[cnt];
+            pr_score[i] = score[i];
+            Debug.Log("pr_score" + pr_score[i]);
 
         }
 
-        for (int i = 0; i < lenght; i++)
+        for (int i = 0; i < cnt; i++)
         {
             hiscore = pr_score[i];
-            for (int j = 0; j < lenght; j++)
+            for (int j = 0; j < cnt; j++)
             {
                 if(hiscore < pr_score[j])
                 {
