@@ -163,7 +163,8 @@ public class minion : TrueSyncBehaviour {
                                     anim.SetTrigger("minionWeakAttack");
                                     coolTime = attackSpeed;
                                     attack = true;
-
+                                    p = parentPlayer.GetComponent<player>();
+                                    p.AddScoreNum(5);   // スコア追加
                                     if (isBullet != null)
                                     {
                                         GameObject go = Instantiate(isBullet, transform.position, Quaternion.identity);

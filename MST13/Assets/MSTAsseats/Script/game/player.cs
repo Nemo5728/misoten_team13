@@ -31,8 +31,8 @@ public class player : TrueSyncBehaviour {
     private int minionCount = 0;
     private int loveGauge;
 
-    private float timeLeft = 1.0f;
-    private float transformCount = 0.0f;
+    private FP timeLeft = 1.0f;
+    private FP transformCount = 0.0f;
     private int powerUpButton = 0;
     private float powerUpCount = 0.0f;
     private bool powerUpFlag;
@@ -40,19 +40,7 @@ public class player : TrueSyncBehaviour {
     private TSVector move;
     private GameObject signObject;
     private int knockback;
-
-
-    // アイテムフラグ管理
-    [AddTracking]
-    private bool bGaugeUp;
-
-    [AddTracking]
-    private bool bRisponFlag;
-
-    [AddTracking]
-    private bool bSpeedUp;
-
-
+    public GameObject ManagerScore;
     // 2017/12/1 追加
     private Animator anim;  // アニメーター
     float time;
@@ -69,9 +57,7 @@ public class player : TrueSyncBehaviour {
 
     [SerializeField, TooltipAttribute("攻撃速度(sec)")] private int attackSpeed = 0;
     [SerializeField, TooltipAttribute("復帰時間(sec)")] private float respawnTime = 0;
-
     [SerializeField, TooltipAttribute("移動速度")] private FP speed;
-
     [SerializeField, TooltipAttribute("触るな危険")] private GameObject[] markerList;
     [SerializeField, TooltipAttribute("触るな危険")] private GameObject minionDog;
     [SerializeField, TooltipAttribute("触るな危険")] private GameObject minionShooter;
@@ -100,9 +86,7 @@ public class player : TrueSyncBehaviour {
 
     public override void OnSyncedStart()
     {
-
-        //Debug.Log("TrueSyncなう");
-        WebAPIClient.send(2, 50);
+        ManagerScore = transform.parent.gameObject;
         powerUpCount = 0.0f;
         powerUpButton = 0;
         powerUpFlag = false;
@@ -110,16 +94,13 @@ public class player : TrueSyncBehaviour {
         move = TSVector.zero;
         rb = GetComponent<TSRigidBody>();
         knockback = 0;
-        bGaugeUp = false;
-        bRisponFlag = false;
-        bSpeedUp = false;
-        TSVector signPos = new TSVector(tsTransform.position.x, tsTransform.position.y + 5f, tsTransform.position.z);
+        TSVector signPos = new TSVector(tsTransform.position.x, tsTransform.position.y + 10f, tsTransform.position.z);
         signObject = TrueSyncManager.SyncedInstantiate(sign, signPos, TSQuaternion.identity);
         signObject.transform.parent = transform;
         if(owner.Id != 0) signObject.GetComponent<MeshRenderer>().material.SetFloat("_Player", (float)owner.Id);
         else signObject.GetComponent<MeshRenderer>().material.SetFloat("_Player", 1);    //オフラインモード例外処理
 
-       
+
         // 2017/12/1 追加
         anim = GetComponent<Animator>();    // アニメーションの取得
         state = STATE.STATE_AWAKE;
@@ -255,7 +236,7 @@ public class player : TrueSyncBehaviour {
 
                         if(Tc > 0)
                         {
-                            
+                            /*
                             //Debug.Log("TrueSyncTouchなう");
                             Touch th = Input.GetTouch(0);
 
@@ -270,7 +251,7 @@ public class player : TrueSyncBehaviour {
                             Debug.Log(vec);
                             tsTransform.position = vec;
                           
-
+                        */
                         }
                             if (kib_y)
                             {
@@ -359,7 +340,7 @@ public class player : TrueSyncBehaviour {
                         }
 
                         //ラブゲージ処理
-                        timeLeft -= Time.deltaTime;
+                        timeLeft -= TrueSyncManager.DeltaTime;
                         if (timeLeft <= 0)
                         {
                             loveGauge += loveGaugeLate;
@@ -368,44 +349,30 @@ public class player : TrueSyncBehaviour {
 
                         if (loveGauge >= loveGaugeMax)
                         {
-                            transformCount = transformTime;
-                           // transformCount = 5;
-                            //state = STATE.STATE_PREPARATION;
+                        //transformCount = transformTime;
+                            AddScoreNum(100);
+                            transformCount = 1;
+                            state = STATE.STATE_PREPARATION;
                         }
 
-                    // アイテム手にれたら
-                    if(bGaugeUp)
-                    {
-                        Debug.Log("GaugeUP！");
-                        loveGauge += 10;
-                        bGaugeUp = false;
-                    }
-                    else if(bRisponFlag)
-                    {
-                        Debug.Log("Respon！");
-                        SetItemResponMinion();
-                        bRisponFlag = false;
-                    }
-                    else if (bSpeedUp)
-                    {
-                        Debug.Log("SpeedUP！");
-                        speed += 0.5f;
-                        bSpeedUp = false;
-                    }
-
+               
                         break;
                     }
                 case STATE.STATE_PREPARATION:
                     {
                         //変身前処理
-
+                         
                         // 2017/12/1 追記
                         anim.SetTrigger("bannerTransform");
 
                          // 2017/12/6 追記
                         foreach (minion mi in FindObjectsOfType<minion>())
                         {
-                             mi.SetTransform();
+                            if(mi.owner.Id == owner.Id)
+                            {
+                                mi.SetTransform();
+                            }
+                             
                         }
 
                         state = STATE.STATE_TRANSFORM;
@@ -413,14 +380,16 @@ public class player : TrueSyncBehaviour {
                     }
                 case STATE.STATE_TRANSFORM:
                     {
+                    /*
                     GetComponent<ParticleManager>().Play("FX_BannerTransP" + owner.Id, 
                                                          new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z));
-                    transformCount -= Time.deltaTime;
-
-                    tsTransform.position += (tsTransform.up * (Time.deltaTime * 0.3f));
-                    if (transformCount <= 0)
-                        {
-            
+    
+*/
+               
+                    transformCount -= TrueSyncManager.DeltaTime;
+                    tsTransform.position += (tsTransform.up * (TrueSyncManager.DeltaTime * 1f));
+                    if (transformCount <= 0f)
+                        {  Debug.Log("変身や！");
                              // 2017/12/6 追加
                              // 親オブジェクトを参照してmonsterを生成する
                              GameObject Manager = transform.parent.gameObject;
@@ -576,51 +545,24 @@ public class player : TrueSyncBehaviour {
    
     public void OnSyncedCollisionEnter(TSCollision col)
     {
-        
-        Debug.Log("collision!Player");
         if (col.gameObject.tag == "ItemLoveUp")
         {
             loveGauge += 10;
-            Debug.Log("Item触れたよ！");
 
         }
         else if (col.gameObject.tag == "ItemMiniUp")
         {
             SetItemResponMinion();
-            Debug.Log("minion触れたよ！");
         }
         else if (col.gameObject.tag == "ItemSpeed")
         {
-            speed += 0.5f;
-            Debug.Log("Speed触れたよ！");
+            speed += 5f;
         }
-
+        else if (col.gameObject.tag == "ItemPower")
+        {
+            speed += 3f;
+        }
     }
-
-
-    public void OnCollisionEnter(Collision col)
-    {
-        /*
-        // アイテムに触れたら
-        if (col.gameObject.tag == "ItemLoveUp")
-        {
-            bGaugeUp = true;
-            Debug.Log("Item触れたよ！");
-
-        }
-        else if (col.gameObject.tag == "ItemMiniUp")
-        {
-            bRisponFlag = true;
-            Debug.Log("minion触れたよ！");
-        }
-        else if (col.gameObject.tag == "ItemSpeed")
-        {
-            bSpeedUp = true;
-            Debug.Log("Speed触れたよ！");
-        }
-        */
-    }
-
     // アイテムを手に入れたら
     void SetItemResponMinion()
     {
@@ -650,6 +592,11 @@ public class player : TrueSyncBehaviour {
                 }
             }
         }
+    }
+
+    public void AddScoreNum(int score)
+    {
+        ManagerScore.GetComponent<PlayManager>().AddScore(score);
     }
 
 }

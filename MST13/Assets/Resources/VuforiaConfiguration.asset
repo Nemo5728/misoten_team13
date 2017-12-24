@@ -24,12 +24,12 @@ MonoBehaviour:
     cameraOffset: 0.06
     distortionRenderingMode: 2
     distortionRenderingLayer: 31
-    eyewearType: 0
-    stereoFramework: 1
+    eyewearType: 2
+    stereoFramework: 0
     seeThroughConfiguration: 0
-    viewerName: Generic Cardboard
-    viewerManufacturer: Vuforia
-    useCustomViewer: 1
+    viewerName: Cardboard v1
+    viewerManufacturer: Google
+    useCustomViewer: 0
     customViewer:
       Version: 0
       Name: 

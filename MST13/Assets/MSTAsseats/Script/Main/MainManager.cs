@@ -195,6 +195,8 @@ public class MainManager : MonoBehaviour {
         {
             Destroy(mi);
         }
+
+        WebAPIClient.reset();
     }
 
     void LoginCloneDelete()

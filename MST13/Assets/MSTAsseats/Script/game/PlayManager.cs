@@ -7,7 +7,7 @@ public class PlayManager : TrueSyncBehaviour {
 
     private GameObject PlayerObject;
     private GameObject monsterObject;
-
+    public int playScore;
 	// Use this for initialization
 	void Start () {}
 	
@@ -16,7 +16,7 @@ public class PlayManager : TrueSyncBehaviour {
 
     public override void OnSyncedStart()
     {
-        
+        playScore = 0;
         if (owner.Id != 0)
         {
             Debug.Log("PlayManager:オンラインモードなう");
@@ -72,7 +72,10 @@ public class PlayManager : TrueSyncBehaviour {
     }
 
     public override void OnSyncedUpdate()
-    { }
+    {
+        Debug.Log("PlayerScore" +owner.Id);
+        Debug.Log(playScore);
+    }
 
     // 2017/12/6 追加
     public void SertActiveMonster()
@@ -87,5 +90,10 @@ public class PlayManager : TrueSyncBehaviour {
     {
         PlayerObject = transform.Find("player" + owner.Id).gameObject;
         PlayerObject.SetActive(true);
+    }
+
+    public void AddScore(int score)
+    {
+        playScore += score;
     }
 }

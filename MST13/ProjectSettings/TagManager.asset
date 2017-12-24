@@ -15,6 +15,7 @@ TagManager:
   - ItemLoveUp
   - ItemMiniUp
   - Item
+  - ItemPower
   layers:
   - Default
   - TransparentFX

@@ -2407,7 +2407,8 @@ MonoBehaviour:
     name: 
   attackSpeed: 0
   respawnTime: 0
-  speed: 10
+  speed:
+    _serializedValue: 0
   markerList:
   - {fileID: 1346232086802106}
   - {fileID: 1288880510393854}
@@ -2432,6 +2433,7 @@ MonoBehaviour:
   stamina: 10
   knockBackMax: 100
   knockBackValue: 2
+  knockBackPower: 100
 --- !u!114 &114549519840815292
 MonoBehaviour:
   m_ObjectHideFlags: 1

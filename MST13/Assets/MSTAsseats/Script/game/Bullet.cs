@@ -23,6 +23,7 @@ public class Bullet : TrueSyncBehaviour {
 	}
 
     public override void OnSyncedUpdate(){
+        transform.localScale = Vector3.one;
         TSVector vec = target.tsTransform.position - tsTransform.position;
         vec = TSVector.Normalize(vec);
         tsTransform.Translate(vec * speed, Space.World);

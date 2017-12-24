@@ -7,7 +7,7 @@ public class HitMonster : TrueSyncBehaviour {
 
     public float time;
     public int damage;  // 与えるダメージ
-    //public GameObject damageEffect;
+    public GameObject monsterPare;
 
 
 	// Use this for initialization
@@ -18,21 +18,73 @@ public class HitMonster : TrueSyncBehaviour {
 
     public override void OnSyncedStart()
     {
-     
+        monsterPare = transform.parent.gameObject;
     }
 
  
 
     public void OnSyncedCollisionEnter(TSCollision c)
     {
-        if (c.gameObject.name == "minion")
+        // 弱攻撃中なら
+        if(monsterPare.GetComponent<monster>().isAttakc)
         {
-            // minionにダメージ
-            //  c.gameObject.GetComponent<minion>().AddDamage(damage);
-            TrueSyncManager.SyncedDestroy(c.gameObject);
-          //  Instantiate(damageEffect, transform.position, Quaternion.identity);
+            if (c.gameObject.tag == "minion")
+            {
+                // minionにダメージ
+                c.gameObject.GetComponent<minion>().AddDamage(5);
+                //  Instantiate(damageEffect, transform.position, Quaternion.identity);
+            }
+            else if (c.gameObject.tag == "Player")
+            {
+                c.gameObject.GetComponent<monster>().AddDamage(5);
+            }
         }
+        // 強攻撃中なら
+        else if (monsterPare.GetComponent<monster>().isStrAttack)
+        {
+            if (c.gameObject.tag == "minion" )
+            {
+                // minionにダメージ
+                c.gameObject.GetComponent<minion>().AddDamage(10);
+                //  Instantiate(damageEffect, transform.position, Quaternion.identity);
+            }
+            else if (c.gameObject.tag == "Player")
+            {
+                c.gameObject.GetComponent<monster>().AddDamage(10);
+            }
+        }
+    }
 
+    public void OnCollisionEnter(Collision c)
+    {
+        // 弱攻撃中なら
+        if (monsterPare.GetComponent<monster>().isAttakc)
+        {
+            if (c.gameObject.tag == "minion")
+            {
+                // minionにダメージ
+                c.gameObject.GetComponent<minion>().AddDamage(5);
+                //  Instantiate(damageEffect, transform.position, Quaternion.identity);
+            }
+            else if (c.gameObject.tag == "Player")
+            {
+                c.gameObject.GetComponent<monster>().AddDamage(5);
+            }
+        }
+        // 強攻撃中なら
+        else if (monsterPare.GetComponent<monster>().isStrAttack)
+        {
+            if (c.gameObject.tag == "minion")
+            {
+                // minionにダメージ
+                c.gameObject.GetComponent<minion>().AddDamage(10);
+                //  Instantiate(damageEffect, transform.position, Quaternion.identity);
+            }
+            else if (c.gameObject.tag == "Player")
+            {
+                c.gameObject.GetComponent<monster>().AddDamage(10);
+            }
+        }
     }
 
     public override void OnSyncedUpdate()

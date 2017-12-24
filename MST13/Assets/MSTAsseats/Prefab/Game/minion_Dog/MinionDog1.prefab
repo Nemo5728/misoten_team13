@@ -70,6 +70,8 @@ GameObject:
   - component: {fileID: 95362959178864264}
   - component: {fileID: 114750612520749906}
   - component: {fileID: 114696439920775130}
+  - component: {fileID: 54338925830789182}
+  - component: {fileID: 135313965275154736}
   m_Layer: 9
   m_Name: MinionDog1
   m_TagString: minion
@@ -521,7 +523,7 @@ Transform:
   m_GameObject: {fileID: 1127812990422254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_Children:
   - {fileID: 4634077631049940}
   - {fileID: 4903540131333350}
@@ -596,6 +598,21 @@ Transform:
   m_Father: {fileID: 4012156716771250}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &54338925830789182
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1127812990422254}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
 --- !u!95 &95362959178864264
 Animator:
   serializedVersion: 3
@@ -689,11 +706,11 @@ MonoBehaviour:
       _serializedValue: 0
   lossyScale:
     x:
-      _serializedValue: 21474836480
+      _serializedValue: 34359738368
     y:
-      _serializedValue: 21474836480
+      _serializedValue: 34359738368
     z:
-      _serializedValue: 21474836480
+      _serializedValue: 34359738368
   tsTransform: {fileID: 114889615117818374}
   _radius: 3
 --- !u!114 &114889615117818374
@@ -725,14 +742,26 @@ MonoBehaviour:
       _serializedValue: 4294967296
   _scale:
     x:
-      _serializedValue: 21474836480
+      _serializedValue: 34359738368
     y:
-      _serializedValue: 21474836480
+      _serializedValue: 34359738368
     z:
-      _serializedValue: 21474836480
+      _serializedValue: 34359738368
   _serialized: 1
   tsCollider: {fileID: 0}
   tsParent: {fileID: 0}
+--- !u!135 &135313965275154736
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1127812990422254}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &137344354581197788
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
