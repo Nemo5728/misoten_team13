@@ -65,7 +65,7 @@ public class scoreManager : TrueSyncBehaviour {
             }
         }
 
-        Debug.Log("Hiscore"+hiscore);
+       
  
         WebAPIClient.send(playerNum, hiscore);
     }

@@ -73,8 +73,8 @@ public class PlayManager : TrueSyncBehaviour {
 
     public override void OnSyncedUpdate()
     {
-        Debug.Log("PlayerScore" +owner.Id);
-        Debug.Log(playScore);
+       // Debug.Log("PlayerScore" +owner.Id);
+     //   Debug.Log(playScore);
     }
 
     // 2017/12/6 追加

@@ -180,7 +180,7 @@ public class minion : TrueSyncBehaviour {
                                         tsTransform.LookAt(vector);
 
                                         anim.SetTrigger("minionWeakAttack");
-                                        SeManager.Instance.Play("minion-attack");
+                                        SeManager.Instance.Play("minion-attack.mp3");
                                         coolTime = attackSpeed;
                                         attack = true;
                                         p = parentPlayer.GetComponent<player>();
