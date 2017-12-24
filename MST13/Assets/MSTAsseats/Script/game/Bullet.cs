@@ -5,12 +5,13 @@ using TrueSync;
 
 public class Bullet : TrueSyncBehaviour {
 
-    private minion target;
+    private minion targetMinion = null;
+    private monster targetMonster = null;
     private int shootOwner;
     private int damage;
 
     [SerializeField, TooltipAttribute("速度")] private FP speed;
-    [SerializeField, TooltipAttribute("消える範囲")] private float range;
+    [SerializeField, TooltipAttribute("消える範囲")] private FP range;
 
 	// Use this for initialization
 	void Start () {
@@ -24,19 +25,42 @@ public class Bullet : TrueSyncBehaviour {
 
     public override void OnSyncedUpdate(){
         transform.localScale = Vector3.one;
-        TSVector vec = target.tsTransform.position - tsTransform.position;
-        vec = TSVector.Normalize(vec);
-        tsTransform.Translate(vec * speed, Space.World);
+        TSVector vec = TSVector.zero;
 
-        if (TSMath.Abs(TSVector.Distance(tsTransform.position, target.tsTransform.position)) < range)
-        {
-            Destroy(gameObject);
-            target.AddDamage(damage);
+        if(targetMinion != null){
+            vec = targetMinion.tsTransform.position - tsTransform.position;
+            vec = TSVector.Normalize(vec);
+            tsTransform.Translate(vec * speed, Space.World);
+
+            if (TSMath.Abs(TSVector.Distance(tsTransform.position, targetMinion.tsTransform.position)) < range)
+            {
+                Destroy(gameObject);
+                targetMinion.AddDamage(damage);
+            }
         }
+
+        if (targetMonster != null){
+            vec = targetMonster.tsTransform.position - tsTransform.position;
+            vec = TSVector.Normalize(vec);
+            tsTransform.Translate(vec * speed, Space.World);
+
+            if (TSMath.Abs(TSVector.Distance(tsTransform.position, targetMonster.tsTransform.position)) < range)
+            {
+                Destroy(gameObject);
+                targetMonster.AddDamage(damage);
+            }
+        }
+
     }
 
-    public void Create(minion target, int shootOwner, int damage){
-        this.target = target;
+    public void CreateBulletMinion(minion target, int shootOwner, int damage){
+        this.targetMinion = target;
+        this.shootOwner = shootOwner;
+        this.damage = damage;
+    }
+
+    public void CreateBulletMonster(monster target, int shootOwner, int damage){
+        this.targetMonster = target;
         this.shootOwner = shootOwner;
         this.damage = damage;
     }
