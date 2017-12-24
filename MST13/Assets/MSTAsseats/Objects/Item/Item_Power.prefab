@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114336968111415328}
   - component: {fileID: 114759994902733850}
   - component: {fileID: 114951922180448432}
+  - component: {fileID: 114716055942014002}
   m_Layer: 0
   m_Name: Item_Power
   m_TagString: ItemPower
@@ -259,6 +260,22 @@ MonoBehaviour:
   _serialized: 1
   tsCollider: {fileID: 0}
   tsParent: {fileID: 0}
+--- !u!114 &114716055942014002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010956120410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87329470a7cf6574aa86ea5011316e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ParticleList:
+  - waitTime: 0
+    obj: {fileID: 1000011944911798, guid: b7db4b21ac3de0c4a8aab15b3423833e, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000014037028612, guid: 4754c719d27ef07469f2324fffea7d9c, type: 2}
 --- !u!114 &114759994902733850
 MonoBehaviour:
   m_ObjectHideFlags: 1

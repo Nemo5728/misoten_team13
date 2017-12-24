@@ -47,6 +47,8 @@ public class minion : TrueSyncBehaviour {
 
     [SerializeField, TooltipAttribute("攻撃速度(sec)")] private float attackSpeed;
     [SerializeField, TooltipAttribute("触るな危険")] private GameObject bullet;
+
+    [AddTracking]
     [SerializeField, TooltipAttribute("ヒットポイント")] private int health;
     [SerializeField, TooltipAttribute("攻撃範囲")] private float attackRange;
     [SerializeField, TooltipAttribute("索敵範囲")] private float searchRange;

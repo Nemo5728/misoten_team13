@@ -215,6 +215,16 @@ public class monster : TrueSyncBehaviour {
                         // 弱攻撃モーション
                         anime.SetTrigger("monsterStrAttack");
                         GetComponent<ParticleManager>().Play("FX_SwingB" , transform.position);
+
+
+                         foreach (minion mi in FindObjectsOfType<minion>())
+                        {
+                            if (TSMath.Abs(TSVector.Distance(tsTransform.position, mi.tsTransform.position)) < 30f)
+                            {
+                                Debug.Log("ダメージだぜ");
+                                mi.AddDamage(5);
+                            }
+                        }
                       
                     }
                 }
@@ -233,6 +243,14 @@ public class monster : TrueSyncBehaviour {
                         anime.SetTrigger("monsterWeakAttack");
                         GetComponent<ParticleManager>().Play("FX_SwingA", transform.position);
                         //HitWeakAttack(hitWeakObject, hitWeakOffset);
+                        foreach (minion mi in FindObjectsOfType<minion>())
+                        {
+                            if (TSMath.Abs(TSVector.Distance(tsTransform.position, mi.tsTransform.position)) < 30f)
+                            {
+                                Debug.Log("ダメージだぜ!!!!!!!");
+                                mi.AddDamage(3);
+                            }
+                        }
 
                     }
                     speed = DefSpeed;   // 設定速度へ戻す
@@ -268,6 +286,15 @@ public class monster : TrueSyncBehaviour {
                         // 弱攻撃モーション
                         anime.SetTrigger("monsterStrAttack");
                         GetComponent<ParticleManager>().Play("FX_SwingB", transform.position);
+
+                         foreach (minion mi in FindObjectsOfType<minion>())
+                        {
+                            if (TSMath.Abs(TSVector.Distance(tsTransform.position, mi.tsTransform.position)) < 30f)
+                            {
+                                Debug.Log("ダメージだぜ");
+                                mi.AddDamage(3);
+                            }
+                        }
                     }
                 }
                 ///// その他のモーション /////
@@ -284,6 +311,15 @@ public class monster : TrueSyncBehaviour {
                         // 弱攻撃モーション
                         anime.SetTrigger("monsterWeakAttack");
                         GetComponent<ParticleManager>().Play("FX_SwingA", transform.position);
+
+                        foreach (minion mi in FindObjectsOfType<minion>())
+                        {
+                            if (TSMath.Abs(TSVector.Distance(tsTransform.position, mi.tsTransform.position)) < 30f)
+                            {
+                                Debug.Log("ダメージだぜ!!!!!!!");
+                                mi.AddDamage(1);
+                            }
+                        }
                         //HitWeakAttack(hitWeakObject, hitWeakOffset);
 
                     }
@@ -306,7 +342,7 @@ public class monster : TrueSyncBehaviour {
                 {
                         // 出現モーション
                         //anime.SetTrigger("monsterTransform");
-
+                        GetComponent<ParticleManager>().Play("FX_Trans_PulseP" + owner.Id, transform.position);
                         bool isTransform = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monster_Idle");
                         if (isTransform == true)
                         {
@@ -319,6 +355,10 @@ public class monster : TrueSyncBehaviour {
                     // 通常状態
                 case STATE.STATE_NORMAL:
                 {
+                        // 弱攻撃中
+                        if(isAttakc)
+                        {
+                        }
                         // ラブゲージ処理
                         timeLeft -= Time.deltaTime;
                         if (timeLeft <= 0)
@@ -334,7 +374,6 @@ public class monster : TrueSyncBehaviour {
                             // 時間消滅へ
                             state = STATE.STATE_SPLIT;
                     }
-
                     // 体力処理
                     if (health <= 0)
                     {
@@ -367,7 +406,7 @@ public class monster : TrueSyncBehaviour {
                         //Debug.Log("モンスターダウン");
                         // 撃破モーション
                         anime.SetTrigger("monsterDown");
-
+                        GetComponent<ParticleManager>().Play("FX_TransOff_PulseP" + owner.Id, transform.position);
                         // リスポーンステートになったら
                         bool isDown = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monterOut");
 
@@ -387,7 +426,7 @@ public class monster : TrueSyncBehaviour {
                         //Debug.Log("モンスター時間消滅");
                         // 時間切れ
                         anime.SetTrigger("monsterSplit");
-
+                        GetComponent<ParticleManager>().Play("FX_TransOff_PulseP" + owner.Id, transform.position);
                         // リスポーンステートになったら
                         bool isSplit = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monterOut");
 

@@ -23,14 +23,65 @@ public class Item :  TrueSyncBehaviour
 
     public override void OnSyncedStart()
     {
+        /*
+        if(tag == "ItemLoveUp")
+        {
+            GetComponent<ParticleManager>().Play("FX_ItemAppear_Gauge", new Vector3(transform.position.x,
+                                                                                                   transform.position.y + 2f,
+                                                                                                   transform.position.z));
+        }
+        else if (tag == "ItemPower")
+        {
+            GetComponent<ParticleManager>().Play("FX_ItemAppear_Power", new Vector3(transform.position.x,
+                                                                                                   transform.position.y + 2f,
+                                                                                                   transform.position.z));
+        }
+        else if (tag == "ItemMiniUp")
+        {
+            GetComponent<ParticleManager>().Play("FX_ItemAppear_Respawn", new Vector3(transform.position.x,
+                                                                                                   transform.position.y + 2f,
+                                                                                                   transform.position.z));
+        }
+        else if (name == "Item_Speed(Clone)")
+        {
+            GetComponent<ParticleManager>().Play("FX_ItemAppear_Speed", new Vector3(transform.position.x,
+                                                                                                   transform.position.y + 2f,
+                                                                                                   transform.position.z));
+        }
+        */
         bUse = true;
     }
     public override void OnSyncedUpdate()
     {
         if(!bUse)
         {
-            Debug.Log("どこどこ");
-            //Destroy(gameObject);
+            
+          /*
+            if (tag == "ItemLoveUp")
+            {
+                GetComponent<ParticleManager>().Play("FX_itemGot_Gauge", new Vector3(transform.position.x,
+                                                                                                   transform.position.y + 2f,
+                                                                                                   transform.position.z));
+            }
+            else if (tag == "ItemPower")
+            {
+                GetComponent<ParticleManager>().Play("FX_itemGot_Power", new Vector3(transform.position.x,
+                                                                                                   transform.position.y + 2f,
+                                                                                                   transform.position.z));
+            }
+            else if (tag == "ItemMiniUp")
+            {
+                GetComponent<ParticleManager>().Play("FX_itemGot_Respawn", new Vector3(transform.position.x,
+                                                                                                   transform.position.y + 2f,
+                                                                                                   transform.position.z));
+            }
+            else if (tag== "ItemSpeed")
+            {
+                GetComponent<ParticleManager>().Play("FX_itemGot_Speed", new Vector3(transform.position.x,
+                                                                                                   transform.position.y + 2f,
+                                                                                                   transform.position.z));
+            }
+*/
             TrueSyncManager.SyncedDestroy(gameObject);
         }
     }
@@ -40,7 +91,6 @@ public class Item :  TrueSyncBehaviour
         //playerに触れたら
         if(col.gameObject.tag == "Player")
         {
-            Debug.Log("当たっって");
             bUse = false;
            
         }
