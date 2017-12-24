@@ -215,7 +215,7 @@ public class monster : TrueSyncBehaviour {
                         // 弱攻撃モーション
                         anime.SetTrigger("monsterStrAttack");
                         GetComponent<ParticleManager>().Play("FX_SwingB" , transform.position);
-                      //  TrueSyncManager.SyncedInstantiate(Collider,new TSVector(tsTransform.position.x));
+                      
                     }
                 }
                 ///// その他のモーション /////

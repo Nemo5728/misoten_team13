@@ -8,7 +8,8 @@ using UnityEngine.SceneManagement;
 public class ranking : MonoBehaviour
 {
 
-    public int[] TestScore = { 10, 20, 15, 40 };
+    //  public int[] TestScore = { 10, 20, 15, 40 };
+    public GameObject scoreManager;
     public GameObject players;
     public GameObject texts;
     public GameObject pillers;
@@ -44,9 +45,9 @@ public class ranking : MonoBehaviour
         float addy = 0.0f;
         int minscore = 9999999;
         int maxscore = 0;
-
+        scoreManager = GameObject.Find("ScoreManager");
+        scoreManager.GetComponent<scoreManager>().pr_score.CopyTo(score, 0);
         //通信なしでの動作確認用
-        TestScore.CopyTo(score, 0);
 
         score.CopyTo(pr_score, 0);
 

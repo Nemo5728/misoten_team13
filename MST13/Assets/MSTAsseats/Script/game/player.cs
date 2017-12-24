@@ -351,7 +351,7 @@ public class player : TrueSyncBehaviour {
                         {
                         //transformCount = transformTime;
                             AddScoreNum(100);
-                            transformCount = 1;
+                            transformCount = 2;
                             state = STATE.STATE_PREPARATION;
                         }
 
@@ -368,7 +368,7 @@ public class player : TrueSyncBehaviour {
                          // 2017/12/6 追記
                         foreach (minion mi in FindObjectsOfType<minion>())
                         {
-                            if(mi.owner.Id == owner.Id)
+                            if (owner.Id == mi.GetOwner())
                             {
                                 mi.SetTransform();
                             }
@@ -548,19 +548,23 @@ public class player : TrueSyncBehaviour {
         if (col.gameObject.tag == "ItemLoveUp")
         {
             loveGauge += 10;
+            AddScoreNum(10);
 
         }
         else if (col.gameObject.tag == "ItemMiniUp")
         {
             SetItemResponMinion();
+            AddScoreNum(10);
         }
         else if (col.gameObject.tag == "ItemSpeed")
         {
             speed += 5f;
+            AddScoreNum(10);
         }
         else if (col.gameObject.tag == "ItemPower")
         {
             speed += 3f;
+            AddScoreNum(10);
         }
     }
     // アイテムを手に入れたら

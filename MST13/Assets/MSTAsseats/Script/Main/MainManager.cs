@@ -14,7 +14,7 @@ public class MainManager : MonoBehaviour {
     private const float GAME_TIME = 185;
     private const float LOGIN_TIME = 30;
 
-    private enum STATE
+    public enum STATE
     {
         STATE_TITLE,
         STATE_CONECTING,
@@ -23,7 +23,7 @@ public class MainManager : MonoBehaviour {
         STATE_RESULT
     };
 
-    private STATE state;    // 状態遷移
+    public STATE state;    // 状態遷移
     GameObject selectObj;   // 選択中のオブジェクト
 
     void Awake()
