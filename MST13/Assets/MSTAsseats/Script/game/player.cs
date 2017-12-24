@@ -340,7 +340,7 @@ public class player : TrueSyncBehaviour {
                         }
 
                         //ラブゲージ処理
-                        timeLeft -= TrueSyncManager.DeltaTime;
+                        timeLeft -= Time.deltaTime;
                         if (timeLeft <= 0)
                         {
                             loveGauge += loveGaugeLate;
@@ -351,7 +351,7 @@ public class player : TrueSyncBehaviour {
                         {
                         //transformCount = transformTime;
                             AddScoreNum(100);
-                            transformCount = 2;
+                             transformCount = 3f;
                             state = STATE.STATE_PREPARATION;
                         }
 
@@ -374,7 +374,9 @@ public class player : TrueSyncBehaviour {
                             }
                              
                         }
-
+                    GetComponent<ParticleManager>().Play("FX_BannerTransP" + owner.Id, new Vector3(transform.position.x,
+                                                                                                   transform.position.y + 2f,
+                                                                                                   transform.position.z));
                         state = STATE.STATE_TRANSFORM;
                         break;
                     }
@@ -385,9 +387,9 @@ public class player : TrueSyncBehaviour {
                                                          new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z));
     
 */
-               
-                    transformCount -= TrueSyncManager.DeltaTime;
-                    tsTransform.position += (tsTransform.up * (TrueSyncManager.DeltaTime * 1f));
+
+                    transformCount -= Time.deltaTime;
+                    tsTransform.position += (tsTransform.up * (Time.deltaTime * 1f));
                     if (transformCount <= 0f)
                         {  Debug.Log("変身や！");
                              // 2017/12/6 追加
@@ -558,6 +560,9 @@ public class player : TrueSyncBehaviour {
         }
         else if (col.gameObject.tag == "ItemSpeed")
         {
+            GetComponent<ParticleManager>().Play("FX_SpeedUp" + owner.Id, new Vector3(transform.position.x,
+                                                                                   transform.position.y + 2f,
+                                                                                   transform.position.z));
             speed += 5f;
             AddScoreNum(10);
         }

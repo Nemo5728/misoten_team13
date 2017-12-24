@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114571783250089622}
   - component: {fileID: 114051655432899554}
   - component: {fileID: 114262955273776962}
+  - component: {fileID: 114022722590366432}
   m_Layer: 0
   m_Name: Item_Speed
   m_TagString: ItemSpeed
@@ -193,6 +194,22 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114022722590366432
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010384541900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87329470a7cf6574aa86ea5011316e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ParticleList:
+  - waitTime: 0
+    obj: {fileID: 1000012814303278, guid: 16ba594e8d3aa8a48b1d35bdc4ca5d2c, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000013899479774, guid: ddd0b41872f2c0b4a828ea41e407c2ff, type: 2}
 --- !u!114 &114051655432899554
 MonoBehaviour:
   m_ObjectHideFlags: 1

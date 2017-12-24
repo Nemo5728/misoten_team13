@@ -9489,10 +9489,10 @@ MonoBehaviour:
   HeightRate: 25
   DifPltoBar: 0
   monster:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1000012443736484, guid: d28f98415dda1f4408b6578059fd40f4, type: 2}
+  - {fileID: 1000010697899754, guid: ff8e1ce8543c5ad47bbc1e1a2827b611, type: 2}
+  - {fileID: 1000012423575008, guid: 1c35e7d63d443e548bc454ab59805d25, type: 2}
+  - {fileID: 1000012524221738, guid: 22fbb280c2c9eee4a925b3768cbca5cb, type: 2}
   monsAnim: {fileID: 9100000, guid: 1ed4b6c83c6de4f2185a98342d97b08a, type: 2}
 --- !u!114 &114185293230375184
 MonoBehaviour:
