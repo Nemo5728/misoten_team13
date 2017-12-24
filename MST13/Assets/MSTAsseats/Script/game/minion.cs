@@ -187,7 +187,8 @@ public class minion : TrueSyncBehaviour {
                                         p.AddScoreNum(5);   // スコア追加
                                         if (isBullet != null)
                                         {
-                                            GameObject go = Instantiate(isBullet, transform.position, Quaternion.identity);
+                                            //GameObject go = Instantiate(isBullet, transform.position, Quaternion.identity);
+                                            GameObject go = TrueSyncManager.SyncedInstantiate(isBullet, tsTransform.position, TSQuaternion.identity);
 
                                             if (!p.GetPowerUp())
                                             {
@@ -198,7 +199,8 @@ public class minion : TrueSyncBehaviour {
                                                 go.GetComponent<Bullet>().CreateBulletMinion(targetMinion, ownerNum, powerUpAttackValue);
                                             }
 
-                                            go.transform.parent = targetMinion.transform;
+                                            //go.transform.parent = targetMinion.transform;
+                                            go.GetComponent<TSTransform>().tsParent = targetMinion.tsTransform;
                                         }
                                         else
                                         {
@@ -228,7 +230,8 @@ public class minion : TrueSyncBehaviour {
                                         p.AddScoreNum(5);   // スコア追加
                                         if (isBullet != null)
                                         {
-                                            GameObject go = Instantiate(isBullet, transform.position, Quaternion.identity);
+                                            //GameObject go = Instantiate(isBullet, transform.position, Quaternion.identity);
+                                            GameObject go = TrueSyncManager.SyncedInstantiate(isBullet, tsTransform.position, TSQuaternion.identity);
 
                                             if (!p.GetPowerUp())
                                             {
@@ -239,7 +242,8 @@ public class minion : TrueSyncBehaviour {
                                                 go.GetComponent<Bullet>().CreateBulletMonster(targetMonster, ownerNum, powerUpAttackValue);
                                             }
 
-                                            go.transform.parent = targetMinion.transform;
+                                            //go.transform.parent = targetMonster.transform;
+                                            go.GetComponent<TSTransform>().tsParent = targetMonster.tsTransform;
                                         }
                                         else
                                         {
