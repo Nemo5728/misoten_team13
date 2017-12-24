@@ -17815,9 +17815,9 @@ MonoBehaviour:
     obj: {fileID: 1000013098976266, guid: 387ce1e8fcc4bd849a602529d8da74e4, type: 2}
   - waitTime: 0
     obj: {fileID: 1000013822938674, guid: abd9dd2894efa2842aae98eac486214a, type: 2}
-  - waitTime: 0
+  - waitTime: 10
     obj: {fileID: 1000010875558800, guid: 6c3e733c294cfcf44950bda69f6d2bc9, type: 2}
-  - waitTime: 0
+  - waitTime: 10
     obj: {fileID: 1000014062079076, guid: 3446317be5cf30a4fbe04b4db2170d9e, type: 2}
   - waitTime: 0
     obj: {fileID: 1000012050971066, guid: e1fd9729cd8169b4ab006a73db49d285, type: 2}

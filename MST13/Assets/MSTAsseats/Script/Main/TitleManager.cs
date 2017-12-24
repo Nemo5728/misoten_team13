@@ -6,6 +6,8 @@ public class TitleManager : MonoBehaviour {
 
     public GameObject logo;
     GameObject obj;
+    GameObject conect;
+    public GameObject text;
     float alpha;
 
     private enum STATE
@@ -23,6 +25,8 @@ public class TitleManager : MonoBehaviour {
         obj =  Instantiate(logo,transform.position,new Quaternion(0f, 180f, 0f, 1f));
         obj.transform.parent = transform;
 
+        conect = Instantiate(text, transform.position, Quaternion.identity);
+        conect.transform.parent = transform;
         state = STATE.STATE_START;
 	}
 

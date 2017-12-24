@@ -69,8 +69,8 @@ public class loginPlayer : TrueSyncBehaviour
 
 
         //BLEなんちゃら
-        //  info = BLEControlManager.GetControllerInfo();
-        info = SerialControllManager.GetControllerInfo();
+          info = BLEControlManager.GetControllerInfo();
+        //info = SerialControllManager.GetControllerInfo();
 
         if (info != null) controllerConnect = true;
 

@@ -94,7 +94,7 @@ public class player : TrueSyncBehaviour {
         move = TSVector.zero;
         rb = GetComponent<TSRigidBody>();
         knockback = 0;
-        TSVector signPos = new TSVector(tsTransform.position.x, tsTransform.position.y + 10f, tsTransform.position.z);
+        TSVector signPos = new TSVector(tsTransform.position.x, tsTransform.position.y + 13f, tsTransform.position.z);
         signObject = TrueSyncManager.SyncedInstantiate(sign, signPos, TSQuaternion.identity);
         signObject.transform.parent = transform;
         if(owner.Id != 0) signObject.GetComponent<MeshRenderer>().material.SetFloat("_Player", (float)owner.Id);
