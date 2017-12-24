@@ -1970,7 +1970,7 @@ MonoBehaviour:
   localOwner:
     id: 0
     name: 
-  speed: 0.1
+  speed: 1
   GetLoginArea: {fileID: 1958430887092394, guid: 20605738b0a99204f91330f6cd163cfc,
     type: 2}
 --- !u!114 &114236461945505306

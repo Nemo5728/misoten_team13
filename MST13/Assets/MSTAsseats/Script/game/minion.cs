@@ -90,6 +90,7 @@ public class minion : TrueSyncBehaviour {
         anim = GetComponent<Animator>();    // アニメーションの取得
 
         anim.SetTrigger("minionSpawn");        // 誕生アニメーション
+
         state = STATE.STATE_NORMAL;
 
         isBullet = bullet;
@@ -179,6 +180,7 @@ public class minion : TrueSyncBehaviour {
                                         tsTransform.LookAt(vector);
 
                                         anim.SetTrigger("minionWeakAttack");
+                                        SeManager.Instance.Play("minion-attack");
                                         coolTime = attackSpeed;
                                         attack = true;
                                         p = parentPlayer.GetComponent<player>();
@@ -219,7 +221,7 @@ public class minion : TrueSyncBehaviour {
 
                                         tsTransform.LookAt(vector);
 
-                                        anim.SetTrigger("minionWeakAttack");
+                                        anim.SetTrigger("minionWeakAttack.mp3");
                                         coolTime = attackSpeed;
                                         attack = true;
                                         p = parentPlayer.GetComponent<player>();
@@ -301,7 +303,7 @@ public class minion : TrueSyncBehaviour {
                 {
                     // 2017/12/2 追記
                     anim.SetTrigger("minionDown"); // ダウン
-
+                    SeManager.Instance.Play("minion-down");
                     bool isRespon = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.minion_down");
 
                     // ダウンモーションが終了したら

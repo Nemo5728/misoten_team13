@@ -11,6 +11,7 @@ public class Item :  TrueSyncBehaviour
     [AddTracking]
     bool bUse;
 
+    private float time;
     void Start()
     {
         bUse = true;
@@ -23,6 +24,7 @@ public class Item :  TrueSyncBehaviour
 
     public override void OnSyncedStart()
     {
+        time = 0f;
         /*
         if(tag == "ItemLoveUp")
         {
@@ -53,6 +55,7 @@ public class Item :  TrueSyncBehaviour
     }
     public override void OnSyncedUpdate()
     {
+        
         if(!bUse)
         {
             

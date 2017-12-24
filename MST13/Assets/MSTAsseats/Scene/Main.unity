@@ -508,6 +508,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114106068977602130, guid: f776e0f249fb046cfb1fc0ec115daba1,
+        type: 2}
+      propertyPath: DeviceName
+      value: MST1303
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f776e0f249fb046cfb1fc0ec115daba1, type: 2}
   m_IsPrefabParent: 0
@@ -1438,10 +1443,6 @@ Prefab:
     - target: {fileID: 450246, guid: 7521f6f0afaaa4c86afd2d6698303da2, type: 2}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11450246, guid: 7521f6f0afaaa4c86afd2d6698303da2, type: 2}
-      propertyPath: DebugMode
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7521f6f0afaaa4c86afd2d6698303da2, type: 2}
@@ -4135,11 +4136,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1166344024202724, guid: 1e4c75f656fa24abebda2708f58b5b9d, type: 2}
       propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114500088389557482, guid: 1e4c75f656fa24abebda2708f58b5b9d,
-        type: 2}
-      propertyPath: loveGaugeLate
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
