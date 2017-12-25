@@ -48,7 +48,7 @@ public class scoreManager : TrueSyncBehaviour {
         for (int i = 0; i < cnt; i++)
         {
             pr_score[i] = score[i];
-            Debug.Log("pr_score" + pr_score[i]);
+           // Debug.Log("pr_score" + pr_score[i]);
 
         }
 

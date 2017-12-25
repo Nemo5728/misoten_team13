@@ -214,6 +214,7 @@ public class monster : TrueSyncBehaviour {
                         if (isStrAttack) return;
                         // 弱攻撃モーション
                         anime.SetTrigger("monsterStrAttack");
+                        SeManager.Instance.Play("monsterStrAttack");
                         GetComponent<ParticleManager>().Play("FX_SwingB" , transform.position);
 
 
@@ -241,6 +242,7 @@ public class monster : TrueSyncBehaviour {
 
                         // 弱攻撃モーション
                         anime.SetTrigger("monsterWeakAttack");
+                        SeManager.Instance.Play("monsterWeakAttack");
                         GetComponent<ParticleManager>().Play("FX_SwingA", transform.position);
                         SeManager.Instance.Play("monster-attack.mp3");
                         //HitWeakAttack(hitWeakObject, hitWeakOffset);
@@ -286,13 +288,14 @@ public class monster : TrueSyncBehaviour {
                         if (isStrAttack) return;
                         // 弱攻撃モーション
                         anime.SetTrigger("monsterStrAttack");
+                        SeManager.Instance.Play("monsterStrAttack");
                         GetComponent<ParticleManager>().Play("FX_SwingB", transform.position);
 
                          foreach (minion mi in FindObjectsOfType<minion>())
                         {
                             if (TSMath.Abs(TSVector.Distance(tsTransform.position, mi.tsTransform.position)) < 30f)
                             {
-                                Debug.Log("ダメージだぜ");
+                            //   Debug.Log("ダメージだぜ");
                                 mi.AddDamage(3);
                             }
                         }
@@ -311,13 +314,14 @@ public class monster : TrueSyncBehaviour {
 
                         // 弱攻撃モーション
                         anime.SetTrigger("monsterWeakAttack");
+                        SeManager.Instance.Play("monsterWeakAttack");
                         GetComponent<ParticleManager>().Play("FX_SwingA", transform.position);
 
                         foreach (minion mi in FindObjectsOfType<minion>())
                         {
                             if (TSMath.Abs(TSVector.Distance(tsTransform.position, mi.tsTransform.position)) < 30f)
                             {
-                                Debug.Log("ダメージだぜ!!!!!!!");
+                            //    Debug.Log("ダメージだぜ!!!!!!!");
                                 mi.AddDamage(1);
                             }
                         }
@@ -343,7 +347,7 @@ public class monster : TrueSyncBehaviour {
                 {
                         // 出現モーション
                         //anime.SetTrigger("monsterTransform");
-                       
+                     //   SeManager.Instance.Play("monsterrespon");
                         bool isTransform = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monster_Idle");
                         if (isTransform == true)
                         {
@@ -408,6 +412,7 @@ public class monster : TrueSyncBehaviour {
                         //Debug.Log("モンスターダウン");
                         // 撃破モーション
                         anime.SetTrigger("monsterDown");
+                        SeManager.Instance.Play("monsterdown");
                         GetComponent<ParticleManager>().Play("FX_TransOff_PulseP" + owner.Id, transform.position);
 
                         // リスポーンステートになったら

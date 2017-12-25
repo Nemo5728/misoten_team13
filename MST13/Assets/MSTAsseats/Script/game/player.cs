@@ -109,7 +109,7 @@ public class player : TrueSyncBehaviour {
 
     public override void OnSyncedInput()
     {
-        Debug.Log("TrueSyncInputなう");
+        //Debug.Log("TrueSyncInputなう");
         bool forward = Input.GetKey(KeyCode.W);
         bool back = Input.GetKey(KeyCode.S);
         bool right = Input.GetKey(KeyCode.D);
@@ -211,8 +211,7 @@ public class player : TrueSyncBehaviour {
                             
                         }
 
-                        if (controllerConnect)
-                        {
+                      
                             //Debug.Log("TrueSyncコントローラなう");
                             int stickX = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
                             int stickY = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
@@ -232,7 +231,7 @@ public class player : TrueSyncBehaviour {
                                 loveGauge++;
                                     // minion強攻撃へ！
                             }
-                        }
+                        
 
                         if(Tc > 0)
                         {
@@ -335,7 +334,7 @@ public class player : TrueSyncBehaviour {
                                     minion mi = createMinion.GetComponent<minion>();
                                     mi.Create(gameObject, i, owner.Id);
                                     minionCount++;
-                                     SeManager.Instance.Play("minion-spawn");
+                                    
                                 }
                             }
                         }
@@ -352,7 +351,7 @@ public class player : TrueSyncBehaviour {
                         {
                         //transformCount = transformTime;
                             AddScoreNum(100);
-                             transformCount = 3f;
+                             transformCount = 2f;
                             state = STATE.STATE_PREPARATION;
                         }
 
@@ -365,7 +364,7 @@ public class player : TrueSyncBehaviour {
                          
                         // 2017/12/1 追記
                         anim.SetTrigger("bannerTransform");
-
+                         // SeManager.Instance.Play("playerrespon");
                          // 2017/12/6 追記
                         foreach (minion mi in FindObjectsOfType<minion>())
                         {
@@ -480,7 +479,7 @@ public class player : TrueSyncBehaviour {
         {
             //2017/12/2 追記
             anim.SetTrigger("bannerDown");
-
+            SeManager.Instance.Play("playerdown");
             state = STATE.STATE_KNOCKOUT;
             playerRespawnCount = respawnTime;
         }
@@ -599,7 +598,7 @@ public class player : TrueSyncBehaviour {
                     mi.Create(gameObject, i, owner.Id);
                     minionCount++;
                     ResponCount++;
-                    SeManager.Instance.Play("minion-spawn");
+                   
                 }
             }
         }
