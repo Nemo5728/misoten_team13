@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TrueSync;
 
 public class player : TrueSyncBehaviour {
@@ -74,6 +75,8 @@ public class player : TrueSyncBehaviour {
     [SerializeField, TooltipAttribute("ノックバック上昇値")] private int knockBackValue = 2;
     [SerializeField, TooltipAttribute("ノックバックパワー")] private float knockBackPower = 100;
 
+    private GameObject hogeX;
+    private GameObject hogeY;
 
     // Use this for initialization
     void Start () 
@@ -104,6 +107,9 @@ public class player : TrueSyncBehaviour {
         // 2017/12/1 追加
         anim = GetComponent<Animator>();    // アニメーションの取得
         state = STATE.STATE_AWAKE;
+
+        hogeX = GameObject.Find("StickXNum");
+        hogeY = GameObject.Find("StickYNum");
 
     }
 
@@ -217,6 +223,9 @@ public class player : TrueSyncBehaviour {
                             int stickY = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
                             bool button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
                             bool stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
+
+                            hogeX.GetComponent<Text>().text = stickX.ToString();
+                            hogeY.GetComponent<Text>().text = stickY.ToString();
 
                             // 2017/12/1 追記
                             // Playerの移動モーション管理
