@@ -90,7 +90,7 @@ public class minion : TrueSyncBehaviour {
         anim = GetComponent<Animator>();    // アニメーションの取得
 
         anim.SetTrigger("minionSpawn");        // 誕生アニメーション
-
+       // SeManager.Instance.Play("minionRespon");
         state = STATE.STATE_NORMAL;
 
         isBullet = bullet;
@@ -180,7 +180,7 @@ public class minion : TrueSyncBehaviour {
                                         tsTransform.LookAt(vector);
 
                                         anim.SetTrigger("minionWeakAttack");
-                                        SeManager.Instance.Play("minion-attack.mp3");
+                                     //   SeManager.Instance.Play("minionWeakAttack");
                                         coolTime = attackSpeed;
                                         attack = true;
                                         p = parentPlayer.GetComponent<player>();
@@ -223,7 +223,8 @@ public class minion : TrueSyncBehaviour {
 
                                         tsTransform.LookAt(vector);
 
-                                        anim.SetTrigger("minionWeakAttack.mp3");
+                                        anim.SetTrigger("minionWeakAttack");
+                                     //   SeManager.Instance.Play("minionStrAttack");
                                         coolTime = attackSpeed;
                                         attack = true;
                                         p = parentPlayer.GetComponent<player>();
@@ -307,7 +308,7 @@ public class minion : TrueSyncBehaviour {
                 {
                     // 2017/12/2 追記
                     anim.SetTrigger("minionDown"); // ダウン
-                    SeManager.Instance.Play("minion-down");
+                    SeManager.Instance.Play("miniondown");
                     bool isRespon = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.minion_down");
 
                     // ダウンモーションが終了したら
@@ -346,6 +347,7 @@ public class minion : TrueSyncBehaviour {
             //Debug.Log("minionDamage!");
             // 2017/12/2 追記
             anim.SetTrigger("minionDamage"); // ダメージアニメーション
+
         }
     }
 

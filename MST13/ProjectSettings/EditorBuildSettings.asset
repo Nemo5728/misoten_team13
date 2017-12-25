@@ -20,3 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MSTAsseats/Scene/Main.unity
     guid: 20bed981c2388428cba2c4a4d9e6f208
+  - enabled: 0
+    path: Assets/BLECommunication/Examples/Scenes/Test.unity
+    guid: 90dfb0c07e9a641df9ea19c3295c0d6a
