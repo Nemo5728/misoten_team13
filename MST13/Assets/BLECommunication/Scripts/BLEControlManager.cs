@@ -26,41 +26,46 @@ public class BLEControlManager : SingletonMonoBehaviour<BLEControlManager>
     void Update(){
         string message;
         message = bm.GetMessage();
-
-        Debug.Log(message);
-
-        controllerInfo.isStickDown = false;
-        controllerInfo.isStickUp = false;
-        controllerInfo.isButtonDown = false;
-        controllerInfo.isButtonUp = false;
-
-        oldStickPush = controllerInfo.isStick;
-        oldButtonPush = controllerInfo.isButton;
-
-        controllerInfo.isStick = (int.Parse(message.Substring(0, 1)) == 0) ? true : false;
-
-        if (oldStickPush == false && controllerInfo.isStick == true)
+        if (message != null)
         {
-            controllerInfo.isStickUp = true;
-        }
-        else if (oldStickPush == true && controllerInfo.isStick == false)
-        {
-            controllerInfo.isStickDown = true;
-        }
+            Debug.Log(message);
 
-        controllerInfo.isButton = (int.Parse(message.Substring(1, 1)) == 0) ? true : false;
+            controllerInfo.isStickDown = false;
+            controllerInfo.isStickUp = false;
+            controllerInfo.isButtonDown = false;
+            controllerInfo.isButtonUp = false;
 
-        if (oldButtonPush == false && controllerInfo.isButton == true)
-        {
-            controllerInfo.isButtonUp = true;
-        }
-        else if (oldButtonPush == true && controllerInfo.isButton == false)
-        {
-            controllerInfo.isButtonDown = true;
-        }
+            oldStickPush = controllerInfo.isStick;
+            oldButtonPush = controllerInfo.isButton;
 
-        controllerInfo.stickX = System.Convert.ToInt32("0" + message.Substring(2, 3), 16);
-        controllerInfo.stickY = System.Convert.ToInt32("0" + message.Substring(5, 3), 16);
+            controllerInfo.isStick = (int.Parse(message.Substring(0, 1)) == 0) ? true : false;
+
+            if (oldStickPush == false && controllerInfo.isStick == true)
+            {
+                controllerInfo.isStickUp = true;
+            }
+            else if (oldStickPush == true && controllerInfo.isStick == false)
+            {
+                controllerInfo.isStickDown = true;
+            }
+
+            controllerInfo.isButton = (int.Parse(message.Substring(1, 1)) == 0) ? true : false;
+
+            if (oldButtonPush == false && controllerInfo.isButton == true)
+            {
+                controllerInfo.isButtonUp = true;
+            }
+            else if (oldButtonPush == true && controllerInfo.isButton == false)
+            {
+                controllerInfo.isButtonDown = true;
+            }
+
+            controllerInfo.stickX = System.Convert.ToInt32("0" + message.Substring(2, 3), 16);
+            controllerInfo.stickY = System.Convert.ToInt32("0" + message.Substring(5, 3), 16);
+        }else{
+            controllerInfo.stickX = -1;
+            controllerInfo.stickY = -1;
+        }
 
     }
 

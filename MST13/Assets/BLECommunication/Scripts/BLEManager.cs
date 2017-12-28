@@ -40,8 +40,9 @@ public class BLEManager : SingletonMonoBehaviour<BLEManager>
     // Use this for initialization
     void Start()
     {
-
-        DeviceName = GameObject.Find("ControllerInfoManager").GetComponent<ControllerInfoManager>().playerString;
+        GameObject obj = GameObject.Find("ControllerInfoManager");
+       
+        DeviceName = obj.GetComponent<ControllerInfoManager>().playerString;
 
         BluetoothLEHardwareInterface.Initialize(true, false, () =>
         {
