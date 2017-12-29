@@ -41,7 +41,6 @@ GameObject:
   - component: {fileID: 114538004119733984}
   - component: {fileID: 114223777759412850}
   - component: {fileID: 114973143597325218}
-  - component: {fileID: 114764629851234204}
   m_Layer: 0
   m_Name: Item_Gauge
   m_TagString: ItemLoveUp
@@ -281,22 +280,6 @@ MonoBehaviour:
   _serialized: 1
   tsCollider: {fileID: 0}
   tsParent: {fileID: 0}
---- !u!114 &114764629851234204
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012816445626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87329470a7cf6574aa86ea5011316e45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ParticleList:
-  - waitTime: 0
-    obj: {fileID: 1000011755879186, guid: 0d24ae7f51e39b747b482a29840133b9, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000011416206348, guid: b8f214dd3969ce6459f829c5fbffd7b1, type: 2}
 --- !u!114 &114973143597325218
 MonoBehaviour:
   m_ObjectHideFlags: 1
