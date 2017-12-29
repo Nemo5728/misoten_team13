@@ -40,7 +40,7 @@ public class MainManager : MonoBehaviour {
         info = BLEControlManager.GetControllerInfo();
         //info = SerialControllManager.GetControllerInfo();
 
-        if (info != null) controllerConnect = true;
+        //if (info != null) controllerConnect = true;
 
        BgmManager.Instance.Play("select");
         state = STATE.STATE_TITLE;

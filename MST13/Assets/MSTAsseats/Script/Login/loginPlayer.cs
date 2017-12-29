@@ -109,7 +109,7 @@ public class loginPlayer : TrueSyncBehaviour
 
             if (controllerConnect)
             {
-                Debug.Log("TrueSyncコントローラなう");
+                //Debug.Log("TrueSyncコントローラなう");
                 int stickX = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
                 int stickY = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
                 bool button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
@@ -144,15 +144,15 @@ public class loginPlayer : TrueSyncBehaviour
             areaPos.z - AreaSize < pos.z)
             {
                 bPlayerArea = true;
-                Debug.Log("乗ってるよ！");
+                //Debug.Log("乗ってるよ！");
             }
             else
             {
                 bPlayerArea = false;
             }
-            Debug.Log("areaPos" + areaPos);
-            Debug.Log("rb.position" + rb.position);
-            Debug.Log("pos" + pos);
+            //Debug.Log("areaPos" + areaPos);
+            //Debug.Log("rb.position" + rb.position);
+            //Debug.Log("pos" + pos);
         }
 
     }
