@@ -185,7 +185,7 @@ public class player : TrueSyncBehaviour {
                     if (right) directionVector += vector += TSVector.right;
 
                     if(kib_y){
-                        
+                        rb.AddForce(tsTransform.forward * -knockBackPower, ForceMode.Impulse);
                     }
 
 
@@ -194,8 +194,8 @@ public class player : TrueSyncBehaviour {
 
                     if(TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) stickX = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
                     if(TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickY = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
-                    if(TrueSyncInput.GetInt(INPUT_CONTROLLER_BUTTON) != -1) button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
-                    if(TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKBUTTON) != -1) stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
+                    if(TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
+                    if(TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
 
                     // 2017/12/1 追記
                     // Playerの移動モーション管理
