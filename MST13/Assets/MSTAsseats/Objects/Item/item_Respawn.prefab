@@ -58,7 +58,6 @@ GameObject:
   - component: {fileID: 114850486813521660}
   - component: {fileID: 114981958555922684}
   - component: {fileID: 114406113390965624}
-  - component: {fileID: 114289521469644832}
   m_Layer: 0
   m_Name: item_Respawn
   m_TagString: ItemMiniUp
@@ -231,22 +230,6 @@ MonoBehaviour:
   _serialized: 1
   tsCollider: {fileID: 0}
   tsParent: {fileID: 0}
---- !u!114 &114289521469644832
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012058241512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87329470a7cf6574aa86ea5011316e45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ParticleList:
-  - waitTime: 0
-    obj: {fileID: 1000012401949450, guid: 21424852c56bde547a9208e690e4a9e6, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000012222575388, guid: 46fb60ac1f2cfa8478b22b7b9748bfac, type: 2}
 --- !u!114 &114406113390965624
 MonoBehaviour:
   m_ObjectHideFlags: 1
