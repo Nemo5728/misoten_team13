@@ -167,6 +167,7 @@ public class player : TrueSyncBehaviour {
   
                     break;
                 case STATE.STATE_NORMAL:
+                
                     bool forward = TrueSyncInput.GetBool(INPUT_KEY_FORWARD);
                     bool back = TrueSyncInput.GetBool(INPUT_KEY_BACK);
                     bool right = TrueSyncInput.GetBool(INPUT_KEY_RIGHT);

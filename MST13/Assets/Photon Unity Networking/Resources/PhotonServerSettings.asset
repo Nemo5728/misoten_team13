@@ -11,11 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3758f8f58fdef43803eb9be1df0608, type: 3}
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
-  AppID: MST_001
+  AppID: 6fa9d65b-62bc-42ee-9148-366201d53087
   VoiceAppID: 
   ChatAppID: 
-  HostType: 2
-  PreferredRegion: 0
+  HostType: 1
+  PreferredRegion: 3
   EnabledRegions: -1
   Protocol: 0
   ServerAddress: 192.168.137.1
@@ -35,10 +35,6 @@ MonoBehaviour:
   - PunPickup
   - PunPickupSimple
   - PunRespawn
-  - RequestForPickupTimes
-  - LoadRace
-  - MultiplayerPanel_ChatReceived
-  - OnMatchDataChange
-  - StartMatch
   - RequestForPickupItems
+  - RequestForPickupTimes
   DisableAutoOpenWizard: 1
