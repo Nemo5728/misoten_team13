@@ -25,7 +25,7 @@ public class ControllerInfoManager : MonoBehaviour {
         SceneManager.LoadScene("Main");
     }
     public void DecideFour(){
-        playerString = "MST1304";
+        playerString = "MST04";
         SceneManager.LoadScene("Main");
     }
 }

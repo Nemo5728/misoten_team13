@@ -113,7 +113,7 @@ public class monster : TrueSyncBehaviour {
         loveGauge = loveGaugeMax;
         move = TSVector.zero;
         state = STATE.STATE_TRANSFORM;
-        GetComponent<ParticleManager>().Play("FX_Trans_PulseP" + owner.Id, transform.position);
+      //  GetComponent<ParticleManager>().Play("FX_Trans_PulseP" + owner.Id, transform.position);
 	}
 
 	// インプット
