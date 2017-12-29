@@ -137,7 +137,8 @@ public class player : TrueSyncBehaviour {
     public override void OnSyncedUpdate()
     {
 
-        time += TrueSyncManager.DeltaTime;
+        //time += TrueSyncManager.DeltaTime;
+        time += Time.deltaTime;
 
         if (time <= 3) return;
         switch(state)
@@ -188,7 +189,7 @@ public class player : TrueSyncBehaviour {
                     }
 
 
-                    int stickX = 0, stickY = 0;
+                    int stickX = -1, stickY = -1;
                     bool button = false, stickBtn = false;
 
                     if(TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) stickX = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
@@ -251,13 +252,14 @@ public class player : TrueSyncBehaviour {
                          powerUpFlag = false;
                      }
 
+                   
                      vector = TSVector.Normalize(vector);
                      directionVector = TSVector.Normalize(directionVector);
                      FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
                      tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
 
                     if (!(TSVector.Distance(TSVector.zero, tsTransform.position + vector) >= STAGE_LENGTH))
-                    tsTransform.Translate((vector * speed)* TrueSyncManager.DeltaTime, Space.World);
+                        tsTransform.Translate((vector * speed)* TrueSyncManager.DeltaTime, Space.World);
 
 
                     //ノックバック処理
