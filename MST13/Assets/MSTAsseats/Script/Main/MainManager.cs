@@ -58,14 +58,7 @@ public class MainManager : MonoBehaviour {
                    state == STATE.STATE_RESULT)
                 {
                     //選択オブジェクトを削除し、次のステートへ移行
-                    if(state != STATE.STATE_TITLE)
-                    {
-                        selectObj.GetComponent<FadeSceneManager>().SetFadeStart();
-                    }
-                    else
-                    {
-                        NextState();
-                    }
+                    selectObj.GetComponent<FadeSceneManager>().SetFadeStart();
                 }
            }
         }
@@ -74,28 +67,14 @@ public class MainManager : MonoBehaviour {
             int touch = Input.touchCount;
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if(state != STATE.STATE_TITLE)
-                {
-                    selectObj.GetComponent<FadeSceneManager>().SetFadeStart();
-                }
-                else
-                {
-                    NextState();
-                }
+                selectObj.GetComponent<FadeSceneManager>().SetFadeStart();
             }
             else if(touch > 0)
             {
                 Touch tg = Input.GetTouch(0);
                 if (tg.phase == TouchPhase.Began)
                 {
-                    if(state != STATE.STATE_TITLE)
-                    {
-                        selectObj.GetComponent<FadeSceneManager>().SetFadeStart();
-                    }
-                    else
-                    {
-                        NextState();
-                    }
+                    selectObj.GetComponent<FadeSceneManager>().SetFadeStart();
                 }
             }
 
@@ -113,14 +92,7 @@ public class MainManager : MonoBehaviour {
                     if (Timer >= LOGIN_TIME)
                     {
                         Timer = 0f;
-                        if(state != STATE.STATE_TITLE)
-                        {
-                            selectObj.GetComponent<FadeSceneManager>().SetFadeStart();
-                        }
-                        else
-                        {
-                            NextState();
-                        }
+                        selectObj.GetComponent<FadeSceneManager>().SetFadeStart();
                     }
                     break;
                 }
@@ -133,30 +105,19 @@ public class MainManager : MonoBehaviour {
                     if (gametimr >= GAME_TIME)
                     {
                         gametimr = 0f;
-                        if(state != STATE.STATE_TITLE)
-                        {
-                            selectObj.GetComponent<FadeSceneManager>().SetFadeStart();
-                        }
-                        else
-                        {
-                            NextState();
-                        }
+                        selectObj.GetComponent<FadeSceneManager>().SetFadeStart();
                     }
                     break;
                 }
         }
 
-        if(state != STATE.STATE_TITLE)
+        if (selectObj.GetComponent<FadeSceneManager>().GetFadeState() == FadeSceneManager.Fade.End)
         {
-            if (selectObj.GetComponent<FadeSceneManager>().GetFadeState() == FadeSceneManager.Fade.End)
-            {
-                NextState();
-            }
+            NextState();
         }
 	}
 
     private void NextState(){
-        if(state != STATE.STATE_TITLE) selectObj.GetComponent<FadeSceneManager>().AllDestroy();
         Destroy(selectObj);
         NextState(state);
         SetState();

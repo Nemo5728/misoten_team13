@@ -22,11 +22,11 @@ public class TitleManager : MonoBehaviour {
 	void Start ()
     {
         alpha = 0f;
-        obj = Instantiate(logo,transform.position,new Quaternion(0f, 180f, 0f, 1f));
-        obj.transform.parent = transform;
+        //obj = Instantiate(logo,transform.position,new Quaternion(0f, 180f, 0f, 1f));
+        //obj.transform.parent = transform;
 
-        conect = Instantiate(text, transform.position, Quaternion.identity);
-        conect.transform.parent = transform;
+        //conect = Instantiate(text, transform.position, Quaternion.identity);
+        //conect.transform.parent = transform;
         state = STATE.STATE_START;
 	}
 
@@ -59,16 +59,16 @@ public class TitleManager : MonoBehaviour {
                 }
         }
 
-        obj.GetComponent<MeshRenderer>().material.SetFloat("_alpha", alpha);
+        //obj.GetComponent<MeshRenderer>().material.SetFloat("_alpha", alpha);
     }
 
-    public void AllDelete()
+    private void AllDelete()
     {
         Destroy(obj);
         Destroy(gameObject);
     }
 
-    public void AlphaState()
+    private void AlphaState()
     {
         switch (state)
         {
