@@ -13,11 +13,11 @@ public class LoginManager : MonoBehaviour {
     {
         // 生成したオブジェクトを子オブジェクトに変更
 
-        obj = Instantiate(LoginTruySyncManager, transform.position, Quaternion.identity);
-        obj.transform.parent = transform;
+        //obj = Instantiate(LoginTruySyncManager, transform.position, Quaternion.identity);
+        //obj.transform.parent = transform;
 
-        obj = Instantiate(LoginObject, transform.position, Quaternion.identity);
-        obj.transform.parent = transform;
+        //obj = Instantiate(LoginObject, transform.position, Quaternion.identity);
+        //obj.transform.parent = transform;
     }
 
     // Update is called once per frame

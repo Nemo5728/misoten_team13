@@ -14,10 +14,9 @@ public class FadeSceneManager : MonoBehaviour {
 
     Fade fade;
 
-    //canvas系対応難しいなー
     [SerializeField, TooltipAttribute("フェードさせたいMeshRendererを持ったやつ")] private GameObject[] fadeObjectForMesh;
-    [SerializeField, TooltipAttribute("Canvas出すだけ")] private GameObject[] fadeObjectForCanvas;
     [SerializeField, TooltipAttribute("1フレーム毎の変化量")] private float fadeTime;
+    [SerializeField, TooltipAttribute("タイトル例外処理")] private bool titleEnable;
 
     private GameObject[] fadeObject;
     private MeshRenderer[] fadeMesh;
@@ -33,16 +32,9 @@ public class FadeSceneManager : MonoBehaviour {
 
         for (int i = 0; i < fadeObjectForMesh.Length; i++)
         {
-            //fadeObject[i] = Instantiate(fadeObjectForMesh[i], transform.position, Quaternion.identity);
-            //fadeObject[i].transform.parent = transform;
-
             fadeMesh[i] = fadeObjectForMesh[i].GetComponent<MeshRenderer>();
-            fadeMesh[i].material.SetFloat("_alpha", alpha);
-        }
-
-        for (int i = 0; i < fadeObjectForCanvas.Length; i ++)
-        {
-            //Instantiate(fadeObjectForCanvas[i], transform.position, Quaternion.identity);
+            if (titleEnable) fadeMesh[i].material.SetFloat("_alpha", alpha);
+            else fadeMesh[i].material.SetFloat("_loadUVpan", alpha);
         }
     }
 
@@ -56,7 +48,8 @@ public class FadeSceneManager : MonoBehaviour {
 
                 for (int i = 0; i < fadeMesh.Length; i++)
                 {
-                    fadeMesh[i].material.SetFloat("_alpha", alpha);
+                    if (titleEnable) fadeMesh[i].material.SetFloat("_alpha", alpha);
+                    else fadeMesh[i].material.SetFloat("_loadUVpan", alpha);
                 }
 
                 if (alpha >= 1.0f)
@@ -70,7 +63,8 @@ public class FadeSceneManager : MonoBehaviour {
 
                 for (int i = 0; i < fadeMesh.Length; i++)
                 {
-                    fadeMesh[i].material.SetFloat("_alpha", alpha);
+                    if (titleEnable) fadeMesh[i].material.SetFloat("_alpha", alpha);
+                    else fadeMesh[i].material.SetFloat("_loadUVpan", alpha);
                 }
 
                 if (alpha <= 0.0f)
@@ -94,7 +88,8 @@ public class FadeSceneManager : MonoBehaviour {
         fade = Fade.Out;
     }
 
-    public void AllDelete(){
+    public void AllDestroy()
+    {
         Destroy(gameObject);
     }
 }

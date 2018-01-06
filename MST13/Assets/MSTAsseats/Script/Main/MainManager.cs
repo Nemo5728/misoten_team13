@@ -42,7 +42,7 @@ public class MainManager : MonoBehaviour {
 
         //if (info != null) controllerConnect = true;
 
-       BgmManager.Instance.Play("select");
+        BgmManager.Instance.Play("select");
         state = STATE.STATE_TITLE;
         SetState();
 	}
@@ -57,10 +57,15 @@ public class MainManager : MonoBehaviour {
                 if(state == STATE.STATE_TITLE||
                    state == STATE.STATE_RESULT)
                 {
-                    // 選択オブジェクトを削除し、次のステートへ移行
-                    Destroy(selectObj);
-                    NextState(state);
-                    SetState();
+                    //選択オブジェクトを削除し、次のステートへ移行
+                    if(state != STATE.STATE_TITLE)
+                    {
+                        selectObj.GetComponent<FadeSceneManager>().SetFadeStart();
+                    }
+                    else
+                    {
+                        NextState();
+                    }
                 }
            }
         }
@@ -69,18 +74,28 @@ public class MainManager : MonoBehaviour {
             int touch = Input.touchCount;
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Destroy(selectObj);
-                NextState(state);
-                SetState();
+                if(state != STATE.STATE_TITLE)
+                {
+                    selectObj.GetComponent<FadeSceneManager>().SetFadeStart();
+                }
+                else
+                {
+                    NextState();
+                }
             }
-            else if( touch > 0)
+            else if(touch > 0)
             {
                 Touch tg = Input.GetTouch(0);
                 if (tg.phase == TouchPhase.Began)
                 {
-                    Destroy(selectObj);
-                    NextState(state);
-                    SetState();
+                    if(state != STATE.STATE_TITLE)
+                    {
+                        selectObj.GetComponent<FadeSceneManager>().SetFadeStart();
+                    }
+                    else
+                    {
+                        NextState();
+                    }
                 }
             }
 
@@ -98,9 +113,14 @@ public class MainManager : MonoBehaviour {
                     if (Timer >= LOGIN_TIME)
                     {
                         Timer = 0f;
-                        Destroy(selectObj);
-                        NextState(state);
-                        SetState();
+                        if(state != STATE.STATE_TITLE)
+                        {
+                            selectObj.GetComponent<FadeSceneManager>().SetFadeStart();
+                        }
+                        else
+                        {
+                            NextState();
+                        }
                     }
                     break;
                 }
@@ -113,15 +133,34 @@ public class MainManager : MonoBehaviour {
                     if (gametimr >= GAME_TIME)
                     {
                         gametimr = 0f;
-                        Destroy(selectObj);
-                        NextState(state);
-                        SetState();
+                        if(state != STATE.STATE_TITLE)
+                        {
+                            selectObj.GetComponent<FadeSceneManager>().SetFadeStart();
+                        }
+                        else
+                        {
+                            NextState();
+                        }
                     }
                     break;
                 }
         }
 
+        if(state != STATE.STATE_TITLE)
+        {
+            if (selectObj.GetComponent<FadeSceneManager>().GetFadeState() == FadeSceneManager.Fade.End)
+            {
+                NextState();
+            }
+        }
 	}
+
+    private void NextState(){
+        if(state != STATE.STATE_TITLE) selectObj.GetComponent<FadeSceneManager>().AllDestroy();
+        Destroy(selectObj);
+        NextState(state);
+        SetState();
+    }
 
     // ステート管理
     void SetState()
@@ -138,7 +177,7 @@ public class MainManager : MonoBehaviour {
         {
             case STATE.STATE_TITLE:
                 {
-                     BgmManager.Instance.Stop();
+                    BgmManager.Instance.Stop();
                     BgmManager.Instance.Play("gameBGM1");
                     state = STATE.STATE_LOGIN;
 
@@ -147,8 +186,8 @@ public class MainManager : MonoBehaviour {
             case STATE.STATE_LOGIN:
                 {
                     LoginCloneDelete();
-                   BgmManager.Instance.Stop();
-                   BgmManager.Instance.Play("gameBGM2");
+                    BgmManager.Instance.Stop();
+                    BgmManager.Instance.Play("gameBGM2");
                     state = STATE.STATE_GAME;
                     break;
                 }
@@ -156,15 +195,15 @@ public class MainManager : MonoBehaviour {
                 {
                     // クローンの削除
                     GameCloneDelete();
-                 BgmManager.Instance.Stop();
-                   BgmManager.Instance.Play("result");
+                    BgmManager.Instance.Stop();
+                    BgmManager.Instance.Play("result");
                     state = STATE.STATE_RESULT;
                     break;
                 }
             case STATE.STATE_RESULT:
                 {
                     ResultCloneDelete();
-                   BgmManager.Instance.Stop();
+                    BgmManager.Instance.Stop();
                     BgmManager.Instance.Play("select");
                     state = STATE.STATE_TITLE;
                     break;

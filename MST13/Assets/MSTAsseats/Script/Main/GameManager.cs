@@ -12,11 +12,11 @@ public class GameManager : MonoBehaviour {
     void Start()
     {
         // 生成したオブジェクトを子オブジェクトに変更
-        obj = Instantiate(truesyncManager, transform.position, Quaternion.identity);
-        obj.transform.parent = transform;
+        //obj = Instantiate(truesyncManager, transform.position, Quaternion.identity);
+        //obj.transform.parent = transform;
 
-        obj = Instantiate(GameObj, transform.position, Quaternion.identity);
-        obj.transform.parent = transform;
+        //obj = Instantiate(GameObj, transform.position, Quaternion.identity);
+        //obj.transform.parent = transform;
     }
 
     // Update is called once per frame
