@@ -143,247 +143,151 @@ public class player : TrueSyncBehaviour {
         if (time <= 3) return;
         switch(state)
         {
-                case STATE.STATE_AWAKE:
-                    if(gameObject.activeSelf == true)
-                    {
-                        for (int i = 0; i < markerList.Length; i++)
-                        {
-                            TSVector vec;
-                            vec.x = markerList[i].transform.position.x;
-                            vec.y = markerList[i].transform.position.y;
-                            vec.z = markerList[i].transform.position.z;
-
-                            GameObject createMinion;
-
-                            if (i > SHOOTER_VALUE) createMinion = TrueSyncManager.SyncedInstantiate(minionDog, vec, TSQuaternion.identity);
-                            else createMinion = TrueSyncManager.SyncedInstantiate(minionShooter, vec, TSQuaternion.identity);
-
-                            minion mi = createMinion.GetComponent<minion>();
-                            mi.Create(gameObject, i, owner.Id);
-                            minionCount++;
-                        }
-                       
-                        state = STATE.STATE_NORMAL;
-                    }
-  
-                    break;
-                case STATE.STATE_NORMAL:
-                
-                    bool forward = TrueSyncInput.GetBool(INPUT_KEY_FORWARD);
-                    bool back = TrueSyncInput.GetBool(INPUT_KEY_BACK);
-                    bool right = TrueSyncInput.GetBool(INPUT_KEY_RIGHT);
-                    bool left = TrueSyncInput.GetBool(INPUT_KEY_LEFT);
-                    bool space = TrueSyncInput.GetBool(INPUT_KEY_SPACE);
-                    bool mouse = TrueSyncInput.GetBool(INOPUT_MOUSE);
-                    bool kib_y = TrueSyncInput.GetBool(INPUT_KEY_Y);
-                    int Tc = TrueSyncInput.GetInt(INPUT_TAP);
-
-                    TSVector vector = TSVector.zero;
-                    if (forward) directionVector += vector += TSVector.forward;
-                    if (back) directionVector += vector += TSVector.back;
-                    if (left) directionVector += vector += TSVector.left;
-                    if (right) directionVector += vector += TSVector.right;
-
-                    if(kib_y){
-                        rb.AddForce(tsTransform.forward * -knockBackPower, ForceMode.Impulse);
-                    }
-
-
-                    int stickX = -1, stickY = -1;
-                    bool button = false, stickBtn = false;
-
-                    if(TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) stickX = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
-                    if(TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickY = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
-                    if(TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
-                    if(TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
-
-                    // 2017/12/1 追記
-                    // Playerの移動モーション管理
-                    MoveAnimetion(stickX);
-
-                    if(stickX != -1 || stickY != -1){
-                        directionVector.x = vector.x = speed * (stickX / 473);
-                        directionVector.z = vector.z = speed * (stickY / 473);
-                    }
-
-                    if (stickBtn && stickX != -1 && stickY != -1)
-                    {
-                        knockBackValue++;
-                        loveGauge++;
-                            // minion強攻撃へ！
-                    }
-
-                    if(Tc > 0)
-                    {
-                        
-                    }
-
-                    if (kib_y)
-                    {
-                         knockBackValue++;
-                         loveGauge++;
-
-                        // minion強攻撃へ！
-                    }
-                       
-
-                     if (space)
-                     {
-                         powerUpButton++;
-                         powerUpCount = 0.0f;
-                     }
-                     else
-                     {
-                         powerUpCount += Time.deltaTime;
-                     
-                         if (powerUpCount >= powerUpEndTime)
-                         {
-                             powerUpCount = 0.0f;
-                             powerUpButton = 0;
-                         }
-                     }
-
-                     if (powerUpButton > powerUpStart)
-                     {
-                          powerUpFlag = true;
-                     }
-                     else
-                     {
-                         powerUpFlag = false;
-                     }
-
-                   
-                     vector = TSVector.Normalize(vector);
-                     directionVector = TSVector.Normalize(directionVector);
-                     FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
-                     tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
-
-                    if (!(TSVector.Distance(TSVector.zero, tsTransform.position + vector) >= STAGE_LENGTH))
-                        tsTransform.Translate((vector * speed)* TrueSyncManager.DeltaTime, Space.World);
-
-
-                    //ノックバック処理
-                    foreach (minion mi in FindObjectsOfType<minion>())
-                    {
-                        if (mi.GetAttack() && mi.GetOwner() == owner.Id)
-                        {
-                            knockback += knockBackValue;
-                        }
-                    }
-
-                    if (knockback >= knockBackMax)
-                    {
-                        rb.AddForce(tsTransform.forward * -knockBackPower, ForceMode.Impulse);
-                    }
-
-                    if (TSVector.Distance(TSVector.zero, tsTransform.position + rb.velocity) >= STAGE_LENGTH)
-                    {
-                        rb.velocity = TSVector.zero;
-                    }
-
-                    //ミニオンリスポーン処理
+            case STATE.STATE_AWAKE:
+                if(gameObject.activeSelf == true)
+                {
                     for (int i = 0; i < markerList.Length; i++)
                     {
-                        if (minionRespawnCount[i] > 0)
-                        {
-                            minionRespawnCount[i] -= Time.deltaTime;
+                        TSVector vec;
+                        vec.x = markerList[i].transform.position.x;
+                        vec.y = markerList[i].transform.position.y;
+                        vec.z = markerList[i].transform.position.z;
 
-                            if (minionRespawnCount[i] < 0)
-                            {
-                                TSVector vec;
-                                vec.x = markerList[i].transform.position.x;
-                                vec.y = markerList[i].transform.position.y;
-                                vec.z = markerList[i].transform.position.z;
+                        GameObject createMinion;
 
-                                GameObject createMinion;
-                                if (i > SHOOTER_VALUE) createMinion = TrueSyncManager.SyncedInstantiate(minionDog, vec, TSQuaternion.identity);
-                                else createMinion = TrueSyncManager.SyncedInstantiate(minionShooter, vec, TSQuaternion.identity);
-                                minion mi = createMinion.GetComponent<minion>();
-                                mi.Create(gameObject, i, owner.Id);
-                                minionCount++;
-                                
-                            }
-                        }
+                        if (i > SHOOTER_VALUE) createMinion = TrueSyncManager.SyncedInstantiate(minionDog, vec, TSQuaternion.identity);
+                        else createMinion = TrueSyncManager.SyncedInstantiate(minionShooter, vec, TSQuaternion.identity);
+
+                        minion mi = createMinion.GetComponent<minion>();
+                        mi.Create(gameObject, i, owner.Id);
+                        minionCount++;
                     }
+                   
+                    state = STATE.STATE_NORMAL;
+                }
 
-                    //ラブゲージ処理
-                    timeLeft -= Time.deltaTime;
-                    if (timeLeft <= 0)
-                    {
-                        loveGauge += loveGaugeLate;
-                        timeLeft = 1.0f;
-                    }
+                break;
+            case STATE.STATE_NORMAL:
+                bool forward = TrueSyncInput.GetBool(INPUT_KEY_FORWARD);
+                bool back = TrueSyncInput.GetBool(INPUT_KEY_BACK);
+                bool right = TrueSyncInput.GetBool(INPUT_KEY_RIGHT);
+                bool left = TrueSyncInput.GetBool(INPUT_KEY_LEFT);
+                bool space = TrueSyncInput.GetBool(INPUT_KEY_SPACE);
+                bool mouse = TrueSyncInput.GetBool(INOPUT_MOUSE);
+                bool kib_y = TrueSyncInput.GetBool(INPUT_KEY_Y);
+                int Tc = TrueSyncInput.GetInt(INPUT_TAP);
 
-                    if (loveGauge >= loveGaugeMax)
-                    {
-                    //transformCount = transformTime;
-                        AddScoreNum(100);
-                         transformCount = 2f;
-                        state = STATE.STATE_PREPARATION;
-                    }
+                TSVector vector = TSVector.zero;
+                if (forward) directionVector += vector += TSVector.forward;
+                if (back) directionVector += vector += TSVector.back;
+                if (left) directionVector += vector += TSVector.left;
+                if (right) directionVector += vector += TSVector.right;
 
-           
-                    break;
-                case STATE.STATE_PREPARATION:
-                    //変身前処理
-                    // 2017/12/1 追記
-                    anim.SetTrigger("bannerTransform");
-                     // SeManager.Instance.Play("playerrespon");
-                     // 2017/12/6 追記
-                    foreach (minion mi in FindObjectsOfType<minion>())
-                    {
-                        if (owner.Id == mi.GetOwner())
-                        {
-                            mi.SetTransform();
-                        }
-                         
-                    }
-                    GetComponent<ParticleManager>().Play("FX_BannerTransP" + owner.Id, new Vector3(transform.position.x,
-                                                                                                   transform.position.y + 2f,
-                                                                                                   transform.position.z));
-                    state = STATE.STATE_TRANSFORM;
+                if(kib_y){
+                    rb.AddForce(tsTransform.forward * -knockBackPower, ForceMode.Impulse);
+                }
+
+
+                int stickX = -1, stickY = -1;
+                bool button = false, stickBtn = false;
+
+                if(TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) stickX = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
+                if(TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickY = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
+                if(TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
+                if(TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
+
+                // 2017/12/1 追記
+                // Playerの移動モーション管理
+                MoveAnimetion(stickX);
+
+                if(stickX != -1 && stickY != -1){
+                    directionVector.x = vector.x = speed * (stickX / 473);
+                    directionVector.z = vector.z = speed * (stickY / 473);
+                }
+
+                if (stickBtn && stickX != -1 && stickY != -1)
+                {
+                    knockBackValue++;
+                    loveGauge++;
+                        // minion強攻撃へ！
+                }
+
+                if(Tc > 0)
+                {
                     
-                    break;
-                case STATE.STATE_TRANSFORM:
-                    transformCount -= Time.deltaTime;
-                    tsTransform.position += (tsTransform.up * (Time.deltaTime * 1f));
-                    if (transformCount <= 0f)
-                        {  Debug.Log("変身や！");
-                             // 2017/12/6 追加
-                             // 親オブジェクトを参照してmonsterを生成する
-                             GameObject Manager = transform.parent.gameObject;
-                             Manager.GetComponent<PlayManager>().SertActiveMonster();
+                }
 
-                             //Debug.Log("monster" + owner.Id);
-                             GameObject monster = Manager.transform.Find("monster" + owner.Id).gameObject;
-                             monster.GetComponent<monster>().TransformInit(tsTransform.position, tsTransform.rotation);
-                            
-                            //GetComponent<monster>().TransformInit(tsTransform.position, tsTransform.rotation);
-                            //Debug.Log("変化");
-                            gameObject.SetActive(false);
+                if (kib_y)
+                {
+                     knockBackValue++;
+                     loveGauge++;
 
-                            foreach (minion mi in FindObjectsOfType<minion>())
-                            {
-                                if (owner.Id == mi.GetOwner())
-                                {
-                                    mi.Destroy();
-                                }
-                            }
-                             state = STATE.STATE_NONE;
-                        }
+                    // minion強攻撃へ！
+                }
+                   
 
-                        break;
-                case STATE.STATE_KNOCKOUT:
-                    //2017/12/2 追記
-                    anim.SetTrigger("bannerSit");
+                 if (space)
+                 {
+                     powerUpButton++;
+                     powerUpCount = 0.0f;
+                 }
+                 else
+                 {
+                     powerUpCount += Time.deltaTime;
+                 
+                     if (powerUpCount >= powerUpEndTime)
+                     {
+                         powerUpCount = 0.0f;
+                         powerUpButton = 0;
+                     }
+                 }
 
-                    playerRespawnCount -= Time.deltaTime;
+                 if (powerUpButton > powerUpStart)
+                 {
+                      powerUpFlag = true;
+                 }
+                 else
+                 {
+                     powerUpFlag = false;
+                 }
 
-                    if (playerRespawnCount <= 0)
+               
+                 vector = TSVector.Normalize(vector);
+                 directionVector = TSVector.Normalize(directionVector);
+                 FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
+                 tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
+
+                if (!(TSVector.Distance(TSVector.zero, tsTransform.position + vector) >= STAGE_LENGTH))
+                    tsTransform.Translate((vector * speed)* TrueSyncManager.DeltaTime, Space.World);
+
+
+                //ノックバック処理
+                foreach (minion mi in FindObjectsOfType<minion>())
+                {
+                    if (mi.GetAttack() && mi.GetOwner() == owner.Id)
                     {
-                        //2017/12/2 追記
-                        anim.SetTrigger("bannerRise");
-                        for (int i = 0; i < markerList.Length; i++)
+                        knockback += knockBackValue;
+                    }
+                }
+
+                if (knockback >= knockBackMax)
+                {
+                    rb.AddForce(tsTransform.forward * -knockBackPower, ForceMode.Impulse);
+                }
+
+                if (TSVector.Distance(TSVector.zero, tsTransform.position + rb.velocity) >= STAGE_LENGTH)
+                {
+                    rb.velocity = TSVector.zero;
+                }
+
+                //ミニオンリスポーン処理
+                for (int i = 0; i < markerList.Length; i++)
+                {
+                    if (minionRespawnCount[i] > 0)
+                    {
+                        minionRespawnCount[i] -= Time.deltaTime;
+
+                        if (minionRespawnCount[i] < 0)
                         {
                             TSVector vec;
                             vec.x = markerList[i].transform.position.x;
@@ -391,24 +295,119 @@ public class player : TrueSyncBehaviour {
                             vec.z = markerList[i].transform.position.z;
 
                             GameObject createMinion;
-
                             if (i > SHOOTER_VALUE) createMinion = TrueSyncManager.SyncedInstantiate(minionDog, vec, TSQuaternion.identity);
                             else createMinion = TrueSyncManager.SyncedInstantiate(minionShooter, vec, TSQuaternion.identity);
-
                             minion mi = createMinion.GetComponent<minion>();
                             mi.Create(gameObject, i, owner.Id);
                             minionCount++;
-
-                            minionRespawnCount[i] = 0.0f;
+                            
                         }
-
-                        playerRespawnCount = 10f;
-                        state = STATE.STATE_NORMAL;
                     }
+                }
+
+                //ラブゲージ処理
+                timeLeft -= Time.deltaTime;
+                if (timeLeft <= 0)
+                {
+                    loveGauge += loveGaugeLate;
+                    timeLeft = 1.0f;
+                }
+
+                if (loveGauge >= loveGaugeMax)
+                {
+                //transformCount = transformTime;
+                    AddScoreNum(100);
+                     transformCount = 2f;
+                    state = STATE.STATE_PREPARATION;
+                }
+
+       
+                break;
+            case STATE.STATE_PREPARATION:
+                //変身前処理
+                // 2017/12/1 追記
+                anim.SetTrigger("bannerTransform");
+                 // SeManager.Instance.Play("playerrespon");
+                 // 2017/12/6 追記
+                foreach (minion mi in FindObjectsOfType<minion>())
+                {
+                    if (owner.Id == mi.GetOwner())
+                    {
+                        mi.SetTransform();
+                    }
+                     
+                }
+                GetComponent<ParticleManager>().Play("FX_BannerTransP" + owner.Id, new Vector3(transform.position.x,
+                                                                                               transform.position.y + 2f,
+                                                                                               transform.position.z));
+                state = STATE.STATE_TRANSFORM;
+                
+                break;
+            case STATE.STATE_TRANSFORM:
+                transformCount -= Time.deltaTime;
+                tsTransform.position += (tsTransform.up * (Time.deltaTime * 1f));
+                if (transformCount <= 0f)
+                    {  Debug.Log("変身や！");
+                         // 2017/12/6 追加
+                         // 親オブジェクトを参照してmonsterを生成する
+                         GameObject Manager = transform.parent.gameObject;
+                         Manager.GetComponent<PlayManager>().SertActiveMonster();
+
+                         //Debug.Log("monster" + owner.Id);
+                         GameObject monster = Manager.transform.Find("monster" + owner.Id).gameObject;
+                         monster.GetComponent<monster>().TransformInit(tsTransform.position, tsTransform.rotation);
+                        
+                        //GetComponent<monster>().TransformInit(tsTransform.position, tsTransform.rotation);
+                        //Debug.Log("変化");
+                        gameObject.SetActive(false);
+
+                        foreach (minion mi in FindObjectsOfType<minion>())
+                        {
+                            if (owner.Id == mi.GetOwner())
+                            {
+                                mi.Destroy();
+                            }
+                        }
+                         state = STATE.STATE_NONE;
+                    }
+
                     break;
-                default:
-                    break;
-            };
+            case STATE.STATE_KNOCKOUT:
+                //2017/12/2 追記
+                anim.SetTrigger("bannerSit");
+
+                playerRespawnCount -= Time.deltaTime;
+
+                if (playerRespawnCount <= 0)
+                {
+                    //2017/12/2 追記
+                    anim.SetTrigger("bannerRise");
+                    for (int i = 0; i < markerList.Length; i++)
+                    {
+                        TSVector vec;
+                        vec.x = markerList[i].transform.position.x;
+                        vec.y = markerList[i].transform.position.y;
+                        vec.z = markerList[i].transform.position.z;
+
+                        GameObject createMinion;
+
+                        if (i > SHOOTER_VALUE) createMinion = TrueSyncManager.SyncedInstantiate(minionDog, vec, TSQuaternion.identity);
+                        else createMinion = TrueSyncManager.SyncedInstantiate(minionShooter, vec, TSQuaternion.identity);
+
+                        minion mi = createMinion.GetComponent<minion>();
+                        mi.Create(gameObject, i, owner.Id);
+                        minionCount++;
+
+                        minionRespawnCount[i] = 0.0f;
+                    }
+
+                    playerRespawnCount = 10f;
+                    state = STATE.STATE_NORMAL;
+                }
+                break;
+            default:
+                break;
+        };
         
 
         signObject.GetComponent<MeshRenderer>().material.SetFloat("_barValue", (float)loveGauge / 100);

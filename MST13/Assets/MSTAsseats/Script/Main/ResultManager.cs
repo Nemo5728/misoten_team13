@@ -11,8 +11,8 @@ public class ResultManager : MonoBehaviour {
 	void Start () 
     {
         // 生成したオブジェクトを子オブジェクトに変更
-        obj = Instantiate(ResultObject, transform.position, Quaternion.identity);
-        obj.transform.parent = transform;
+        //obj = Instantiate(ResultObject, transform.position, Quaternion.identity);
+        //obj.transform.parent = transform;
 	}
 	
 	// Update is called once per frame
