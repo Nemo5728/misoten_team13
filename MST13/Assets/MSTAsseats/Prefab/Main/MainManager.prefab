@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ManagerList:
   - {fileID: 1920032993185280, guid: 31e00e62a18ae400dad5f8b74aaca1d5, type: 2}
-  - {fileID: 1973401212857140, guid: 0ac08438b3a6e462dacec6c56fc465b4, type: 2}
   - {fileID: 1871675396525442, guid: a60f44c0f9d3b4b17bb0459d390f37b4, type: 2}
   - {fileID: 1641879522439696, guid: 3cf319c363fc44f6f874e134763293dd, type: 2}
   - {fileID: 1301897232668920, guid: 4d43684d0a3074c9b8aa9c1c83cd91ff, type: 2}
+  state: 0

@@ -343,6 +343,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4879794792242210}
+  - component: {fileID: 114860151942888040}
   m_Layer: 0
   m_Name: GameObj
   m_TagString: Untagged
@@ -1296,6 +1297,27 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
+--- !u!114 &114860151942888040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1716284535868580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8d156a961c5a4689af14f3a232e2cca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeObjectForMesh:
+  - {fileID: 1623139955347428}
+  - {fileID: 1854093876556096}
+  - {fileID: 1078855238014386}
+  - {fileID: 1709174621542822}
+  - {fileID: 1426371875676358}
+  fadeObjectForCanvas:
+  - {fileID: 1387546197732966}
+  - {fileID: 1532360223721250}
+  fadeTime: 0.01
 --- !u!114 &114954103691539542
 MonoBehaviour:
   m_ObjectHideFlags: 1
