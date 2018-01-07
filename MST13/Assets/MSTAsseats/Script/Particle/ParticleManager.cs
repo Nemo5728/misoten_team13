@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -48,11 +49,18 @@ public class ParticleManager : MonoBehaviour
 
         particle.transform.position = position;
         ParticleSystem ps = particle.GetComponent<ParticleSystem>();
+
         if (roop)
         {
             StartCoroutine(WaitDestroy(ps.time, particle));
 
         }
+        else
+        {
+            // パーティクルが終わり次第削除
+            Destroy(particle, ps.duration);
+        }
+       
     }
 
     IEnumerator WaitDestroy(float frame, GameObject obj)
@@ -70,5 +78,8 @@ public class ParticleManager : MonoBehaviour
         }
     }
 
-
+    internal void Play(string v)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -117,7 +117,8 @@ public class MainManager : MonoBehaviour {
         }
 	}
 
-    private void NextState(){
+    private void NextState()
+    {
         Destroy(selectObj);
         NextState(state);
         SetState();
@@ -146,7 +147,7 @@ public class MainManager : MonoBehaviour {
                 }
             case STATE.STATE_LOGIN:
                 {
-                    LoginCloneDelete();
+                  //LoginCloneDelete();
                     BgmManager.Instance.Stop();
                     BgmManager.Instance.Play("gameBGM2");
                     state = STATE.STATE_GAME;
@@ -236,9 +237,9 @@ public class MainManager : MonoBehaviour {
 
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
 
-        foreach (GameObject play in objs)
+        foreach (GameObject player in objs)
         {
-            Destroy(play);
+            Destroy(player);
         }
     }
 
