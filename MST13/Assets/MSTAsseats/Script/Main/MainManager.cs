@@ -44,6 +44,7 @@ public class MainManager : MonoBehaviour {
 
         BgmManager.Instance.Play("select");
         state = STATE.STATE_TITLE;
+
         SetState();
 	}
 
@@ -57,6 +58,7 @@ public class MainManager : MonoBehaviour {
                 if(state == STATE.STATE_TITLE||
                    state == STATE.STATE_RESULT)
                 {
+                    SeManager.Instance.Play("miniondown");
                     //選択オブジェクトを削除し、次のステートへ移行
                     selectObj.GetComponent<FadeSceneManager>().SetFadeStart();
                 }
@@ -67,6 +69,7 @@ public class MainManager : MonoBehaviour {
             int touch = Input.touchCount;
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                SeManager.Instance.Play("miniondown");
                 selectObj.GetComponent<FadeSceneManager>().SetFadeStart();
             }
             else if(touch > 0)
@@ -74,6 +77,7 @@ public class MainManager : MonoBehaviour {
                 Touch tg = Input.GetTouch(0);
                 if (tg.phase == TouchPhase.Began)
                 {
+                    SeManager.Instance.Play("miniondown");
                     selectObj.GetComponent<FadeSceneManager>().SetFadeStart();
                 }
             }
@@ -139,6 +143,7 @@ public class MainManager : MonoBehaviour {
         {
             case STATE.STATE_TITLE:
                 {
+                   
                     BgmManager.Instance.Stop();
                     BgmManager.Instance.Play("gameBGM1");
                     state = STATE.STATE_LOGIN;

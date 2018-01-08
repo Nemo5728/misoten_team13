@@ -17502,7 +17502,7 @@ MonoBehaviour:
   attackSpeed: 0
   respawnTime: 10
   speed:
-    _serializedValue: 107374182400
+    _serializedValue: 128849018880
   markerList:
   - {fileID: 1663460944513190}
   - {fileID: 1342187904313466}
@@ -17517,7 +17517,7 @@ MonoBehaviour:
     type: 2}
   sign: {fileID: 1000012717119552, guid: 741baa47259bb7b4ab42b14add93120f, type: 2}
   loveGaugeMax: 100
-  loveGaugeLate: 1
+  loveGaugeLate: 10
   health: 100
   transformTime: 5
   attack: 1
@@ -17664,7 +17664,7 @@ MonoBehaviour:
   attackSpeed: 0
   respawnTime: 10
   speed:
-    _serializedValue: 107374182400
+    _serializedValue: 128849018880
   markerList:
   - {fileID: 1358391136970080}
   - {fileID: 1514772055458994}
@@ -17815,7 +17815,7 @@ MonoBehaviour:
   attackSpeed: 0
   respawnTime: 10
   speed:
-    _serializedValue: 107374182400
+    _serializedValue: 128849018880
   markerList:
   - {fileID: 1680323122286194}
   - {fileID: 1033913919578696}
@@ -18137,7 +18137,7 @@ MonoBehaviour:
   attackSpeed: 0
   respawnTime: 10
   speed:
-    _serializedValue: 107374182400
+    _serializedValue: 128849018880
   markerList:
   - {fileID: 1986454656483886}
   - {fileID: 1477631521766030}

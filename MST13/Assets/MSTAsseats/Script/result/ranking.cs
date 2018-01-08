@@ -35,12 +35,13 @@ public class ranking : MonoBehaviour
     private GameObject[] pr_BarCol = new GameObject[4];
     private GameObject[] pr_BarTop = new GameObject[4];
     private GameObject pr_Monster;
+    private GameObject particle;
 
     // Use this for initialization
     void Start()
     {
         TrueSyncManager.EndSimulation();
-
+        particle = GameObject.Find("Particle");
         Transform text;
         float addy = 0.0f;
         int minscore = 9999999;
@@ -110,12 +111,13 @@ public class ranking : MonoBehaviour
             if (pr_rank[i] == 1)
             {
                 //一位固有演出をするプレイヤーの設定
+                particle.GetComponent<ParticleManager>().Play("FX_ResultFireworkP" + pr_rank[i] , transform.position);
                 a = i;
                 text.GetComponent<Renderer>().material.SetFloat("_Crown", 1.0f);
          
             }
         }
-        GetComponent<ParticleManager>().Play("FX_ResultFireworkP1", transform.position);
+       
     }
 
     // Update is called once per frame

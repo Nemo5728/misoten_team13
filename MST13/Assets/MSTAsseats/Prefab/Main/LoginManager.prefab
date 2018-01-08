@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 114546695945985996}
   m_Layer: 0
   m_Name: LoginManager
-  m_TagString: Untagged
+  m_TagString: PlayManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

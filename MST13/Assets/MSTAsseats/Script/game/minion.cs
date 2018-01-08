@@ -14,7 +14,7 @@ public class minion : TrueSyncBehaviour {
     private bool attack;
     private player p;
     private FP range = 1.0f;
-
+    GameObject particle;
     // 2017/12/2 追加
     private Animator anim;  // アニメーター
 
@@ -90,11 +90,13 @@ public class minion : TrueSyncBehaviour {
         anim = GetComponent<Animator>();    // アニメーションの取得
 
         anim.SetTrigger("minionSpawn");        // 誕生アニメーション
+       
        // SeManager.Instance.Play("minionRespon");
         state = STATE.STATE_NORMAL;
 
         isBullet = bullet;
         p = parentPlayer.GetComponent<player>();
+        particle = GameObject.Find("Particle");
     }
 
     public override void OnSyncedUpdate()
@@ -180,7 +182,7 @@ public class minion : TrueSyncBehaviour {
                                         tsTransform.LookAt(vector);
 
                                         anim.SetTrigger("minionWeakAttack");
-                                     //   SeManager.Instance.Play("minionWeakAttack");
+
                                         coolTime = attackSpeed;
                                         attack = true;
                                         p = parentPlayer.GetComponent<player>();
@@ -206,10 +208,12 @@ public class minion : TrueSyncBehaviour {
                                         {
                                             if (!p.GetPowerUp())
                                             {
+                                                SeManager.Instance.Play("minionWeakAttack");
                                                 targetMinion.AddDamage(attackValue);
                                             }
                                             else
                                             {
+                                                SeManager.Instance.Play("minionWeakAttack");
                                                 targetMinion.AddDamage(powerUpAttackValue);
                                             }
                                         }
@@ -224,7 +228,7 @@ public class minion : TrueSyncBehaviour {
                                         tsTransform.LookAt(vector);
 
                                         anim.SetTrigger("minionWeakAttack");
-                                     //   SeManager.Instance.Play("minionStrAttack");
+                                       
                                         coolTime = attackSpeed;
                                         attack = true;
                                         p = parentPlayer.GetComponent<player>();
@@ -250,10 +254,12 @@ public class minion : TrueSyncBehaviour {
                                         {
                                             if (!p.GetPowerUp())
                                             {
+                                                SeManager.Instance.Play("minionStrAttack");
                                                 targetMinion.AddDamage(attackValue);
                                             }
                                             else
                                             {
+                                                SeManager.Instance.Play("minionStrAttack");
                                                 targetMinion.AddDamage(powerUpAttackValue);
                                             }
                                         }
@@ -283,6 +289,7 @@ public class minion : TrueSyncBehaviour {
 
                     if (health <= 0)
                     {
+                       
                         // downへ
                         state = STATE.STATE_DOWN;
                     }
@@ -308,20 +315,19 @@ public class minion : TrueSyncBehaviour {
                 {
                     // 2017/12/2 追記
                     anim.SetTrigger("minionDown"); // ダウン
+                    bool isRespon = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.minionRespon");
                     SeManager.Instance.Play("miniondown");
-                    bool isRespon = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.minion_down");
-
                     // ダウンモーションが終了したら
 
-                    TrueSyncManager.SyncedDestroy(gameObject);
-                    //Debug.Log("responする！!");
-
-                    p.SetResporn(respawnTime, parentMarker);
+                   
 
                     if (isRespon == true)
                     {
                       
-                       
+                        TrueSyncManager.SyncedDestroy(gameObject);
+                        //Debug.Log("responする！!");
+
+                        p.SetResporn(respawnTime, parentMarker);
                     }
                     break;
                 }
@@ -336,6 +342,7 @@ public class minion : TrueSyncBehaviour {
     {
         if (state != STATE.STATE_NORMAL) return;
 
+        particle.GetComponent<ParticleManager>().Play("FX_Dying_Pulse", transform.position);
         health -= damage;
 
         if(health <= 0)
