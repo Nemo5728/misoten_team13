@@ -57,8 +57,6 @@ GameObject:
   - component: {fileID: 23110075496659962}
   - component: {fileID: 114463634571043124}
   - component: {fileID: 114539449088452020}
-  - component: {fileID: 114993684067038264}
-  - component: {fileID: 114962682189222558}
   m_Layer: 0
   m_Name: Shooter_Bullet2
   m_TagString: Bullet
@@ -74,7 +72,7 @@ Transform:
   m_GameObject: {fileID: 1453660371315884}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 4495587579143970}
   m_Father: {fileID: 4643431267903114}
@@ -88,7 +86,7 @@ Transform:
   m_GameObject: {fileID: 1568516132001682}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 4162176312124424}
   m_RootOrder: 0
@@ -101,7 +99,7 @@ Transform:
   m_GameObject: {fileID: 1744654209434920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 4162176312124424}
   m_Father: {fileID: 0}
@@ -168,7 +166,7 @@ MonoBehaviour:
   speed:
     _serializedValue: 42949672960
   range:
-    _serializedValue: 4294967296
+    _serializedValue: 21474836480
 --- !u!114 &114539449088452020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -198,64 +196,14 @@ MonoBehaviour:
       _serializedValue: 4294967296
   _scale:
     x:
-      _serializedValue: 4294967296
+      _serializedValue: 21474836480
     y:
-      _serializedValue: 4294967296
+      _serializedValue: 21474836480
     z:
-      _serializedValue: 4294967296
+      _serializedValue: 21474836480
   _serialized: 1
   tsCollider: {fileID: 0}
   tsParent: {fileID: 0}
---- !u!114 &114962682189222558
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1744654209434920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8561a4124465f743903b76d8cf232a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mass:
-    _serializedValue: 4294967296
-  _useGravity: 1
-  _isKinematic: 0
-  _linearDrag:
-    _serializedValue: 0
-  _angularDrag:
-    _serializedValue: 214748368
-  interpolation: 0
-  _constraints: 0
---- !u!114 &114993684067038264
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1744654209434920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2761f79677a73b84cbeba46eda8c3766, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isTrigger: 0
-  tsMaterial: {fileID: 0}
-  center:
-    x:
-      _serializedValue: 0
-    y:
-      _serializedValue: 0
-    z:
-      _serializedValue: 0
-  lossyScale:
-    x:
-      _serializedValue: 4294967296
-    y:
-      _serializedValue: 4294967296
-    z:
-      _serializedValue: 4294967296
-  tsTransform: {fileID: 114539449088452020}
-  _size: {x: 1, y: 1, z: 1}
 --- !u!198 &198261140345036828
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -313,7 +261,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1966679548
+  randomSeed: -1408573405
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -587,7 +535,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -628,7 +576,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -3379,7 +3327,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 729908437
+  randomSeed: -297593722
   InitialModule:
     serializedVersion: 3
     enabled: 1
