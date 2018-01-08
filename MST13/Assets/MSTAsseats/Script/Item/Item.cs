@@ -10,7 +10,7 @@ public class Item :  TrueSyncBehaviour
 
     [AddTracking]
     bool bUse;
-
+    private GameObject particle;
     private float time;
     void Start()
     {
@@ -24,7 +24,25 @@ public class Item :  TrueSyncBehaviour
 
     public override void OnSyncedStart()
     {
+        particle = GameObject.Find("Particle");
         time = 0f;
+
+        if(this.gameObject.tag == "ItemLoveUp")
+        {
+            particle.GetComponent<ParticleManager>().Play("FX_ItemAppear_core", new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z));
+        }
+        else if (this.gameObject.tag == "ItemPower")
+        {
+            particle.GetComponent<ParticleManager>().Play("FX_ItemAppear_core", new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z));
+        }
+        else if (this.gameObject.tag == "ItemMiniUp")
+        {
+            particle.GetComponent<ParticleManager>().Play("FX_ItemAppear_core", new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z));
+        }
+        else if (this.gameObject.tag == "ItemSpeed")
+        {
+            particle.GetComponent<ParticleManager>().Play("FX_ItemAppear_core", new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z));
+        }
         /*
         if(tag == "ItemLoveUp")
         {

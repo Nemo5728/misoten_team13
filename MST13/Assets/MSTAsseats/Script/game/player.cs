@@ -25,6 +25,7 @@ public class player : TrueSyncBehaviour {
     private TSRigidBody rb = null;
     private TSVector directionVector = TSVector.zero;
     private ControllerInfo info = null;
+    private GameObject particle;
 
     private float[] minionRespawnCount = new float[8];
 
@@ -39,6 +40,7 @@ public class player : TrueSyncBehaviour {
     private bool powerUpFlag;
     private TSVector move;
     private GameObject signObject;
+    private bool controllerConnect;
     private int knockback;
     public GameObject ManagerScore;
     // 2017/12/1 追加
@@ -83,11 +85,13 @@ public class player : TrueSyncBehaviour {
 
     public override void OnSyncedStart()
     {
+        particle = GameObject.Find("Particle");
         ManagerScore = transform.parent.gameObject;
         powerUpCount = 0.0f;
         powerUpButton = 0;
         powerUpFlag = false;
         move = TSVector.zero;
+        controllerConnect = false;
         rb = GetComponent<TSRigidBody>();
         knockback = 0;
         TSVector signPos = new TSVector(tsTransform.position.x, tsTransform.position.y + 13f, tsTransform.position.z);
@@ -123,15 +127,21 @@ public class player : TrueSyncBehaviour {
 
         info = BLEControlManager.GetControllerInfo();
 
-        int stickX = info.stickX;
-        int stickY = info.stickY;
-        bool button = info.isButtonDown;
-        bool stickBtn = info.isStickDown;
+        if (info != null) controllerConnect = true;
 
-        TrueSyncInput.SetInt(INPUT_CONTROLLER_STICKX, stickX);
-        TrueSyncInput.SetInt(INPUT_CONTROLLER_STICKY, stickY);
-        TrueSyncInput.SetBool(INPUT_CONTROLLER_BUTTON, button);
-        TrueSyncInput.SetBool(INPUT_CONTROLLER_STICKBUTTON, stickBtn);
+        if(controllerConnect)
+        {
+            int stickX = info.stickX;
+            int stickY = info.stickY;
+            bool button = info.isButtonDown;
+            bool stickBtn = info.isStickDown;
+
+            TrueSyncInput.SetInt(INPUT_CONTROLLER_STICKX, stickX);
+            TrueSyncInput.SetInt(INPUT_CONTROLLER_STICKY, stickY);
+            TrueSyncInput.SetBool(INPUT_CONTROLLER_BUTTON, button);
+            TrueSyncInput.SetBool(INPUT_CONTROLLER_STICKBUTTON, stickBtn);
+        }
+       
     }
 
     public override void OnSyncedUpdate()
@@ -162,7 +172,7 @@ public class player : TrueSyncBehaviour {
                         mi.Create(gameObject, i, owner.Id);
                         minionCount++;
                     }
-                   
+                    SeManager.Instance.Play("minionRespon");
                     state = STATE.STATE_NORMAL;
                 }
 
@@ -187,30 +197,34 @@ public class player : TrueSyncBehaviour {
                     rb.AddForce(tsTransform.forward * -knockBackPower, ForceMode.Impulse);
                 }
 
-
-                int stickX = -1, stickY = -1;
-                bool button = false, stickBtn = false;
-
-                if(TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) stickX = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
-                if(TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickY = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
-                if(TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
-                if(TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
-
-                // 2017/12/1 追記
-                // Playerの移動モーション管理
-                MoveAnimetion(stickX);
-
-                if(stickX != -1 && stickY != -1){
-                    directionVector.x = vector.x = speed * (stickX / 473);
-                    directionVector.z = vector.z = speed * (stickY / 473);
-                }
-
-                if (stickBtn && stickX != -1 && stickY != -1)
+                if(controllerConnect)
                 {
-                    knockBackValue++;
-                    loveGauge++;
+                    int stickX = -1, stickY = -1;
+                    bool button = false, stickBtn = false;
+
+                    if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) stickX = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
+                    if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickY = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
+                    if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
+                    if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
+
+                    // 2017/12/1 追記
+                    // Playerの移動モーション管理
+                    MoveAnimetion(stickX);
+
+                    if (stickX != -1 && stickY != -1)
+                    {
+                        directionVector.x = vector.x = speed * (stickX / 473);
+                        directionVector.z = vector.z = speed * (stickY / 473);
+                    }
+
+                    if (stickBtn && stickX != -1 && stickY != -1)
+                    {
+                        knockBackValue++;
+                        loveGauge++;
                         // minion強攻撃へ！
+                    }
                 }
+             
 
                 if(Tc > 0)
                 {
@@ -272,6 +286,7 @@ public class player : TrueSyncBehaviour {
 
                 if (knockback >= knockBackMax)
                 {
+                    particle.GetComponent<ParticleManager>().Play("FX_HitEffect_back", transform.position);
                     rb.AddForce(tsTransform.forward * -knockBackPower, ForceMode.Impulse);
                 }
 
@@ -337,9 +352,11 @@ public class player : TrueSyncBehaviour {
                     }
                      
                 }
-                GetComponent<ParticleManager>().Play("FX_BannerTransP" + owner.Id, new Vector3(transform.position.x,
-                                                                                               transform.position.y + 2f,
-                                                                                               transform.position.z));
+        
+                particle.GetComponent<ParticleManager>().Play("FX_BannerTransP" + owner.Id, 
+                                                              new Vector3(transform.position.x, 
+                                                                          transform.position.y + 2f,
+                                                                          transform.position.z));
                 state = STATE.STATE_TRANSFORM;
                 
                 break;
@@ -432,6 +449,7 @@ public class player : TrueSyncBehaviour {
             //2017/12/2 追記
             anim.SetTrigger("bannerDown");
             SeManager.Instance.Play("playerdown");
+           
             state = STATE.STATE_KNOCKOUT;
             playerRespawnCount = respawnTime;
         }
@@ -499,27 +517,31 @@ public class player : TrueSyncBehaviour {
    
     public void OnSyncedCollisionEnter(TSCollision col)
     {
+        // アイテム
         if (col.gameObject.tag == "ItemLoveUp")
         {
+            particle.GetComponent<ParticleManager>().Play("FX_itemGot_Gauge", new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z));
             loveGauge += 10;
             AddScoreNum(10);
 
         }
         else if (col.gameObject.tag == "ItemMiniUp")
         {
+            particle.GetComponent<ParticleManager>().Play("FX_itemGot_Respawn", new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z));
             SetItemResponMinion();
             AddScoreNum(10);
         }
         else if (col.gameObject.tag == "ItemSpeed")
         {
-            GetComponent<ParticleManager>().Play("FX_SpeedUp" + owner.Id, new Vector3(transform.position.x,
-                                                                                   transform.position.y + 2f,
-                                                                                   transform.position.z));
+            particle.GetComponent<ParticleManager>().Play("FX_itemGot_Speed", new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z));
+         
             speed += 5f;
             AddScoreNum(10);
+            particle.GetComponent<ParticleManager>().Play("FX_SpeedUp", new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z));
         }
         else if (col.gameObject.tag == "ItemPower")
         {
+            particle.GetComponent<ParticleManager>().Play("FX_itemGot_Power", new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z));
             speed += 3f;
             AddScoreNum(10);
         }

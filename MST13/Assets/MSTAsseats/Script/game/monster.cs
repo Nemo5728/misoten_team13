@@ -31,7 +31,7 @@ public class monster : TrueSyncBehaviour {
     private bool powerUpFlag;
     private bool controllerConnect;
     private bool bAttack;               // 攻撃
-
+    private GameObject particle;           // particle
     private Animator anime;             //アニメーター
     private TSVector move;
     private GameObject ready;           // readyオブジェクト
@@ -97,6 +97,7 @@ public class monster : TrueSyncBehaviour {
 	// 初期化
 	public override void OnSyncedStart()
 	{
+        particle = GameObject.Find("Particle");
         ManagerScore = transform.parent.gameObject;
         DefSpeed = speed;
         ready = GameObject.Find("ready");
@@ -133,8 +134,8 @@ public class monster : TrueSyncBehaviour {
         TrueSyncInput.SetBool(INPUT_ATTACK,weakAttack);
 
         //BLEなんちゃら
-        //info = BLEControlManager.GetControllerInfo();
-        info = SerialControllManager.GetControllerInfo();
+        info = BLEControlManager.GetControllerInfo();
+       // info = SerialControllManager.GetControllerInfo();
         if (info != null) controllerConnect = true;
 
         if (controllerConnect)
@@ -215,7 +216,10 @@ public class monster : TrueSyncBehaviour {
                         // 弱攻撃モーション
                         anime.SetTrigger("monsterStrAttack");
                         SeManager.Instance.Play("monsterStrAttack");
-                        GetComponent<ParticleManager>().Play("FX_SwingB" , transform.position);
+                        particle.GetComponent<ParticleManager>().Play("FX_SwingB",
+                                                              new Vector3(transform.position.x,
+                                                                          transform.position.y + 2f,
+                                                                          transform.position.z));
 
 
                          foreach (minion mi in FindObjectsOfType<minion>())
@@ -243,7 +247,10 @@ public class monster : TrueSyncBehaviour {
                         // 弱攻撃モーション
                         anime.SetTrigger("monsterWeakAttack");
                         SeManager.Instance.Play("monsterWeakAttack");
-                        GetComponent<ParticleManager>().Play("FX_SwingA", transform.position);
+                        particle.GetComponent<ParticleManager>().Play("FX_SwingA",
+                                                              new Vector3(transform.position.x,
+                                                                          transform.position.y + 2f,
+                                                                          transform.position.z));
                         SeManager.Instance.Play("monster-attack.mp3");
                         //HitWeakAttack(hitWeakObject, hitWeakOffset);
                         foreach (minion mi in FindObjectsOfType<minion>())
@@ -289,7 +296,10 @@ public class monster : TrueSyncBehaviour {
                         // 弱攻撃モーション
                         anime.SetTrigger("monsterStrAttack");
                         SeManager.Instance.Play("monsterStrAttack");
-                        GetComponent<ParticleManager>().Play("FX_SwingB", transform.position);
+                        particle.GetComponent<ParticleManager>().Play("FX_SwingB",
+                                                              new Vector3(transform.position.x,
+                                                                          transform.position.y + 2f,
+                                                                          transform.position.z));
 
                          foreach (minion mi in FindObjectsOfType<minion>())
                         {
@@ -315,7 +325,10 @@ public class monster : TrueSyncBehaviour {
                         // 弱攻撃モーション
                         anime.SetTrigger("monsterWeakAttack");
                         SeManager.Instance.Play("monsterWeakAttack");
-                        GetComponent<ParticleManager>().Play("FX_SwingA", transform.position);
+                        particle.GetComponent<ParticleManager>().Play("FX_SwingA",
+                                                              new Vector3(transform.position.x,
+                                                                          transform.position.y + 2f,
+                                                                          transform.position.z));
 
                         foreach (minion mi in FindObjectsOfType<minion>())
                         {
@@ -345,12 +358,18 @@ public class monster : TrueSyncBehaviour {
                 // 召喚時
                 case STATE.STATE_TRANSFORM:
                 {
+                        particle = GameObject.Find("Particle");
                         // 出現モーション
                         //anime.SetTrigger("monsterTransform");
                      //   SeManager.Instance.Play("monsterrespon");
+                        particle.GetComponent<ParticleManager>().Play("FX_Trans_PulseP" + owner.Id,
+                                                              new Vector3(transform.position.x,
+                                                                          transform.position.y + 2f,
+                                                                          transform.position.z));
                         bool isTransform = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monster_Idle");
                         if (isTransform == true)
                         {
+                            
                             Debug.Log("アイドルへ");
                             state = STATE.STATE_NORMAL;
                         }
@@ -413,7 +432,10 @@ public class monster : TrueSyncBehaviour {
                         // 撃破モーション
                         anime.SetTrigger("monsterDown");
                         SeManager.Instance.Play("monsterdown");
-                        GetComponent<ParticleManager>().Play("FX_TransOff_PulseP" + owner.Id, transform.position);
+                        particle.GetComponent<ParticleManager>().Play("FX_TransOff_PulseP" + owner.Id,
+                                                              new Vector3(transform.position.x,
+                                                                          transform.position.y + 2f,
+                                                                          transform.position.z));
 
                         // リスポーンステートになったら
                         bool isDown = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monterOut");
@@ -434,7 +456,11 @@ public class monster : TrueSyncBehaviour {
                         //Debug.Log("モンスター時間消滅");
                         // 時間切れ
                         anime.SetTrigger("monsterSplit");
-                        GetComponent<ParticleManager>().Play("FX_TransOff_PulseP" + owner.Id, transform.position);
+                        SeManager.Instance.Play("monsterdown");
+                        particle.GetComponent<ParticleManager>().Play("FX_TransOff_PulseP" + owner.Id,
+                                                              new Vector3(transform.position.x,
+                                                                          transform.position.y + 2f,
+                                                                          transform.position.z));
                         // リスポーンステートになったら
                         bool isSplit = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monterOut");
 
@@ -492,7 +518,10 @@ public class monster : TrueSyncBehaviour {
         // 被ダメ
         if (c.gameObject.tag == "minion")
         {
-            Debug.Log("minionからDamage!");
+            particle.GetComponent<ParticleManager>().Play("FX_MonsterDamageP" + owner.Id,
+                                                              new Vector3(transform.position.x,
+                                                                          transform.position.y + 2f,
+                                                                          transform.position.z));
             AddDamage(1);
         }
     }

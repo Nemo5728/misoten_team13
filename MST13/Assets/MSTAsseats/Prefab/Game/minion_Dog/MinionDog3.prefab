@@ -727,7 +727,7 @@ MonoBehaviour:
   searchRange: 6
   outRange: 10
   attackValue: 3
-  powerUpAttackValue: 0
+  powerUpAttackValue: 5
   speed: 10
   respawnTime: 10
   boidRange:

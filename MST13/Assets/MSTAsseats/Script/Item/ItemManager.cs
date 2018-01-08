@@ -17,6 +17,7 @@ public class ItemManager : TrueSyncBehaviour {
 
     public override void OnSyncedStart()
     {
+       
         timer = 0f;
     }
 
@@ -33,6 +34,7 @@ public class ItemManager : TrueSyncBehaviour {
                                                                   -0.5f,
                                                                   TSRandom.Range(-30f, 30f)),
                                                                   TSQuaternion.identity);
+          
             timer = 0f;
         }
     }
