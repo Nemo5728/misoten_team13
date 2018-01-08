@@ -319,15 +319,15 @@ public class minion : TrueSyncBehaviour {
                     SeManager.Instance.Play("miniondown");
                     // ダウンモーションが終了したら
 
-                   
+
+                        TrueSyncManager.SyncedDestroy(gameObject);
+                    //Debug.Log("responする！!");
+
+                    p.SetResporn(respawnTime, parentMarker);
 
                     if (isRespon == true)
                     {
                       
-                        TrueSyncManager.SyncedDestroy(gameObject);
-                        //Debug.Log("responする！!");
-
-                        p.SetResporn(respawnTime, parentMarker);
                     }
                     break;
                 }
