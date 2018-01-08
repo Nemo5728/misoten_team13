@@ -201,7 +201,7 @@ public class minion : TrueSyncBehaviour {
                                                 go.GetComponent<Bullet>().CreateBulletMinion(targetMinion, ownerNum, powerUpAttackValue);
                                             }
 
-                                            //go.transform.parent = targetMinion.transform;
+                                            go.transform.parent = targetMinion.transform;
                                             go.GetComponent<TSTransform>().tsParent = targetMinion.tsTransform;
                                         }
                                         else

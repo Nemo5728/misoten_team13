@@ -57,8 +57,6 @@ GameObject:
   - component: {fileID: 23907548771441456}
   - component: {fileID: 114868248966919020}
   - component: {fileID: 114445436228874202}
-  - component: {fileID: 114120658129643442}
-  - component: {fileID: 114346569223558108}
   m_Layer: 0
   m_Name: Shooter_Bullet1
   m_TagString: Bullet
@@ -74,7 +72,7 @@ Transform:
   m_GameObject: {fileID: 1252965111761912}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 4844284641754520}
   m_RootOrder: 0
@@ -101,7 +99,7 @@ Transform:
   m_GameObject: {fileID: 1577324698782624}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 4280665929686940}
   m_Father: {fileID: 4536882353943440}
@@ -146,56 +144,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1871796210600878}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114120658129643442
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1871796210600878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2761f79677a73b84cbeba46eda8c3766, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isTrigger: 0
-  tsMaterial: {fileID: 0}
-  center:
-    x:
-      _serializedValue: 0
-    y:
-      _serializedValue: 0
-    z:
-      _serializedValue: 0
-  lossyScale:
-    x:
-      _serializedValue: 4294967296
-    y:
-      _serializedValue: 4294967296
-    z:
-      _serializedValue: 4294967296
-  tsTransform: {fileID: 114445436228874202}
-  _size: {x: 1, y: 1, z: 1}
---- !u!114 &114346569223558108
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1871796210600878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8561a4124465f743903b76d8cf232a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mass:
-    _serializedValue: 4294967296
-  _useGravity: 1
-  _isKinematic: 0
-  _linearDrag:
-    _serializedValue: 0
-  _angularDrag:
-    _serializedValue: 214748368
-  interpolation: 0
-  _constraints: 0
 --- !u!114 &114445436228874202
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -255,7 +203,7 @@ MonoBehaviour:
   speed:
     _serializedValue: 42949672960
   range:
-    _serializedValue: 4294967296
+    _serializedValue: 21474836480
 --- !u!198 &198198112439771330
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -313,7 +261,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -992483324
+  randomSeed: -932423378
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3379,7 +3327,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1750973998
+  randomSeed: 128252964
   InitialModule:
     serializedVersion: 3
     enabled: 1
