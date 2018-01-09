@@ -465,6 +465,63 @@ Transform:
   m_PrefabParentObject: {fileID: 4000010866384470, guid: 077aef9a187d2fb46a4e97786c0ff271,
     type: 2}
   m_PrefabInternal: {fileID: 93672997}
+--- !u!1 &94075646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 94075648}
+  - component: {fileID: 94075647}
+  m_Layer: 0
+  m_Name: ParticleSwing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &94075647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 94075646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87329470a7cf6574aa86ea5011316e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfPlayers: 0
+  ownerIndex: -1
+  owner:
+    id: 0
+    name: 
+  localOwner:
+    id: 0
+    name: 
+  ParticleList:
+  - waitTime: 0
+    obj: {fileID: 1000010685566484, guid: f0f3a30ebffe5f24c9478071916ef060, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000011690563874, guid: 2cd60b424487c9a4ba1554058cdc973d, type: 2}
+  - waitTime: 20
+    obj: {fileID: 1000010875558800, guid: 6c3e733c294cfcf44950bda69f6d2bc9, type: 2}
+  - waitTime: 20
+    obj: {fileID: 1000014062079076, guid: 3446317be5cf30a4fbe04b4db2170d9e, type: 2}
+--- !u!4 &94075648
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 94075646}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &144627961
 Prefab:
   m_ObjectHideFlags: 0
@@ -1115,7 +1172,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &288940276
 Rigidbody:
@@ -2676,7 +2733,7 @@ GameObject:
   - component: {fileID: 727276055}
   - component: {fileID: 727276054}
   m_Layer: 0
-  m_Name: Particle
+  m_Name: ParticleBanner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2693,6 +2750,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87329470a7cf6574aa86ea5011316e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfPlayers: 0
+  ownerIndex: -1
+  owner:
+    id: 0
+    name: 
+  localOwner:
+    id: 0
+    name: 
   ParticleList:
   - waitTime: 0
     obj: {fileID: 1000013813325376, guid: a583c6831a4185240b16656cbb497c3e, type: 2}
@@ -2706,64 +2771,6 @@ MonoBehaviour:
     obj: {fileID: 1000012339884214, guid: 6a0267d54f3b3d749a64318dae8fd8c1, type: 2}
   - waitTime: 0
     obj: {fileID: 1000012081927092, guid: 15d996bb226a3b14fa7288d549704b46, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000012445073602, guid: 0d24ae7f51e39b747b482a29840133b9, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000011342442198, guid: b7db4b21ac3de0c4a8aab15b3423833e, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000010265882814, guid: 21424852c56bde547a9208e690e4a9e6, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000010837220122, guid: 16ba594e8d3aa8a48b1d35bdc4ca5d2c, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000011416206348, guid: b8f214dd3969ce6459f829c5fbffd7b1, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000014037028612, guid: 4754c719d27ef07469f2324fffea7d9c, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000012222575388, guid: 46fb60ac1f2cfa8478b22b7b9748bfac, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000013899479774, guid: ddd0b41872f2c0b4a828ea41e407c2ff, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000012814303278, guid: 16ba594e8d3aa8a48b1d35bdc4ca5d2c, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000012050971066, guid: e1fd9729cd8169b4ab006a73db49d285, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000010815092180, guid: cc52e9724492fce42b876d81e45a5cd8, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000011219140322, guid: 5065d4ba86feef64aa58eeb9af4a146f, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000013466716212, guid: fac5a84e19b9df64db445fe1a761c251, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000013098976266, guid: 387ce1e8fcc4bd849a602529d8da74e4, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000014107202356, guid: db380d2477c61bd42802ac03a97cefa0, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000012891382974, guid: 14fe2e79214fe02479007c624c7a4312, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000010539374848, guid: 0d0d9dcee06a82a428fc546f683f80cd, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000013822938674, guid: abd9dd2894efa2842aae98eac486214a, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000012325447342, guid: e46930e6c3fefe04cae14d1fc56473d6, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000011943576614, guid: 6fb485f0d6bdc2e408c851c017799de9, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000010204179878, guid: 9cca806a6a9151646b1c756d98337656, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000010685566484, guid: f0f3a30ebffe5f24c9478071916ef060, type: 2}
-  - waitTime: 0
-    obj: {fileID: 1000011690563874, guid: 2cd60b424487c9a4ba1554058cdc973d, type: 2}
-  - waitTime: 30
-    obj: {fileID: 1000010875558800, guid: 6c3e733c294cfcf44950bda69f6d2bc9, type: 2}
-  - waitTime: 30
-    obj: {fileID: 1000014062079076, guid: 3446317be5cf30a4fbe04b4db2170d9e, type: 2}
-  - waitTime: 30
-    obj: {fileID: 1000012051743184, guid: 2ef7df9d7d18da843a75a072092a03db, type: 2}
-  - waitTime: 30
-    obj: {fileID: 1000012524030116, guid: cc933bfea46b52548bb4ea9f0849be7d, type: 2}
-  - waitTime: 30
-    obj: {fileID: 1000011080044644, guid: 5d5e3eb26a1d3cf4caa342ef6595444e, type: 2}
-  - waitTime: 30
-    obj: {fileID: 1000012550977660, guid: 0818c46838c88c54e95da64fe5748f92, type: 2}
 --- !u!4 &727276055
 Transform:
   m_ObjectHideFlags: 0
@@ -2775,7 +2782,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &731761491
 Prefab:
@@ -3290,6 +3297,63 @@ Transform:
   m_PrefabParentObject: {fileID: 4000010866384470, guid: 077aef9a187d2fb46a4e97786c0ff271,
     type: 2}
   m_PrefabInternal: {fileID: 866512689}
+--- !u!1 &867448798
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 867448800}
+  - component: {fileID: 867448799}
+  m_Layer: 0
+  m_Name: ParticleTransOff
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &867448799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 867448798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87329470a7cf6574aa86ea5011316e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfPlayers: 0
+  ownerIndex: -1
+  owner:
+    id: 0
+    name: 
+  localOwner:
+    id: 0
+    name: 
+  ParticleList:
+  - waitTime: 0
+    obj: {fileID: 1000013822938674, guid: abd9dd2894efa2842aae98eac486214a, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000012325447342, guid: e46930e6c3fefe04cae14d1fc56473d6, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000011943576614, guid: 6fb485f0d6bdc2e408c851c017799de9, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000010204179878, guid: 9cca806a6a9151646b1c756d98337656, type: 2}
+--- !u!4 &867448800
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 867448798}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &891393558
 Prefab:
   m_ObjectHideFlags: 0
@@ -3791,6 +3855,63 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3de27ac17f499446aa3c2bb18afe264a, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1045466532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1045466534}
+  - component: {fileID: 1045466533}
+  m_Layer: 0
+  m_Name: ParticleItemGet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1045466533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1045466532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87329470a7cf6574aa86ea5011316e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfPlayers: 0
+  ownerIndex: -1
+  owner:
+    id: 0
+    name: 
+  localOwner:
+    id: 0
+    name: 
+  ParticleList:
+  - waitTime: 0
+    obj: {fileID: 1000011416206348, guid: b8f214dd3969ce6459f829c5fbffd7b1, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000014037028612, guid: 4754c719d27ef07469f2324fffea7d9c, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000012222575388, guid: 46fb60ac1f2cfa8478b22b7b9748bfac, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000013899479774, guid: ddd0b41872f2c0b4a828ea41e407c2ff, type: 2}
+--- !u!4 &1045466534
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1045466532}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1054311338
 Prefab:
   m_ObjectHideFlags: 0
@@ -4111,6 +4232,63 @@ Transform:
   m_PrefabParentObject: {fileID: 4000010866384470, guid: 077aef9a187d2fb46a4e97786c0ff271,
     type: 2}
   m_PrefabInternal: {fileID: 1110215898}
+--- !u!1 &1127269526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1127269528}
+  - component: {fileID: 1127269527}
+  m_Layer: 0
+  m_Name: ParticleMnsDamage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1127269527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1127269526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87329470a7cf6574aa86ea5011316e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfPlayers: 0
+  ownerIndex: -1
+  owner:
+    id: 0
+    name: 
+  localOwner:
+    id: 0
+    name: 
+  ParticleList:
+  - waitTime: 0
+    obj: {fileID: 1000012050971066, guid: e1fd9729cd8169b4ab006a73db49d285, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000010815092180, guid: cc52e9724492fce42b876d81e45a5cd8, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000011219140322, guid: 5065d4ba86feef64aa58eeb9af4a146f, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000013466716212, guid: fac5a84e19b9df64db445fe1a761c251, type: 2}
+--- !u!4 &1127269528
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1127269526}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1136785063
 Prefab:
   m_ObjectHideFlags: 0
@@ -4573,6 +4751,63 @@ Transform:
   m_PrefabParentObject: {fileID: 4000010866384470, guid: 077aef9a187d2fb46a4e97786c0ff271,
     type: 2}
   m_PrefabInternal: {fileID: 1277040750}
+--- !u!1 &1277265929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1277265931}
+  - component: {fileID: 1277265930}
+  m_Layer: 0
+  m_Name: ParticleTransPulse
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1277265930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1277265929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87329470a7cf6574aa86ea5011316e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfPlayers: 0
+  ownerIndex: -1
+  owner:
+    id: 0
+    name: 
+  localOwner:
+    id: 0
+    name: 
+  ParticleList:
+  - waitTime: 0
+    obj: {fileID: 1000013098976266, guid: 387ce1e8fcc4bd849a602529d8da74e4, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000014107202356, guid: db380d2477c61bd42802ac03a97cefa0, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000012891382974, guid: 14fe2e79214fe02479007c624c7a4312, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000010539374848, guid: 0d0d9dcee06a82a428fc546f683f80cd, type: 2}
+--- !u!4 &1277265931
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1277265929}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1278499524
 Prefab:
   m_ObjectHideFlags: 0
@@ -4909,6 +5144,120 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1327060961}
+--- !u!1 &1332035362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1332035364}
+  - component: {fileID: 1332035363}
+  m_Layer: 0
+  m_Name: "Particle\bItemAppear"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1332035363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1332035362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87329470a7cf6574aa86ea5011316e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfPlayers: 0
+  ownerIndex: -1
+  owner:
+    id: 0
+    name: 
+  localOwner:
+    id: 0
+    name: 
+  ParticleList:
+  - waitTime: 0
+    obj: {fileID: 1000012445073602, guid: 0d24ae7f51e39b747b482a29840133b9, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000011342442198, guid: b7db4b21ac3de0c4a8aab15b3423833e, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000010265882814, guid: 21424852c56bde547a9208e690e4a9e6, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000010837220122, guid: 16ba594e8d3aa8a48b1d35bdc4ca5d2c, type: 2}
+--- !u!4 &1332035364
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1332035362}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1369965033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1369965035}
+  - component: {fileID: 1369965034}
+  m_Layer: 0
+  m_Name: ParticleResultFirework
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1369965034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1369965033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87329470a7cf6574aa86ea5011316e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfPlayers: 0
+  ownerIndex: -1
+  owner:
+    id: 0
+    name: 
+  localOwner:
+    id: 0
+    name: 
+  ParticleList:
+  - waitTime: 0
+    obj: {fileID: 1000012051743184, guid: 2ef7df9d7d18da843a75a072092a03db, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000012524030116, guid: cc933bfea46b52548bb4ea9f0849be7d, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000011080044644, guid: 5d5e3eb26a1d3cf4caa342ef6595444e, type: 2}
+  - waitTime: 0
+    obj: {fileID: 1000012550977660, guid: 0818c46838c88c54e95da64fe5748f92, type: 2}
+--- !u!4 &1369965035
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1369965033}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1409069880
 Prefab:
   m_ObjectHideFlags: 0

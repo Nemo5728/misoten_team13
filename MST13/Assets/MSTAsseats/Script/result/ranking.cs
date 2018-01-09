@@ -41,7 +41,7 @@ public class ranking : MonoBehaviour
     void Start()
     {
         TrueSyncManager.EndSimulation();
-        particle = GameObject.Find("Particle");
+        particle = GameObject.Find("ParticleResultFirework");
         Transform text;
         float addy = 0.0f;
         int minscore = 9999999;

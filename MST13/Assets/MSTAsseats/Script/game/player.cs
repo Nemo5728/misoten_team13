@@ -25,7 +25,10 @@ public class player : TrueSyncBehaviour {
     private TSRigidBody rb = null;
     private TSVector directionVector = TSVector.zero;
     private ControllerInfo info = null;
+
+    // パーティクル
     private GameObject particle;
+    private GameObject particleItemGet;
 
     private float[] minionRespawnCount = new float[8];
 
@@ -85,7 +88,9 @@ public class player : TrueSyncBehaviour {
 
     public override void OnSyncedStart()
     {
-        particle = GameObject.Find("Particle");
+        particle = GameObject.Find("ParticleBanner");
+        particleItemGet = GameObject.Find("ParticleItemGet");
+
         ManagerScore = transform.parent.gameObject;
         powerUpCount = 0.0f;
         powerUpButton = 0;
@@ -517,32 +522,32 @@ public class player : TrueSyncBehaviour {
    
     public void OnSyncedCollisionEnter(TSCollision col)
     {
-        particle = GameObject.Find("Particle");
-        // アイテム
+        
         if (col.gameObject.tag == "ItemLoveUp")
         {
-            particle.GetComponent<ParticleManager>().Play("FX_itemGot_Core", new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z));
+          
+            particleItemGet.GetComponent<ParticleManager>().Play("FX_itemGot_Gauge", new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z));
             loveGauge += 10;
             AddScoreNum(10);
 
         }
         else if (col.gameObject.tag == "ItemMiniUp")
         {
-            particle.GetComponent<ParticleManager>().Play("FX_itemGot_Core", new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z));
+            particleItemGet.GetComponent<ParticleManager>().Play("FX_itemGot_Respawn", new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z));
             SetItemResponMinion();
             AddScoreNum(10);
         }
         else if (col.gameObject.tag == "ItemSpeed")
         {
-            particle.GetComponent<ParticleManager>().Play("FX_itemGot_Core", new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z));
+            particleItemGet.GetComponent<ParticleManager>().Play("FX_itemGot_Speed", new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z));
          
             speed += 5f;
             AddScoreNum(10);
-            particle.GetComponent<ParticleManager>().Play("FX_SpeedUp", new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z));
+           // particle.GetComponent<ParticleManager>().Play("FX_SpeedUp", new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z));
         }
         else if (col.gameObject.tag == "ItemPower")
         {
-            particle.GetComponent<ParticleManager>().Play("FX_itemGot_Core", new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z));
+            particleItemGet.GetComponent<ParticleManager>().Play("FX_itemGot_Power", new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z));
             speed += 3f;
             AddScoreNum(10);
         }

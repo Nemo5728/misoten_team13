@@ -24,7 +24,7 @@ public class Item :  TrueSyncBehaviour
 
     public override void OnSyncedStart()
     {
-        particle = GameObject.Find("Particle");
+        particle = GameObject.Find("ParticleItemAppear");
         time = 0f;
 
         if(this.gameObject.tag == "ItemLoveUp")
