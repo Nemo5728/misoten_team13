@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TrueSync;
 
 
-
-public class ParticleManager : MonoBehaviour
+public class ParticleManager : TrueSyncBehaviour
 {
     [System.Serializable]   
     public class EffectInf
@@ -57,8 +57,9 @@ public class ParticleManager : MonoBehaviour
         }
         else
         {
+            TrueSyncManager.Destroy(particle, ps.duration);
             // パーティクルが終わり次第削除
-            Destroy(particle, ps.duration);
+   
         }
        
     }
@@ -66,16 +67,13 @@ public class ParticleManager : MonoBehaviour
     IEnumerator WaitDestroy(float frame, GameObject obj)
     {
         yield return new WaitForSeconds(frame);
-        Destroy(obj);
+        TrueSyncManager.SyncedDestroy(obj);
     }
 
 
     void Update()
     {
-        if (Input.GetKey("s"))
-        {
-            Play("aaaaaa", pos);
-        }
+       
     }
 
     internal void Play(string v)

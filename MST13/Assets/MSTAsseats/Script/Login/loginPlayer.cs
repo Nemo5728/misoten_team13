@@ -30,8 +30,7 @@ public class loginPlayer : TrueSyncBehaviour
     private Vector3 areaPos;//エリアの位置を入れる
     const float AreaSize = 2.5f;//床の大きさ
     bool bPlayerArea;
-    
-    public GameObject GetLoginArea;
+
     TSVector pos;
     // Use this for initialization
     void Start()
@@ -132,27 +131,7 @@ public class loginPlayer : TrueSyncBehaviour
                             tsTransform.Translate(vector * speed, Space.World);
 
 
-            //areaPos情報を取得
-            loginArea GetReady = GetLoginArea.GetComponent<loginArea>();
-            GetReady.SetAreaPos(areaPos);
 
-
-            //当り判定：床の上に乗っているなら
-            if (areaPos.x + AreaSize > pos.x &&
-            areaPos.x - AreaSize < pos.x &&
-            areaPos.z + AreaSize > pos.z &&
-            areaPos.z - AreaSize < pos.z)
-            {
-                bPlayerArea = true;
-                //Debug.Log("乗ってるよ！");
-            }
-            else
-            {
-                bPlayerArea = false;
-            }
-            //Debug.Log("areaPos" + areaPos);
-            //Debug.Log("rb.position" + rb.position);
-            //Debug.Log("pos" + pos);
         }
 
     }
