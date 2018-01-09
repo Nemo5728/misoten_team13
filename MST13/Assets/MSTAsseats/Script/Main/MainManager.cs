@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TrueSync;
 
-public class MainManager : MonoBehaviour {
+public class MainManager : TrueSyncBehaviour {
 
     [SerializeField, TooltipAttribute("Manager群")] private GameObject[] ManagerList;
 
@@ -30,8 +31,8 @@ public class MainManager : MonoBehaviour {
         Application.targetFrameRate = 60; //60FPSに設定
     }
 
-	// Use this for initialization
-	void Start () 
+    // Use this for initialization
+    void Start () 
     {
         Timer = 0f;
         gametimr = 0f;
@@ -46,7 +47,7 @@ public class MainManager : MonoBehaviour {
         state = STATE.STATE_TITLE;
 
         SetState();
-	}
+    }
 
     // Update is called once per frame
     void Update()
@@ -119,7 +120,7 @@ public class MainManager : MonoBehaviour {
         {
             NextState();
         }
-	}
+    }
 
     private void NextState()
     {
@@ -152,7 +153,7 @@ public class MainManager : MonoBehaviour {
                 }
             case STATE.STATE_LOGIN:
                 {
-                  //LoginCloneDelete();
+                    LoginCloneDelete();
                     BgmManager.Instance.Stop();
                     BgmManager.Instance.Play("gameBGM2");
                     state = STATE.STATE_GAME;
@@ -189,7 +190,7 @@ public class MainManager : MonoBehaviour {
 
         foreach (GameObject play in objs)
         {
-            Destroy(play);
+            TrueSyncManager.SyncedDestroy(play);
         }
 
 
@@ -197,35 +198,35 @@ public class MainManager : MonoBehaviour {
 
         foreach (GameObject mi in tagobjs)
         {
-            Destroy(mi);
+            TrueSyncManager.SyncedDestroy(mi);
         }
 
         GameObject[] Love = GameObject.FindGameObjectsWithTag("ItemLoveUp");
 
         foreach (GameObject mi in Love)
         {
-            Destroy(mi);
+            TrueSyncManager.SyncedDestroy(mi);
         }
 
         GameObject[] power = GameObject.FindGameObjectsWithTag("ItemPower");
 
         foreach (GameObject mi in power)
         {
-            Destroy(mi);
+            TrueSyncManager.SyncedDestroy(mi);
         }
 
         GameObject[] miniUp = GameObject.FindGameObjectsWithTag("ItemMiniUp");
 
         foreach (GameObject mi in miniUp)
         {
-            Destroy(mi);
+            TrueSyncManager.SyncedDestroy(mi);
         }
 
         GameObject[] speed = GameObject.FindGameObjectsWithTag("ItemSpeed");
 
         foreach (GameObject mi in speed)
         {
-            Destroy(mi);
+            TrueSyncManager.SyncedDestroy(mi);
         }
 
         WebAPIClient.reset();
@@ -237,15 +238,19 @@ public class MainManager : MonoBehaviour {
 
         foreach (GameObject play in logs)
         {
-            Destroy(play);
+            TrueSyncManager.SyncedDestroy(play);
         }
 
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
 
         foreach (GameObject player in objs)
         {
-            Destroy(player);
+            TrueSyncManager.SyncedDestroy(player);
         }
+
+     
+
+
     }
 
     void ResultCloneDelete()
@@ -254,7 +259,7 @@ public class MainManager : MonoBehaviour {
 
         foreach (GameObject play in objs)
         {
-            Destroy(play);
+            TrueSyncManager.SyncedDestroy(play);
         }
     }
 }
