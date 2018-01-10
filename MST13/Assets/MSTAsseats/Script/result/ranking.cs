@@ -160,6 +160,9 @@ public class ranking : MonoBehaviour
                         //モンスターの召喚
                         pr_Monster = Instantiate(monster[a], new Vector3(0.0f, 0.0f, 0.0f), new Quaternion (0.0f, 180.0f, 0.0f, 0.0f) );
                         pr_Monster.GetComponent<Animator>().runtimeAnimatorController = monsAnim;
+
+                        GameObject target = GameObject.FindWithTag("SetAR");
+                        pr_Monster.transform.SetParent(target.transform);
                     }
                     else
                     {

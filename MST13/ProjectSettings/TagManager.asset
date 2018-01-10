@@ -16,6 +16,8 @@ TagManager:
   - ItemMiniUp
   - Item
   - ItemPower
+  - Sword
+  - SetAR
   layers:
   - Default
   - TransparentFX

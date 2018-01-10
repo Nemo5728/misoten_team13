@@ -69,6 +69,9 @@ public class PlayManager : TrueSyncBehaviour {
             PlayerObject.SetActive(false);
             monsterObject.SetActive(false);
         }
+
+        GameObject target = GameObject.FindWithTag("SetAR");
+        transform.SetParent(target.transform);
     }
 
     public override void OnSyncedUpdate()
