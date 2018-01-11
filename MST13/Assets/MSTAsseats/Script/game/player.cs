@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TrueSync;
-//using UnityStandardAssets.CrossPlatformInput;
 
 public class player : TrueSyncBehaviour {
 
@@ -53,6 +52,7 @@ public class player : TrueSyncBehaviour {
     // 2017/12/1 追加
     private Animator anim;  // アニメーター
     FP time;
+    private GameObject imageTarget;
 
     private enum STATE
     {
@@ -94,6 +94,7 @@ public class player : TrueSyncBehaviour {
     {
         particle = GameObject.Find("ParticleBanner");
         particleItemGet = GameObject.Find("ParticleItemGet");
+        imageTarget = GameObject.Find("ImageTarget");
 
         ManagerScore = transform.parent.gameObject;
         powerUpCount = 0.0f;
@@ -133,32 +134,23 @@ public class player : TrueSyncBehaviour {
         TrueSyncInput.SetBool(INPUT_KEY_SPACE, space);
         TrueSyncInput.SetInt(INPUT_TAP,touch);
         TrueSyncInput.SetBool(INPUT_KEY_Y, kib_y);
-        //TrueSyncInput.SetFP(INPUT_VIRTUALPAD_X, CrossPlatformInputManager.GetAxis("Horizontal"));
-        //TrueSyncInput.SetFP(INPUT_VIRTUALPAD_Y, CrossPlatformInputManager.GetAxis("Vertical"));
-        //TrueSyncInput.SetBool(INPUT_VIRTUAL_BUTTON, CrossPlatformInputManager.GetButtonDown("Jump"));
-
         info = BLEControlManager.GetControllerInfo();
 
         if (info != null) controllerConnect = true;
 
         if(controllerConnect)
         {
-            int stickX = info.stickX;
-            int stickY = info.stickY;
-            bool button = info.isButtonDown;
-            bool stickBtn = info.isStickDown;
-
-            TrueSyncInput.SetInt(INPUT_CONTROLLER_STICKX, stickX);
-            TrueSyncInput.SetInt(INPUT_CONTROLLER_STICKY, stickY);
-            TrueSyncInput.SetBool(INPUT_CONTROLLER_BUTTON, button);
-            TrueSyncInput.SetBool(INPUT_CONTROLLER_STICKBUTTON, stickBtn);
+            TrueSyncInput.SetInt(INPUT_CONTROLLER_STICKX, info.stickX);
+            TrueSyncInput.SetInt(INPUT_CONTROLLER_STICKY, info.stickY);
+            TrueSyncInput.SetBool(INPUT_CONTROLLER_BUTTON, info.isButtonDown);
+            TrueSyncInput.SetBool(INPUT_CONTROLLER_STICKBUTTON, info.isStickDown);
         }
        
     }
 
     public override void OnSyncedUpdate()
     {
-
+        transform.position = imageTarget.transform.position;
         //time += TrueSyncManager.DeltaTime;
         time += Time.deltaTime;
 
