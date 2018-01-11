@@ -17,7 +17,7 @@ public class minion : TrueSyncBehaviour {
     GameObject particle;
     // 2017/12/2 追加
     private Animator anim;  // アニメーター
-
+    private GameObject imageTarget;
     private enum STATE
     {
         STATE_NONE,
@@ -90,7 +90,7 @@ public class minion : TrueSyncBehaviour {
         anim = GetComponent<Animator>();    // アニメーションの取得
 
         anim.SetTrigger("minionSpawn");        // 誕生アニメーション
-       
+        imageTarget = GameObject.Find("ImageTarget");
        // SeManager.Instance.Play("minionRespon");
         state = STATE.STATE_NORMAL;
 
@@ -104,6 +104,9 @@ public class minion : TrueSyncBehaviour {
 
     public override void OnSyncedUpdate()
     {
+        FP imageY = imageTarget.GetComponent<TSTransform>().position.y;
+        tsTransform.position = new TSVector(tsTransform.position.x, imageY, tsTransform.position.z);
+
        // Debug.Log("called minion update");
         TSVector markerPos = p.GetMarkerPosition(parentMarker);
 
