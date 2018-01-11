@@ -96,7 +96,10 @@ public class minion : TrueSyncBehaviour {
 
         isBullet = bullet;
         p = parentPlayer.GetComponent<player>();
-        particle = GameObject.Find("Particle");
+        particle = GameObject.Find("ParticleBanner");
+
+        GameObject target = GameObject.FindWithTag("SetAR");
+        transform.SetParent(target.transform);
     }
 
     public override void OnSyncedUpdate()

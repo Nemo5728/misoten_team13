@@ -186,12 +186,10 @@ public class MainManager : TrueSyncBehaviour {
     void GameCloneDelete()
     {
        
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("PlayManager");
+        GameObject objs = GameObject.FindWithTag("PlayManager");
 
-        foreach (GameObject play in objs)
-        {
-            TrueSyncManager.SyncedDestroy(play);
-        }
+  
+            TrueSyncManager.SyncedDestroy(objs);
 
 
         GameObject[] tagobjs = GameObject.FindGameObjectsWithTag("minion");
@@ -234,12 +232,10 @@ public class MainManager : TrueSyncBehaviour {
 
     void LoginCloneDelete()
     {
-        GameObject[] logs = GameObject.FindGameObjectsWithTag("PlayManager");
+        GameObject logs = GameObject.FindWithTag("PlayManager");
 
-        foreach (GameObject play in logs)
-        {
-            TrueSyncManager.SyncedDestroy(play);
-        }
+        TrueSyncManager.SyncedDestroy(logs);
+
 
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
 
@@ -247,10 +243,6 @@ public class MainManager : TrueSyncBehaviour {
         {
             TrueSyncManager.SyncedDestroy(player);
         }
-
-     
-
-
     }
 
     void ResultCloneDelete()
@@ -259,7 +251,7 @@ public class MainManager : TrueSyncBehaviour {
 
         foreach (GameObject play in objs)
         {
-            TrueSyncManager.SyncedDestroy(play);
+            Destroy(play);
         }
     }
 }

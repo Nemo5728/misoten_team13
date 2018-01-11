@@ -69,6 +69,10 @@ public class Item :  TrueSyncBehaviour
                                                                                                    transform.position.z));
         }
         */
+
+        GameObject target = GameObject.FindWithTag("SetAR");
+        transform.SetParent(target.transform);
+
         bUse = true;
     }
     public override void OnSyncedUpdate()

@@ -17517,7 +17517,7 @@ MonoBehaviour:
     type: 2}
   sign: {fileID: 1000012717119552, guid: 741baa47259bb7b4ab42b14add93120f, type: 2}
   loveGaugeMax: 100
-  loveGaugeLate: 10
+  loveGaugeLate: 5
   health: 100
   transformTime: 5
   attack: 1

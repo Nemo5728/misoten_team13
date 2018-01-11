@@ -20,17 +20,18 @@ public class ParticleManager : TrueSyncBehaviour
     public List<EffectInf> ParticleList;
     Dictionary<string, EffectInf> ParticleDic = new Dictionary<string, EffectInf>();
     Vector3 pos;
-
+    GameObject target;
    
     private void Start()
     {
         pos = new Vector3(0.0f, 0.0f, 0.0f);
+        target = GameObject.FindWithTag("SetAR");
         //リスト作成
         foreach (var particle in ParticleList)
         {
             ParticleDic.Add(particle.obj.name, particle);
         }
-        
+
     }
 
     // 指定の座標で再生
@@ -47,7 +48,11 @@ public class ParticleManager : TrueSyncBehaviour
         yield return new WaitForFrame(ParticleDic[particleName].waitTime);
         GameObject particle = Instantiate(ParticleDic[particleName].obj);
 
+        particle.transform.SetParent(target.transform);
+
         particle.transform.position = position;
+
+
         ParticleSystem ps = particle.GetComponent<ParticleSystem>();
 
         if (roop)

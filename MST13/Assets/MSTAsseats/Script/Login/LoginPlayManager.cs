@@ -35,7 +35,7 @@ public class LoginPlayManager : TrueSyncBehaviour
                 }
             }
 
-
+           
         }
         else
         {  //オフラインモードの例外処理
@@ -51,6 +51,9 @@ public class LoginPlayManager : TrueSyncBehaviour
             PlayerObject = transform.Find("loginplayer4").gameObject;
             PlayerObject.SetActive(false);
         }
+
+        GameObject target = GameObject.FindWithTag("SetAR");
+        transform.SetParent(target.transform);
     }
 
     public override void OnSyncedUpdate()
