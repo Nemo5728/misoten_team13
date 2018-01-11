@@ -20492,7 +20492,8 @@ MonoBehaviour:
     id: 0
     name: 
   attackSpeed: 0
-  speed: 0
+  speed:
+    _serializedValue: 0
   loveGaugeMax: 100
   loveGaugeLate: 1
   WeakAttack: 1
@@ -20633,9 +20634,11 @@ MonoBehaviour:
   localOwner:
     id: 0
     name: 
+  ManagerScore: {fileID: 0}
   attackSpeed: 0
   respawnTime: 10
-  speed: 0.5
+  speed:
+    _serializedValue: 0
   markerList:
   - {fileID: 1915913748080236}
   - {fileID: 1780510042430428}
@@ -20647,9 +20650,8 @@ MonoBehaviour:
   - {fileID: 1471319708817068}
   - {fileID: 1613520531406126}
   - {fileID: 1927961062315020}
-  minion: {fileID: 1048655944603804, guid: dbde5a86070f84a0398a432e7bda6a58, type: 2}
-  monsterObject: {fileID: 1973043387217022, guid: ebc225670cfe240f7ae79a89df727050,
-    type: 2}
+  minionDog: {fileID: 0}
+  minionShooter: {fileID: 0}
   sign: {fileID: 1000012717119552, guid: 741baa47259bb7b4ab42b14add93120f, type: 2}
   loveGaugeMax: 100
   loveGaugeLate: 1
@@ -20661,6 +20663,7 @@ MonoBehaviour:
   stamina: 10
   knockBackMax: 100
   knockBackValue: 2
+  knockBackPower: 100
 --- !u!114 &114193181822434080
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -20701,9 +20704,11 @@ MonoBehaviour:
   localOwner:
     id: 0
     name: 
+  ManagerScore: {fileID: 0}
   attackSpeed: 0
   respawnTime: 10
-  speed: 0.5
+  speed:
+    _serializedValue: 0
   markerList:
   - {fileID: 1751023151588526}
   - {fileID: 1579126803209680}
@@ -20715,9 +20720,8 @@ MonoBehaviour:
   - {fileID: 1278328275096608}
   - {fileID: 1521348766910086}
   - {fileID: 1579870564414724}
-  minion: {fileID: 1984050615264282, guid: 3bcdcafb324314166b8261a30d8a4eb3, type: 2}
-  monsterObject: {fileID: 1445317756442730, guid: 3520833827fbf49739634e7c72183312,
-    type: 2}
+  minionDog: {fileID: 0}
+  minionShooter: {fileID: 0}
   sign: {fileID: 1000012717119552, guid: 741baa47259bb7b4ab42b14add93120f, type: 2}
   loveGaugeMax: 100
   loveGaugeLate: 1
@@ -20729,6 +20733,7 @@ MonoBehaviour:
   stamina: 10
   knockBackMax: 100
   knockBackValue: 2
+  knockBackPower: 100
 --- !u!114 &114219432753421276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -20914,7 +20919,8 @@ MonoBehaviour:
     id: 0
     name: Local_Player
   attackSpeed: 0
-  speed: 0.1
+  speed:
+    _serializedValue: 0
   loveGaugeMax: 1000000
   loveGaugeLate: 1
   WeakAttack: 1
@@ -21021,9 +21027,11 @@ MonoBehaviour:
   localOwner:
     id: 0
     name: 
+  ManagerScore: {fileID: 0}
   attackSpeed: 0
   respawnTime: 10
-  speed: 0.5
+  speed:
+    _serializedValue: 0
   markerList:
   - {fileID: 1718007261599874}
   - {fileID: 1393892902781760}
@@ -21035,9 +21043,8 @@ MonoBehaviour:
   - {fileID: 1274905670103586}
   - {fileID: 1742218662303374}
   - {fileID: 1705305147824468}
-  minion: {fileID: 1892812841504998, guid: 04286658ea49043ce93578e7d502832e, type: 2}
-  monsterObject: {fileID: 1423908912880506, guid: e4a0cfb773dcd4a3d812486a34108efd,
-    type: 2}
+  minionDog: {fileID: 0}
+  minionShooter: {fileID: 0}
   sign: {fileID: 1000012717119552, guid: 741baa47259bb7b4ab42b14add93120f, type: 2}
   loveGaugeMax: 100
   loveGaugeLate: 1
@@ -21049,6 +21056,7 @@ MonoBehaviour:
   stamina: 10
   knockBackMax: 100
   knockBackValue: 2
+  knockBackPower: 100
 --- !u!114 &114433154462477392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -21089,9 +21097,11 @@ MonoBehaviour:
   localOwner:
     id: 0
     name: 
+  ManagerScore: {fileID: 0}
   attackSpeed: 0
   respawnTime: 10
-  speed: 0.5
+  speed:
+    _serializedValue: 0
   markerList:
   - {fileID: 1649166635244934}
   - {fileID: 1646050332823438}
@@ -21108,9 +21118,8 @@ MonoBehaviour:
   - {fileID: 1666768670709488}
   - {fileID: 1051257354236630}
   - {fileID: 1590355778791346}
-  minion: {fileID: 1127812990422254, guid: 0bba7adf5c0054eb8aa574c1473c1a4b, type: 2}
-  monsterObject: {fileID: 1139474049102988, guid: b980d428ff6dd412784a1f54f461781c,
-    type: 2}
+  minionDog: {fileID: 0}
+  minionShooter: {fileID: 0}
   sign: {fileID: 1000012717119552, guid: 741baa47259bb7b4ab42b14add93120f, type: 2}
   loveGaugeMax: 100
   loveGaugeLate: 10
@@ -21122,6 +21131,7 @@ MonoBehaviour:
   stamina: 10
   knockBackMax: 100
   knockBackValue: 2
+  knockBackPower: 100
 --- !u!114 &114437549791201206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -21634,7 +21644,8 @@ MonoBehaviour:
     id: 0
     name: Local_Player
   attackSpeed: 0
-  speed: 0.1
+  speed:
+    _serializedValue: 0
   loveGaugeMax: 1000000
   loveGaugeLate: 1
   WeakAttack: 1

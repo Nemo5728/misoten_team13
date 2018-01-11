@@ -116,7 +116,7 @@ Transform:
   m_GameObject: {fileID: 1000012816445626}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
   m_Children:
   - {fileID: 4000010681162084}
   - {fileID: 4000013121765458}
@@ -236,11 +236,11 @@ MonoBehaviour:
       _serializedValue: 0
   lossyScale:
     x:
-      _serializedValue: 4294967296
+      _serializedValue: 171798688
     y:
-      _serializedValue: 4294967296
+      _serializedValue: 171798688
     z:
-      _serializedValue: 4294967296
+      _serializedValue: 171798688
   tsTransform: {fileID: 114752697762809240}
   _size: {x: 2.5, y: 2, z: 1}
 --- !u!114 &114752697762809240
@@ -272,11 +272,11 @@ MonoBehaviour:
       _serializedValue: 4294967296
   _scale:
     x:
-      _serializedValue: 4294967296
+      _serializedValue: 171798688
     y:
-      _serializedValue: 4294967296
+      _serializedValue: 171798688
     z:
-      _serializedValue: 4294967296
+      _serializedValue: 171798688
   _serialized: 1
   tsCollider: {fileID: 0}
   tsParent: {fileID: 0}

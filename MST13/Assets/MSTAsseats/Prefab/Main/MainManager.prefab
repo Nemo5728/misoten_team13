@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114210195989489718}
   m_Layer: 0
   m_Name: MainManager
-  m_TagString: Untagged
+  m_TagString: SetAR
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,7 +35,7 @@ Transform:
   m_GameObject: {fileID: 1306198726334674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 25, y: 25, z: 25}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -51,6 +51,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35df25e7da1ad48edb5f613c263b032d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfPlayers: 0
+  ownerIndex: -1
+  owner:
+    id: 0
+    name: 
+  localOwner:
+    id: 0
+    name: 
   ManagerList:
   - {fileID: 1920032993185280, guid: 31e00e62a18ae400dad5f8b74aaca1d5, type: 2}
   - {fileID: 1871675396525442, guid: a60f44c0f9d3b4b17bb0459d390f37b4, type: 2}

@@ -150,7 +150,9 @@ public class player : TrueSyncBehaviour {
 
     public override void OnSyncedUpdate()
     {
-        transform.position = imageTarget.transform.position;
+        FP imageY = imageTarget.GetComponent<TSTransform>().position.y;
+        tsTransform.position = new TSVector(tsTransform.position.x , imageY , tsTransform.position.z) ;
+
         //time += TrueSyncManager.DeltaTime;
         time += Time.deltaTime;
 

@@ -17,7 +17,7 @@ MonoBehaviour:
     cameraDeviceModeSetting: -1
     maxSimultaneousImageTargets: 1
     maxSimultaneousObjectTargets: 1
-    useDelayedLoadingObjectTargets: 1
+    useDelayedLoadingObjectTargets: 0
     cameraDirection: 0
     mirrorVideoBackground: 0
   digitalEyewear:
@@ -27,8 +27,8 @@ MonoBehaviour:
     eyewearType: 0
     stereoFramework: 0
     seeThroughConfiguration: 0
-    viewerName: Cardboard v1
-    viewerManufacturer: Google
+    viewerName: 
+    viewerManufacturer: 
     useCustomViewer: 0
     customViewer:
       Version: 0
@@ -60,11 +60,11 @@ MonoBehaviour:
     autoInitTracker: 0
     autoStartTracker: 0
     posePrediction: 0
-    modelCorrectionMode: 2
+    modelCorrectionMode: 0
     modelTransformEnabled: 0
     modelTransform: {x: 0, y: 0.1, z: -0.1}
   webcam:
-    deviceNameSetInEditor: FaceTime HD Camera
-    flipHorizontally: 1
+    deviceNameSetInEditor: 
+    flipHorizontally: 0
     turnOffWebCam: 0
     renderTextureLayer: 30

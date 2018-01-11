@@ -18,6 +18,7 @@ TagManager:
   - ItemPower
   - Sword
   - SetAR
+  - Stage
   layers:
   - Default
   - TransparentFX

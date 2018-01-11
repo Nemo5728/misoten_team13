@@ -70,7 +70,7 @@ public class PlayManager : TrueSyncBehaviour {
             monsterObject.SetActive(false);
         }
 
-        GameObject target = GameObject.FindWithTag("SetAR");
+        GameObject target = GameObject.FindWithTag("Stage");
         transform.SetParent(target.transform);
     }
 

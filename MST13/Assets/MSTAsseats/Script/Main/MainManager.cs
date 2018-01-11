@@ -188,8 +188,7 @@ public class MainManager : TrueSyncBehaviour {
        
         GameObject objs = GameObject.FindWithTag("PlayManager");
 
-  
-            TrueSyncManager.SyncedDestroy(objs);
+         TrueSyncManager.SyncedDestroy(objs);
 
 
         GameObject[] tagobjs = GameObject.FindGameObjectsWithTag("minion");
