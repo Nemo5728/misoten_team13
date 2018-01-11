@@ -262,11 +262,11 @@ public class player : TrueSyncBehaviour {
                     }
 
                     if(stickY >= 700){
-                        directionVector.z = vector.z = speed;
+                        directionVector.z = vector.z = -speed;
                     }
 
                     if(stickY >= 200){
-                        directionVector.z = vector.z = -speed;
+                        directionVector.z = vector.z = speed;
                     }
                 }
 
