@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TrueSync;
-using UnityStandardAssets.CrossPlatformInput;
+//using UnityStandardAssets.CrossPlatformInput;
 
 public class player : TrueSyncBehaviour {
 
@@ -133,9 +133,9 @@ public class player : TrueSyncBehaviour {
         TrueSyncInput.SetBool(INPUT_KEY_SPACE, space);
         TrueSyncInput.SetInt(INPUT_TAP,touch);
         TrueSyncInput.SetBool(INPUT_KEY_Y, kib_y);
-        TrueSyncInput.SetFP(INPUT_VIRTUALPAD_X, CrossPlatformInputManager.GetAxis("Horizontal"));
-        TrueSyncInput.SetFP(INPUT_VIRTUALPAD_Y, CrossPlatformInputManager.GetAxis("Vertical"));
-        TrueSyncInput.SetBool(INPUT_VIRTUAL_BUTTON, CrossPlatformInputManager.GetButtonDown("Jump"));
+        //TrueSyncInput.SetFP(INPUT_VIRTUALPAD_X, CrossPlatformInputManager.GetAxis("Horizontal"));
+        //TrueSyncInput.SetFP(INPUT_VIRTUALPAD_Y, CrossPlatformInputManager.GetAxis("Vertical"));
+        //TrueSyncInput.SetBool(INPUT_VIRTUAL_BUTTON, CrossPlatformInputManager.GetButtonDown("Jump"));
 
         info = BLEControlManager.GetControllerInfo();
 
