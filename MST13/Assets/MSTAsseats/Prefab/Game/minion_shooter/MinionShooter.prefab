@@ -1092,7 +1092,7 @@ MonoBehaviour:
   localOwner:
     id: 0
     name: 
-  attackSpeed: 1
+  attackSpeed: 5
   bullet: {fileID: 1871796210600878, guid: 3c5ffe20791dd40ae92d21a3f46be32e, type: 2}
   health: 10
   attackRange: 6

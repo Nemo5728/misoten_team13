@@ -34,8 +34,8 @@ public class Bullet : TrueSyncBehaviour {
 
             if (TSMath.Abs(TSVector.Distance(tsTransform.position, targetMinion.tsTransform.position)) < range)
             {
-                TrueSyncManager.SyncedDestroy(gameObject);
                 targetMinion.AddDamage(damage);
+                TrueSyncManager.SyncedDestroy(gameObject);
             }
         }
 
@@ -46,8 +46,8 @@ public class Bullet : TrueSyncBehaviour {
 
             if (TSMath.Abs(TSVector.Distance(tsTransform.position, targetMonster.tsTransform.position)) < range)
             {
-                TrueSyncManager.SyncedDestroy(gameObject);
                 targetMonster.AddDamage(damage);
+                TrueSyncManager.SyncedDestroy(gameObject);
             }
         }
 

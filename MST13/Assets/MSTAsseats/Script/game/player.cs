@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TrueSync;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class player : TrueSyncBehaviour {
 
@@ -16,6 +17,9 @@ public class player : TrueSyncBehaviour {
     private const byte INPUT_CONTROLLER_BUTTON = 7;
     private const byte INPUT_CONTROLLER_STICKBUTTON = 8;
     private const byte INPUT_KEY_Y = 9;
+    private const byte INPUT_VIRTUALPAD_X = 10;
+    private const byte INPUT_VIRTUALPAD_Y = 11;
+    private const byte INPUT_VIRTUAL_BUTTON = 12;
 
     private const float STAGE_LENGTH = 56.0f;
     private const byte INPUT_TAP = 10;
@@ -129,6 +133,9 @@ public class player : TrueSyncBehaviour {
         TrueSyncInput.SetBool(INPUT_KEY_SPACE, space);
         TrueSyncInput.SetInt(INPUT_TAP,touch);
         TrueSyncInput.SetBool(INPUT_KEY_Y, kib_y);
+        TrueSyncInput.SetFP(INPUT_VIRTUALPAD_X, CrossPlatformInputManager.GetAxis("Horizontal"));
+        TrueSyncInput.SetFP(INPUT_VIRTUALPAD_Y, CrossPlatformInputManager.GetAxis("Vertical"));
+        TrueSyncInput.SetBool(INPUT_VIRTUAL_BUTTON, CrossPlatformInputManager.GetButtonDown("Jump"));
 
         info = BLEControlManager.GetControllerInfo();
 
@@ -202,6 +209,7 @@ public class player : TrueSyncBehaviour {
                     rb.AddForce(tsTransform.forward * -knockBackPower, ForceMode.Impulse);
                 }
 
+                /*
                 if(controllerConnect)
                 {
                     int stickX = -1, stickY = -1;
@@ -210,7 +218,7 @@ public class player : TrueSyncBehaviour {
                     if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) stickX = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
                     if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickY = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
                     if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
-                    if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
+                    if (TrueSyncIn7put.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
 
                     // 2017/12/1 追記
                     // Playerの移動モーション管理
@@ -229,7 +237,45 @@ public class player : TrueSyncBehaviour {
                         // minion強攻撃へ！
                     }
                 }
-             
+                */
+
+                int stickX = -1, stickY = -1;
+                bool button = false, stickBtn = false;
+
+                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) stickX = TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
+                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickY = TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
+                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
+                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
+
+                // 2017/12/1 追記
+                // Playerの移動モーション管理
+                MoveAnimetion(stickX);
+
+                if (stickX != -1 && stickY != -1)
+                {
+                    if(stickX >= 700){
+                        directionVector.x = vector.x = speed;
+                    }
+
+                    if(stickX <= 200){
+                        directionVector.x = vector.x = -speed;
+                    }
+
+                    if(stickY >= 700){
+                        directionVector.z = vector.z = speed;
+                    }
+
+                    if(stickY >= 200){
+                        directionVector.z = vector.z = -speed;
+                    }
+                }
+
+                if (stickBtn && stickX != -1 && stickY != -1)
+                {
+                    knockBackValue++;
+                    loveGauge++;
+                    // minion強攻撃へ！
+                }
 
                 if(Tc > 0)
                 {
