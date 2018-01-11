@@ -42,6 +42,7 @@ public class monster : TrueSyncBehaviour {
     private TSVector move;
     private GameObject ready;           // readyオブジェクト
     private GameObject ManagerScore;
+    private GameObject imageTarget;
     // ステータス制御
     private enum STATE
     {
@@ -108,6 +109,7 @@ public class monster : TrueSyncBehaviour {
         ParticleSwing = GameObject.Find("ParticleSwing");
         ParticleTransPulse = GameObject.Find("ParticleTransPulse");
         ParticleTransOff = GameObject.Find("ParticleTransOff");
+        imageTarget = GameObject.Find("ImageTarget");
 
         ManagerScore = transform.parent.gameObject;
         DefSpeed = speed;
@@ -170,7 +172,8 @@ public class monster : TrueSyncBehaviour {
 
         if (!knockout)
         {
-
+            //FP imageY = imageTarget.GetComponent<TSTransform>().position.y;
+           // tsTransform.position = new TSVector(tsTransform.position.x, imageY, tsTransform.position.z);
             // Debug.Log("HP" + health);
             // 攻撃アニメーション情報を取得
             //    isAttakc    = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monsterWeakAttack");

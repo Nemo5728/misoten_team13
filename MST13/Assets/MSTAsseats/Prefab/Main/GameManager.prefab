@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 23426174930233218}
   m_Layer: 0
   m_Name: floor
-  m_TagString: Stage
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -394,9 +394,10 @@ GameObject:
   - component: {fileID: 4918646278028568}
   - component: {fileID: 95948225455772880}
   - component: {fileID: 114011549940168258}
+  - component: {fileID: 114396288103388166}
   m_Layer: 0
   m_Name: stage
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1053,6 +1054,43 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 
+--- !u!114 &114396288103388166
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1746350667788384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df3e4ecc2c78eaa409dad488c230d65d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _position:
+    x:
+      _serializedValue: 0
+    y:
+      _serializedValue: 0
+    z:
+      _serializedValue: 0
+  _rotation:
+    x:
+      _serializedValue: 0
+    y:
+      _serializedValue: 0
+    z:
+      _serializedValue: 0
+    w:
+      _serializedValue: 4294967296
+  _scale:
+    x:
+      _serializedValue: 17179869184
+    y:
+      _serializedValue: 17179869184
+    z:
+      _serializedValue: 17179869184
+  _serialized: 1
+  tsCollider: {fileID: 0}
+  tsParent: {fileID: 0}
 --- !u!114 &114405897861474938
 MonoBehaviour:
   m_ObjectHideFlags: 1

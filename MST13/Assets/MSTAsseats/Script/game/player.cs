@@ -94,7 +94,7 @@ public class player : TrueSyncBehaviour {
     {
         particle = GameObject.Find("ParticleBanner");
         particleItemGet = GameObject.Find("ParticleItemGet");
-        imageTarget = GameObject.Find("ImageTarget");
+        imageTarget = GameObject.FindWithTag("Stage");
 
         ManagerScore = transform.parent.gameObject;
         powerUpCount = 0.0f;
@@ -150,8 +150,8 @@ public class player : TrueSyncBehaviour {
 
     public override void OnSyncedUpdate()
     {
-        FP imageY = imageTarget.GetComponent<TSTransform>().position.y;
-        tsTransform.position = new TSVector(tsTransform.position.x , imageY , tsTransform.position.z) ;
+       // FP imageY = imageTarget.GetComponent<TSTransform>().position.y;
+       // tsTransform.position = new TSVector(tsTransform.position.x , imageY , tsTransform.position.z) ;
 
         //time += TrueSyncManager.DeltaTime;
         time += Time.deltaTime;
@@ -256,11 +256,11 @@ public class player : TrueSyncBehaviour {
                     }
 
                     if(stickY >= 700){
-                        directionVector.z = vector.z = -speed;
+                        directionVector.z = vector.z = speed;
                     }
 
                     if(stickY <= 200){
-                        directionVector.z = vector.z = speed;
+                        directionVector.z = vector.z = -speed;
                     }
                 }
 

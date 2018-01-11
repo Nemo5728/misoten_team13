@@ -104,8 +104,8 @@ public class minion : TrueSyncBehaviour {
 
     public override void OnSyncedUpdate()
     {
-        FP imageY = imageTarget.GetComponent<TSTransform>().position.y;
-        tsTransform.position = new TSVector(tsTransform.position.x, imageY, tsTransform.position.z);
+       // FP imageY = imageTarget.GetComponent<TSTransform>().position.y;
+      //  tsTransform.position = new TSVector(tsTransform.position.x, imageY, tsTransform.position.z);
 
        // Debug.Log("called minion update");
         TSVector markerPos = p.GetMarkerPosition(parentMarker);
