@@ -22,7 +22,7 @@ public class readyTime : TrueSyncBehaviour {
     {
         ready.SetActive(true);
         start.SetActive(false);
-        GetComponent<UnityEngine.UI.Text>().text = MAX_TIME.ToString();
+        //GetComponent<UnityEngine.UI.Text>().text = MAX_TIME.ToString();
     }
 
 	// Update is called once per frame
@@ -38,7 +38,8 @@ public class readyTime : TrueSyncBehaviour {
            // TrueSyncManager.Destroy(transform.parent.gameObject);
             //TrueSyncManager.SyncedDestroy(transform.parent.gameObject);
             GetComponent<UnityEngine.UI.Text>().text = " ";
-
+            start.SetActive(false);
+            ready.SetActive(false);
         }
 
 
