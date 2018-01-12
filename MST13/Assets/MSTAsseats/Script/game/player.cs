@@ -236,16 +236,16 @@ public class player : TrueSyncBehaviour {
                 int stickX = -1, stickY = -1;
                 bool button = false, stickBtn = false;
 
-                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) stickX = TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
-                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickY = TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
-                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
-                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
+                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) > 0) stickX = TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
+                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) > 0) stickY = TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
+                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) > 0) button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
+                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) > 0) stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
 
                 // 2017/12/1 追記
                 // Playerの移動モーション管理
                 MoveAnimetion(stickX);
 
-                if (stickX != -1 || stickY != -1)
+                if (stickX > 0 || stickY > 0)
                 {
                     if(stickX >= 700){
                         directionVector.x += vector.x += speed;

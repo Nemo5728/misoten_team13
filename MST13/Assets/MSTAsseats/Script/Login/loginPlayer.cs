@@ -102,16 +102,16 @@ public class loginPlayer : TrueSyncBehaviour
             int stickX = -1, stickY = -1;
             bool button = false, stickBtn = false;
 
-            if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) stickX = TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
-            if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickY = TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
-            if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
-            if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
+            if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) > 0) stickX = TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
+            if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) > 0) stickY = TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
+            if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) > 0) button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
+            if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) > 0) stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
 
             // 2017/12/1 追記
             // Playerの移動モーション管理
             MoveAnimetion(stickX);
 
-            if (stickX != -1 || stickY != -1)
+            if (stickX > 0 || stickY > 0)
             {
                 if (stickX >= 700)
                 {
@@ -135,13 +135,13 @@ public class loginPlayer : TrueSyncBehaviour
             }
 
 
-              vector = TSVector.Normalize(vector);
-                    directionVector = TSVector.Normalize(directionVector);
-                    FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
-                    tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
+            vector = TSVector.Normalize(vector);
+            directionVector = TSVector.Normalize(directionVector);
+            FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
+            tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
 
-                    if (!(TSVector.Distance(TSVector.zero, tsTransform.position + vector) >= STAGE_LENGTH))
-                        tsTransform.Translate(vector * speed, Space.World);
+            if (!(TSVector.Distance(TSVector.zero, tsTransform.position + vector) >= STAGE_LENGTH))
+                tsTransform.Translate(vector * speed, Space.World);
 
 
 
