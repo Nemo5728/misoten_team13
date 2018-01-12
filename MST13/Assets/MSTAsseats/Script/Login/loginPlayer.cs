@@ -111,37 +111,37 @@ public class loginPlayer : TrueSyncBehaviour
             // Playerの移動モーション管理
             MoveAnimetion(stickX);
 
-            if (stickX != -1 && stickY != -1)
+            if (stickX != -1 || stickY != -1)
             {
                 if (stickX >= 700)
                 {
-                    directionVector.x = vector.x = speed;
+                    directionVector.x += vector.x += speed;
                 }
 
                 if (stickX <= 200)
                 {
-                    directionVector.x = vector.x = -speed;
+                    directionVector.x += vector.x += -speed;
                 }
 
                 if (stickY >= 700)
                 {
-                    directionVector.z = vector.z = speed;
+                    directionVector.z += vector.z += speed;
                 }
 
                 if (stickY <= 200)
                 {
-                    directionVector.z = vector.z = -speed;
+                    directionVector.z += vector.z += -speed;
                 }
             }
 
 
-                  vector = TSVector.Normalize(vector);
-                        directionVector = TSVector.Normalize(directionVector);
-                        FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
-                        tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
+              vector = TSVector.Normalize(vector);
+                    directionVector = TSVector.Normalize(directionVector);
+                    FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
+                    tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
 
-                        if (!(TSVector.Distance(TSVector.zero, tsTransform.position + vector) >= STAGE_LENGTH))
-                            tsTransform.Translate(vector * speed, Space.World);
+                    if (!(TSVector.Distance(TSVector.zero, tsTransform.position + vector) >= STAGE_LENGTH))
+                        tsTransform.Translate(vector * speed, Space.World);
 
 
 
