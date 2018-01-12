@@ -199,7 +199,7 @@ public class monster : TrueSyncBehaviour {
             if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
 
             // スティック傾けているかチェック*部品ごとの誤差対策
-            if(stickX >=  -1 || stickX <= 1)
+            if(stickX != -1 || stickY != 1)
             {
                 if (stickX >= 700)
                 {
