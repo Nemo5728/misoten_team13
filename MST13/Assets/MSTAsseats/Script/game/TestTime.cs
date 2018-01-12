@@ -9,6 +9,9 @@ public class TestTime : TrueSyncBehaviour {
     public GameObject[] stageTex;
     public Text finishtext;
 
+    [SerializeField] private GameObject finish;
+
+
     private FP MAX_TIME = 180f; //xウントダウンの開始値
     private FP MAX_TIMEPOINT = 60f; // 秒数の最大値
     //private int OBJ_MAX = 5; // 秒数の最大値
@@ -65,7 +68,7 @@ public class TestTime : TrueSyncBehaviour {
         //r.material.EnableKeyword("_ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON");//透明度の有効化
         //r.material.EnableKeyword("_EMISSION"); //Emission カラー か Emission マップの有効化
 
-
+        finish.SetActive(false);
     }
 
     public override void OnSyncedUpdate()
@@ -97,7 +100,8 @@ public class TestTime : TrueSyncBehaviour {
 
         if (timeCounter <= 0f)
         {
-            finishtext.text = "Finish!";
+            //finishtext.text = "Finish!";
+            finish.SetActive(true);
         }
         //i = (int)timeCounter;
         //if (i != old_i)//１秒ごとに

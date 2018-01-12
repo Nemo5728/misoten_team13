@@ -10,6 +10,9 @@ public class readyTime : TrueSyncBehaviour {
     [AddTracking]
     private float timeCounter = 4;
 
+    [SerializeField] private GameObject ready;
+    [SerializeField] private GameObject start;
+
 	// Use this for initialization
 	void Start () {}
 
@@ -17,6 +20,8 @@ public class readyTime : TrueSyncBehaviour {
 	
     public override void OnSyncedStart()
     {
+        ready.SetActive(true);
+        start.SetActive(false);
         GetComponent<UnityEngine.UI.Text>().text = MAX_TIME.ToString();
     }
 
@@ -41,12 +46,14 @@ public class readyTime : TrueSyncBehaviour {
         else if (timeCounter <= 1f)
         {
             // ゲームスタートを描画
-            GetComponent<UnityEngine.UI.Text>().text = "GameStart!";
+            //GetComponent<UnityEngine.UI.Text>().text = "GameStart!";
+            start.SetActive(true);
+            ready.SetActive(false);
         }
 
         else
         {
-            GetComponent<UnityEngine.UI.Text>().text = ((int)timeCounter).ToString();
+            //GetComponent<UnityEngine.UI.Text>().text = ((int)timeCounter).ToString();
         }
 
            
