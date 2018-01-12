@@ -200,7 +200,7 @@ public class player : TrueSyncBehaviour {
                 if (right) directionVector += vector += TSVector.right;
 
                 if(kib_y){
-                    rb.AddForce(tsTransform.forward * -knockBackPower, ForceMode.Impulse);
+                    //rb.AddForce(tsTransform.forward * -knockBackPower, ForceMode.Impulse);
                 }
 
                 /*
@@ -267,7 +267,7 @@ public class player : TrueSyncBehaviour {
                 if (stickBtn && stickX != -1 && stickY != -1)
                 {
                     knockBackValue++;
-                    loveGauge++;
+                    loveGauge = 100;
                     // minion強攻撃へ！
                 }
 

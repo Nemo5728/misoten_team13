@@ -116,13 +116,16 @@ public class monster : TrueSyncBehaviour {
         ready = GameObject.Find("ready");
 		anime = GetComponent<Animator> ();	//アニメーションの取得
 		rb = GetComponent<TSRigidBody>();	// RigidBodyの取得
+
         knockout = false;
         transformFlag = false;
         powerUpCount = 0.0f;
         powerUpButton = 0;
         health = 100;
         powerUpFlag = false;
+
         controllerConnect = false;
+
         bAttack = false;
         loveGauge = loveGaugeMax;
         move = TSVector.zero;
@@ -153,15 +156,10 @@ public class monster : TrueSyncBehaviour {
 
         if (controllerConnect)
         {
-            int stickX = info.stickX;
-            int stickY = info.stickY;
-            bool button = info.isButtonDown;
-            bool stickBtn = info.isStickDown;
-
-            TrueSyncInput.SetInt(INPUT_CONTROLLER_STICKX, stickX);
-            TrueSyncInput.SetInt(INPUT_CONTROLLER_STICKY, stickY);
-            TrueSyncInput.SetBool(INPUT_CONTROLLER_BUTTON, button);
-            TrueSyncInput.SetBool(INPUT_CONTROLLER_STICKBUTTON, stickBtn);
+            TrueSyncInput.SetInt(INPUT_CONTROLLER_STICKX, info.stickX);
+            TrueSyncInput.SetInt(INPUT_CONTROLLER_STICKY, info.stickY);
+            TrueSyncInput.SetBool(INPUT_CONTROLLER_BUTTON, info.isButtonDown);
+            TrueSyncInput.SetBool(INPUT_CONTROLLER_STICKBUTTON, info.isStickDown);
         }
 	}
 
@@ -172,9 +170,6 @@ public class monster : TrueSyncBehaviour {
 
         if (!knockout)
         {
-            //FP imageY = imageTarget.GetComponent<TSTransform>().position.y;
-           // tsTransform.position = new TSVector(tsTransform.position.x, imageY, tsTransform.position.z);
-            // Debug.Log("HP" + health);
             // 攻撃アニメーション情報を取得
             //    isAttakc    = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monsterWeakAttack");
             //  isStrAttack = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monsterStrAttack");
@@ -195,11 +190,17 @@ public class monster : TrueSyncBehaviour {
             if (left) directionVector = vector += TSVector.left;
             if (right) directionVector = vector += TSVector.right;
 
-            if (controllerConnect)
-            {
+                int stickX = -1, stickY = -1;
+                bool button = false, stickBtn = false;
+
+                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) stickX = TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
+                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickY = TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
+                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
+                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
               //  Debug.Log("コントローラ繋がってるよ！");
 
                 // スティック処理
+                /*
                 int stickX = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
                 int stickY = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
                 bool button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
@@ -207,10 +208,30 @@ public class monster : TrueSyncBehaviour {
 
                 directionVector.x = vector.x = speed * (stickX / 473);
                 directionVector.z = vector.z = speed * (stickY / 473);
-
+*/
                 // スティック傾けているかチェック*部品ごとの誤差対策
-                if(stickX >=  -20 && stickX <= 20)
+                if(stickX >=  -1 && stickX <= 1)
                 {
+
+                    if (stickX >= 700)
+                    {
+                        directionVector.x = vector.x = speed;
+                    }
+
+                    if (stickX <= 200)
+                    {
+                        directionVector.x = vector.x = -speed;
+                    }
+
+                    if (stickY >= 700)
+                    {
+                        directionVector.z = vector.z = speed;
+                    }
+
+                    if (stickY <= 200)
+                    {
+                        directionVector.z = vector.z = -speed;
+                    }
                     // 
                     anime.SetBool("monsterMove", false);
                 }
@@ -254,7 +275,7 @@ public class monster : TrueSyncBehaviour {
                 else
                 {
                     // スティックを押したら
-                    if (stickBtn || weakAttack)
+                if (button || weakAttack)
                     {
                         if (bAttack) return;    // 
                         //Debug.Log("スティックボタン押されたよ！");
@@ -264,9 +285,6 @@ public class monster : TrueSyncBehaviour {
                         // 弱攻撃モーション
                         anime.SetTrigger("monsterWeakAttack");
                         SeManager.Instance.Play("monsterWeakAttack");
-                      
-                        SeManager.Instance.Play("monster-attack.mp3");
-                        //HitWeakAttack(hitWeakObject, hitWeakOffset);
                         foreach (minion mi in FindObjectsOfType<minion>())
                         {
                             if (TSMath.Abs(TSVector.Distance(tsTransform.position, mi.tsTransform.position)) < 30f)
@@ -277,7 +295,6 @@ public class monster : TrueSyncBehaviour {
 
                     }
                     speed = DefSpeed;   // 設定速度へ戻す
-
                 }
 
                 // 攻撃モーションを使用していなかったら
@@ -285,16 +302,8 @@ public class monster : TrueSyncBehaviour {
                 {
                     bAttack = false;
                 }
-                // ボタンが押されたら
-                if(button == true)
-                {
-                    speed = 0f;
-                    //Debug.Log("ボタン押されたよ！");
-                    // 弱攻撃モーション
-                    anime.SetTrigger("monsterWeakAttack");
-                  
-                }
-            }
+              
+            
             else
             {
                 ///// 攻撃モーション中は移動不可にしたい /////
@@ -391,17 +400,7 @@ public class monster : TrueSyncBehaviour {
                     // 通常状態
                 case STATE.STATE_NORMAL:
                 {
-                        if ( weakAttack)
-                        {
-                            //アタックステートへ
-                            state = STATE.STATE_ATTACK;
-                            //アタックステートで、弱攻撃→その最中に攻撃したら強攻撃
-                            // アニメーションが終わったらノーマルへ
-                        }
-                        // 弱攻撃中
-                        if(isAttakc)
-                        {
-                        }
+                      
                         // ラブゲージ処理
                         timeLeft -= Time.deltaTime;
                         if (timeLeft <= 0)
@@ -433,7 +432,7 @@ public class monster : TrueSyncBehaviour {
                         tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
 
                         if (!(TSVector.Distance(TSVector.zero, tsTransform.position + vector) >= STAGE_LENGTH))
-//                            Debug.Log("移動中");
+                            //                            Debug.Log("移動中");
                             tsTransform.Translate((vector * speed) * TrueSyncManager.DeltaTime, Space.World);
 
                     break;

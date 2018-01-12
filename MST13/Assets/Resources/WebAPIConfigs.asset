@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaff0507e0d444f549207c0210d43750, type: 3}
   m_Name: WebAPIConfigs
   m_EditorClassIdentifier: 
-  apiUrl: http://192.168.137.195:3000/ranking/
+  apiUrl: http://192.168.179.6:3000/ranking/

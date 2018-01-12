@@ -67,23 +67,16 @@ public class loginPlayer : TrueSyncBehaviour
         TrueSyncInput.SetBool(INPUT_KEY_SPACE, space);
 
 
-        //BLEなんちゃら
-          info = BLEControlManager.GetControllerInfo();
-        //info = SerialControllManager.GetControllerInfo();
+        info = BLEControlManager.GetControllerInfo();
 
         if (info != null) controllerConnect = true;
 
         if (controllerConnect)
         {
-            int stickX = info.stickX;
-            int stickY = info.stickY;
-            bool button = info.isButtonDown;
-            bool stickBtn = info.isStickDown;
-
-            TrueSyncInput.SetInt(INPUT_CONTROLLER_STICKX, stickX);
-            TrueSyncInput.SetInt(INPUT_CONTROLLER_STICKY, stickY);
-            TrueSyncInput.SetBool(INPUT_CONTROLLER_BUTTON, button);
-            TrueSyncInput.SetBool(INPUT_CONTROLLER_STICKBUTTON, stickBtn);
+            TrueSyncInput.SetInt(INPUT_CONTROLLER_STICKX, info.stickX);
+            TrueSyncInput.SetInt(INPUT_CONTROLLER_STICKY, info.stickY);
+            TrueSyncInput.SetBool(INPUT_CONTROLLER_BUTTON, info.isButtonDown);
+            TrueSyncInput.SetBool(INPUT_CONTROLLER_STICKBUTTON, info.isStickDown);
         }
 
     }
@@ -106,21 +99,41 @@ public class loginPlayer : TrueSyncBehaviour
             if (right) directionVector += vector += TSVector.right;
 
 
-            if (controllerConnect)
+            int stickX = -1, stickY = -1;
+            bool button = false, stickBtn = false;
+
+            if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) stickX = TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
+            if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickY = TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
+            if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
+            if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
+
+            // 2017/12/1 追記
+            // Playerの移動モーション管理
+            MoveAnimetion(stickX);
+
+            if (stickX != -1 && stickY != -1)
             {
-                //Debug.Log("TrueSyncコントローラなう");
-                int stickX = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
-                int stickY = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
-                bool button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
-                bool stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
+                if (stickX >= 700)
+                {
+                    directionVector.x = vector.x = speed;
+                }
 
-                // 2017/12/1 追記
-                // Playerの移動モーション管理
-                MoveAnimetion(stickX);
+                if (stickX <= 200)
+                {
+                    directionVector.x = vector.x = -speed;
+                }
 
-                directionVector.x = vector.x = speed * (stickX / 473);
-                directionVector.z = vector.z = speed * (stickY / 473);
+                if (stickY >= 700)
+                {
+                    directionVector.z = vector.z = speed;
+                }
+
+                if (stickY <= 200)
+                {
+                    directionVector.z = vector.z = -speed;
+                }
             }
+
 
                   vector = TSVector.Normalize(vector);
                         directionVector = TSVector.Normalize(directionVector);
