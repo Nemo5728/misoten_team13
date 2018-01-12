@@ -17265,7 +17265,7 @@ MonoBehaviour:
     z:
       _serializedValue: 17179869184
   tsTransform: {fileID: 114656496069948148}
-  _size: {x: 1.5, y: 1.2, z: 1.5}
+  _size: {x: 4, y: 6, z: 4}
 --- !u!114 &114189384391223182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17435,7 +17435,7 @@ MonoBehaviour:
     name: 
   attackSpeed: 0
   speed:
-    _serializedValue: 0
+    _serializedValue: 107374182400
   loveGaugeMax: 100
   loveGaugeLate: 1
   WeakAttack: 1
@@ -17779,7 +17779,7 @@ MonoBehaviour:
     name: 
   attackSpeed: 0
   speed:
-    _serializedValue: 0
+    _serializedValue: 107374182400
   loveGaugeMax: 100
   loveGaugeLate: 1
   WeakAttack: 1
@@ -17993,7 +17993,7 @@ MonoBehaviour:
     name: 
   attackSpeed: 0
   speed:
-    _serializedValue: 0
+    _serializedValue: 107374182400
   loveGaugeMax: 100
   loveGaugeLate: 1
   WeakAttack: 1
