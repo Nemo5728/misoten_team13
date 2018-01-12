@@ -245,7 +245,7 @@ public class player : TrueSyncBehaviour {
                 // Playerの移動モーション管理
                 MoveAnimetion(stickX);
 
-                if (stickX > 0 || stickY > 0)
+                if (stickX > 0 && stickY > 0)
                 {
                     if(stickX >= 700){
                         directionVector.x += vector.x += speed;
