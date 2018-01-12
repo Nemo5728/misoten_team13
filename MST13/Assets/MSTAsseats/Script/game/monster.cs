@@ -190,106 +190,120 @@ public class monster : TrueSyncBehaviour {
             if (left) directionVector = vector += TSVector.left;
             if (right) directionVector = vector += TSVector.right;
 
-            int stickX = -1, stickY = -1;
-            bool button = false, stickBtn = false;
+                int stickX = -1, stickY = -1;
+                bool button = false, stickBtn = false;
 
-            if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) > 0) stickX = TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
-            if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) > 0) stickY = TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
-            if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) > 0) button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
-            if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) > 0) stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
+                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) stickX = TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
+                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickY = TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
+                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX) != -1) button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
+                if (TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY) != -1) stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
+              //  Debug.Log("コントローラ繋がってるよ！");
 
-            // スティック傾けているかチェック*部品ごとの誤差対策
-            if(stickX > 0 || stickY > 0)
-            {
-                if (stickX >= 700)
+                // スティック処理
+                /*
+                int stickX = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKX);
+                int stickY = -550 + TrueSyncInput.GetInt(INPUT_CONTROLLER_STICKY);
+                bool button = TrueSyncInput.GetBool(INPUT_CONTROLLER_BUTTON);
+                bool stickBtn = TrueSyncInput.GetBool(INPUT_CONTROLLER_STICKBUTTON);
+
+                directionVector.x = vector.x = speed * (stickX / 473);
+                directionVector.z = vector.z = speed * (stickY / 473);
+*/
+                // スティック傾けているかチェック*部品ごとの誤差対策
+                if(stickX >=  -1 && stickX <= 1)
                 {
-                    directionVector.x += vector.x += speed;
-                }
 
-                if (stickX <= 200)
-                {
-                    directionVector.x += vector.x += -speed;
-                }
+                    if (stickX >= 700)
+                    {
+                        directionVector.x = vector.x = speed;
+                    }
 
-                if (stickY >= 700)
-                {
-                    directionVector.z += vector.z += speed;
-                }
+                    if (stickX <= 200)
+                    {
+                        directionVector.x = vector.x = -speed;
+                    }
 
-                if (stickY <= 200)
-                {
-                    directionVector.z += vector.z += -speed;
+                    if (stickY >= 700)
+                    {
+                        directionVector.z = vector.z = speed;
+                    }
+
+                    if (stickY <= 200)
+                    {
+                        directionVector.z = vector.z = -speed;
+                    }
+                    // 
+                    anime.SetBool("monsterMove", false);
                 }
-                // 
-                anime.SetBool("monsterMove", false);
-            }
-            else
-            {
-                anime.SetBool("monsterMove", true); 
-            }
+                else
+                {
+                    anime.SetBool("monsterMove", true); 
+                }
 
 
                
-            ///// 攻撃モーション中は移動不可にしたい /////
-            if (isAttakc)
-            {
-                speed = 0f; // 移動速度を0に
-
-                // スティックを押したら
-                if (stickBtn || weakAttack)
+                ///// 攻撃モーション中は移動不可にしたい /////
+                if (isAttakc)
                 {
-                    if (isStrAttack) return;
-                    // 弱攻撃モーション
-                    anime.SetTrigger("monsterStrAttack");
-                    SeManager.Instance.Play("monsterStrAttack");
-                    ParticleSwing.GetComponent<ParticleManager>().Play("FX_SwingB",
-                                                          new Vector3(transform.position.x,
-                                                                      transform.position.y + 2f,
-                                                                      transform.position.z));
+                    speed = 0f; // 移動速度を0に
 
-
-                     foreach (minion mi in FindObjectsOfType<minion>())
+                    // スティックを押したら
+                    if (stickBtn || weakAttack)
                     {
-                        if (TSMath.Abs(TSVector.Distance(tsTransform.position, mi.tsTransform.position)) < 30f)
+                        if (isStrAttack) return;
+                        // 弱攻撃モーション
+                        anime.SetTrigger("monsterStrAttack");
+                        SeManager.Instance.Play("monsterStrAttack");
+                        ParticleSwing.GetComponent<ParticleManager>().Play("FX_SwingB",
+                                                              new Vector3(transform.position.x,
+                                                                          transform.position.y + 2f,
+                                                                          transform.position.z));
+
+
+                         foreach (minion mi in FindObjectsOfType<minion>())
                         {
-                            Debug.Log("ダメージだぜ");
-                            mi.AddDamage(5);
+                            if (TSMath.Abs(TSVector.Distance(tsTransform.position, mi.tsTransform.position)) < 30f)
+                            {
+                                Debug.Log("ダメージだぜ");
+                                mi.AddDamage(5);
+                            }
                         }
+                      
                     }
-                  
                 }
-            }
-            ///// その他のモーション /////
-            else
-            {
-                // スティックを押したら
-            if (button || weakAttack)
+                ///// その他のモーション /////
+                else
                 {
-                    if (bAttack) return;    // 
-                    //Debug.Log("スティックボタン押されたよ！");
-
-                    bAttack = true;
-
-                    // 弱攻撃モーション
-                    anime.SetTrigger("monsterWeakAttack");
-                    SeManager.Instance.Play("monsterWeakAttack");
-                    foreach (minion mi in FindObjectsOfType<minion>())
+                    // スティックを押したら
+                if (button || weakAttack)
                     {
-                        if (TSMath.Abs(TSVector.Distance(tsTransform.position, mi.tsTransform.position)) < 30f)
+                        if (bAttack) return;    // 
+                        //Debug.Log("スティックボタン押されたよ！");
+
+                        bAttack = true;
+
+                        // 弱攻撃モーション
+                        anime.SetTrigger("monsterWeakAttack");
+                        SeManager.Instance.Play("monsterWeakAttack");
+                        foreach (minion mi in FindObjectsOfType<minion>())
                         {
-                            mi.AddDamage(3);
+                            if (TSMath.Abs(TSVector.Distance(tsTransform.position, mi.tsTransform.position)) < 30f)
+                            {
+                                mi.AddDamage(3);
+                            }
                         }
+
                     }
-
+                    speed = DefSpeed;   // 設定速度へ戻す
                 }
-                speed = DefSpeed;   // 設定速度へ戻す
-            }
 
-            // 攻撃モーションを使用していなかったら
-            if (isAttakc == false && isStrAttack == false)
-            {
-                bAttack = false;
-            }
+                // 攻撃モーションを使用していなかったら
+                if (isAttakc == false && isStrAttack == false)
+                {
+                    bAttack = false;
+                }
+              
+            
             else
             {
                 ///// 攻撃モーション中は移動不可にしたい /////
@@ -386,7 +400,17 @@ public class monster : TrueSyncBehaviour {
                     // 通常状態
                 case STATE.STATE_NORMAL:
                 {
-                      
+                        if ( weakAttack)
+                        {
+                            //アタックステートへ
+                            state = STATE.STATE_ATTACK;
+                            //アタックステートで、弱攻撃→その最中に攻撃したら強攻撃
+                            // アニメーションが終わったらノーマルへ
+                        }
+                        // 弱攻撃中
+                        if(isAttakc)
+                        {
+                        }
                         // ラブゲージ処理
                         timeLeft -= Time.deltaTime;
                         if (timeLeft <= 0)
@@ -410,15 +434,16 @@ public class monster : TrueSyncBehaviour {
                             state = STATE.STATE_KNOCKOUT;
                     }
 
-                    // 移動処理
-                    vector = TSVector.Normalize(vector);
-                    directionVector = TSVector.Normalize(directionVector);
+                        // 移動処理
+                        vector = TSVector.Normalize(vector);
+                        directionVector = TSVector.Normalize(directionVector);
 
-                    FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
-                    tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
+                        FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
+                        tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
 
-                    if (!(TSMath.Abs(TSVector.Distance(TSVector.zero, tsTransform.position + vector)) >= STAGE_LENGTH))
-                        tsTransform.Translate((vector * speed) * TrueSyncManager.DeltaTime, Space.World);
+                        if (!(TSVector.Distance(TSVector.zero, tsTransform.position + vector) >= STAGE_LENGTH))
+//                            Debug.Log("移動中");
+                            tsTransform.Translate((vector * speed) * TrueSyncManager.DeltaTime, Space.World);
 
                     break;
                 }  
