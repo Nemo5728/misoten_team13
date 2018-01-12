@@ -814,6 +814,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3f1d3d147ae341af90787c87164a553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfPlayers: 0
+  ownerIndex: -1
+  owner:
+    id: 0
+    name: 
+  localOwner:
+    id: 0
+    name: 
   stageTex:
   - {fileID: 1375643100227570}
   - {fileID: 1125770767429358}
@@ -1021,6 +1029,9 @@ MonoBehaviour:
     id: 0
     name: 
   MAX_TIME: 3
+  GameLogoList:
+  - {fileID: 1000011816764828, guid: b39fc8bbeee787043a3533b153a02c3c, type: 2}
+  - {fileID: 1000011510508798, guid: 93eaf27e1ad03324595bb7b68b0c77b5, type: 2}
 --- !u!114 &114358857267362242
 MonoBehaviour:
   m_ObjectHideFlags: 1

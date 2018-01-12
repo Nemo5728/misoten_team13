@@ -39,13 +39,6 @@ public class PlayManager : TrueSyncBehaviour {
                 {
                     monsterObject = transform.Find("monster" + owner.Id).gameObject;
                     monsterObject.SetActive(false);
-
-                    if ((owner.Id - 1) == 2)
-                    {
-                        PlayerObject = transform.Find("player3").gameObject;
-                        PlayerObject.GetComponent<player>().AllDeleteMinion();
-                        PlayerObject.SetActive(false);
-                    }
                 }
             }
         }

@@ -12,9 +12,11 @@ public class Item :  TrueSyncBehaviour
     bool bUse;
     private GameObject particle;
     private float time;
+    private FP UseTime;
     void Start()
     {
         bUse = true;
+        UseTime = 0f;
     }
 
     void Update()
@@ -80,7 +82,7 @@ public class Item :  TrueSyncBehaviour
         
         if(!bUse)
         {
-            
+          
           /*
             if (tag == "ItemLoveUp")
             {
@@ -108,6 +110,15 @@ public class Item :  TrueSyncBehaviour
             }
 */
             TrueSyncManager.SyncedDestroy(gameObject);
+        }
+        else{
+            UseTime += TrueSyncManager.DeltaTime;
+
+            if (UseTime >= 10f)
+            {
+                UseTime = 0f;
+                TrueSyncManager.SyncedDestroy(gameObject);
+            }
         }
     }
 

@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/MSTAsseats/Scene/Game.unity
     guid: 2cb34f0f2e3344aba8fe97c368b93c82
-  - enabled: 1
+  - enabled: 0
     path: Assets/MSTAsseats/Scene/ControllerSelect.unity
     guid: 4f6e94da1fba9464ba1d5270add498d6
   - enabled: 1

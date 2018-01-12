@@ -2,31 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TrueSync;
 
-public class TestTime : MonoBehaviour {
+public class TestTime : TrueSyncBehaviour {
 
     public GameObject[] stageTex;
     public Text finishtext;
 
-    private int MAX_TIME = 180; // カウントダウンの開始値
-    private int MAX_TIMEPOINT = 60; // 秒数の最大値
+    private FP MAX_TIME = 180f; //xウントダウンの開始値
+    private FP MAX_TIMEPOINT = 60f; // 秒数の最大値
     //private int OBJ_MAX = 5; // 秒数の最大値
 
-    float timeCounter;
+    FP timeCounter;
     int threeCount;
     
-    int i;
-    int old_i;
-    float ClockLoghtCount;
-    int oldTime;
+    private int i;
+    private FP old_i;
+    private float ClockLoghtCount;
+    private int oldTime;
 
     void Start()
+    {
+        
+    }
+
+    void Update()
+    {
+
+
+
+    }
+
+    public override void OnSyncedStart()
     {
         i = 0;
         old_i = MAX_TIME;
         oldTime = 0;
         timeCounter = MAX_TIME;
-        threeCount = MAX_TIMEPOINT;
+        threeCount = (int)MAX_TIMEPOINT;
 
         //ステージ上の各オブジェクトのシェーダの初期数値を設定
         MeshRenderer floor = stageTex[0].GetComponent<MeshRenderer>();
@@ -55,22 +68,21 @@ public class TestTime : MonoBehaviour {
 
     }
 
-    void Update()
+    public override void OnSyncedUpdate()
     {
-
         MeshRenderer floor = stageTex[0].GetComponent<MeshRenderer>();
         MeshRenderer stage = stageTex[1].GetComponent<MeshRenderer>();
         MeshRenderer timerClock = stageTex[2].GetComponent<MeshRenderer>();
         MeshRenderer timeRing = stageTex[3].GetComponent<MeshRenderer>();
-        timeCounter -= Time.deltaTime;//カウントをマイナス
-        
-        if ((int)timeCounter % 3 == 0 && oldTime != (int)timeCounter)//3で割り切れるなら
+        timeCounter -= TrueSyncManager.DeltaTime;//カウントをマイナス
+
+        if ((int)timeCounter % 2 == 0 && oldTime != (int)timeCounter)//3で割り切れるなら
         {
             oldTime = (int)timeCounter;
             threeCount--;
         }
 
-        if(((int)timeCounter + 1) % 3 == 0)//タイマーとステージの光波動のタイミングを合わせる
+        if (((int)timeCounter + 1) % 2 == 0)//タイマーとステージの光波動のタイミングを合わせる
         {
             timerClock.material.SetFloat("_ClockCount", threeCount);//タイムカウントを減らしていく
         }
@@ -103,9 +115,8 @@ public class TestTime : MonoBehaviour {
 
 
         // マイナス値にならないようにしている
-        timeCounter = Mathf.Max(timeCounter, 0.0f);
+        timeCounter = Mathf.Max((float)timeCounter, 0.0f);
         //GetComponent<UnityEngine.UI.Text>().text = threeCount.ToString(); 
         //Debug.Log(timeCounter);
-
     }
 }
