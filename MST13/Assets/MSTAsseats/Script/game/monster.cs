@@ -171,7 +171,7 @@ public class monster : TrueSyncBehaviour {
         if (!knockout)
         {
             // 攻撃アニメーション情報を取得
-            //    isAttakc    = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monsterWeakAttack");
+            //  isAttakc    = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monsterWeakAttack");
             //  isStrAttack = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Base Layer.monsterStrAttack");
             isAttakc = false;
             isStrAttack = false;
@@ -439,7 +439,7 @@ public class monster : TrueSyncBehaviour {
                         FP direction = TSMath.Atan2(directionVector.x, directionVector.z) * TSMath.Rad2Deg;
                         tsTransform.rotation = TSQuaternion.Euler(0.0f, direction, 0.0f);
 
-                        if (!(TSVector.Distance(TSVector.zero, tsTransform.position + vector) >= STAGE_LENGTH))
+                        if (!(TSMath.Abs(TSVector.Distance(TSVector.zero, tsTransform.position + vector)) >= STAGE_LENGTH))
 //                            Debug.Log("移動中");
                             tsTransform.Translate((vector * speed) * TrueSyncManager.DeltaTime, Space.World);
 
